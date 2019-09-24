@@ -13,6 +13,7 @@
 *.cb2
 .*.lb
 
+*.ps
 *.pdf
 
 ## Intermediate documents:
@@ -274,3 +275,4 @@ TSWLatexianTemp*
 
 # Makeindex log files
 *.lpz
+Kod/bilbana/out.ps
