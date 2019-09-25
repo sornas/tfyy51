@@ -1,0 +1,60 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{geometry}  % gör texten lite bredare eftersom vanlig latex är för smal för a4
+\usepackage{url}
+
+% minska storleken på rubriker och underrubriker
+\usepackage{titlesec}
+\titleformat{\section}
+    {\normalfont\Large\bfseries}{\thesection}{1em}{}
+
+\titleformat{\subsection}
+    {\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}[\vspace{-0.4em}]
+\usepackage[]{parskip}
+
+% undvik helst subsubsections
+
+%% FÖRKLARINGAR AV KOMMANDON OCH DYL.
+% \\ skapar en radbrytning
+% \\[1em] skapar en radbrytning med "1em" extra utrymme mellan rader
+%   (1 em är ganska stor)
+% \textbf{Skapar text i fetstil}
+% \begin{itemize} och \end{itemize} skapar en s.k. list-enviornment (list-miljö)
+%   Inuti itemize skriver man \item för att skapa en ny punkt, annars är det bara att skriva
+% \section*{Titel} och \subsection*{Understitel} skapar nya sektioner och undersektioner
+%   Asterisken ser till att det inte dyker upp ett nummer bredvid namnet.
+% I övrigt är det bara att skriva text där man vill ha den
+
+\begin{document}
+\pagenumbering{gobble} % räkna inte (och skriv inte heller ut) sidnumrering
+    \begin{center}
+        \textbf{\Large TFYY51 - Yc4} \\[0.2em]
+        Mötesprotokoll för 23 September 2019
+    \end{center}
+    \vspace{1em}
+    \textbf{Närvarande:} Gustav (ordf), David (sek), Alexander (lokal), Mattias, Albin \\[0.5em]
+    \textbf{Frånvarande:} \\[0.5em]  % som exempel
+    \textbf{Övriga närvarande:}
+
+    \section*{Föregående protokoll}
+    \vspace{1em}
+    
+    \section*{Dagordning}
+    \subsection*{Stämma av projektplan}
+    Inte direkt några invändningar. Projektplanen ser bra ut helt enkelt
+    \subsection*{Gör mailgrupp}
+    Mattias skapar en gemensam mailgrupp; \url{team_YC4@liu.onmicrosoft.com}, så att vi kan ha mailkontakt med varandra på ett smidigt och funktionellt sätt.
+    Dessutom kan Eriks information nå ut till hela gruppen skulle han ha något viktigt att säga.
+    \subsection*{Mer detaljrik tidsplan}
+    Vi räknar ut att vi vill snitta på 10 timmar/pers/vecka. Färre timmar, ungefär hälften av snittet, kan läggas ned på arbetet de veckor som kräver förberedelse inför diverse
+    prov eller redovisningar
+    \subsection*{Gör mötesprotkollmall}
+    Mallen är strukturerad på det sätt vi vill ha det. Mallen skrivs in i \LaTeX\ och läggs upp i gitLab
+    \subsection*{Formell gruppbestämmelse}
+    Utökat gruppkontrakt, med bestämmelse om struktur och ordning i gruppen. Bland annat mötesordning och rullians på roller inför möten
+
+    \section*{Övrigt}
+    \vspace{1em}
+
+    \section*{Nästa möte}
+    Nästa mötes hålls Tisdag 1 Oktober 2019 13:15. Lokalbokare kommer då vara Mattias.  
+\end{document}
