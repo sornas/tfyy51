@@ -1,0 +1,267 @@
+\documentclass[10pt,swedish,oneside]{lips-no_customer}
+
+\usepackage[round]{natbib}\bibliographystyle{plainnat}
+
+\title{Projektplan}
+\author{Yc4}
+\date{2019-10-01}
+\version{1.0}
+
+\reviewed{Viktor Leek}{2019-10-01}
+\approved{Erik Frisk}{2019-10-02}
+
+\projecttitle{Styrning och optimering av bilbana}
+
+\groupname{Yc4}
+\groupemail{team_yc4@liuonline.onmicrosoft.com}
+\groupwww{https://www.fs.isy.liu.se/Edu/Courses/TFYY51/}
+
+\coursecode{TFYY51}
+\coursename{Ingenjörsprojekt}
+
+\orderer{Erik Frisk, Linköpings universitet}
+\ordererphone{+46 (0)13-285714}
+\ordereremail{erik.frisk@liu.se}
+
+% \customer{Kund, Företag X}
+% \customerphone{+46 xxxxxx}
+% \customeremail{customer@companyx.com}
+
+\courseresponsible{Urban Forsberg}
+\courseresponsiblephone{+46 (0)13-281350}
+\courseresponsibleemail{urban.forsberg@liu.se}
+
+\supervisor{Viktor Leek}
+\supervisorphone{+46 (0)13-284493}
+\supervisoremail{viktor.leek@liu.se}
+
+\cfoot{\thepage}
+\begin{document}
+    \maketitle
+
+    \cleardoublepage
+    \makeprojectid
+
+    \begin{center}
+    \Large Projektdeltagare
+    \end{center}
+    \begin{center}
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Namn} & \textbf{Ansvar} & \textbf{Kontaktinformation}\\
+	\hline
+	Mattias Uvesten & Projektledare (PL) & 0768697559\\
+	&& \url{matvu053@student.liu.se} \\
+    \hline
+	Gustav Sörnäs & Dokument, display (DOK, DSP) & 0703279113\\
+	&& \url{gusso230@student.liu.se} \\
+    \hline
+	Alexander Tuneskog & Hastighet (SPD) & 0725559873 \\
+	&& \url{aletu130@student.liu.se} \\
+    \hline
+	David Thorén & Tester, gemensam målgång (TST, GML) & 0721838605 \\
+	&& \url{davth346@student.liu.se} \\
+    \hline
+	Albin Wahlén & Kalibrering, positionering (KLB, POS) & 0762016054 \\
+	&& \url{albwa833@student.liu.se} \\
+    \hline
+    \end{tabular}
+    \end{center}
+
+    \cleardoublepage
+    \tableofcontents
+
+    \cleardoublepage
+	
+	\section*{Dokumenthistorik}
+		\begin{tabular}{p{.06\textwidth}|p{.1\textwidth}|p{.45\textwidth}|p{.13\textwidth}|p{.12\textwidth}}
+			\multicolumn{1}{c}{\bfseries Version} &
+			\multicolumn{1}{|c}{\bfseries Datum} &
+			\multicolumn{1}{|c}{\bfseries Utförda förändringar} &
+			\multicolumn{1}{|c}{\bfseries Utförda av} &
+			\multicolumn{1}{|c}{\bfseries Granskad}\\
+			\hline
+			\hline
+			0.1 & 2019-09-20 & Första utkast & Gustav & 2019-09-23 \\\hline
+			0.2 & 2019-09-24 & Andra utkast efter granskning & Gustav & 2019-10-01 \\\hline
+			1.0 & 2019-10-01 & Inlämning & & 2019-10-01 \\\hline
+		\end{tabular}
+
+		\cleardoublepage
+		\pagenumbering{arabic}\cfoot{\thepage}
+
+    \section{Beställare} \label{sec:beställare}
+		Beställare är Erik Frisk, Institutionen för systemteknik (ISY), Linköpings universitet.
+
+    \section{Översiktilig beskrivning}
+		\subsection{Mål}
+		Huvudmålet med projektet är att utveckla ett system för autonom körning av bilbana med inställbar varvtid. Vidare ska systemet kunna hantera bilar med olika egenskaper samt att styra två banor samtidigt. Syftet med kursen som helhet (TFYY51) är att utföra ett projektsamarbete efter en projektmodell samt att utveckla medlemmarnas samarbetsförmåga.
+		\subsection{Leveranser} \label{sec:leveranser}
+		Leveranser och delleveranser definieras enligt projektets kravspecifikation. Nedan följer en sammanfattning. \\[1em]
+		\begin{tabular}{|l|l|l|l|}
+			\multicolumn{1}{c}{\bfseries Vecka} &
+			\multicolumn{1}{|c}{\bfseries Datum} &
+			\multicolumn{1}{|c}{\bfseries Beslutspunkt} &
+			\multicolumn{1}{|c}{\bfseries Leverans} \\
+			\hline
+			\hline
+			2 & 2019-10-02 & BP2 & Redovisad och godkänd projektplan. \\
+			\hline
+			4 & 2019-10-11  & BP3 & Redovisad och godkänd designspecifikation. \\
+			\hline
+			-- & -- & BP4a & Redovisning av krav 2, 4, 25, 31, samt utskrivning av bansegment. \\
+			\hline
+			7 & 2019-11-03 & BP4b & Redovisning av krav 3, 5, 10, 17 och 18. \\
+			\hline
+			9 & 2019-11-17 & -- & Mjukvarufrysning samt demonstration. \\
+			\hline
+			10 & 2019-11-24 & BP5 & Leverans av mjukvara och dokumentation samt komplett redovisning \\
+			\hline
+		\end{tabular}
+	
+	\section{Basplan}
+		\subsection{Före projektet}
+		Innan projektet kan börja kommer gruppen arbeta fram en projektplan och en tidsplan. Gruppen får grundläggande utbildning i git och fördelar arbetsuppgifterna mellan medlemmarna.
+			
+		\subsection{Under projektet}
+		Gruppen kommer börja med att testa olika lösningar för att sedan besluta om en lösningsmetod och definiera den i en designspecifikation. Under utvecklingen av projektet kommer medlemmarna implementera designspecifikationen.
+		
+		\subsection{Efter projektet}
+		När utvecklingen är klar och produkten är färdig kommer gruppen redovisa sina resultat; dels för kunden och dels för kursexaminatorn som en del av en större projektkonferens.
+
+	\section{Organisationsplan}
+		\subsection{Villkor för samarbetet inom projektgruppen}
+		Gruppmedlemmarna har tillsammans svarat på frågorna i gruppkontrakt tillhörande LIPS-mallarna. Vidare har gruppmedlemmarna kommit överens om ytterligare bestämmelser om hur samarbetet bör gå till väga. Dessa bestämmelser återfinns i dokumentet ``Gruppbestämmelser''.
+		\subsection{Ansvarsområden}
+		\begin{tabular}{|l|l|}
+			\hline
+			\textbf{Namn} & \textbf{Ansvar}\\
+			\hline
+			Mattias Uvesten & Projektledare (PL)\\
+			\hline
+			Gustav Sörnäs & Dokument och display (DOK, DSP)\\
+			\hline
+			Alexander Tuneskog & Hastighet (SPD)\\
+			\hline
+			David Thorén & Tester och gemensam målgång (TST, GML)\\
+			\hline
+			Albin Wahlén & Kalibrering och positionering (KLB, POS)\\
+			\hline
+		\end{tabular} \\[1em]
+		Nedan följer en förklaring till de olika ansvarsområdena och vilka krav de berör.
+		
+		\begin{itemize}
+			\item Projektledare (PL) \\ Sköter kontakten mellan gruppen och beställaren. Projektleadren ansvarar för att tidsrapport och mötesprotokoll skickas in varje vecka. Dessutom kallar han till och skriver en dagordning inför varje gruppmöte.
+			\item Dokumentansvarig (DOK) \\ Organiserar och håller reda på gruppens dokument. Ansvarar dessutom för att dokumenten följer ett gemensamt format.
+			\item Testansvarig (TST) \\ Ser till att leveranserna i BP4 och BP5 efterföljs. Ser också till att det finns dokumentation och planering för tester som säkerställer att kravspecifikationen uppnås.
+			\item Gemensam målgång (GML) \\ Ser till att kraven gällande gemensam målgång uppnås.
+			\item Displayhantering (DSP) \\ Ser till att displayen programmeras och att kraven gällande den uppfylls.
+			\item Hastighet (SPD) \\ Ser till att kraven gällande varvtid uppfylls.
+			\item Kalibreringsvarv och positionsdetektering (KLB, POS) \\ Ser till att kraven gällande positionering uppfylls samt att kalibreringsvarven fungerar som de ska.
+		\end{itemize}
+	\section{Dokumentplan}
+		Gruppen kommer framställa ett antal dokument rörande projektstrukturen enligt LIPS-mallar.
+		
+		\begin{tabular}{| p{0.25\linewidth} | p{0.25\linewidth } | r |}
+			\multicolumn{1}{l}{\textbf{Dokument}} & \multicolumn{1}{l}{\textbf{Syfte}} & \multicolumn{1}{c}{\textbf{Datum}} \\\hline
+			Projektplan & Beskriver projektet och dess genomförande. & 2019-10-01 \\\hline
+			Mötesprotokoll & Protokoll till varje möte. & \\\hline
+			Tidsrapportering & Visar hur mycket tid medlemmarna lagt på projektet. & \\\hline
+			Efter-studie & Sammanställning av erfarenheter och arbetet överlag. & \\\hline
+			Designspecifikation & Utvärdering av olika lösningsförslag och beslut. & 2019-10-11 \\\hline
+			Dokumentation till programvara && \\\hline
+			Testprotokoll & Redovisar resultat och förbättringsmöjligheter på genomförda tester & \\\hline
+		\end{tabular}
+	
+	\section{Metodik}
+		Inga synnerliga krav finns på metodik. Istället behöver gruppen söka efter och utvärdera olika lösningsmöjligheter och fastställa den mest effektiva.
+	
+	\section{Utbildning}
+		\subsection{Projektmedlemmarnas utbildning}
+		Projektmedlemmarna ska av handledaren och/eller beställaren få en utbildning i git samt en introduktion till att programmera i Matlab.
+		\subsection{Kundens utbildning}
+		Enligt kravspecifikationen (krav 13) ska systemet gå att starta med minimala förberedelser. Således kommer kunden inte behöva någon utbildning för att använda produkten.
+	
+	\section{Rapporteringsplan}
+		Varje medlem ansvarar själv för att föra in sin tidrapportering i den gemensamma excelfilen. PL sammanställer dessa samt en kort beskrivning om vad som gjorts under veckan och rapporterar in det till beställaren senast 12:00 varje måndag. I rapporten ska även mötesprotokoll bifogas.
+	
+	\section{Mötesplan}
+		Möte planeras mellan PL och beställare en gång per vecka, en vecka i taget. Möten inom projektgruppen planeras av PL vid behov.
+	
+	\section{Resursplan}
+		\subsection{Personer}
+		Gruppen består av 5 studenter som har 120h vardera och de kan även ta hjälp av en handledare i 25h.
+		\subsection{Material}
+		Det material som gruppen har tillgång till är själva bilbanan, ett antal bilar av olika modeller samt de stationära datorer som finns inne i labbet. 
+		\subsection{Lokaler}
+		De lokaler som utfärdats till projektgruppen är “bilbanelabbet”, sal 227:187. Detta utrymme delas med en annan projektgrupp och medlemmarna ansvarar för att boka labbet efter behov. Vid fall av möten eller andra träffar kan det vara mer passande att befinna sig i exempelvis ett grupprum, projektgruppen ansvarar själva för att ordna sal till dylika tillfällen.
+		\subsection{Ekonomi}
+		Projektmedlemmarna har totalt 600h att spendera på projektet. 
+	
+	\section{Beslutspunkter}
+		Se avsnitt \ref{sec:leveranser} för beslutspunkter.
+		
+	\section{Aktiviteter}
+	\begin{tabular}{| p{0.3\linewidth} | p{0.55\linewidth}| r |}
+		\multicolumn{1}{l}{\bfseries Namn} & \multicolumn{1}{l}{\textbf{Beskrivning} (och \textbf{krav})} & \multicolumn{1}{l}{\textbf{Tid} [h]} \\\hline
+		\emph{Display} && \emph{60} \\\hline
+		\quad Under körning & Displayen ska visa nuvarande varv och varvtid (4), visa nuvarande gaspådrag (5), välja aktiv bana/banor, välja referenstid, samt välja om gemensam målgång ska vara aktiverad eller inte (14). & 10 \\\hline
+		\quad Statistik & Displayen ska vid slutförd körning visa statistik (6) som visar varv, varvtid och avvikelser med standardavvikelser (25). & 20 \\\hline
+		\quad Touchfunktionalitet & Displayen ska fråga och få svar från användaren enbart via skärmen och touch-inmatning (15). & 30 \\\hline
+
+		\emph{Körning} & Den här delen av koden ska kunna justera bilens hastighet i de olika segmenten för att uppnå de förutbestämda varvtiderna.  & \emph{224} \\\hline
+		\quad Variabel hastighet & Variera hastigheten för att uppnå vald referenstid (17). & 150 \\\hline
+		\quad\quad ...utifrån del av banan & Till exempel kräver vissa delar av banan större pålagd spänning än andra delar av banan. & 60 \\\hline
+		\quad\quad ...utifrån körningsegenskaper & Programmet ska hantera olika bilar och ``driftsfall'' av banan (7, 8). & 60 \\\hline
+		\quad\quad ...utifrån nuvarande tid & Programmet ska själv utvärdera hur vardera bil ligger till vid givarna och öka alternativt sänka hastigheten vid behov. & 30 \\\hline
+		\quad Gemensam målgång & Två bilar ska kunna passera målgången samtidigt (11, 23). & 24 \\\hline
+		\quad Hantering av missade givare & Programmet ska kunna hantera missade givarsignaler från banan (3). & 10 \\\hline
+		\quad Hantering av avåkning & Om bilen åker av banan ska detta rapporteras inom 10 sekunder (9). & 10 \\\hline
+		\quad Testning & Tid där programmets och kodens funktionalitet testas. & 30 \\\hline
+
+		\emph{Dokument} && \emph{114} \\\hline
+		\quad Projektplan och tidsplan & Projektplanen beskriver hur projektet kommer gå till och tidsplanen är en uppskattad tidsplanering över hela projektet (43). & 8 \\\hline
+		\quad Mötesprotokoll & Till varje möte ska ett mötesprotokoll skrivas (41, 43). & 8 \\\hline
+		\quad Beställarkontakt & Senast 12:00 varje måndag ska en summering av veckans arbete tillsammans med tidsrapportering och mötesprotokoll skickas till beställaren (41). & 8 \\\hline  % samt veckorapportering
+		\quad Teknisk dokumentation & Allt arbete som görs och alla testresultat ska loggas för att kunna redovisa projektets gång (43). & 80 \\\hline
+		\quad Dokumentansvarigsarbete & Korrekturläsning av alla officiella dokument samt ansvar för att de förvaras smidigt och åtkomligt för alla i gruppen. & 10 \\\hline
+
+		\emph{Övrigt} && \emph{132} \\\hline
+		\quad Presentation och förberedelser & En presentation med visuella hjälpmedel över det genomförda projektet och dess resultat (39). & 20 \\\hline
+		\quad Biblioteksuppgift & En uppgift i faktasökande som genomförs parallellt med ordinarie projektarbete. & 40 \\\hline
+		\quad Möten & Tillfällen för att inom gruppen stämma av hur det går i projektet och om det är något annat inom gruppen eller arbetet som måste lösas. & 58 \\\hline
+		\quad Utbildning & Utbildning i diverse nödvändiga program som Git, MatLab och LaTeX (1, 44) & 14 \\\hline
+		Buffert & Undanlagda timmar ifall något moment tar längre tid än planerat. & 70 \\\hline
+	\end{tabular}
+	\section{Förändringsplan}
+	Om gruppen behöver förändra något i projektplanen eller dylik planering genomförs följande process.
+	\begin{enumerate}
+		\item Gruppmöte.
+		\item Ta fram förslag.
+		\item PL för fram förslag till beställaren.
+		\item Eventuell omarbetning av förslag.
+	\end{enumerate}
+	
+	\section{Kvalitet}
+		\subsection{Granskningar}
+		Handledare granskar dokument som PL skickar veckovis. Vid leverans granskas inlämnat material i Urkund. Dessutom jämförs slutresultaten med tidigare års resultat.
+		\subsection{Testplan}
+		\begin{itemize}
+			\item Rullande tester under utveckling.
+			\item Test av ``enkel funktionalitet'' enligt kravspecifikationen senast 2019-11-04.
+			\item Dessutom regelbundna och fullständiga tester av kalibreringsvarv med komplett loggning och jämförelse mot tidigare fullständiga tester.
+		\end{itemize}
+		Testerna kan komma att kompletteras när gruppen är mer införstådd i styrsystemet.
+	
+	\section{Riskanalys}
+		Risk för materiell skada bedöms som låg. Gruppen kan tänka på att ta det lugnt med hastigheten och stiften när bilar lyfts av och på banan.
+	
+	\section{Projektavslut}
+		Vid projektavslut kommer gruppen och dess medlemmar:
+		\begin{itemize}
+			\item Reflektera över gruppens samarbete.
+			\item Göra ett större slut-test.
+			\item Jämföra gruppens resultat med projekten från föregående år.
+		\end{itemize}
+	
+\end{document}
