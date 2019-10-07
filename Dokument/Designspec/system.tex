@@ -21,7 +21,32 @@ själva bilkörningen medan det andra systemet kontrollerar displayen.
     \subsubsection{Primära beräkningar}
 
     De primära beräkningarna är de beräkningar som beror direkt på tillgänglig
-    information.
+    information. Eftersom indatan enbart består av bilens position är bilens
+    hastighet genom det förra segmentet den enda informationen som direkt beror
+    på indata.
 
+    \subsubsection{Sekundära beräkningar}
+    
+    Den första beräkningen som görs är bilens nuvarande position. Detta görs med
+    hjälp av en intern bild av banan och vetskapen om vilken hastighet bilen
+    önskas ha. Sedan räknas den position som bäst gör att bilen klarar den satta
+    varvtiden ut. För att räkna ut den beaktas enbart den nuvarande tiden och
+    (om gemensam målgång är aktiverat) positionen av den andra bilen. Steget
+    efter är att räkna ut den mest rimliga optimala situationen som beaktar hur
+    lång tid det är kvar på det nuvarande varvet. I början av varvet görs alltså
+    inte lika drastiska hastighetsändringar som mot slutet.
+
+    Det sista som händer är när informationen om bilens och banans skick används
+    för att räkna ut vilket spänningspådrag som krävs för att få bilen att nå
+    den hastighet och position som krävs.
+
+    \subsubsection{Utförande}
+
+    I utförandet skickas det nya spänningspådraget till banorna.
 
   \subsection{Delsystem B: Display}
+
+  Displayen ter sig enklare än delsystem A. Under körning ska, om ett nytt varv
+  påbörjats, den senaste varvtiden och varvnumret skickas till displayen. Om
+  stopp-knappen har tryckts ned ska systemet hoppa till resultat-skärmen och om
+  inte så ska det fortsätta.
