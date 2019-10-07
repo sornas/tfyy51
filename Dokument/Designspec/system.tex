@@ -1,0 +1,27 @@
+\section{Delsystem}
+
+Systemet kommer vara indelat i två olika delsystem. Dessa system kommer köras
+sekvensiellt, alltså det ena efter det andra. Det första systemet kontrollerar
+själva bilkörningen medan det andra systemet kontrollerar displayen.
+
+  \subsection{Delsystem A: Bana}
+  
+  Delsystem A är indelat i tre övergripande delar. I del A.1 hämtas all
+  tillgänglig information in, i del A.2a görs beräkningar utifrån tillgänglig
+  data, i del A.2b görs vidare beräkningar (alltså beräkningar som inte baseras
+  direkt på den tillgängliga informationen), och i del A.3 utförs de ändringar
+  som programmet bedömer är nödvändiga för att klara den valda varvtiden. 
+
+    \subsubsection{Inhämtning av information}
+
+    Information som finns tillgänglig är kraftigt begränsad. I praktiken kommer
+    programmet endast fråga om någon av bilarna passerat en givare sedan
+    programmet frågade förra gången.
+
+    \subsubsection{Primära beräkningar}
+
+    De primära beräkningarna är de beräkningar som beror direkt på tillgänglig
+    information.
+
+
+  \subsection{Delsystem B: Display}
