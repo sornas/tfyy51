@@ -1,20 +1,9 @@
 \section{Hantering av händelser}
 
+\subsection{Start} \input{events/start}
 
-\subsection{Start}
-\input{events/start}
+\subsection{Avåkning} \input{events/off-circuit}
 
-\subsection{Avåkning}
-\input{events/off-circuit}
+\subsection{Missade givare} \input{events/missade-givare}
 
-\input{events/missade-givare}
-\subsection{Missade givare}
-
-Enligt krav 3 i kravspecifikationen ska programmet kunna hantera missade givare och fortsätta köra som normalt. Som vi har tänkt att använda oss av givarna så ska inte bilarna ändra sin körning vid ett sådant utfall. Då vi tänkt att använda givarna som en referens och inte justering av bilarnas körning så kommer en missad givare ge ett fel på referens.
-
-\input{events/manuell}
-\subsection{Manuell körning}
-Enligt kravspecifikationens punkt 12 ska de två olika banorna delas upp så att ena banan styrs autonomt och den andra manuellt. 
-Den manuella delen ska bli hjälpt av programmet för att underläta körning vid händelse av driftfall samt uppvärmning av banan.
-Detta ska uppnås genom att jämföra vilken hastighet bilen erhåller i ett visst segment styrt av vilken spänningspåläggning som verkar på bilen.
-Sedan ska programmet  jämföra hastigheten med en tidigare föreslagen hastighet och sedan modifiera en konstant för att matcha det önskade värdet.
+\subsection{Manuell körning} \input{events/manuell} 
