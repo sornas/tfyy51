@@ -50,7 +50,34 @@ figur~\ref{fig:system_diagram} för ett processchema.
 
     \subsubsection{Utförande}
 
-    I utförandet skickas det nya spänningspådraget till banorna.
+    	I utförandet skickas det nya spänningspådraget till banorna. 
+	Se figur~\ref{fig:flow_diagram} 
+
+    \subsubsection{Delsystem A djupgående}
+	I figur visas flödet för de funktioner som sker i delsystem A i en cykel. 
+	Här listas namn på funktionerna och deras funktion:
+	\begin{itemize}
+ 		\item indata: Ger data när bilen passerar en givare
+		\item car constant: Programmets sätt att justera sig efter olika bilars egenskaper. Justeras vid varje ny indata
+ 		\item position
+ 		\item clock
+		\item car position dif
+		\item target
+		\item target dif
+		\item agressivness
+		\item u constant map	
+		\item new v	
+		\item track u constant
+		\item new u
+	\end{itemize}
+
+	\begin{figure}
+  	\centering
+  	\includegraphics{figures/Flödesdiagram.pdf}
+  	\caption{Funktionsflödet i delsystem A}
+  	\label{fig:flow_diagram}
+	\end{figure}
+
 
   \subsection{Delsystem B: Display}
 
