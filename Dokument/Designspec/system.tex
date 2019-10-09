@@ -51,24 +51,25 @@ figur~\ref{fig:system_diagram} för ett processchema.
     \subsubsection{Utförande}
 
     	I utförandet skickas det nya spänningspådraget till banorna. 
-	Se figur~\ref{fig:flow_diagram} 
+	
 
-    \subsubsection{Delsystem A djupgående}
-	I figur visas flödet för de funktioner som sker i delsystem A i en cykel. 
+    \subsubsection{Funktioner i delsystem A}
+	I figur~\ref{fig:flow_diagram}  visas flödet av de funktioner som sker i delsystem A under en cykel.
 	Här listas namn på funktionerna och deras funktion:
 	\begin{itemize}
  		\item indata: Ger data när bilen passerar en givare
 		\item car constant: Programmets sätt att justera sig efter olika bilars egenskaper. Justeras vid varje ny indata
- 		\item position
- 		\item clock
-		\item car position dif
-		\item target
-		\item target dif
-		\item agressivness
-		\item u constant map	
-		\item new v	
-		\item track u constant
-		\item new u
+ 		\item position: Där programmet tror att bilen är
+ 		\item clock: Hur länge bilen har varit i det nuvarande segmentet och varvet
+		\item car position dif: Bilarnas position rellativt till varandra. Endast aktiv om gemensam målgång aktiverad.
+		\item target: Den varvtid som manuellt har satts inan programet startade
+		\item target dif: Bilens position relativt till var den borde vara vid den nuvarande tiden
+		\item agressivness: Hur bråttom det är att justera bilarnas hastighet 
+		\item u constant map: En "karta" över hur mycket spänning som behövs i olika delar av banan
+		\item track u constant: Konstant för att justera spänningen på nuvarande position
+		\item new v: Den nya hastigheten som ska sättas
+		 
+		\item new u: Den spänning som sätts
 	\end{itemize}
 
 	\begin{figure}
