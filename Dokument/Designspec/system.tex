@@ -8,7 +8,7 @@ figur~\ref{fig:system_diagram} för ett processchema.
 \begin{figure}
   \centering
   \includegraphics{figures/Processchema.pdf}
-  \caption{Processchema över systemets helhet.}
+  \caption{Processchema över systemets helhet.}%
   \label{fig:system_diagram}
 \end{figure}
 
@@ -65,22 +65,20 @@ figur~\ref{fig:system_diagram} för ett processchema.
 		\item target: Den varvtid som manuellt har satts inan programet startade
 		\item target dif: Bilens position relativt till var den borde vara vid den nuvarande tiden
 		\item agressivness: Hur bråttom det är att justera bilarnas hastighet 
-		\item u constant map: En "karta" över hur mycket spänning som behövs i olika delar av banan
+		\item u constant map: En ``karta'' över hur mycket spänning som behövs i olika delar av banan
 		\item track u constant: Konstant för att justera spänningen på nuvarande position
-		\item speed map: En "karta" över hur fort man kan köra i olika delar av banan		
+		\item speed map: En ``karta'' över hur fort man kan köra i olika delar av banan		
 		\item speed constant: Konstant som används för att se till att hastigheten anpassas efter banans svängar m.m.
 		\item new v: Den nya hastigheten som ska sättas
-		 
 		\item new u: Den spänning som sätts
 	\end{itemize}
 
 	\begin{figure}
   	\centering
-  	\includegraphics{figures/Flödesdiagram.pdf}
-  	\caption{Funktionsflödet i delsystem A}
+    \includegraphics[width=\linewidth]{figures/flow.pdf}
+  	\caption{Funktionsflödet i delsystem A.}%
   	\label{fig:flow_diagram}
 	\end{figure}
-
 
   \subsection{Delsystem B: Display}
 
