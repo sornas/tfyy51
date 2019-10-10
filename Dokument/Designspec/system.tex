@@ -15,10 +15,9 @@ figur~\ref{fig:system_diagram} för ett processchema.
   \subsection{Delsystem A: Bana}
   
   Delsystem A är indelat i tre övergripande delar. I del A.1 hämtas all
-  tillgänglig information in, i del A.2a görs beräkningar utifrån tillgänglig
-  data, i del A.2b görs vidare beräkningar (alltså beräkningar som inte baseras
-  direkt på den tillgängliga informationen), och i del A.3 utförs de ändringar
-  som programmet bedömer är nödvändiga för att klara den valda varvtiden. 
+  tillgänglig information in, i del A.2 görs alla beräkningar som krävs och i
+  del A.3 utförs de ändringar som programmet bedömer är nödvändiga för att
+  klara den valda varvtiden. 
 
     \subsubsection{Inhämtning av information}
 
@@ -51,27 +50,27 @@ figur~\ref{fig:system_diagram} för ett processchema.
     \subsubsection{Utförande}
 
     	I utförandet skickas det nya spänningspådraget till banorna. 
-	
 
-    \subsubsection{Funktioner i delsystem A}
-	I figur~\ref{fig:flow_diagram}  visas flödet av de funktioner som sker i delsystem A under en cykel.
-	Här listas namn på funktionerna och deras funktion:
-	\begin{itemize}
- 		\item indata: Ger data när bilen passerar en givare
-		\item car constant: Programmets sätt att justera sig efter olika bilars egenskaper. Justeras vid varje ny indata
- 		\item position: Där programmet tror att bilen är
- 		\item clock: Hur länge bilen har varit i det nuvarande segmentet och varvet
-		\item car position dif: Bilarnas position rellativt till varandra. Endast aktiv om gemensam målgång aktiverad.
-		\item target: Den varvtid som manuellt har satts inan programet startade
-		\item target dif: Bilens position relativt till var den borde vara vid den nuvarande tiden
-		\item agressivness: Hur bråttom det är att justera bilarnas hastighet 
-		\item u constant map: En ``karta'' över hur mycket spänning som behövs i olika delar av banan
-		\item track u constant: Konstant för att justera spänningen på nuvarande position
-		\item speed map: En ``karta'' över hur fort man kan köra i olika delar av banan		
-		\item speed constant: Konstant som används för att se till att hastigheten anpassas efter banans svängar m.m.
-		\item new v: Den nya hastigheten som ska sättas
-		\item new u: Den spänning som sätts
-	\end{itemize}
+      \subsubsection{Funktioner i delsystem A} \label{sec:system_a_funcs}
+
+    I figur~\ref{fig:flow_diagram}  visas flödet av de funktioner som sker i delsystem A under en cykel.
+    Här listas namn på funktionerna och deras funktion:
+    \begin{itemize}
+      \item indata: Ger data när bilen passerar en givare
+      \item car constant: Programmets sätt att justera sig efter olika bilars egenskaper. Justeras vid varje ny indata
+      \item position: Där programmet tror att bilen är
+      \item clock: Hur länge bilen har varit i det nuvarande segmentet och varvet
+      \item car position dif: Bilarnas position rellativt till varandra. Endast aktiv om gemensam målgång aktiverad.
+      \item target: Den varvtid som manuellt har satts inan programet startade
+      \item target dif: Bilens position relativt till var den borde vara vid den nuvarande tiden
+      \item agressivness: Hur bråttom det är att justera bilarnas hastighet 
+      \item u constant map: En ``karta'' över hur mycket spänning som behövs i olika delar av banan
+      \item track u constant: Konstant för att justera spänningen på nuvarande position
+      \item speed map: En ``karta'' över hur fort man kan köra i olika delar av banan		
+      \item speed constant: Konstant som används för att se till att hastigheten anpassas efter banans svängar m.m.
+      \item new v: Den nya hastigheten som ska sättas
+      \item new u: Den spänning som sätts
+    \end{itemize}
 
 	\begin{figure}
   	\centering
