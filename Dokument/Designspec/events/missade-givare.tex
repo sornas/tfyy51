@@ -1,8 +1,6 @@
 Enligt krav 3 i kravspecifikationen ska programmet kunna hantera missade givare
 och fortsätta köra som normalt. Med metoden som används blir detta inte ett
-problem.  Givarna kommer endast att användas för att justera programmets
+problem. Givarna kommer endast att användas för att justera programmets
 uppfattning om bilarnas position, medan själva positioneringen räknas ut av
-systemet. Programmet ska detektera detta fel genom att se om en givare passeras
-när det är förväntat. Om systemet inte gör det och nästa passering av givare
-sker när det är förväntat identifierar systemet den tidigare tidsfördröjningen
-som en missad givare.
+systemet. Om programmet detekterar att en givare inte passeras överhuvudtaget när det var förväntat fortsätter systemet att köra bilen enligt beräkningar på vart bilen borde befinna sig tills nästa givare. Vid passering av nästa givare kommer systemet att jämföra om den uträknade tiden och den faktiska tiden som bilen passerade på. Där systemet jämför om tiderna är rimliga och därefter avgör om den tidigare tidsfördröjningen var en missad givare.
+
