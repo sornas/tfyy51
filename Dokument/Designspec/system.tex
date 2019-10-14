@@ -70,6 +70,17 @@ och ger ett värde på placeringsskillnaden för en viss hastighet. Detta kommer
 sedan användas för att sätta bilarnas nya hastighet. Värdet blir stort om skillnaden i placering är stor men justeras också efter hastigeten. Dvs om bilarna ligger långt ifrån varandra men åker ganska fort kommer inte värdet bli lika stort som om bilarna legat lika långt ifrån varandra men haft lägre hastighet. Värdet är positivt om bil 1 ligger före bil 2 och negativt om bil 2 ligger före bil 1. På så sätt kan nästa funktion avgöra vilken bil som ligger först.
 Värdet används sedan för att beräkna nästa hastighet (new v) som kommer ökas eller minskas för att få bilarna att köra ikapp varandra. 
 
+<<<<<<< HEAD
+      \item target: Den varvtid som manuellt har satts innan programet startade.
+      \item target dif: Bilens position relativt till var den borde vara vid den nuvarande tiden.
+      \item agressivness: Hur bråttom det är att justera bilarnas hastighet. Exempelvis kan det vara mer angeläget att ändra hastigheten ju närmre slutet av varvet bilen befinner sig. Agressivness kommer vara en konstant som då blir större och gör att hastigheten för varje cykel ändras mer.
+      \item u constant map: Är en kartläggning över banan och de spänningsnivåer som behöver sättas så att spänningen blir jämn. Detta eftersom att spänningstillförseln beter sig olika för olika delar av banan. Kartläggningen kommer bygga på det register med inlagrad data som tagits fram genom tester.
+      \item track u constant: Konstant för att justera spänningen på nuvarande position.
+      \item speed map: En ``karta'' över hur fort man kan köra i olika delar av banan.
+      \item speed constant: Konstant som används för att se till att hastigheten anpassas efter banans svängar m.m.
+      \item new v: Den nya hastigheten som ska sättas.
+      \item new u: Den spänning som skickas till bilen.
+=======
       \item target: Den varvtid som manuellt har satts inan programet startade.
       \item target\textunderscore dif: Bilens position relativt till var den borde vara vid den nuvarande tiden.
       \item agressivness: Hur bråttom det är att justera bilarnas hastighet. Exempelvis kan det vara mer angeläget att ändra hastigheten ju närmre slutet av varvet bilen befinner sig. Agressivness kommer vara en konstant som då blir större och gör att hastigheten för varje cykel ändras mer.
@@ -79,6 +90,7 @@ Värdet används sedan för att beräkna nästa hastighet (new v) som kommer ök
       \item speed\textunderscore constant: Konstant som används för att se till att hastigheten anpassas efter banans svängar m.m.
       \item new\textunderscore v: Den nya hastigheten som ska sättas.
       \item new\textunderscore u: Den spänning som skickas till bilen.
+>>>>>>> eb2fe135ca33a5e3fe26725e46e6202586c3be3e
     \end{itemize}
 
     \begin{figure}
