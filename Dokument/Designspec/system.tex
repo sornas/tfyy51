@@ -57,12 +57,12 @@ figur~\ref{fig:system_diagram} för ett processchema.
     I figur~\ref{fig:flow_diagram}  visas flödet av de funktioner som sker i delsystem A under en cykel.
     Här listas namn på funktionerna och deras funktion:
     \begin{itemize}
-	\item old u: old u är lagring av data från bilens spänning. Denna databas kommer lagra information om tidigare cyklar, varv och tidigare lopp. Databasen kommer vara en egen separat funktion så att det blir lätt att referera till databasen.
-	\item old v: old v är lagringen av data från bilens hastighet mellan segment, varv, tidigare lopp och detta lagras i databasen som är en egen funktion som vi kommer att referera till. 
-	\item old position: Lagring av gammal data för bilens placering. Från denna databas kan andra funktioner få information om var bilen var förra cykeln, var bilen var för ett varv sedan m.m.
+	\item old\textunderscore u: old u är lagring av data från bilens spänning. Denna databas kommer lagra information om tidigare cyklar, varv och tidigare lopp. Databasen kommer vara en egen separat funktion så att det blir lätt att referera till databasen.
+	\item old\textunderscore v: old v är lagringen av data från bilens hastighet mellan segment, varv, tidigare lopp och detta lagras i databasen som är en egen funktion som vi kommer att referera till. 
+	\item old\textunderscore position: Lagring av gammal data för bilens placering. Från denna databas kan andra funktioner få information om var bilen var förra cykeln, var bilen var för ett varv sedan m.m.
       \item indata: Ger data när bilen passerar en givare.
-      \item car constant: Programmets sätt att anpassa sig efter olika bilars egenskaper. Justeras vid varje ny indata.
-      \item position: Position, programmet räknar ut vart på banan bilen befinner sig genom att hämta senaste positionen old position och sedan addera sträckan bilen har färdats sedan dess senaste värde. Sträckan som bilen har färdats kan räknas ut genom S=VxT, där v=old v och (delta)t=tidskillnaden mellan senaste cykel.
+      \item car\textunderscore constant: Programmets sätt att anpassa sig efter olika bilars egenskaper. Justeras vid varje ny indata.
+      \item position: Position, programmet räknar ut vart på banan bilen befinner sig genom att hämta senaste positionen old position och sedan addera sträckan bilen har färdats sedan dess senaste värde. Sträckan som bilen har färdats kan räknas ut genom S=V\textasteriskcentered T, där v = old\textunderscore v och (delta)t = tidskillnaden mellan senaste cykel.
       \item clock: Hur länge bilen har varit i det nuvarande segmentet och varvet.
 
       \item car\textunderscore position\textunderscore dif: Endast aktiv om gemensam målgång aktiverad. Jämför bilarnas position med varandra. Funktionen utgår ifrån respektive bils placering (från old position) och hastighet (från old v) 
@@ -70,6 +70,7 @@ och ger ett värde på placeringsskillnaden för en viss hastighet. Detta kommer
 sedan användas för att sätta bilarnas nya hastighet. Värdet blir stort om skillnaden i placering är stor men justeras också efter hastigeten. Dvs om bilarna ligger långt ifrån varandra men åker ganska fort kommer inte värdet bli lika stort som om bilarna legat lika långt ifrån varandra men haft lägre hastighet. Värdet är positivt om bil 1 ligger före bil 2 och negativt om bil 2 ligger före bil 1. På så sätt kan nästa funktion avgöra vilken bil som ligger först.
 Värdet används sedan för att beräkna nästa hastighet (new v) som kommer ökas eller minskas för att få bilarna att köra ikapp varandra. 
 
+<<<<<<< HEAD
       \item target: Den varvtid som manuellt har satts innan programet startade.
       \item target dif: Bilens position relativt till var den borde vara vid den nuvarande tiden.
       \item agressivness: Hur bråttom det är att justera bilarnas hastighet. Exempelvis kan det vara mer angeläget att ändra hastigheten ju närmre slutet av varvet bilen befinner sig. Agressivness kommer vara en konstant som då blir större och gör att hastigheten för varje cykel ändras mer.
@@ -79,6 +80,17 @@ Värdet används sedan för att beräkna nästa hastighet (new v) som kommer ök
       \item speed constant: Konstant som används för att se till att hastigheten anpassas efter banans svängar m.m.
       \item new v: Den nya hastigheten som ska sättas.
       \item new u: Den spänning som skickas till bilen.
+=======
+      \item target: Den varvtid som manuellt har satts inan programet startade.
+      \item target\textunderscore dif: Bilens position relativt till var den borde vara vid den nuvarande tiden.
+      \item agressivness: Hur bråttom det är att justera bilarnas hastighet. Exempelvis kan det vara mer angeläget att ändra hastigheten ju närmre slutet av varvet bilen befinner sig. Agressivness kommer vara en konstant som då blir större och gör att hastigheten för varje cykel ändras mer.
+      \item u\textunderscore constant\textunderscore map: Är en kartläggning över de optimala spänningsnivåerna utöver banan. Kartläggningen kommer bygga på det register med inlagrad data som tagits fram genom tester för optimal körning.
+      \item track\textunderscore u\textunderscore constant: Konstant för att justera spänningen på nuvarande position.
+      \item speed\textunderscore map: En ``karta'' över hur fort man kan köra i olika delar av banan.
+      \item speed\textunderscore constant: Konstant som används för att se till att hastigheten anpassas efter banans svängar m.m.
+      \item new\textunderscore v: Den nya hastigheten som ska sättas.
+      \item new\textunderscore u: Den spänning som skickas till bilen.
+>>>>>>> eb2fe135ca33a5e3fe26725e46e6202586c3be3e
     \end{itemize}
 
     \begin{figure}
