@@ -57,11 +57,13 @@ figur~\ref{fig:system_diagram} för ett processchema.
     I figur~\ref{fig:flow_diagram}  visas flödet av de funktioner som sker i delsystem A under en cykel.
     Här listas namn på funktionerna och deras funktion:
     \begin{itemize}
-	\item old\textunderscore u: old u är lagring av data från bilens spänning. Denna databas kommer lagra information om tidigare cyklar, varv och tidigare lopp. Databasen kommer vara en egen separat funktion så att det blir lätt att referera till databasen.
 	\item old\textunderscore v: old v är lagringen av data från bilens hastighet mellan segment, varv, tidigare lopp och detta lagras i databasen som är en egen funktion som vi kommer att referera till. 
 	\item old\textunderscore position: Lagring av gammal data för bilens placering. Från denna databas kan andra funktioner få information om var bilen var förra cykeln, var bilen var för ett varv sedan m.m.
       \item indata: Ger data när bilen passerar en givare.
-      \item car\textunderscore constant: Programmets sätt att anpassa sig efter olika bilars egenskaper. Justeras vid varje ny indata.
+
+%car_constant
+      \item car\textunderscore constant: car\textunderscore constant ska direkt påverka new\textunderscore u så att new\textunderscore u tillsammans med track\textunderscore u\textunderscore constant motsvarar den hastighet som anges av new\textunderscore v. Car\textunderscore constant ändras endast vid ny indata, vilket innebär att den är konstant under resterande cykler. Genom att jämföra position med indatan kan programmet räkna ut felmarginalen som har uppstått och kalibreras så att man med större precision kan justera new\textunderscore u.
+ 
       \item position: Position, programmet räknar ut vart på banan bilen befinner sig genom att hämta senaste positionen old position och sedan addera sträckan bilen har färdats sedan dess senaste värde. Sträckan som bilen har färdats kan räknas ut genom S=V\textasteriskcentered T, där v = old\textunderscore v och (delta)t = tidskillnaden mellan senaste cykel. Om ny indata finns denna cykel så är positionen känd och denna data används i stället för att utgå igrån gammal.
       \item clock: Hur länge bilen har varit i det nuvarande segmentet och varvet.
 
@@ -87,7 +89,9 @@ också på agressivness, högre agressivness ger större skillnad mellan new\tex
 inte kommer ändras särskillt mycket.
 new\textunderscore v används sedan för att sätta
 new\textunderscore u. Högre new\textunderscore v ger högre new\textunderscore u och lägre new\textunderscore v ger lägre\textunderscore u. 
-      \item new\textunderscore u: Beräknar den spänning som ska appliceras beroende på vilken hastighet new \textunderscore v anger. Ett högre new \textunderscore v innebär ett högre new\textunderscore u. De andra parametrarna som påverkar new\textunderscore u är car\textunderscore constant och track\textunderscore u\textunderscore constant, desto högre dessa värden dessa antar desto högre värde antar också new\textunderscore u. New\textunderscore u är programmets sista output, dess värde 0 till 127 är den spänning som appliceras på bilen. Värdet lagras också direkt till loggen old\textunderscore u. 
+     
+% new:u
+ \item new\textunderscore u: Beräknar den spänning som ska appliceras beroende på vilken hastighet new \textunderscore v anger. Ett högre new \textunderscore v innebär ett högre new\textunderscore u. De andra parametrarna som påverkar new\textunderscore u är car\textunderscore constant och track\textunderscore u\textunderscore constant, desto högre dessa värden dessa antar desto högre värde antar också new\textunderscore u. New\textunderscore u är programmets sista output, dess värde 0 till 127 är den spänning som appliceras på bilen.
 
     \end{itemize}
 
