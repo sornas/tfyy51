@@ -72,7 +72,7 @@ Värdet används sedan för att beräkna nästa hastighet (new v) som kommer ök
 
       \item target: Den varvtid som manuellt har satts inan programet startade.
       \item target dif: Bilens position relativt till var den borde vara vid den nuvarande tiden.
-      \item agressivness: Hur bråttom det är att justera bilarnas hastighet.
+      \item agressivness: Hur bråttom det är att justera bilarnas hastighet. Exempelvis kan det vara mer angeläget att ändra hastigheten ju närmre slutet av varvet bilen befinner sig. Agressivness kommer vara en konstant som då blir större och gör att hastigheten för varje cykel ändras mer.
       \item u constant map: Är en kartläggning över de optimala spänningsnivåerna utöver banan. Kartläggningen kommer bygga på det register med inlagrad data som tagits fram genom tester för optimal körning.
       \item track u constant: Konstant för att justera spänningen på nuvarande position.
       \item speed map: En ``karta'' över hur fort man kan köra i olika delar av banan.
