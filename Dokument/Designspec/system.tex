@@ -57,8 +57,8 @@ figur~\ref{fig:system_diagram} för ett processchema.
     I figur~\ref{fig:flow_diagram}  visas flödet av de funktioner som sker i delsystem A under en cykel.
     Här listas namn på funktionerna och deras funktion:
     \begin{itemize}
-	\item old\textunderscore u: old u är lagring av data från bilens spänning. Denna databas kommer lagra information om tidigare cyklar, varv och tidigare lopp. Databasen kommer vara en egen separat funktion så att det blir lätt att referera till databasen.
-	\item old\textunderscore v: old v är lagringen av data från bilens hastighet mellan segment, varv, tidigare lopp och detta lagras i databasen som är en egen funktion som vi kommer att referera till. 
+	\item old\textunderscore u: old\textunderscore u är lagring av data från bilens spänning. Denna databas kommer lagra information om tidigare cyklar, varv och tidigare lopp. Databasen kommer vara en egen separat funktion så att det blir lätt att referera till databasen.
+	\item old\textunderscore v: old\textunderscore v är lagringen av data från bilens hastighet mellan segment, varv, tidigare lopp. Detta lagras i databasen som är en egen funktion som kommer att refereras till. 
 	\item old\textunderscore position: Lagring av gammal data för bilens placering. Från denna databas kan andra funktioner få information om var bilen var förra cykeln, var bilen var för ett varv sedan m.m.
       \item indata: Ger data när bilen passerar en givare.
       \item car\textunderscore constant: Programmets sätt att anpassa sig efter olika bilars egenskaper. Justeras vid varje ny indata.
