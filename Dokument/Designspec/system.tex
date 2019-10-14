@@ -62,7 +62,7 @@ figur~\ref{fig:system_diagram} för ett processchema.
 	\item old position: Lagring av gammal data för bilens placering. Från denna databas kan andra funktioner få information om var bilen var förra cykeln, var bilen var för ett varv sedan m.m.
       \item indata: Ger data när bilen passerar en givare.
       \item car constant: Programmets sätt att anpassa sig efter olika bilars egenskaper. Justeras vid varje ny indata.
-      \item position: Där programmet tror att bilen är.
+      \item position: Position, programmet räknar ut vart på banan bilen befinner sig genom att hämta senaste positionen old_position och sedan addera sträckan bilen har färdats sedan dess vilket görs genom old_v*delta_t.
       \item clock: Hur länge bilen har varit i det nuvarande segmentet och varvet.
 
       \item car position dif: Endast aktiv om gemensam målgång aktiverad. Jämför bilarnas position med varandra. Funktionen utgår ifrån respektive bils placering (från old position) och hastighet (från old v) 
