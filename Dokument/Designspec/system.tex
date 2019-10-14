@@ -1,7 +1,7 @@
 \section{Delsystem}
 
 Systemet är indelat i två olika delsystem. Dessa system kommer köras
-sekvensiellt, alltså det ena efter det andra. Det första systemet kontrollerar
+sekvensiellt, alltså det ena efter det andra. Varje sekund kommer dessa två delsystem köras 10 gånger (dvs 10 cykler/sekund). Det första systemet kontrollerar
 själva bilkörningen medan det andra systemet kontrollerar displayen. Se
 figur~\ref{fig:system_diagram} för ett processchema.
 
@@ -26,24 +26,22 @@ figur~\ref{fig:system_diagram} för ett processchema.
     programmet endast fråga om någon av bilarna passerat en givare sedan
     programmet frågade förra gången.
 
-    \subsubsection{Primära beräkningar}
+    \subsubsection{Behandling av insignaler}
 
-    De primära beräkningarna är de beräkningar som beror direkt på tillgänglig
-    information. Eftersom indatan enbart består av bilens position är bilens
-    hastighet genom det förra segmentet den enda informationen som direkt beror
-    på indata.
+    De beräkningar som beror direkt på tillgänglig
+    information. Då ny indata endast kommer då en bil passerar en givare görs dessa beräkningar inte varje cykel. 
+ Ny indata används för att bestäma bilens position, starta en clocka och för att kalibrera en konstant. Dessa funktioner beskrivs 
+mer ingående i \ref{sec:system_a_funcs}.
 
-    \subsubsection{Sekundära beräkningar}
+    \subsubsection{Vidare beräkningar}
     
     Den första beräkningen som görs är bilens nuvarande position. Detta görs med
-    hjälp av en intern bild av banan och vetskapen om vilken hastighet bilen
-    önskas ha. Sedan räknas den position som bäst gör att bilen klarar den satta
-    varvtiden ut. För att räkna ut den beaktas enbart den nuvarande tiden och, om gemensam målgång är aktiverat, positionen av den andra bilen. Steget
-    efter är att räkna ut den mest rimliga optimala situationen som beaktar hur
-    lång tid det är kvar på det nuvarande varvet. I början av varvet görs alltså
-    inte lika drastiska hastighetsändringar som mot slutet.
+    hjälp av en intern bild av banan och vetskapen om vilken hastighet och position bilen
+    tidigare haft. Sedan beräknas den position som bäst gör att bilen klarar den satta
+    varvtiden. För att räkna ut den beaktas enbart den nuvarande tiden och, om gemensam målgång är aktiverat, positionen av den andra bilen.  
+I början av varvet görs  inte lika drastiska hastighetsändringar som mot slutet.
 
-    Det sista som händer är när informationen om bilens och banans skick används
+    Det sista som händer är att  informationen om bilens och banans skick används
     för att räkna ut vilket spänningspådrag som krävs för att få bilen att nå
     den hastighet och position som krävs.
 
@@ -56,10 +54,10 @@ figur~\ref{fig:system_diagram} för ett processchema.
     I figur~\ref{fig:flow_diagram}  visas flödet av de funktioner som sker i delsystem A under en cykel.
     Här listas namn på funktionerna och deras funktion:
     \begin{itemize}
-	\item old\textunderscore u: old\textunderscore u är lagring av data från bilens spänning. Denna databas kommer lagra information om tidigare cyklar, varv och tidigare lopp. Databasen kommer vara en egen separat funktion så att det blir lätt att referera till databasen.
-	\item old\textunderscore v: old\textunderscore v är lagringen av data från bilens hastighet mellan segment, varv, tidigare lopp. Detta lagras i databasen som är en egen funktion som kommer att refereras till. 
+	
+	\item old\textunderscore v: Lagring av bilens hastighet från segment, varv och tidigare lopp. Från denna databas kan andra funktioner få information om hur fort bilen tidigare har åkt. 
 	\item old\textunderscore position: Lagring av gammal data för bilens placering. Från denna databas kan andra funktioner få information om var bilen var förra cykeln, var bilen var för ett varv sedan m.m.
-      \item indata: Ger data när bilen passerar en givare.
+      \item indata: Avgör huruvida en givare har passerats sedan förra cykeln.
       \item car\textunderscore constant: Programmets sätt att anpassa sig efter olika bilars egenskaper. Justeras vid varje ny indata.
       \item position: Programmet räknar ut var på banan bilen befinner sig genom att hämta senaste positionen old\textunderscore position och sedan addera sträckan bilen har färdats sedan dess senaste värde. Sträckan som bilen har färdats kan räknas ut genom S=V\textasteriskcentered (delta)T, där V = old\textunderscore v och (delta)T = tidskillnaden mellan senaste cykel. Om det finns ny indata denna cykel, så är positionen känd och denna data används istället för att utgå ifrån gammal.
       \item clock: Hur länge bilen har varit i det nuvarande segmentet och varvet.
