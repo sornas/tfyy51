@@ -62,7 +62,7 @@ figur~\ref{fig:system_diagram} för ett processchema.
 	\item old\textunderscore position: Lagring av gammal data för bilens placering. Från denna databas kan andra funktioner få information om var bilen var förra cykeln, var bilen var för ett varv sedan m.m.
       \item indata: Ger data när bilen passerar en givare.
       \item car\textunderscore constant: Programmets sätt att anpassa sig efter olika bilars egenskaper. Justeras vid varje ny indata.
-      \item position: Position, programmet räknar ut vart på banan bilen befinner sig genom att hämta senaste positionen old position och sedan addera sträckan bilen har färdats sedan dess senaste värde. Sträckan som bilen har färdats kan räknas ut genom S=V\textasteriskcentered T, där v = old\textunderscore v och (delta)t = tidskillnaden mellan senaste cykel.
+      \item position: Position, programmet räknar ut vart på banan bilen befinner sig genom att hämta senaste positionen old position och sedan addera sträckan bilen har färdats sedan dess senaste värde. Sträckan som bilen har färdats kan räknas ut genom S=V\textasteriskcentered T, där v = old\textunderscore v och (delta)t = tidskillnaden mellan senaste cykel. Om ny indata finns denna cykel så är positionen känd och denna data används i stället för att utgå igrån gammal.
       \item clock: Hur länge bilen har varit i det nuvarande segmentet och varvet.
 
       \item car\textunderscore position\textunderscore dif: Endast aktiv om gemensam målgång aktiverad. Jämför bilarnas position med varandra. Funktionen utgår ifrån respektive bils placering (från old position) och hastighet (från old v) 
