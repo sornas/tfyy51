@@ -1,7 +1,7 @@
 \section{Delsystem}
 
 Systemet är indelat i två olika delsystem. Dessa system kommer köras
-sekvensiellt, alltså det ena efter det andra. Det första systemet kontrollerar
+sekvensiellt, alltså det ena efter det andra. Varje sekund kommer dessa två delsystem köras 10 gånger (dvs 10 cykler/sekund). Det första systemet kontrollerar
 själva bilkörningen medan det andra systemet kontrollerar displayen. Se
 figur~\ref{fig:system_diagram} för ett processchema.
 
@@ -26,25 +26,22 @@ figur~\ref{fig:system_diagram} för ett processchema.
     programmet endast fråga om någon av bilarna passerat en givare sedan
     programmet frågade förra gången.
 
-    \subsubsection{Primära beräkningar}
+    \subsubsection{Behandling av insignaler}
 
-    De primära beräkningarna är de beräkningar som beror direkt på tillgänglig
-    information. Eftersom indatan enbart består av bilens position är bilens
-    hastighet genom det förra segmentet den enda informationen som direkt beror
-    på indata.
+    De beräkningar som beror direkt på tillgänglig
+    information. Då ny indata endast kommer då en bil passerar en givare görs dessa beräkningar inte varje cykel. 
+ Ny indata används för att bestäma bilens position, starta en clocka och för att kalibrera en konstant. Dessa funktioner beskrivs 
+mer ingående i \ref{sec:system_a_funcs}.
 
-    \subsubsection{Sekundära beräkningar}
+    \subsubsection{Vidare beräkningar}
     
     Den första beräkningen som görs är bilens nuvarande position. Detta görs med
-    hjälp av en intern bild av banan och vetskapen om vilken hastighet bilen
-    önskas ha. Sedan räknas den position som bäst gör att bilen klarar den satta
-    varvtiden ut. För att räkna ut den beaktas enbart den nuvarande tiden och
-    (om gemensam målgång är aktiverat) positionen av den andra bilen. Steget
-    efter är att räkna ut den mest rimliga optimala situationen som beaktar hur
-    lång tid det är kvar på det nuvarande varvet. I början av varvet görs alltså
-    inte lika drastiska hastighetsändringar som mot slutet.
+    hjälp av en intern bild av banan och vetskapen om vilken hastighet och position bilen
+    tidigare haft. Sedan beräknas den position som bäst gör att bilen klarar den satta
+    varvtiden. För att räkna ut den beaktas enbart den nuvarande tiden och, om gemensam målgång är aktiverat, positionen av den andra bilen.  
+I början av varvet görs  inte lika drastiska hastighetsändringar som mot slutet.
 
-    Det sista som händer är när informationen om bilens och banans skick används
+    Det sista som händer är att  informationen om bilens och banans skick används
     för att räkna ut vilket spänningspådrag som krävs för att få bilen att nå
     den hastighet och position som krävs.
 
@@ -57,14 +54,13 @@ figur~\ref{fig:system_diagram} för ett processchema.
     I figur~\ref{fig:flow_diagram}  visas flödet av de funktioner som sker i delsystem A under en cykel.
     Här listas namn på funktionerna och deras funktion:
     \begin{itemize}
-	\item old\textunderscore v: old v är lagringen av data från bilens hastighet mellan segment, varv, tidigare lopp och detta lagras i databasen som är en egen funktion som vi kommer att referera till. 
-	\item old\textunderscore position: Lagring av gammal data för bilens placering. Från denna databas kan andra funktioner få information om var bilen var förra cykeln, var bilen var för ett varv sedan m.m.
-      \item indata: Ger data när bilen passerar en givare.
+	\item old\textunderscore v: Lagring av bilens hastighet från segment, varv och tidigare lopp. Från denna databas kan andra funktioner få information om hur fort bilen tidigare har åkt. 	\item old\textunderscore position: Lagring av gammal data för bilens placering. Från denna databas kan andra funktioner få information om var bilen var förra cykeln, var bilen var för ett varv sedan m.m.
+      \item indata: Avgör huruvida en givare har passerats sedan förra cykeln.
 
 %car_constant
       \item car\textunderscore constant: car\textunderscore constant ska direkt påverka new\textunderscore u så att new\textunderscore u tillsammans med track\textunderscore u\textunderscore constant motsvarar den hastighet som anges av new\textunderscore v. Car\textunderscore constant ändras endast vid ny indata, vilket innebär att den är konstant under resterande cykler. Genom att jämföra position med indatan kan programmet räkna ut felmarginalen som har uppstått och kalibreras så att man med större precision kan justera new\textunderscore u.
  
-      \item position: Position, programmet räknar ut vart på banan bilen befinner sig genom att hämta senaste positionen old position och sedan addera sträckan bilen har färdats sedan dess senaste värde. Sträckan som bilen har färdats kan räknas ut genom S=V\textasteriskcentered T, där v = old\textunderscore v och (delta)t = tidskillnaden mellan senaste cykel. Om ny indata finns denna cykel så är positionen känd och denna data används i stället för att utgå igrån gammal.
+      \item position: Programmet räknar ut var på banan bilen befinner sig genom att hämta senaste positionen old\textunderscore position och sedan addera sträckan bilen har färdats sedan dess senaste värde. Sträckan som bilen har färdats kan räknas ut genom S=V\textasteriskcentered (delta)T, där V = old\textunderscore v och (delta)T = tidskillnaden mellan senaste cykel. Om det finns ny indata denna cykel, så är positionen känd och denna data används istället för att utgå ifrån gammal.
       \item clock: Hur länge bilen har varit i det nuvarande segmentet och varvet.
 
       \item car\textunderscore position\textunderscore dif: Endast aktiv om gemensam målgång aktiverad. Jämför bilarnas position med varandra. Funktionen utgår ifrån respektive bils placering (från old\textunderscore position) och hastighet (från old\textunderscore v) 
@@ -74,25 +70,22 @@ Värdet används sedan för att beräkna nästa hastighet (new\textunderscore v)
 
       \item target: Den varvtid som manuellt har satts innan programet startade.
       \item target dif: Den differensen mellan den önskade tiden och positionen relativt till den faktiska tiden och positionen. Görs genom att subtrahera de önskade värdena med de faktiska värdena.  
-      \item agressivness: Justerar hur stora ändringar som görs på new\textunderscore v, vid start av ett nytt varv finns det mycket tid kvar att justera. Följden av detta är att new \textunderscore v kan ändras lite i taget istället för att göra stora förändringar. Agressivness räknas ut via; clock,  vilken tid på varvet bilen befinner sig, Target \textunderscore dif,  hur långt ifrån måltiden befinner sig bilen och om gemensam målgång är aktiv tar agresivness även hänsyn till car\textunderscore position \textunderscore dif,  hur långt är avståndet mellan de två bilarna. 
+      \item agressivness: Justerar hur stora ändringar som görs på new\textunderscore v, vid start av ett nytt varv finns det mycket tid kvar att justera. Följden av detta är att new \textunderscore v kan ändras lite i taget istället för att göra stora förändringar. Agressivness räknas ut via; clock,  vilken tid på varvet bilen befinner sig, Target \textunderscore dif, hur långt ifrån måltiden befinner sig bilen och om gemensam målgång är aktiv tar agresivness även hänsyn till car\textunderscore position \textunderscore dif,  hur långt avståndet mellan de två bilarna är. 
       \item u\textunderscore constant\textunderscore map: Är en kartläggning över banan och de spänningsnivåer som behöver sättas så att spänningen blir jämn. Detta eftersom att spänningstillförseln beter sig olika för olika delar av banan. Kartläggningen kommer bygga på det register med inlagrad data som tagits fram genom tester.
       \item target\textunderscore dif: Bilens position relativt till var den borde vara vid den nuvarande tiden.
       \item track\textunderscore u\textunderscore constant: Detta ät det förbestämda spänningsvärdet för ett visst subsegment på banan. Värdet tas fram manuellt genom prövning och lagras i u \textunderscore constant \textunderscore map. Ur position tar track \textunderscore u \textunderscore constant fram rätt spänningsvärde. 
-      \item speed\textunderscore map: En ``karta'' över hur fort man kan köra i olika delar av banan.n.
+      \item speed\textunderscore map: En ``karta'' över hur fort man kan köra i olika delar av banan.
       \item speed\textunderscore constant: Den förbestämda hastigheten för nuvarande subsegment. Hastigheten tas fram manuellt genom prövning och lagras i speed \textunderscore map. Ur position tar speed \textunderscore constant fram rätt hastighet. 
 
 % new_v     
 \item new\textunderscore v: Beräknar den hastighet som bilen ska få nästa cykel. Funktionen tar förra cykelns hastighet (old\textunderscore v) 
-och lägger till eller tar bort lite beroende på hur långt ifrån målet som bilarna ligger (target\textunderscore dif) och om gemensam
-målgång aktiverad hur långt ifrån varandra bilarna är (car\textunderscore position\textunderscore dif). Funktionen beror 
-också på agressivness, högre agressivness ger större skillnad mellan new\textunderscore v och old\textunderscore v medan ett lågt värde gör så att v 
+och lägger till eller tar bort lite beroende på hur långt ifrån målet som bilarna ligger (target\textunderscore dif) och, om gemensam
+målgång är aktiverad, hur långt ifrån varandra bilarna är (car\textunderscore position\textunderscore dif). Funktionen beror 
+också på agressivness, högre agressivness ger större skillnad mellan new\textunderscore v och old\textunderscore v medan ett lågt värde gör att new\textunderscore v 
 inte kommer ändras särskillt mycket.
 new\textunderscore v används sedan för att sätta
 new\textunderscore u. Högre new\textunderscore v ger högre new\textunderscore u och lägre new\textunderscore v ger lägre\textunderscore u. 
-     
-% new:u
- \item new\textunderscore u: Beräknar den spänning som ska appliceras beroende på vilken hastighet new \textunderscore v anger. Ett högre new \textunderscore v innebär ett högre new\textunderscore u. De andra parametrarna som påverkar new\textunderscore u är car\textunderscore constant och track\textunderscore u\textunderscore constant, desto högre dessa värden dessa antar desto högre värde antar också new\textunderscore u. New\textunderscore u är programmets sista output, dess värde 0 till 127 är den spänning som appliceras på bilen.
-
+% new:u \item new\textunderscore u: Beräknar den spänning som ska appliceras beroende på vilken hastighet new \textunderscore v anger. Ett högre new \textunderscore v innebär ett högre new\textunderscore u. De andra parametrarna som påverkar new\textunderscore u är car\textunderscore constant och track\textunderscore u\textunderscore constant, desto högre dessa värden dessa antar desto högre värde antar också new\textunderscore u. New\textunderscore u är programmets sista output, dess värde 0 till 127 är den spänning som appliceras på bilen.
     \end{itemize}
 
     \begin{figure}
