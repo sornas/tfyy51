@@ -78,7 +78,15 @@ Värdet används sedan för att beräkna nästa hastighet (new v) som kommer ök
       \item track\textunderscore u\textunderscore constant: Detta ät det förbestämda spänningsvärdet för ett visst subsegment på banan. Värdet tas fram manuellt genom prövning och lagras i u \textunderscore constant \textunderscore map. Ur position tar track \textunderscore u \textunderscore constant fram rätt spänningsvärde. 
       \item speed\textunderscore map: En ``karta'' över hur fort man kan köra i olika delar av banan.n.
       \item speed\textunderscore constant: Den förbestämda hastigheten för nuvarande subsegment. Hastigheten tas fram manuellt genom prövning och lagras i speed \textunderscore map. Ur position tar speed \textunderscore constant fram rätt hastighet. 
-      \item new\textunderscore v: Den nya hastigheten som ska sättas.
+
+% new_v     
+\item new\textunderscore v: Beräknar den hastighet som bilen ska få nästa cykel. Funktionen tar förra cykelns hastighet (old\textunderscore v) 
+och lägger till eller tar bort lite beroende på hur långt ifrån målet som bilarna ligger (target\textunderscore dif) och om gemensam
+målgång aktiverad hur långt ifrån varandra bilarna är (car\textunderscore position\textunderscore dif). Funktionen beror 
+också på agressivness, högre agressivness ger större skillnad mellan new\textunderscore v och old\textunderscore v medan ett lågt värde gör så att v 
+inte kommer ändras särskillt mycket.
+new\textunderscore v används sedan för att sätta
+new\textunderscore u. Högre new\textunderscore v ger högre new\textunderscore u och lägre new\textunderscore v ger lägre\textunderscore u. 
       \item new\textunderscore u: Den spänning som skickas till bilen.
 
     \end{itemize}
