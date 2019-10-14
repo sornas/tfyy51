@@ -65,7 +65,7 @@ figur~\ref{fig:system_diagram} för ett processchema.
       \item position: Position, programmet räknar ut vart på banan bilen befinner sig genom att hämta senaste positionen old position och sedan addera sträckan bilen har färdats sedan dess vilket görs genom oldvdeltat.
       \item clock: Hur länge bilen har varit i det nuvarande segmentet och varvet.
 
-      \item car position dif: Endast aktiv om gemensam målgång aktiverad. Jämför bilarnas position med varandra. Funktionen utgår ifrån respektive bils placering (från old position) och hastighet (från old v) 
+      \item car\textunderscore position\textunderscore dif: Endast aktiv om gemensam målgång aktiverad. Jämför bilarnas position med varandra. Funktionen utgår ifrån respektive bils placering (från old position) och hastighet (från old v) 
 och ger ett värde på placeringsskillnaden för en viss hastighet. Detta kommer
 sedan användas för att sätta bilarnas nya hastighet. Värdet blir stort om skillnaden i placering är stor men justeras också efter hastigeten. Dvs om bilarna ligger långt ifrån varandra men åker ganska fort kommer inte värdet bli lika stort som om bilarna legat lika långt ifrån varandra men haft lägre hastighet. Värdet är positivt om bil 1 ligger före bil 2 och negativt om bil 2 ligger före bil 1. På så sätt kan nästa funktion avgöra vilken bil som ligger först.
 Värdet används sedan för att beräkna nästa hastighet (new v) som kommer ökas eller minskas för att få bilarna att köra ikapp varandra. 
