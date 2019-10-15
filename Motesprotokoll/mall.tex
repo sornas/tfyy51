@@ -1,0 +1,62 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{geometry}  % gör texten lite bredare eftersom vanlig latex är för smal för a4
+
+% minska storleken på rubriker och underrubriker
+\usepackage{titlesec}
+\titleformat{\section}
+    {\normalfont\Large\bfseries}{\thesection}{1em}{}
+
+\titleformat{\subsection}
+    {\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}[\vspace{-0.4em}]
+\usepackage[]{parskip}
+
+% undvik helst subsubsections
+
+%% FÖRKLARINGAR AV KOMMANDON OCH DYL.
+% \\ skapar en radbrytning
+% \\[1em] skapar en radbrytning med "1em" extra utrymme mellan rader
+%   (1 em är ganska stor)
+% \textbf{Skapar text i fetstil}
+% \begin{itemize} och \end{itemize} skapar en s.k. list-enviornment (list-miljö)
+%   Inuti itemize skriver man \item för att skapa en ny punkt, annars är det bara att skriva
+% \section*{Titel} och \subsection*{Understitel} skapar nya sektioner och undersektioner
+%   Asterisken ser till att det inte dyker upp ett nummer bredvid namnet.
+% I övrigt är det bara att skriva text där man vill ha den
+
+\begin{document}
+\pagenumbering{gobble} % räkna inte (och skriv inte heller ut) sidnumrering
+    \begin{center}
+        \textbf{\Large TFYY51 - Yc4} \\[0.2em]
+        Mötesprotokoll för DATUM i SAL
+    \end{center}
+    \vspace{1em}
+    \textbf{Närvarande:} Gustav (ordf), David (sek), Alexander (lokal), Mattias, Albin \\[0.5em]
+    \textbf{Frånvarande:} Rutt och Tuck (avrättning??) \\[0.5em]  % som exempel
+    \textbf{Övriga närvarande:}
+
+    \section*{Föregående protokoll}
+    \begin{itemize}
+        \item Sak som hände förra mötet. \\
+        Antingen kommenterade vi vad som hände förra mötet.
+        \item En till sak som hände förra mötet, men större. \\
+        Se dagordningen.
+    \end{itemize}
+
+    \section*{Dagordning}
+    \subsection*{En sak vi vill ta upp}
+    Det här är en större punkt vi vill ta upp.
+    \subsection*{En annan sak}
+    Det här är en annan större punkt vi vill ta upp.
+
+    \section*{Övrigt}
+    \begin{itemize}
+        \item Mindre saker behöver inte ta så stor plats.
+        \item Mellanstora saker kanske behöver listor i listor.
+        \begin{itemize}
+            \item Sådana ser ut såhär
+        \end{itemize}
+    \end{itemize}
+
+    \section*{Nästa möte}
+    Nästa mötes hålls blabla. Lokalbokare kommer då vara Person D.  
+\end{document}
