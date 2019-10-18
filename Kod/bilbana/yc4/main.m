@@ -108,6 +108,7 @@ while 1
 end
 
 %% END OF PROGRAM
+disp(tocs);
 disp(car1);
 disp(car2);
 
