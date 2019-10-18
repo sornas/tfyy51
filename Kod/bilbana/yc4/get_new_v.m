@@ -15,7 +15,7 @@ GET_NEW_V:
 new_v: Den hastighet som bilen ska få nästa cykel. 
 %}
 
-v = [35, 25, 30, 30, 40, 50, 45, 50, 35];
+v = [35, 25, 30, 30, 40, 50, 40, 50, 35];
 new_v = v(old_v);
 end
 
