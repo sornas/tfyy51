@@ -44,13 +44,16 @@ while 1
     %% CHECK LAP AND CHECKPOINT (CAR 1)
     if car1.new_check_point == true
         % beep;
-        car1.seg_times(car1.lap, car1.segment) = -1;  % TODO 
-        car1.segment = car.segment + 1;
+        if car1.lap ~= 0
+            car1.seg_times(car1.lap, car1.segment) = -1;  % TODO 
+        end
+        car1.segment = car1.segment + 1;
     elseif car1.new_lap == true
-        beep;
+        % beep;
         if car1.lap == 0
             % dont save time for first lap
             car1.segment = 1;
+            car1.lap = car1.lap + 1;
             continue;
         end
         car1.seg_times(car1.lap, car1.segment) = -1;  % TODO
@@ -62,13 +65,16 @@ while 1
     %% CHECK LAP AND CHECKPOINT (CAR 2)
     if car2.new_check_point == true
         % beep;
-        car2.seg_times(car2.lap, car2.segment) = -1;  % TODO 
-        car2.segment = car.segment + 1;
+        if car2.lap ~= 0
+            car2.seg_times(car2.lap, car2.segment) = -1;  % TODO
+        end
+        car2.segment = car2.segment + 1;
     elseif car2.new_lap == true
-        beep;
+        % beep;
         if car2.lap == 0
             % dont save time for first lap
             car2.segment = 1;
+            car2.lap = car2.lap + 1;
             continue;
         end
         car2.seg_times(car2.lap, car2.segment) = -1;  % TODO
@@ -78,13 +84,13 @@ while 1
     end
     
     %% CALCULATE (CAR 1)
-    car1.car_constant = get_car_constant();
+    car1.car_constant = get_car_constant(1);
     car1.v = get_new_v(car1.segment);
     car1.track_u_constant = get_track_u_constant();
     car1.u = get_new_u(car1.v, car1.car_constant, car1.track_u_constant);
     
     %% CALCULATE (CAR 2)
-    car2.car_constant = get_car_constant();
+    car2.car_constant = get_car_constant(2);
     car2.v = get_new_v(car2.segment);
     car2.track_u_constant = get_track_u_constant();
     car2.u = get_new_u(car2.v, car2.car_constant, car2.track_u_constant);
