@@ -1,0 +1,121 @@
+%% INIT
+% TODO init display
+
+disp('Startar bilbanan. Avsluta med q.')
+hf=figure('position',[0 0 eps eps],'menubar','none');
+
+initialize_counters(1)
+initialize_counters(2)
+
+config_IOs
+
+start_race(1)
+start_race(2)
+
+car1 = struct;
+car1.segment = 1;
+car1.lap = 0;
+car1.lap_times = [];
+car1.seg_times = [];
+
+car2 = struct;
+car2.segment = 1;
+car2.lap = 0;
+car2.lap_times = [];
+car2.seg_times = [];
+
+tocs = [];
+
+%% MAIN LOOP
+while 1
+    %tic;
+    %% PRE-LOOP
+    if strcmp(get(hf,'currentcharacter'),'q')
+        beep;
+        close(hf)
+        break
+    end
+    
+    figure(hf)
+    drawnow
+    
+    %% READ
+    [car1.new_lap, car1.new_check_point, car1.time] = get_car_position(1);
+    [car2.new_lap, car2.new_check_point, car2.time] = get_car_position(2);
+    
+    
+    %% CHECK LAP AND CHECKPOINT (CAR 1)
+    if car1.new_check_point == true
+        disp('car 1')
+        disp(car1.lap);
+        disp(car1.segment);
+        car1.seg_times(car1.lap, car1.segment) = -1;  % TODO
+        car1.segment = car1.segment + 1;
+    elseif car1.new_lap == true
+        if car1.lap == 0
+            % dont save time for first lap
+            car1.segment = 1;
+            car1.lap = car1.lap + 1;
+            continue;
+        end
+        car1.seg_times(car1.lap, car1.segment) = -1;  % TODO
+        car1.lap_times(car1.lap) = -1;  % TODO
+        car1.segment = 1;
+        car1.lap = car1.lap + 1;
+    end
+    
+    %% CHECK LAP AND CHECKPOINT (CAR 2)
+    if car2.new_check_point == true
+        disp('car 2')
+        disp(car2.lap);
+        disp(car2.segment);
+        car2.seg_times(car2.lap, car2.segment) = -1;  % TODO 
+        car2.segment = car2.segment + 1;
+    elseif car2.new_lap == true
+        beep;
+        if car2.lap == 0
+            % dont save time for first lap
+            car2.segment = 1;
+            car2.lap = car2.lap + 1;
+            continue;
+        end
+        car2.seg_times(car2.lap, car2.segment) = -1;  % TODO
+        car2.lap_times(car2.lap) = -1;  % TODO
+        car2.segment = 1;
+        car2.lap = car2.lap + 1;
+        %disp('car 2');
+        %disp(car2);
+    end
+    
+    %% CALCULATE (CAR 1)
+    car1.car_constant = get_car_constant(1);
+    car1.v = get_new_v(car1.segment);
+    car1.track_u_constant = get_track_u_constant();
+    car1.u = get_new_u(car1.v, car1.car_constant, car1.track_u_constant);
+    
+    %% CALCULATE (CAR 2)
+    car2.car_constant = get_car_constant(2);
+    car2.v = get_new_v(car2.segment);
+    car2.track_u_constant = get_track_u_constant();
+    car2.u = get_new_u(car2.v, car2.car_constant, car2.track_u_constant);
+    
+    %% EXECUTE
+    set_car_speed(1, car1.u);
+    set_car_speed(2, car2.u);
+    
+    %% DISPLAY
+    
+    %% END OF LOOP
+    pause(0.1)
+    % tocs(end + 1) = toc;
+end
+
+%% END OF PROGRAM
+disp(tocs);
+disp(car1);
+disp(car2);
+
+
+terminate(1);
+terminate(2);
+% TODO terminate display
