@@ -1,5 +1,12 @@
 %% INIT
-% TODO init display
+% INIT DISPLAY
+addpath display/ClientServerApp/Release
+cd display/ClientServerApp/Release
+!startServer
+cd ../../..
+
+global display_data;
+display_data = [];
 
 disp('Startar bilbanan. Avsluta med q.')
 hf=figure('position',[0 0 eps eps],'menubar','none');
@@ -58,6 +65,9 @@ while 1
         end
         car1.seg_times(car1.lap, car1.segment) = -1;  % TODO
         car1.lap_times(car1.lap) = -1;  % TODO
+	
+        display_data = [display_data, put_text(100, 32, L, strjoin({num2str(car1.lap), get_time_as_string(car1.lap_times(car1.lap))}, ' '))];
+
         car1.segment = 1;
         car1.lap = car1.lap + 1;
     end
@@ -79,6 +89,9 @@ while 1
         end
         car2.seg_times(car2.lap, car2.segment) = -1;  % TODO
         car2.lap_times(car2.lap) = -1;  % TODO
+
+        display_data = [display_data, put_text(120, 32, L, strjoin({num2str(car2.lap), get_time_as_string(car2.lap_times(car2.lap))}, ' '))];
+        
         car2.segment = 1;
         car2.lap = car2.lap + 1;
     end
@@ -104,7 +117,8 @@ while 1
     %% END OF LOOP
     tocs(end + 1) = toc;
     pause(0.1)
-    tic;    
+    tic;
+    send_data_to_display(); 
 end
 
 %% END OF PROGRAM
@@ -114,4 +128,5 @@ disp(car2);
 
 terminate(1);
 terminate(2);
-% TODO terminate display
+
+matlabclient(3);
