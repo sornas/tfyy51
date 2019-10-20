@@ -1,5 +1,4 @@
-function [pkg] = draw_line(x1, y1, x2, y2)
-	arg = [x1, 0, y1, 0, x2, 1, y2, 0]  % TODO nollor mellan värden? vad betyder ettan?
-
-	pkg = get_package('GD', arg)
+function pkg = draw_single_line(x1, y1, x2, y2)
+	arg = [mod(x1, 255), fix(x1 / 255), y1, 0, mod(x2, 255), fix(x2 / 255), y2, 0];
+	pkg = get_package('GD', arg);
 end
