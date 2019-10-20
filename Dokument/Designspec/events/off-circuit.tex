@@ -1,0 +1,11 @@
+Enligt kravspecifikationen ska systemet detektera att en bil åkt av banan inom
+10 sekunder. Om systemet inte får en ny givarsignal inom tio sekunder från den
+senaste givaren antas bilen ha fastnat eller åkt av banan och programmet pausas
+tills bilen är på banan igen och användaren trycker på ``fortsätt'' på
+displayen. Med givarnas förväntade tidspassering ska programmet kunna se att en
+bil inte passerat en givare vid den förväntade tidspasseringen. Har bilen inte
+passerat någon av givarna inom fem sekunder kan programmet öka spänningsnivån
+gradvis som vid start för att kontrollera om bilen har stannat. Efter
+ytterligare 5 sekunder ska programmet pausas och displayen skriva ut att bilen
+har åkt av banan.
+
