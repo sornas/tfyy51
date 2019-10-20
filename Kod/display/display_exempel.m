@@ -10,24 +10,24 @@ cd ClientServerApp\Release
 !startServer
 cd ../..
 %% Diagonal linje
-DC1 = 17;
-ESC = 27;
-Code = 'GD';
-
-% x1, y1, x2, y2, (320 x 240 pixlar)
-% minst signifikanta bitar till vänster
-% mest signifikanta bitar till höger
-arg = [0, 0, 0, 0, 63, 1, 239, 0];
-
-% Save the 'small package' as a string
-data = [ESC, double(Code), arg];
-len = length(data);
-initStr = [DC1, len, data];
-bcc = mod(sum(initStr), 256);
-str = [initStr, bcc];
-
-% Skriv
-matlabclient(1, str')
+% DC1 = 17;
+% ESC = 27;
+% Code = 'GD';
+% 
+% % x1, y1, x2, y2, (320 x 240 pixlar)
+% % minst signifikanta bitar till vänster
+% % mest signifikanta bitar till höger
+% arg = [0, 0, 0, 0, 63, 1, 239, 0];
+% 
+% % Save the 'small package' as a string
+% data = [ESC, double(Code), arg];
+% len = length(data);
+% initStr = [DC1, len, data];
+% bcc = mod(sum(initStr), 256);
+% str = [initStr, bcc];
+% 
+% % Skriv
+% matlabclient(1, str')
 
 %% Rita en rektangel som är fylld med mönster
 DC1 = 17;
@@ -53,30 +53,30 @@ str = [initStr, bcc];
 matlabclient(1, str')
 
 %% Skriv en Test-sträng
-DC1 = 17;
-ESC = 27;
-Code = double('ZL');
-
-% x1, y1, (320 x 240 pixlar)
-% minst signifikanta bitar till vänster
-% mest signifikanta bitar till höger
-arg1 = [117, 0, 32, 0];
-
-% Textsträng
-%arg2 = 'Test';
-
-arg2 = 'DISPLAY!!!!!';
-
-% Null
-arg3 = 0;
-
-
-% Save the 'small package' as a string
-data = [ESC, double(Code), arg1, double(arg2), arg3];
-len = length(data);
-initStr = [DC1, len, data];
-bcc = mod(sum(initStr), 256);
-str = [initStr, bcc];
+% DC1 = 17;
+% ESC = 27;
+% Code = double('ZL');
+% 
+% % x1, y1, (320 x 240 pixlar)
+% % minst signifikanta bitar till vänster
+% % mest signifikanta bitar till höger
+% arg1 = [117, 0, 32, 0];
+% 
+% % Textsträng
+% %arg2 = 'Test';
+% 
+% arg2 = 'DISPLAY!!!!!';
+% 
+% % Null
+% arg3 = 0;
+% 
+% 
+% % Save the 'small package' as a string
+% data = [ESC, double(Code), arg1, double(arg2), arg3];
+% len = length(data);
+% initStr = [DC1, len, data];
+% bcc = mod(sum(initStr), 256);
+% str = [initStr, bcc];
 
 % Skriv
 matlabclient(1, str')
@@ -142,20 +142,20 @@ matlabclient(1, str')
 %fwrite(lcd, str)
 
 %% Radera Displayen
-DC1 = 17;
-ESC = 27;
-Code = 'DL';
-
-% Save the 'small package' as a string
-data = [ESC, double(Code)];
-len = length(data);
-initStr = [DC1, len, data];
-bcc = mod(sum(initStr), 256);
-str = [initStr, bcc];
-
-% Skriv
-matlabclient(1, str')
-%fwrite(lcd, str)
+% DC1 = 17;
+% ESC = 27;
+% Code = 'DL';
+% 
+% % Save the 'small package' as a string
+% data = [ESC, double(Code)];
+% len = length(data);
+% initStr = [DC1, len, data];
+% bcc = mod(sum(initStr), 256);
+% str = [initStr, bcc];
+% 
+% % Skriv
+% matlabclient(1, str')
+% %fwrite(lcd, str)
 
 %% Avsluta kommunikation med display
 matlabclient(3);
