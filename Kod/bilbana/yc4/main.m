@@ -6,7 +6,9 @@ cd display/ClientServerApp/Release
 cd ../../..
 
 global display_data;
-display_data = [];
+display_data = {};
+display_data = {display_data clear_display()};
+pause(1);
 
 disp('Startar bilbanan. Avsluta med q.')
 hf=figure('position',[0 0 eps eps],'menubar','none');
@@ -57,8 +59,8 @@ while 1
         end
         car1.segment = car1.segment + 1;
         car1.seg_tic = tic;
-    elseif car1.new_lap == true
-        % beep;
+    end
+    if car1.new_lap == true
         if car1.lap == 0
             % dont save time for first lap
             car1.segment = 1;
@@ -67,12 +69,13 @@ while 1
             car1.lap_tic = tic;
             continue;
         end
+        beep;
         car1.seg_times(car1.lap, car1.segment) = toc(car1.seg_tic);
         car1.seg_tic = tic;
         car1.lap_times(car1.lap) = toc(car1.lap_tic);
         car1.lap_tic = tic;
 
-        display_data = [display_data, put_text(100, 32, L, strjoin({num2str(car1.lap), get_time_as_string(car1.lap_times(car1.lap))}, ' '))];
+        display_data = {display_data, put_text(100, 32, 'L', strjoin({num2str(car1.lap), get_time_as_string(round(car1.lap_times(car1.lap) * 1000))}, ' '))};
         
         car1.segment = 1;
         car1.lap = car1.lap + 1;
@@ -86,22 +89,25 @@ while 1
         end
         car2.segment = car2.segment + 1;
         car2.seg_tic = tic;
-    elseif car2.new_lap == true
-        beep;
+    end
+    if car2.new_lap == true
         if car2.lap == 0
             % dont save time for first lap
             car2.segment = 1;
             car2.lap = car2.lap + 1;
             car2.seg_tic = tic;
             car2.lap_tic = tic;
+            disp('continuing');
             continue;
         end
+        beep;
+        
         car2.seg_times(car2.lap, car2.segment) = toc(car2.seg_tic);
         car2.seg_tic = tic;
         car2.lap_times(car2.lap) = toc(car2.lap_tic);
         car2.lap_tic = tic;
 
-        display_data = [display_data, put_text(120, 32, L, strjoin({num2str(car2.lap), get_time_as_string(car2.lap_times(car2.lap))}, ' '))];
+        display_data = {display_data, put_text(100, 48, 'L', strjoin({num2str(car2.lap), get_time_as_string(round(car2.lap_times(car2.lap) * 1000))}, ' '))};
         
         car2.segment = 1;
         car2.lap = car2.lap + 1;
@@ -130,7 +136,7 @@ while 1
     tocs(end + 1) = toc;
     send_data_to_display();
 end
-
+ 
 %% END OF PROGRAM
 disp(tocs);
 disp(car1);
