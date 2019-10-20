@@ -79,6 +79,8 @@ while 1
         
         car1.segment = 1;
         car1.lap = car1.lap + 1;
+        
+        car1.seg_times(car1.lap, 1) = 0;
     end
     
     %% CHECK LAP AND CHECKPOINT (CAR 2)
@@ -111,6 +113,8 @@ while 1
         
         car2.segment = 1;
         car2.lap = car2.lap + 1;
+        
+        car2.seg_times(car2.lap, 1) = 0;
     end
     
     %% CALCULATE (CAR 1)
@@ -146,3 +150,8 @@ terminate(1);
 terminate(2);
 
 matlabclient(3);
+
+%% DISPLAY GRAPHS
+
+graphs(car1.lap_times, 13, car1.seg_times, 1);
+graphs(car2.lap_times, 13, car2.seg_times, 2);
