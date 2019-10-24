@@ -1,0 +1,91 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{geometry}  % gör texten lite bredare eftersom vanlig latex är för smal för a4
+
+% minska storleken på rubriker och underrubriker
+\usepackage{titlesec}
+\titleformat{\section}
+    {\normalfont\Large\bfseries}{\thesection}{1em}{}
+
+\titleformat{\subsection}
+    {\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}[\vspace{-0.4em}]
+\usepackage[]{parskip}
+
+% undvik helst subsubsections
+
+%% FÖRKLARINGAR AV KOMMANDON OCH DYL.
+% \\ skapar en radbrytning
+% \\[1em] skapar en radbrytning med "1em" extra utrymme mellan rader
+%   (1 em är ganska stor)
+% \textbf{Skapar text i fetstil}
+% \begin{itemize} och \end{itemize} skapar en s.k. list-enviornment (list-miljö)
+%   Inuti itemize skriver man \item för att skapa en ny punkt, annars är det bara att skriva
+% \section*{Titel} och \subsection*{Understitel} skapar nya sektioner och undersektioner
+%   Asterisken ser till att det inte dyker upp ett nummer bredvid namnet.
+% I övrigt är det bara att skriva text där man vill ha den
+
+\begin{document}
+\pagenumbering{gobble} % räkna inte (och skriv inte heller ut) sidnumrering
+    \begin{center}
+        \textbf{\Large TFYY51 - Yc4} \\[0.2em]
+        Mötesprotokoll för möte den 2019-10-23 i I204.
+    \end{center}
+    \vspace{1em}
+    \textbf{Närvarande:} 
+	Albin (ordf),
+	Gustav (sek), 
+	David (lokal), 
+	Alexander.
+	\\[0.5em]
+	\textbf{Frånvarande:} Mattias (bortrest) \\[0.5em]
+    \textbf{Övriga närvarande:}
+
+    \section*{Föregående protokoll}
+	Inget föregående protokoll att gå igenom.
+
+    \section*{Dagordning}
+    \subsection*{Arbetsdisponering under tenta-/omtenta-p}
+	Nästa leverans är BP4b under projektvecka 7 (veckan med start 2019-11-11).
+	Tills dess vill vi ha implementerat alla de större funktionerna som
+	specifierades i designspecifikationen. Vi beslutade att Alexander och David
+	redan imorgon (2019-10-24) ska göra mätningar av banan, dels längd på olika
+	undersegment och dels mätning av spänning i dessa.
+
+	Vi gick även igenom det som fanns kvar efter leveransen av BP4a. För att
+	fördela arbetet delade vi ut issues som fanns på Gitlab (och skrev in några
+	nya som vi kom på under mötets gång).
+
+	\subsection*{Beslut om struktur för gamla värden på position och hastighet}
+
+	Under leveransen av designspecifikationen lyfte Erik fram möjligheten att
+	spara hastigheten i olika delar av banan under tidigare varv som en extra
+	datapunkt när den nuvarande hastigheten ska bestämmas. Vi beslutade att
+	implementera detta genom att utgå från kartan som Alexander och David bygger
+	upp för att få de olika segmenten, och sedan spara värdena i en
+	tre-dimensionell matris. Matrisen har formated ((antal~varv) $\times$ (antal~
+	undersegment) $\times$ 2) där $z$-ledet beskriver hastigheten och varvtiden
+	vid ett visst segment vid ett tidigare varv. Fördelen är att systemet vid en
+	viss tidpunkt kan applicera statistiska funktioner på de tidigare
+	mätpunkterna för ett visst segment som ett hjälpmedel vid nuvarande
+	beräkningar. Dessa mätvärden kan med lätthet utökas för att spara mer
+	information vid olika segment.
+
+	För att underlätta prestandamässigt kan matrisen vid start göras så stor den
+	behöver vara givet att användaren matar in hur många varv en viss bil ska
+	göra.
+
+    \section*{Övrigt}
+    \begin{itemize}
+		\item \textbf{Beslut: } Under utveckling ska vi spara så mycket
+			information som möjligt för att bygga statistik över tid.
+		\item Vi gick igenom hur Gitlab automatiskt kan stänga issues med
+				magiska keywords (ex. "implements \#20" eller "fixes \#5").
+		\item Vi beslutade att utveckling mellan leveranser i huvudsak sker
+				med en ny branch per feature som sedan mergas till master. I
+				praktiken använder vi oss därför från och med nu av Merge 
+				Requests (i den mån det är möjligt).
+    \end{itemize}
+
+    \section*{Nästa möte}
+    Nästa mötes hålls 2019-10-29. Lokalbokare kommer då vara Alexander.
+	Förhoppnigen är att alla medlemmar kan närvara. 
+\end{document}
