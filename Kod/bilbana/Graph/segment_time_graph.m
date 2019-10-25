@@ -34,7 +34,7 @@ Plot = bar(avr_seg_time);
 Plot.FaceColor = 'k';
 xlabel('Segment');
 ylabel('Tid [s]');
-tit = char(['Medeltid/segment bana',char(track)]);
+tit = ['Medeltid/segment bana ' num2str(track)];
 title(tit); 
 end
 
