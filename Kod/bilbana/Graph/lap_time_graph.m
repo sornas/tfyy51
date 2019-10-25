@@ -40,13 +40,13 @@ hold off
 %% Standardavvkielse
 sigma = std(lap_times);
 sigma = round(sigma, 2);
-sig_str = string(sigma);
+sig_str = char(sigma);
 %% Text
 xlabel('Varv');
 ylabel('Tid [s]');
-Tit = join(['Varvtider bana',string(track)]);
+Tit = char(['Varvtider bana',char(track)]);
 title(Tit); 
-txt = join(['Standardavvikelse:',sig_str, 's/varv']);
+txt = char(['Standardavvikelse:',sig_str, 's/varv']);
 annotation('textbox',[.1 0.5 .5 .05],'String',txt,'EdgeColor','none')
 end
 
