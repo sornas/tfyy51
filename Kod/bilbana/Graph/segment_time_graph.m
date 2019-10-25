@@ -13,7 +13,7 @@ divide_by_n = ones(1,seg_time_size(2));
 %% Summera seg_time om seg_time ~= 0
 for r = 1:seg_time_size(1)
     if r == 1
-        avr_seg_time(1:seg_time_size(2)) = seg_times(1:seg_time_size(2));
+        avr_seg_time(1,1:seg_time_size(2)) = seg_times(1,1:seg_time_size(2));
     else
         for c = 1:seg_time_size(2) 
             x = seg_times(r,c);
