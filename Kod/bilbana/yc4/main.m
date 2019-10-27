@@ -209,5 +209,9 @@ matlabclient(3);
 
 %% DISPLAY GRAPHS
 
-graphs(car1.lap_times, 13, car1.seg_times, 1);
-graphs(car2.lap_times, 13, car2.seg_times, 2);
+if car1.running == true
+	graphs(car1.lap_times, 13, car1.seg_times, 1);
+end
+if car2.running == true
+	graphs(car2.lap_times, 13, car2.seg_times, 2);
+end
