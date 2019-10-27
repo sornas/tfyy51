@@ -23,6 +23,7 @@ start_race(2)
 
 car1 = struct;
 car1.running = false;
+car1.automatic = true;
 car1.segment = 1;
 car1.lap = 0;
 car1.lap_times = [];
@@ -30,6 +31,7 @@ car1.seg_times = [];
 
 car2 = struct;
 car2.running = false;
+car2.automatic = true;
 car2.segment = 1;
 car2.lap = 0;
 car2.lap_times = [];
@@ -38,8 +40,30 @@ car2.seg_times = [];
 tocs = [];
 
 %% ASK ACTIVE CARS
-car1.running = (prompt('Vill du köra bil 1? (J/N) [N]', 's') == 'J')
-car2.running = (prompt('Vill du köra bil 2? (J/N) [N]', 's') == 'J')
+disp('J = Ja (automatiskt), M = Ja (manuellt), N = Nej');
+
+car1.response = prompt('Vill du köra bil 1? [N]');
+if car1.response == 'J'
+	car1.running = true;
+	car1.automatic = true;
+elseif car1.response == 'M'
+	car1.running = true;
+	car1.automatic = false;
+else
+	car1.running = false;
+end
+
+car2.response = prompt('Vill du köra bil 2? [N]');
+if car2.response == 'J'
+	car2.running = true;
+	car2.automatic = true;
+elseif car2.response == 'M'
+	car2.running = true;
+	car2.automatic = false;
+else
+	car2.running = false;
+end
+
 
 %% MAIN LOOP
 while 1
@@ -132,7 +156,7 @@ while 1
 	end
 
 	%% CALCULATE (CAR 2)
-	if car1.running == true
+	if car1.running == true & car1.automatic == true
 		car1.car_constant = get_car_constant(1);
 		car1.v = get_new_v(car1.segment);
 		car1.track_u_constant = get_track_u_constant();
@@ -140,18 +164,29 @@ while 1
 	end
     
     %% CALCULATE (CAR 2)
-	if car2.running == true
+	if car2.running == true & car2.automatic == true
 		car2.car_constant = get_car_constant(2);
 		car2.v = get_new_v(car2.segment);
 		car2.track_u_constant = get_track_u_constant();
 		car2.u = get_new_u(car2.v, car2.car_constant, car2.track_u_constant);
 	end
     
+	%% CONTROLLER (CAR 1)
+	if car1.running == true & car1.automatic == false
+		% TODO
+	end
+
+	%% CONTROLLER (CAR 2)
+	if car2.running == true & car2.automatic == false
+		% TODO
+	end
+
+
     %% EXECUTE
-    if car1.running == true
+    if car1.running == true & car1.automatic == true
 		set_car_speed(1, car1.u);
 	end
-	if car2.running == true
+	if car2.running == true & car2.automatic == true
    		set_car_speed(2, car2.u);
 	end
     %% DISPLAY
