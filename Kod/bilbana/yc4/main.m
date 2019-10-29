@@ -156,7 +156,7 @@ while 1
 	end
 
 	%% CALCULATE (CAR 2)
-	if car1.running == true & car1.automatic == true
+	if car1.running == true && car1.automatic == true
 		car1.car_constant = get_car_constant(1);
 		car1.v = get_new_v(car1.segment);
 		car1.track_u_constant = get_track_u_constant();
@@ -164,7 +164,7 @@ while 1
 	end
     
     %% CALCULATE (CAR 2)
-	if car2.running == true & car2.automatic == true
+	if car2.running == true && car2.automatic == true
 		car2.car_constant = get_car_constant(2);
 		car2.v = get_new_v(car2.segment);
 		car2.track_u_constant = get_track_u_constant();
@@ -172,21 +172,21 @@ while 1
 	end
     
 	%% CONTROLLER (CAR 1)
-	if car1.running == true & car1.automatic == false
+	if car1.running == true && car1.automatic == false
 		% TODO
 	end
 
 	%% CONTROLLER (CAR 2)
-	if car2.running == true & car2.automatic == false
+	if car2.running == true && car2.automatic == false
 		% TODO
 	end
 
 
     %% EXECUTE
-    if car1.running == true & car1.automatic == true
+    if car1.running == true && car1.automatic == true
 		set_car_speed(1, car1.u);
-	end
-	if car2.running == true & car2.automatic == true
+    end
+	if car2.running == true && car2.automatic == true
    		set_car_speed(2, car2.u);
 	end
     %% DISPLAY
