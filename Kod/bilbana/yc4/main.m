@@ -155,7 +155,7 @@ while 1
 		end
 	end
 
-	%% CALCULATE (CAR 2)
+	%% CALCULATE (CAR 1)
 	if car1.running == true && car1.automatic == true
 		car1.car_constant = get_car_constant(1);
 		car1.v = get_new_v(car1.segment);
