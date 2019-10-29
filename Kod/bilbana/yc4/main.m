@@ -79,8 +79,6 @@ while 1
         
         car1.segment = 1;
         car1.lap = car1.lap + 1;
-        
-        car1.seg_times(car1.lap, 1) = 0;
     end
     
     %% CHECK LAP AND CHECKPOINT (CAR 2)
@@ -113,8 +111,6 @@ while 1
         
         car2.segment = 1;
         car2.lap = car2.lap + 1;
-        
-        car2.seg_times(car2.lap, 1) = 0;
     end
     
     %% CALCULATE (CAR 1)
