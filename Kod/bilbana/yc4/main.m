@@ -42,7 +42,7 @@ tocs = [];
 %% ASK ACTIVE CARS
 disp('J = Ja (automatiskt), M = Ja (manuellt), N = Nej');
 
-car1.response = prompt('Vill du kÃ¶ra bil 1? [N]');
+car1.response = input('Vill du köra bil 1? [N]', 's');
 if car1.response == 'J'
 	car1.running = true;
 	car1.automatic = true;
@@ -53,7 +53,7 @@ else
 	car1.running = false;
 end
 
-car2.response = prompt('Vill du kÃ¶ra bil 2? [N]');
+car2.response = input('Vill du köra bil 2? [N]', 's');
 if car2.response == 'J'
 	car2.running = true;
 	car2.automatic = true;
@@ -80,7 +80,7 @@ while 1
     %% READ
     if car1.running == true
 		[car1.new_lap, car1.new_check_point, car1.time] = get_car_position(1);
-	end
+    end
 	if car2.running == true
 		[car2.new_lap, car2.new_check_point, car2.time] = get_car_position(2);
 	end
