@@ -1,4 +1,5 @@
 function pkg = set_display_visible(visible)
+% 
 	if visible == true
 		pkg = get_package('DE', []);
 	else
