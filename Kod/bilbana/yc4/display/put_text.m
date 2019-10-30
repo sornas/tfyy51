@@ -1,7 +1,7 @@
 function [pkg] = put_text(x, y, justification, text)
-	code = double(strjoin({'Z', justification}, ''));
+	code = strjoin({'Z', justification}, '');
 
-	arg1 = [x, 0, y, 0];
+	arg1 = [mod(x, 256), x ./ 256, mod(y, 256), y ./ 256];
 	arg2 = text;
 	arg3 = 0;
 
