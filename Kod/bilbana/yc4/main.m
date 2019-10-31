@@ -34,11 +34,11 @@ car2.lap = 0;
 car2.lap_times = [];
 car2.seg_times = [];
 
-tocs = [];
+highToc = 0;
 
 %% MAIN LOOP
 while 1
-    tic;
+    readTime = tic;
     %% PRE-LOOP
     if strcmp(get(hf,'currentcharacter'),'q')
         close(hf)
@@ -133,13 +133,24 @@ while 1
     %% DISPLAY
     
     %% END OF LOOP
-    pause(0.1)
-    tocs(end + 1) = toc;
+    while 1                     %Whileloop med paus som körs till pausen överskridit 0.07 sekunder
+        pause(0.01)             
+        t = toc(readTime)
+       if t > 0.07
+           if t > highToc
+               highToc = s;     %Om det nya värdet på pausen är högre än den tidigare högsta så sparas det som den högsta
+               end
+           
+           break;
+       end
+    end
+    
+    
     send_data_to_display();
 end
  
 %% END OF PROGRAM
-disp(tocs);
+disp(highToc);
 disp(car1);
 disp(car2);
 
