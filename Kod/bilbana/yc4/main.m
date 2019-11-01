@@ -26,7 +26,6 @@ car1.segment = 1;
 car1.lap = 0;
 car1.lap_times = [];
 car1.seg_times = [];
-car1Table = struct2table(car1);
 
 car2 = struct;
 car2.segment = 1;
@@ -135,10 +134,10 @@ while 1
     %% END OF LOOP
     while 1                     %Whileloop med paus som körs till pausen överskridit 0.07 sekunder
         pause(0.01)             
-        t = toc(readTime)
+        t = toc(readTime);
        if t > 0.07
            if t > highToc
-               highToc = s;     %Om det nya värdet på pausen är högre än den tidigare högsta så sparas det som den högsta
+               highToc = t;     %Om det nya värdet på pausen är högre än den tidigare högsta så sparas det som den högsta
                end
            
            break;
@@ -163,11 +162,3 @@ matlabclient(3);
 
 graphs(car1.lap_times, 13, car1.seg_times, 1);
 graphs(car2.lap_times, 13, car2.seg_times, 2);
-
-%% SAVE VARIABLES FROM CAR STRUCT
-
-dateStr = datestr(now, 'dd-mmm-yyyy');
-timeStr = datestr(now, 'HH.MM');
-strCsv = [dateStr,'_',timeStr, '.csv'];
-filename = join(strCsv);
-writetable(car1Table, filename);
