@@ -137,47 +137,45 @@ while 1
     end
 
     %{
-    TODO 1 -> 2
-    
-    %% CHECK LAP AND CHECKPOINT (CAR 1)
-	if car1.running == true
-        %% CALC POSITION (CAR 1)
-        if car1.lap ~= 0
-            if car1.lap > 1
-                last_seg_times1 = car1.seg_times(car1.lap - 1, 1:9);
-                aprox_v = get_aprox_v(car1.segment, last_seg_times1);
-                car1.position = get_position(aprox_v, car1.position, delta_t);
+    %% CHECK LAP AND CHECKPOINT (CAR 2)
+	if car2.running == true
+        %% CALC POSITION (CAR 2)
+        if car2.lap ~= 0
+            if car2.lap > 1
+                last_seg_times1 = car2.seg_times(car2.lap - 1, 1:9);
+                aprox_v = get_aprox_v(car2.segment, last_seg_times2);  %TODO ??
+                car2.position = get_position(aprox_v, car2.position, delta_t);
             end
         end
-        if car1.new_check_point == true
+        if car2.new_check_point == true
             % beep;
-            if car1.lap ~= 0
-                car1.seg_times(car1.lap, car1.segment) = toc(car1.seg_tic);
+            if car2.lap ~= 0
+                car2.seg_times(car2.lap, car2.segment) = toc(car2.seg_tic);
             end
-            car1.segment = car1.segment + 1;
-            car1.seg_tic = tic;
-            car1.position = car1.seg_len(car1.segment);
+            car2.segment = car2.segment + 1;
+            car2.seg_tic = tic;
+            car2.position = car2.seg_len(car2.segment);
         end
-        if car1.new_lap == true
-            if car1.lap == 0
+        if car2.new_lap == true
+            if car2.lap == 0
                 % dont save time for first lap
-                car1.segment = 1;
-                car1.lap = car1.lap + 1;
-                car1.seg_tic = tic;
-                car1.lap_tic = tic;
+                car2.segment = 1;
+                car2.lap = car2.lap + 1;
+                car2.seg_tic = tic;
+                car2.lap_tic = tic;
                 continue;
             end
             beep;
-            car1.seg_times(car1.lap, car1.segment) = toc(car1.seg_tic);
-            car1.seg_tic = tic;
-            car1.lap_times(car1.lap) = toc(car1.lap_tic);
-            car1.lap_tic = tic;
-            car1.position = 0;
+            car2.seg_times(car2.lap, car2.segment) = toc(car2.seg_tic);
+            car2.seg_tic = tic;
+            car2.lap_times(car2.lap) = toc(car2.lap_tic);
+            car2.lap_tic = tic;
+            car2.position = 0;
 
-            display_data = {display_data, put_text(100, 32, 'L', strjoin({num2str(car1.lap), get_time_as_string(round(car1.lap_times(car1.lap) * 1000))}, ' '))};
+            display_data = {display_data, put_text(100, 32, 'L', strjoin({num2str(car2.lap), get_time_as_string(round(car2.lap_times(car2.lap) * 1000))}, ' '))};
 
-            car1.segment = 1;
-            car1.lap = car1.lap + 1;
+            car2.segment = 1;
+            car2.lap = car2.lap + 1;
         end
     end
     %}
