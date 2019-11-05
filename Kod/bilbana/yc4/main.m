@@ -46,7 +46,6 @@ car2.seg_len = [0.0 2.53 3.05 4.92 7.60 8.84 10.65 14.68 17.76];
 %}
 
 highToc = 0;
-delta_t = 0;
 
 %% ASK ACTIVE CARS
 disp('J = Ja (automatiskt), M = Ja (manuellt), N = Nej');
@@ -101,12 +100,10 @@ while 1
     if car1.running == true
         
         %% CALC POSITION (CAR 1)
-        if car1.lap ~= 0
-            if car1.lap > 1
-                last_seg_times1 = car1.seg_times(car1.lap - 1, 1:9);
-                aprox_v = get_aprox_v(car1.segment, last_seg_times1);
-                car1.position = get_position(aprox_v, car1.position, delta_t)
-            end
+        if car1.lap > 1
+            last_seg_times1 = car1.seg_times(car1.lap - 1, 1:9);
+            aprox_v = get_aprox_v(car1.segment, last_seg_times1);
+            car1.position = get_position(aprox_v, car1.position, t);
         end
         if car1.new_check_point == true
             % beep;
@@ -188,7 +185,7 @@ while 1
     %}
 
 	%% CALCULATE (CAR 1)
-	if car1.running == true && car1.automatic == true
+    if car1.running == true && car1.automatic == true
 		car1.car_constant = get_car_constant(1);
 		car1.v = get_new_v(car1.position, Bana1);
 		car1.track_u_constant = get_track_u_constant();
@@ -249,8 +246,7 @@ while 1
             break;
         end
     end
-    
-    
+   
     send_data_to_display();
 end
  
@@ -267,7 +263,7 @@ matlabclient(3);
 %% DISPLAY GRAPHS
 
 if car1.running == true
-	graphs(car1.lap_times, 14.25, car1.seg_times, 1);
+	graphs(car1.lap_times, 13.00, car1.seg_times, 1);
 end
 
 %{
