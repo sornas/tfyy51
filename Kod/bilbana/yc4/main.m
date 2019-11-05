@@ -205,15 +205,20 @@ while 1
 	end
     %}
     
+	% TEMP VARIABLES FOR MANUAL CONTROL
+	mult = 100;
+	max = 55;
+	div = 55;
+
 	%% CONTROLLER (CAR 1)
 	if car1.running == true && car1.automatic == false
-		% TODO
-    end
-    
-    %{
+		set_car_speed(1, mult * ((max - get_manual_speed(1)) / div));
+	end
+
+	%{
 	%% CONTROLLER (CAR 2)
 	if car2.running == true && car2.automatic == false
-		% TODO
+		set_car_speed(2, _mult * ((_max - get_manual_speed(2)) / _div));
 	end
     %}
 
@@ -231,12 +236,12 @@ while 1
     %% DISPLAY
     
     %% END OF LOOP
-    while 1                     %Whileloop med paus som körs till pausen överskridit 0.07 sekunder
+    while 1                     %Whileloop med paus som kï¿½rs till pausen ï¿½verskridit 0.07 sekunder
         pause(0.001);
         t = toc(readTime);
         if t > 0.07
             if t > highToc
-                highToc = t;     %Om det nya värdet på pausen är högre än den tidigare högsta så sparas det som den högsta
+                highToc = t;     %Om det nya vï¿½rdet pï¿½ pausen ï¿½r hï¿½gre ï¿½n den tidigare hï¿½gsta sï¿½ sparas det som den hï¿½gsta
             end
             if t > 0.1
                 beep;
