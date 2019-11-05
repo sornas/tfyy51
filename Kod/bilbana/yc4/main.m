@@ -32,6 +32,7 @@ car1.lap_times = [];
 car1.seg_times = [];
 car1.position = 0;
 car1.seg_len = [0.0 2.53 3.05 4.73 7.68 8.98 10.93 14.69 17.57];
+car1.approximation = [];
 
 %{
 car2 = struct;
@@ -112,7 +113,11 @@ while 1
             end
             car1.segment = car1.segment + 1;
             car1.seg_tic = tic;
+            approximation = car1.position; % Måste vara innan nästa rad
             car1.position = car1.seg_len(car1.segment);
+            % Jämför get_position med indata
+            approximation = approximation - car1.position;
+            car1.approximation(car1.lap, car1.segment) = approximation;
         end
         if car1.new_lap == true
             if car1.lap == 0
