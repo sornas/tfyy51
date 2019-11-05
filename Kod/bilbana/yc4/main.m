@@ -167,16 +167,20 @@ while 1
 		car2.u = get_new_u(car2.v, car2.car_constant, car2.track_u_constant);
 	end
     
+	% TEMP VARIABLES FOR MANUAL CONTROL
+	_mult = 100;
+	_max = 55;
+	_div = 55;
+
 	%% CONTROLLER (CAR 1)
 	if car1.running == true && car1.automatic == false
-		% TODO
+		set_car_speed(1, _mult * ((_max - get_manual_speed(1)) / _div));
 	end
 
 	%% CONTROLLER (CAR 2)
 	if car2.running == true && car2.automatic == false
-		% TODO
+		set_car_speed(2, _mult * ((_max - get_manual_speed(2)) / _div));
 	end
-
 
     %% EXECUTE
     if car1.running == true && car1.automatic == true
