@@ -189,15 +189,17 @@ while 1
     
     %% END OF LOOP
     while 1                     %Whileloop med paus som körs till pausen överskridit 0.07 sekunder
-        pause(0.01)             
+        pause(0.001);
         t = toc(readTime);
-       if t > 0.07
-           if t > highToc
-               highToc = t;     %Om det nya värdet på pausen är högre än den tidigare högsta så sparas det som den högsta
-               end
-           
-           break;
-       end
+        if t > 0.07
+            if t > highToc
+                highToc = t;     %Om det nya värdet på pausen är högre än den tidigare högsta så sparas det som den högsta
+            end
+            if t > 0.1
+                beep;
+            end
+            break;
+        end
     end
     
     
