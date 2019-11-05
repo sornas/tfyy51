@@ -42,7 +42,7 @@ tocs = [];
 %% ASK ACTIVE CARS
 disp('J = Ja (automatiskt), M = Ja (manuellt), N = Nej');
 
-car1.response = input('Vill du k�ra bil 1? [N] ', 's');
+car1.response = input('Vill du köra bil 1? [N] ', 's');
 if car1.response == 'J'
 	car1.running = true;
 	car1.automatic = true;
@@ -53,7 +53,7 @@ else
 	car1.running = false;
 end
 
-car2.response = input('Vill du k�ra bil 2? [N] ', 's');
+car2.response = input('Vill du köra bil 2? [N] ', 's');
 if car2.response == 'J'
 	car2.running = true;
 	car2.automatic = true;
