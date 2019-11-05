@@ -98,7 +98,6 @@ while 1
     
     %% CHECK LAP AND CHECKPOINT (CAR 1)
     if car1.running == true
-        
         %% CALC POSITION (CAR 1)
         if car1.lap > 1
             last_seg_times1 = car1.seg_times(car1.lap - 1, 1:9);
@@ -142,7 +141,6 @@ while 1
     
     %% CHECK LAP AND CHECKPOINT (CAR 1)
 	if car1.running == true
-        
         %% CALC POSITION (CAR 1)
         if car1.lap ~= 0
             if car1.lap > 1
