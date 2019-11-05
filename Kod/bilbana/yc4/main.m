@@ -18,7 +18,7 @@ initialize_counters(2)
 
 config_IOs
 
-load('X:\Git\yc4_2019\Kod\bilbana\files\Bana1.mat')
+load('bilbana\files\Bana1.mat')
 
 start_race(1)
 % start_race(2)
@@ -91,19 +91,21 @@ while 1
     if car1.running == true
 		[car1.new_lap, car1.new_check_point, car1.time] = get_car_position(1);
     end
-	if car2.running == true
-		% [car2.new_lap, car2.new_check_point, car2.time] = get_car_position(2);
+	%{
+    if car2.running == true
+		[car2.new_lap, car2.new_check_point, car2.time] = get_car_position(2);
 	end
+    %}
     
     %% CHECK LAP AND CHECKPOINT (CAR 1)
-	if car1.running == true
+    if car1.running == true
         
         %% CALC POSITION (CAR 1)
         if car1.lap ~= 0
             if car1.lap > 1
                 last_seg_times1 = car1.seg_times(car1.lap - 1, 1:9);
                 aprox_v = get_aprox_v(car1.segment, last_seg_times1);
-                car1.position = get_position(aprox_v, car1.position, delta_t);
+                car1.position = get_position(aprox_v, car1.position, delta_t)
             end
         end
         if car1.new_check_point == true
@@ -260,7 +262,7 @@ matlabclient(3);
 %% DISPLAY GRAPHS
 
 if car1.running == true
-	graphs(car1.lap_times, 13, car1.seg_times, 1);
+	graphs(car1.lap_times, 14.25, car1.seg_times, 1);
 end
 
 %{
