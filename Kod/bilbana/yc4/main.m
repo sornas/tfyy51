@@ -144,14 +144,12 @@ while 1
     %% CHECK LAP AND CHECKPOINT (CAR 2)
     if car2.running == true
         
-        %% CALC POSITION (CAR 2)
-        if car2.lap ~= 0
-            if car2.lap > 1
-                last_seg_times2 = car2.seg_times(car2.lap - 1, 1:9);
-                aprox_v = get_aprox_v(car2.segment, last_seg_times2);
-                car2.position = get_position(aprox_v, car2.position, t);
-            end
-        end
+        %% CALC POSITION (CAR 2
+       if car2.lap > 1
+           last_seg_times2 = car2.seg_times(car2.lap - 1, 1:9);
+           aprox_v = get_aprox_v(car2.segment, last_seg_times2);
+           car2.position = get_position(aprox_v, car2.position, t);
+       end
         if car2.new_check_point == true
             % beep;
             if car2.lap ~= 0
