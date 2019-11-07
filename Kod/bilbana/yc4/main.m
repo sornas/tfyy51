@@ -122,7 +122,8 @@ while 1
             %car1.approximation(car1.lap, car1.segment) = approximation;
             if car1.lap > 2 %Säkerhetsmarginal (Bör vara 1?)
                 disp(car1);
-                [car1.position,seg_plus] = choose_position(car1.position,car1.segment, 1);
+                [car1.position, seg_plus] = ...
+                choose_position(car1.position,car1.segment, 1);
                 %car1.position = x(1);
                 car1.segment = car1.segment + seg_plus;
             else
