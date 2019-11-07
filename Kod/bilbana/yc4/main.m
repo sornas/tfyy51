@@ -111,7 +111,9 @@ while 1
             if car1.lap ~= 0
                 car1.seg_times(car1.lap, car1.segment) = toc(car1.seg_tic);
             end
-            car1.segment = car1.segment + 1;
+            if car1.segment < 9
+                car1.segment = car1.segment + 1;
+            end
             car1.seg_tic = tic;
             %approximation = car1.position; % Måste vara innan nästa rad
             %car1.position = car1.seg_len(car1.segment);
@@ -119,9 +121,10 @@ while 1
             %approximation = approximation - car1.position;
             %car1.approximation(car1.lap, car1.segment) = approximation;
             if car1.lap > 2 %Säkerhetsmarginal (Bör vara 1?)
-                x = choose_position(car1.position,car1.segment, 1);
-                car1.position = x(1);
-                car1.segment = car1.segment + x(2);
+                disp(car1);
+                [car1.position,seg_plus] = choose_position(car1.position,car1.segment, 1);
+                %car1.position = x(1);
+                car1.segment = car1.segment + seg_plus;
             else
                 car1.position = car1.seg_len(car1.segment);
             end

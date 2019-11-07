@@ -17,18 +17,20 @@ for i = 1:length(track_len)
     if i == 1
         near = [i,diff];
     else
-        if diff < near(i)
+        if diff < near(2)
             near = [i,diff];
         end
     end
 end
+disp(near);
 %% Beräkning av passerad givare
 if near(1) == segment
     new_position = set_pos( track, segment);
     seg_plus = 0;
+    disp('In right segment');
 else
     seg_plus = near(1) - segment
-    new_position = set_pos( track, segment)
+    new_position = set_pos( track, segment + seg_plus)
     beep
 end
 % TODO Bättre att utgå ifrån ingen missad givare ifall ingen annan givare
