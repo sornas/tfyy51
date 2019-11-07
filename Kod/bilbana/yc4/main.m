@@ -113,11 +113,18 @@ while 1
             end
             car1.segment = car1.segment + 1;
             car1.seg_tic = tic;
-            approximation = car1.position; % Måste vara innan nästa rad
-            car1.position = car1.seg_len(car1.segment);
+            %approximation = car1.position; % Måste vara innan nästa rad
+            %car1.position = car1.seg_len(car1.segment);
             % Jämför get_position med indata
-            approximation = approximation - car1.position;
-            car1.approximation(car1.lap, car1.segment) = approximation;
+            %approximation = approximation - car1.position;
+            %car1.approximation(car1.lap, car1.segment) = approximation;
+            if car1.lap > 2 %Säkerhetsmarginal (Bör vara 1?)
+                x = choose_position(car1.position,car1.segment, 1);
+                car1.position = x(1);
+                car1.segment = car1.segment + x(2);
+            else
+                car1.position = car1.seg_len(car1.segment);
+            end
         end
         if car1.new_lap == true
             if car1.lap == 0

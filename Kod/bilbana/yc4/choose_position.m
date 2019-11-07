@@ -1,4 +1,4 @@
-function [new_position, seg_plus] = choose_position(position,segment,t_missed, track)
+function [new_position, seg_plus] = choose_position(position,segment, track)
 %CHOOSE_POSITION Välj vad position ska vara
 %   Kör endast vid ny indata. Kollar om indatan är rimlig eller om någon 
 %   givare missats. Sedan väljs position efter vilken givare det var som 
