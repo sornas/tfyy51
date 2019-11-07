@@ -28,12 +28,15 @@ if near(1) == segment
     seg_plus = 0;
     disp('In right segment');
 else
-    seg_plus = near(1) - segment
-    new_position = set_pos( track, segment + seg_plus)
-    beep
+    if near(2) < 0.5
+        seg_plus = near(1) - segment
+        new_position = set_pos( track, segment + seg_plus)
+        beep
+    else
+        new_position = set_pos( track, segment); % ineff borde kombineras
+        seg_plus = 0;
+        disp('In right segment ich');
+    end
 end
-% TODO Bättre att utgå ifrån ingen missad givare ifall ingen annan givare
-% är särskillt nära pos_c heller. (Även om det är närmare) Dessutom blir
-% det problem om givare 2 missas.
 end
 
