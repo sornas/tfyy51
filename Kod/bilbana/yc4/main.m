@@ -107,30 +107,30 @@ while 1
             car1.position = get_position(aprox_v, car1.position, t);
         end
         if car1.new_check_point == true
-            % beep;
-            if car1.lap ~= 0
-                car1.seg_times(car1.lap, car1.segment) = toc(car1.seg_tic);
-            end
-            if car1.segment < 9
+            if car1.new_lap == false
+                if car1.lap ~= 0
+                    car1.seg_times(car1.lap, car1.segment) = toc(car1.seg_tic);
+                end
                 car1.segment = car1.segment + 1;
-            end
-            car1.seg_tic = tic;
-            %approximation = car1.position; % Måste vara innan nästa rad
-            %car1.position = car1.seg_len(car1.segment);
-            % Jämför get_position med indata
-            %approximation = approximation - car1.position;
-            %car1.approximation(car1.lap, car1.segment) = approximation;
-            if car1.lap > 2 %Säkerhetsmarginal (Bör vara 1?)
-                disp(car1);
-                [car1.position, seg_plus] = ...
-                choose_position(car1.position,car1.segment, 1);
-                %car1.position = x(1);
-                car1.segment = car1.segment + seg_plus;
-            else
-                car1.position = car1.seg_len(car1.segment);
+                car1.seg_tic = tic;
+                %approximation = car1.position; % Måste vara innan nästa rad
+                %car1.position = car1.seg_len(car1.segment);
+                % Jämför get_position med indata
+                %approximation = approximation - car1.position;
+                %car1.approximation(car1.lap, car1.segment) = approximation;
+                if car1.lap > 2 %Säkerhetsmarginal (Bör vara 1?)
+                    disp(car1);
+                    [car1.position, seg_plus] = ...
+                    choose_position(car1.position,car1.segment, 1);
+                    %car1.position = x(1);
+                    car1.segment = car1.segment + seg_plus;
+                else
+                    car1.position = car1.seg_len(car1.segment);
+                end
             end
         end
         if car1.new_lap == true
+            disp('----------NEW LAP!----------')
             if car1.lap == 0
                 % dont save time for first lap
                 car1.segment = 1;
