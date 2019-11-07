@@ -13,8 +13,9 @@ for i = 1:length(list)
     if list(i,1) > position
         new_v = list((i-1),4);
         break
-    end    
-    elseif i == 80
+    elseif i == length(list)
         new_v = list(80,4);
-end       
+        break
+    end  
 end
+      

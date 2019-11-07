@@ -16,13 +16,14 @@ hf=figure('position',[0 0 eps eps],'menubar','none');
 initialize_counters(1)
 initialize_counters(2)
 
+
 config_IOs
 
 load('bilbana\files\Bana1.mat')
 load('bilbana\files\Bana2.mat')
 
 start_race(1)
-% start_race(2)
+start_race(2)
 
 car1 = struct;
 car1.running = false;
@@ -104,7 +105,7 @@ while 1
         %% CALC POSITION (CAR 1)
         if car1.lap > 1
             last_seg_times1 = car1.seg_times(car1.lap - 1, 1:9);
-            aprox_v = get_aprox_v(car1.segment, last_seg_times1);
+            aprox_v = get_aprox_v(car1.segment, last_seg_times1, 1);
             car1.position = get_position(aprox_v, car1.position, t);
         end
         if car1.new_check_point == true
@@ -147,7 +148,7 @@ while 1
         %% CALC POSITION (CAR 2
        if car2.lap > 1
            last_seg_times2 = car2.seg_times(car2.lap - 1, 1:9);
-           aprox_v = get_aprox_v(car2.segment, last_seg_times2);
+           aprox_v = get_aprox_v(car2.segment, last_seg_times2, 2);
            car2.position = get_position(aprox_v, car2.position, t);
        end
         if car2.new_check_point == true
