@@ -104,14 +104,15 @@ while 1
         %% CALC POSITION (CAR 1)
         if car1.lap > 1
             last_seg_times1 = car1.seg_times(car1.lap - 1, 1:9);
-            aprox_v = get_aprox_v(car1.segment, last_seg_times1);
+            aprox_v = get_aprox_v(car1.segment + detect_missed( car1.position, car1.segment, 1), car1.lap, car1.seg_times);
             car1.position = get_position(aprox_v, car1.position, t);
             if detect_missed( car1.position, car1.segment, 1)
                 disp('Miss?');
-                disp(toc(car1.miss_time));
-                if car1.miss_time == 0
-                    car1.miss_time = tic;
-                end
+                
+                %disp(toc(car1.miss_time));
+                %if car1.miss_time == 0
+                 %   car1.miss_time = tic;
+                %end
             end
         end
         if car1.new_check_point == true
@@ -123,14 +124,18 @@ while 1
                 car1.seg_tic = tic;
                 if car1.lap > 2 % Säkerhetsmarginal (Bör vara 1?)
                     disp(car1);
-                    [car1.position, seg_plus] = ...
-                    choose_position(car1.position,car1.segment, 1);
-                    %car1.position = x(1);
-                    car1.segment = car1.segment + seg_plus;
-                    car1.miss_time = uint64(0);
+                    [new_position, seg_plus] = ...
+                            choose_position(car1.position, car1.segment, 1);
+                    if seg_plus ~= 0 && car1.segment == 1
+                        disp('Hoppar över missad givare 1/2');
+                    else
+                        car1.position = new_position;
+                        car1.segment = car1.segment + seg_plus;
+                    end
+                    %car1.miss_time = uint64(0);
                 else
                     car1.position = car1.seg_len(car1.segment);
-                    car1.miss_time = uint64(0);
+                    %car1.miss_time = uint64(0);
                 end
             end
         end
