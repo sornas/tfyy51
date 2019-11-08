@@ -33,7 +33,8 @@ car1.seg_times = [];
 car1.position = 0;
 car1.seg_len = [0.0 2.53 3.05 4.73 7.68 8.98 10.93 14.69 17.57];
 car1.approximation = [];
-car1.miss_time = uint64(0);
+car1.miss_probability = 0.1;
+%car1.miss_time = uint64(0);
 
 %{
 car2 = struct;
@@ -91,6 +92,11 @@ while 1
     %% READ
     if car1.running == true
 		[car1.new_lap, car1.new_check_point, car1.time] = get_car_position(1);
+        if car1.new_check_point == true && rand < car1.miss_probability && car1.lap >= 4
+            disp('Hoppar över givare');
+            car1.new_check_point = false;
+            beep;
+        end
     end
 	%{
     if car2.running == true
@@ -149,7 +155,7 @@ while 1
                 car1.lap_tic = tic;
                 continue;
             end
-            beep;
+            % beep;
             car1.seg_times(car1.lap, car1.segment) = toc(car1.seg_tic);
             car1.seg_tic = tic;
             car1.lap_times(car1.lap) = toc(car1.lap_tic);
@@ -267,7 +273,7 @@ while 1
                 highToc = t;     %Om det nya vï¿½rdet pï¿½ pausen ï¿½r hï¿½gre ï¿½n den tidigare hï¿½gsta sï¿½ sparas det som den hï¿½gsta
             end
             if t > 0.1
-                beep;
+                % beep;
             end
             break;
         end
