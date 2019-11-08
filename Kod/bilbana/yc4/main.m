@@ -33,6 +33,7 @@ car1.seg_times = [];
 car1.position = 0;
 car1.seg_len = [0.0 2.53 3.05 4.73 7.68 8.98 10.93 14.69 17.57];
 car1.approximation = [];
+car1.miss_time = uint64(0);
 
 %{
 car2 = struct;
@@ -105,32 +106,36 @@ while 1
             last_seg_times1 = car1.seg_times(car1.lap - 1, 1:9);
             aprox_v = get_aprox_v(car1.segment, last_seg_times1);
             car1.position = get_position(aprox_v, car1.position, t);
+            if detect_missed( car1.position, car1.segment, 1)
+                disp('Miss?');
+                disp(toc(car1.miss_time));
+                if car1.miss_time == 0
+                    car1.miss_time = tic;
+                end
+            end
         end
         if car1.new_check_point == true
-            if car1.new_lap == false
+            if car1.new_lap == false % choose_position krachar vid nytt varv (seg 10)
                 if car1.lap ~= 0
                     car1.seg_times(car1.lap, car1.segment) = toc(car1.seg_tic);
                 end
                 car1.segment = car1.segment + 1;
                 car1.seg_tic = tic;
-                %approximation = car1.position; % Måste vara innan nästa rad
-                %car1.position = car1.seg_len(car1.segment);
-                % Jämför get_position med indata
-                %approximation = approximation - car1.position;
-                %car1.approximation(car1.lap, car1.segment) = approximation;
-                if car1.lap > 2 %Säkerhetsmarginal (Bör vara 1?)
+                if car1.lap > 2 % Säkerhetsmarginal (Bör vara 1?)
                     disp(car1);
                     [car1.position, seg_plus] = ...
                     choose_position(car1.position,car1.segment, 1);
                     %car1.position = x(1);
                     car1.segment = car1.segment + seg_plus;
+                    car1.miss_time = uint64(0);
                 else
                     car1.position = car1.seg_len(car1.segment);
+                    car1.miss_time = uint64(0);
                 end
             end
         end
         if car1.new_lap == true
-            disp('----------NEW LAP!----------')
+            disp('------------NEW LAP------------')
             if car1.lap == 0
                 % dont save time for first lap
                 car1.segment = 1;

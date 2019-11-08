@@ -28,7 +28,7 @@ if near(1) == segment
     seg_plus = 0;
     disp('In right segment');
 else
-    if near(2) < 0.5
+    if near(2) < 0.7 % Behöver bli smartare. Typ jämföra andra normal miss med denna miss
         seg_plus = near(1) - segment
         new_position = set_pos( track, segment + seg_plus)
         beep
