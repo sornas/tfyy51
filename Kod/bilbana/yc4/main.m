@@ -35,7 +35,7 @@ car1.seg_times = [];
 car1.position = 0;
 car1.seg_len = [0.0 2.53 3.05 4.73 7.68 8.98 10.93 14.69 17.57];
 car1.approximation = [];
-car1.miss_probability = 0.1;
+car1.miss_probability = 0.0;
 %car1.miss_time = uint64(0);
 
 
@@ -101,11 +101,11 @@ while 1
             beep;
         end
     end
-	
+	disp(car1);
     if car2.running == true
 		[car2.new_lap, car2.new_check_point, car2.time] = get_car_position(2);
     end
-    
+    disp(car2);
     %% CHECK LAP AND CHECKPOINT (CAR 1)
     if car1.running == true
         if car1.lap ~= 0
@@ -161,26 +161,28 @@ while 1
             end
         end
         if car1.new_lap == true
-            disp('------------NEW LAP------------')
+            car1.new_lap = false;
+            beep;
+            disp('------------NEW LAP 1------------')
             if car1.lap == 0
                 % dont save time for first lap
                 car1.segment = 1;
                 car1.lap = car1.lap + 1;
                 car1.seg_tic = tic;
                 car1.lap_tic = tic;
-                continue;
-            end
+            else
             % beep;
-            car1.seg_times(car1.lap, car1.segment) = toc(car1.seg_tic);
-            car1.seg_tic = tic;
-            car1.lap_times(car1.lap) = toc(car1.lap_tic);
-            car1.lap_tic = tic;
-            car1.position = 0;
+                car1.seg_times(car1.lap, car1.segment) = toc(car1.seg_tic);
+                car1.seg_tic = tic;
+                car1.lap_times(car1.lap) = toc(car1.lap_tic);
+                car1.lap_tic = tic;
+                car1.position = 0;
 
-            display_data = {display_data, put_text(100, 32, 'L', strjoin({num2str(car1.lap), get_time_as_string(round(car1.lap_times(car1.lap) * 1000))}, ' '))};
+                display_data = {display_data, put_text(100, 32, 'L', strjoin({num2str(car1.lap), get_time_as_string(round(car1.lap_times(car1.lap) * 1000))}, ' '))};
 
-            car1.segment = 1;
-            car1.lap = car1.lap + 1;
+                car1.segment = 1;
+                car1.lap = car1.lap + 1;
+            end
         end
     end
     
@@ -238,26 +240,27 @@ while 1
             end
         end
         if car2.new_lap == true
-            disp('------------NEW LAP------------')
+            car2.new_lap = false;
+            disp('------------NEW LAP 2------------')
             if car2.lap == 0
                 % dont save time for first lap
                 car2.segment = 1;
                 car2.lap = car2.lap + 1;
                 car2.seg_tic = tic;
                 car2.lap_tic = tic;
-                continue;
+            else
+                % beep;
+                car2.seg_times(car2.lap, car2.segment) = toc(car2.seg_tic);
+                car2.seg_tic = tic;
+                car2.lap_times(car2.lap) = toc(car2.lap_tic);
+                car2.lap_tic = tic;
+                car2.position = 0;
+
+                display_data = {display_data, put_text(100, 48, 'L', strjoin({num2str(car2.lap), get_time_as_string(round(car2.lap_times(car2.lap) * 1000))}, ' '))};
+
+                car2.segment = 1;
+                car2.lap = car2.lap + 1;
             end
-            % beep;
-            car2.seg_times(car2.lap, car2.segment) = toc(car2.seg_tic);
-            car2.seg_tic = tic;
-            car2.lap_times(car2.lap) = toc(car2.lap_tic);
-            car2.lap_tic = tic;
-            car2.position = 0;
-
-            display_data = {display_data, put_text(100, 48, 'L', strjoin({num2str(car2.lap), get_time_as_string(round(car2.lap_times(car2.lap) * 1000))}, ' '))};
-
-            car2.segment = 1;
-            car2.lap = car2.lap + 1;
         end
     end
 
@@ -270,7 +273,7 @@ while 1
     end
     
     %% CALCULATE (CAR 2)
-	if car2.running == true && car2.automatic == true
+    if car2.running == true && car2.automatic == true
 		car2.car_constant = get_car_constant(2);
 		car2.v = get_new_v(car2.position, Bana2);
 		car2.track_u_constant = get_track_u_constant();
@@ -288,7 +291,7 @@ while 1
 	end
 
 	%% CONTROLLER (CAR 2)
-	if car2.running == true && car2.automatic == false
+    if car2.running == true && car2.automatic == false
 		set_car_speed(2, mult * ((max - get_manual_speed(2)) / div));
     end
 
@@ -307,7 +310,7 @@ while 1
     while 1                     %Whileloop med paus som k�rs till pausen �verskridit 0.07 sekunder
         pause(0.001);
         t = toc(readTime);
-        if t > 0.07
+        if t > 0.1
             if t > highToc
                 highToc = t;     %Om det nya v�rdet p� pausen �r h�gre �n den tidigare h�gsta s� sparas det som den h�gsta
             end
