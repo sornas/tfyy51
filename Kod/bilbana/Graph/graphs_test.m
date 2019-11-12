@@ -1,3 +1,4 @@
+%{
 %% Data needed
 A = [3.9,1.1,2.2,1.8,1.4,3.9,1.5,3.4,1.4;
      4.2,1.1,2.2,1.8,1.4,3.4,1.5,3.4,1.4;
@@ -12,3 +13,7 @@ car1.lap_times = [14.1,13.8,14.15,13.9,14.1,14];
 ref_lap_time = 14;
 %% Actual test
 graphs(car1.lap_times,ref_lap_time,car1.seg_times,5)
+%}
+position = 2.54;
+segment = 2;
+detect_missed(position,segment,1)
