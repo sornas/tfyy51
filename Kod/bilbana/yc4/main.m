@@ -11,7 +11,7 @@ display_data = {display_data clear_display()};
 pause(1);
 
 disp('Startar bilbanan. Avsluta med q.')
-hf=figure('position',[0 0 eps eps],'menubar','none');
+hf=figure('position', [0 0 eps eps], 'menubar', 'none');
 
 initialize_counters(1)
 initialize_counters(2)
@@ -106,13 +106,26 @@ while 1
 		[car2.new_lap, car2.new_check_point, car2.time] = get_car_position(2);
     end
     
-    
     %% CHECK LAP AND CHECKPOINT (CAR 1)
     if car1.running == true
+        if car1.lap ~= 0
+            if toc(car1.seg_tic) > 9.0
+                set_car_speed(1, 0);
+                set_car_speed(2, 0);
+                disp('Avåkning bil 1');
+                disp('J = Ja, N = Nej')
+                car1.response = input('Vill du fortsätta? [N] ', 's');
+                if car1.response == 'J'
+                    car1.seg_tic = tic;
+                else
+                    break;
+                end
+            end
+        end
         %% CALC POSITION (CAR 1)
         if car1.lap > 1
             last_seg_times1 = car1.seg_times(car1.lap - 1, 1:9);
-            aprox_v = get_aprox_v(car1.segment + detect_missed( car1.position, car1.segment, 1), car1.lap, car1.seg_times, 1);
+            aprox_v = get_aprox_v(car1.segment + detect_missed(car1.position, car1.segment, 1), car1.lap, car1.seg_times, 1);
             car1.position = get_position(aprox_v, car1.position, t);
             if detect_missed( car1.position, car1.segment, 1)
                 disp('Miss?');
@@ -170,12 +183,83 @@ while 1
             car1.lap = car1.lap + 1;
         end
     end
-
-    
     
     %% CHECK LAP AND CHECKPOINT (CAR 2)
-    % TODO copy from car1
-    
+    if car2.running == true
+        if car2.lap ~= 0
+            if toc(car2.seg_tic) > 9.0
+                set_car_speed(1, 0);
+                set_car_speed(2, 0);
+                disp('Avåkning bil 2');
+                disp('J = Ja, N = Nej')
+                car2.response = input('Vill du fortsätta? [N] ', 's');
+                if car2.response == 'J'
+                    car2.seg_tic = tic;
+                else
+                    break;
+                end
+            end
+        end
+        if car2.lap > 1
+            last_seg_times2 = car2.seg_times(car2.lap - 1, 1:9);
+            aprox_v = get_aprox_v(car2.segment + detect_missed(car2.position, car2.segment, 2), car2.lap, car2.seg_times, 2);
+            car2.position = get_position(aprox_v, car2.position, t);
+            if detect_missed( car2.position, car2.segment, 2)
+                disp('Miss?');
+                
+                %disp(toc(car2.miss_time));
+                %if car2.miss_time == 0
+                 %   car2.miss_time = tic;
+                %end
+            end
+        end
+        if car2.new_check_point == true
+            if car2.new_lap == false % choose_position krachar vid nytt varv (seg 10)
+                if car2.lap ~= 0
+                    car2.seg_times(car2.lap, car2.segment) = toc(car2.seg_tic);
+                end
+                car2.segment = car2.segment + 1;
+                car2.seg_tic = tic;
+                disp(car2);
+                if car2.lap > 2 % S�kerhetsmarginal (B�r vara 1?)
+                    [new_position, seg_plus] = ...
+                            choose_position(car2.position, car2.segment, 2);
+                    if seg_plus ~= 0 && car2.segment == 1
+                        disp('Hoppar �ver missad givare 1/2');
+                    else
+                        car2.position = new_position;
+                        car2.segment = car2.segment + seg_plus;
+                    end
+                    %car2.miss_time = uint64(0);
+                else
+                    car2.position = car2.seg_len(car2.segment);
+                    %car2.miss_time = uint64(0);
+                end
+            end
+        end
+        if car2.new_lap == true
+            disp('------------NEW LAP------------')
+            if car2.lap == 0
+                % dont save time for first lap
+                car2.segment = 1;
+                car2.lap = car2.lap + 1;
+                car2.seg_tic = tic;
+                car2.lap_tic = tic;
+                continue;
+            end
+            % beep;
+            car2.seg_times(car2.lap, car2.segment) = toc(car2.seg_tic);
+            car2.seg_tic = tic;
+            car2.lap_times(car2.lap) = toc(car2.lap_tic);
+            car2.lap_tic = tic;
+            car2.position = 0;
+
+            display_data = {display_data, put_text(100, 48, 'L', strjoin({num2str(car2.lap), get_time_as_string(round(car2.lap_times(car2.lap) * 1000))}, ' '))};
+
+            car2.segment = 1;
+            car2.lap = car2.lap + 1;
+        end
+    end
 
 	%% CALCULATE (CAR 1)
     if car1.running == true && car1.automatic == true
@@ -185,15 +269,13 @@ while 1
 		car1.u = get_new_u(car1.v, car1.car_constant, car1.track_u_constant);
     end
     
-    
     %% CALCULATE (CAR 2)
 	if car2.running == true && car2.automatic == true
 		car2.car_constant = get_car_constant(2);
 		car2.v = get_new_v(car2.position, Bana2);
 		car2.track_u_constant = get_track_u_constant();
 		car2.u = get_new_u(car2.v, car2.car_constant, car2.track_u_constant);
-	end
-    
+    end    
     
 	% TEMP VARIABLES FOR MANUAL CONTROL
 	mult = 100;
@@ -205,23 +287,19 @@ while 1
 		set_car_speed(1, mult * ((max - get_manual_speed(1)) / div));
 	end
 
-	
 	%% CONTROLLER (CAR 2)
 	if car2.running == true && car2.automatic == false
 		set_car_speed(2, mult * ((max - get_manual_speed(2)) / div));
-	end
-    
+    end
 
     %% EXECUTE
     if car1.running == true && car1.automatic == true
 		set_car_speed(1, car1.u);
     end
     
-    
     if car2.running == true && car2.automatic == true
    		set_car_speed(2, car2.u);
     end
-    
     
     %% DISPLAY
     
@@ -256,7 +334,7 @@ matlabclient(3);
 %% DISPLAY GRAPHS
 
 if car1.running == true
-	graphs(car1.lap_times, 13.00, car1.seg_times, 1);
+	graphs(car1.lap_times, 13, car1.seg_times, 1);
 end
 
 
