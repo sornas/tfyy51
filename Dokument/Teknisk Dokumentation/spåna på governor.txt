@@ -1,4 +1,4 @@
-Funktionen ska utifrån köregenskaper för bil, vald referenstid och, om gemensam målgång aktiverad, skillnad i bilarnas placering se till att rätt gaspådrag skickas till banan. 
+Funktionen ska utifrån köregenskaper för bil, vald referenstid och, om gemensam målgång aktiverad, skillnad i bilarnas placering och se till att rätt gaspådrag skickas till banan. 
 
 Vi utgår ifrån de redan skrivna bankartorna (bana1.mat och bana2.mat) och multiplicerar dess spänningsvärde med en car_constant. Programmet kommer sedan ihåg hur lång tid varje segment tagit för olika car_constant och gör en modell över hur hög den bör vara för att nå en viss segmentstid. gov_set väljer sedan segmentstider utifrån vald referenstid (och om gemensam målgång aktiverad car_diff).
 
