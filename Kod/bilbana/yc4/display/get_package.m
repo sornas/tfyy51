@@ -1,10 +1,4 @@
-function [pkg] = get_package(code, args)
-	DC1 = 17;
+function pkg = get_package(code, args)
 	ESC = 27;
-
-	data = [ESC, double(code), args];
-	len = length(data);
-	initStr = [DC1, len, data];
-	bcc = mod(sum(initStr), 256);
-	pkg = [initStr, bcc];
+	pkg = [ESC, double(code), args];
 end
