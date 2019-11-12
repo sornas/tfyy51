@@ -1,4 +1,4 @@
-function [v] = get_aprox_v(cur_seg,last_seg_times)
+function [v] = get_aprox_v(cur_seg, lap, seg_times)
 %GET_APROX_V Tillfällig? Behövs för att testa get_position. Ger
 %medelhastigheten för nuvarande segment på förra varvet.
 %{
@@ -8,8 +8,18 @@ last_seg_times: 1x9 vektor med förra varvets segmenttider
 seg_len1 = [2.53 0.53 1.68 2.92 1.2 2.01 3.83 2.89 1.99];
 % seg_len2 = [2.53 0.53 1.87 2.68 1.24 1.81 4.03 3.09 2.19];
 
-%v = last_seg_times(cur_seg)/seg_len(cur_seg);
-v = seg_len1(cur_seg)/last_seg_times(cur_seg);
+if cur_seg > 9
+    cur_seg = cur_seg - 9;
+end
+
+while lap > 0
+    lap = lap - 1;
+    if seg_times(lap, cur_seg) ~= 0
+        v = seg_len1(cur_seg)/seg_times(lap, cur_seg);
+        return
+    end
+end
+disp('bara nollor?');
 
 % switch(track)
 %     case 1

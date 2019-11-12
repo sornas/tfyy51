@@ -32,6 +32,9 @@ car1.lap_times = [];
 car1.seg_times = [];
 car1.position = 0;
 car1.seg_len = [0.0 2.53 3.05 4.73 7.68 8.98 10.93 14.69 17.57];
+car1.approximation = [];
+car1.miss_probability = 0.1;
+%car1.miss_time = uint64(0);
 
 %{
 car2 = struct;
@@ -89,6 +92,11 @@ while 1
     %% READ
     if car1.running == true
 		[car1.new_lap, car1.new_check_point, car1.time] = get_car_position(1);
+        if car1.new_check_point == true && rand < car1.miss_probability && car1.lap >= 4
+            disp('Hoppar över givare');
+            car1.new_check_point = false;
+            beep;
+        end
     end
 	%{
     if car2.running == true
@@ -101,19 +109,43 @@ while 1
         %% CALC POSITION (CAR 1)
         if car1.lap > 1
             last_seg_times1 = car1.seg_times(car1.lap - 1, 1:9);
-            aprox_v = get_aprox_v(car1.segment, last_seg_times1);
+            aprox_v = get_aprox_v(car1.segment + detect_missed( car1.position, car1.segment, 1), car1.lap, car1.seg_times);
             car1.position = get_position(aprox_v, car1.position, t);
+            if detect_missed( car1.position, car1.segment, 1)
+                disp('Miss?');
+                
+                %disp(toc(car1.miss_time));
+                %if car1.miss_time == 0
+                 %   car1.miss_time = tic;
+                %end
+            end
         end
         if car1.new_check_point == true
-            % beep;
-            if car1.lap ~= 0
-                car1.seg_times(car1.lap, car1.segment) = toc(car1.seg_tic);
+            if car1.new_lap == false % choose_position krachar vid nytt varv (seg 10)
+                if car1.lap ~= 0
+                    car1.seg_times(car1.lap, car1.segment) = toc(car1.seg_tic);
+                end
+                car1.segment = car1.segment + 1;
+                car1.seg_tic = tic;
+                if car1.lap > 2 % Säkerhetsmarginal (Bör vara 1?)
+                    disp(car1);
+                    [new_position, seg_plus] = ...
+                            choose_position(car1.position, car1.segment, 1);
+                    if seg_plus ~= 0 && car1.segment == 1
+                        disp('Hoppar över missad givare 1/2');
+                    else
+                        car1.position = new_position;
+                        car1.segment = car1.segment + seg_plus;
+                    end
+                    %car1.miss_time = uint64(0);
+                else
+                    car1.position = car1.seg_len(car1.segment);
+                    %car1.miss_time = uint64(0);
+                end
             end
-            car1.segment = car1.segment + 1;
-            car1.seg_tic = tic;
-            car1.position = car1.seg_len(car1.segment);
         end
         if car1.new_lap == true
+            disp('------------NEW LAP------------')
             if car1.lap == 0
                 % dont save time for first lap
                 car1.segment = 1;
@@ -122,7 +154,7 @@ while 1
                 car1.lap_tic = tic;
                 continue;
             end
-            beep;
+            % beep;
             car1.seg_times(car1.lap, car1.segment) = toc(car1.seg_tic);
             car1.seg_tic = tic;
             car1.lap_times(car1.lap) = toc(car1.lap_tic);
@@ -237,7 +269,7 @@ while 1
                 highToc = t;     %Om det nya vï¿½rdet pï¿½ pausen ï¿½r hï¿½gre ï¿½n den tidigare hï¿½gsta sï¿½ sparas det som den hï¿½gsta
             end
             if t > 0.1
-                beep;
+                % beep;
             end
             break;
         end
