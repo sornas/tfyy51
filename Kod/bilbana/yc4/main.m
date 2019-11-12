@@ -310,7 +310,7 @@ while 1
     while 1                     %Whileloop med paus som k�rs till pausen �verskridit 0.07 sekunder
         pause(0.001);
         t = toc(readTime);
-        if t > 0.1
+        if t > 0.07
             if t > highToc
                 highToc = t;     %Om det nya v�rdet p� pausen �r h�gre �n den tidigare h�gsta s� sparas det som den h�gsta
             end
