@@ -26,34 +26,32 @@ start_race(1)
 start_race(2)
 
 car1 = struct;
+car1.num = 1;
 car1.running = false;
 car1.automatic = true;
 car1.segment = 1;
 car1.lap = 0;
 car1.lap_times = [];
 car1.seg_times = [];
-car1.last_seg_times = [];
 car1.position = 0;
 car1.seg_len = [0.0 2.53 3.05 4.73 7.68 8.98 10.93 14.69 17.57];
 car1.map = Bana1;
 car1.approximation = [];
 car1.miss_probability = 0.0;
-car1.num = 1;
 
 
 car2 = struct;
+car2.num = 2;
 car2.running = false;
 car2.automatic = true;
 car2.segment = 1;
 car2.lap = 0;
 car2.lap_times = [];
 car2.seg_times = [];
-car2.last_seg_times = [];
 car2.position = 0;
 car2.seg_len = [0.0 2.53 3.05 4.92 7.60 8.84 10.65 14.68 17.76];
 car2.map = Bana2;
 car2.miss_probability = 0.0;
-car2.num = 2;
 
 
 highToc = 0;

@@ -1,8 +1,25 @@
 function [car, stop, display_data] = do_car(car, t, display_data)
 %DO_CAR Ger nya värden till struct car, avgör om koden ska stoppas samt hämtar displaydata.
 %{
-Input:
-    car: En struct med data för en bil
+Input/Output:
+car - En struct med data för en viss bil    
+    car.num - Vilken bil det är
+    car.running - Om bilen körs eller inte
+    car.automatic - Om bilen körs automatiskt eller inte
+    car.segment - Bilens nuvarande segment
+    car.lap - Bilens nuvarande varv
+    car.lap_times - Bilens sparade varvtider
+    car.seg_times - Bilens sparade segmentstier
+    car.position - Bilens nuvarande placering på banan i meter från
+        start/mål
+    car.seg_len - Banans längd från start till givarna
+    car.map - Tabell med hastighetskoefficienter för alla positioner
+    car.miss_probability - Sannorlikheten för artificiellt introducerade
+        missade givare
+t - Längden (s) på nuvarande programcykel
+display_data - Buffer med den data som ska skickas till displayen vid nästa
+    anrop
+stop - Huruvida koden ska stoppas eller inte
 %}
 stop = false;
 if car.running == true
