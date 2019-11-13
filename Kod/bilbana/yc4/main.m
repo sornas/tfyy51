@@ -15,13 +15,13 @@ display.shm_interp.start_code = '';
 display.shm_interp.data = [];
 display.last_send = tic;
 display.last_request = tic;
+display.send_interval = 0.5;
 
 disp('Startar bilbanan. Avsluta med q.')
 hf=figure('position', [0 0 eps eps], 'menubar', 'none');
 
 initialize_counters(1)
 initialize_counters(2)
-
 
 config_IOs
 
@@ -60,6 +60,7 @@ car2.seg_len = [0.0 2.53 3.05 4.92 7.60 8.84 10.65 14.68 17.76];
 car2.map = Bana2;
 car2.miss_probability = 0.0;
 
+t = 0;
 highToc = 0;
 
 %% ASK ACTIVE CARS
@@ -101,8 +102,8 @@ while 1
     figure(hf)
     drawnow
     
-	[car1, car1.stop, display_data] = do_car(car1, t, display_data);
-	[car2, car2.stop, display_data] = do_car(car2, t, display_data);
+	[car1, car1.stop, display.data] = do_car(car1, t, display.data);
+	[car2, car2.stop, display.data] = do_car(car2, t, display.data);
 
 	if car1.stop == true
 		disp('stopped by car 1');
@@ -132,7 +133,7 @@ while 1
             % request internal mem
             matlabclient(1, hex2dec(['12'; '01'; '53'; '66']));
         end
-        disp(strjoin{'display took additional ', num2str(toc(display.send_delay))});
+        % disp(strjoin({'display took additional ', num2str(toc(display.send_delay))}));
         % ACTUAL END OF LOOP
         t = toc(readTime);
         

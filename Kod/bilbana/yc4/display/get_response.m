@@ -5,8 +5,13 @@ function [ack, start_code, responses] = get_response(display_data)
 
 ack = false;
 start_code = '';
-bcc = display_data(length(display_data));
 responses = [];
+
+if isempty(display_data)
+    return
+end
+bcc = display_data(length(display_data));
+
 
 pointer = 1;
 
