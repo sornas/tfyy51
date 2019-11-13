@@ -1,4 +1,4 @@
-function [car, stop] = do_car(car)
+function [car, stop] = do_car(car, t)
 
 stop = false;
 

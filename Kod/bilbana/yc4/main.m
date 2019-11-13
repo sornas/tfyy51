@@ -95,8 +95,8 @@ while 1
     figure(hf)
     drawnow
     
-	[car1, car1.stop] = do_car(car1);
-	[car2, car2.stop] = do_car(car2);
+	[car1, car1.stop] = do_car(car1, t);
+	[car2, car2.stop] = do_car(car2, t);
 
 	if car1.stop == truej
 		disp('stopped by car 1');
