@@ -139,7 +139,7 @@ while 1
             [display.shm_interp.ack, display.shm_interp.start_code, display.shm_interp.data] = get_response(display.shm);
             
             % request internal mem
-            matlabclient(1, hex2dec(['12'; '01'; '53'; '66']));
+            % matlabclient(1, hex2dec(['12'; '01'; '53'; '66']));
         end
         % disp(strjoin({'display took additional ', num2str(toc(display.send_delay))}));
         % ACTUAL END OF LOOP
