@@ -60,67 +60,61 @@ car2.miss_probability = 0.05;
 t = 0;
 highToc = 0;
 
-%% ASK ACTIVE CARS
-disp('J = Ja (automatiskt), M = Ja (manuellt), N = Nej');
-
 %% DRAW DISPLAY
 matlabclient(1, get_smallpackage([ ...
 	put_text(160, 30, 'C', 'Choose which car to drive'), ...
 	define_touch_switch(98 , 60 , 130, 90 , 11, 12, 'C', '1'), ...
 	define_touch_switch(102, 98 , 126, 122, 13, 14, 'C', 'M'), ...
-    define_touch_switch(190, 60 , 222, 90 , 21, 22, 'C', '2'), ...
-    define_touch_switch(194, 98 , 218, 122, 23, 61, 'C', 'M'), ...
-    define_touch_key(   272, 192, 304, 224, 31, 32, 'C', 'S') ...
-]));
+	define_touch_switch(190, 60 , 222, 90 , 21, 22, 'C', '2'), ...
+	define_touch_switch(194, 98 , 218, 122, 23, 61, 'C', 'M'), ...
+	define_touch_key(   272, 192, 304, 224, 31, 32, 'C', 'S') ...
+	]));
 
+%% CHECK DISPLAY BUTTONS
 display.last_check = tic;
+done = false;
 while 1
 	pause(0.1);
-    if toc(display.last_check) > 0.5
-        display.last_check = tic;
-        % read internal mem from last send
-        [display.out, display.shm] = matlabclient(2);
-        [display.shm_interp.ack, display.shm_interp.start_code, display.shm_interp.data] = get_response(display.shm);
-        
-        % request internal mem
-        matlabclient(1, hex2dec(['12'; '01'; '53'; '66']));
-        
-        if isempty(display.shm_interp.data)
-            disp('tomt')
-            continue
-        end
-        for i = 1:length(display.shm_interp.data)
-            disp(num2str(length(display.shm_interp.data)))
-            data = display.shm_interp.data(i);
-            disp(data)
-            if data.data == 31
-                disp('WAHO')
-            end
-        end
-    end
-end
+	if toc(display.last_check) > 0.5
+		display.last_check = tic;
+		% read internal mem from last send
+		[display.out, display.shm] = matlabclient(2);
+		[display.shm_interp.ack, display.shm_interp.start_code, display.shm_interp.data] = get_response(display.shm);
 
-car1.response = input('Vill du köra bil 1? [N] ', 's');
-if car1.response == 'J'
-	car1.running = true;
-	car1.automatic = true;
-elseif car1.response == 'M'
-	car1.running = true;
-	car1.automatic = false;
-else
-	car1.running = false;
-end
+		% request internal mem
+		matlabclient(1, hex2dec(['12'; '01'; '53'; '66']));
 
-
-car2.response = input('Vill du köra bil 2? [N] ', 's');
-if car2.response == 'J'
-	car2.running = true;
-	car2.automatic = true;
-elseif car2.response == 'M'
-	car2.running = true;
-	car2.automatic = false;
-else
-	car2.running = false;
+		if isempty(display.shm_interp.data)
+			continue
+		end
+		for i = 1:length(display.shm_interp.data)
+			disp(num2str(length(display.shm_interp.data)))
+			data = display.shm_interp.data(i);
+			disp(data)
+			if data.data == 32
+				done = true
+			elseif data.data == 11
+				car1.running = true
+			elseif data.data == 12
+				car1.running = false
+			elseif data.data == 13
+				car1.automatic = true
+			elseif data.data == 14
+				car1.automatic = false
+			elseif data.data == 21
+				car2.running = true
+			elseif data.data == 22
+				car2.running = false
+			elseif data.data == 23
+				car2.automatic = true
+			elseif data.data == 24
+				car2.automatic = false
+			end
+		end
+		if done == true
+			break
+		end
+	end
 end
 %{
 ref_time = input('Vilken referenstid ska anv�ndas? [13] ', 's');
@@ -137,16 +131,16 @@ matlabclient(1, get_smallpackage([define_bar_graph('O', 2, 266, 30, 290, 210, 0,
 
 %% MAIN LOOP
 while 1
-    readTime = tic;
-    %% PRE-LOOP
-    if strcmp(get(hf,'currentcharacter'),'q')
-        close(hf)
-        break
-    end
-    
-    figure(hf)
-    drawnow
-    
+	readTime = tic;
+	%% PRE-LOOP
+	if strcmp(get(hf,'currentcharacter'),'q')
+		close(hf)
+		break
+	end
+
+	figure(hf)
+	drawnow
+
 	[car1, car1.stop, display.data] = do_car(car1, t, display.data);
 	[car2, car2.stop, display.data] = do_car(car2, t, display.data);
 
@@ -158,6 +152,7 @@ while 1
 		disp('stopped by car 2');
 		break;
 	end
+<<<<<<< HEAD
     
     %% END OF LOOP
     while 1                     %Whileloop med paus som k�rs till pausen �verskridit 0.07 sekunder
@@ -202,8 +197,53 @@ while 1
         end
         pause(0.001);
     end
+=======
+
+	%% END OF LOOP
+	while 1                     %Whileloop med paus som k�rs till pausen �verskridit 0.07 sekunder
+		% DISPLAY
+		display.send_delay = tic;
+		if toc(display.last_send) > display.send_interval
+			% queue control signal
+			if car1.running && car1.automatic
+				display.data = [display.data, put_text(20, 16 + (16 * 1), 'L', num2str(car1.u))];
+			end
+			if car2.running && car2.automatic
+				display.data = [display.data, put_text(20, 16 + (16 * 2), 'L', num2str(car2.u))];
+			end
+
+			% send all queued data
+			if ~isempty(display.data)
+				[display.out] = matlabclient(1, get_smallpackage(display.data));
+				display.data = [];
+			end
+			display.last_send = tic;
+
+			% read internal mem from last send
+			[display.out, display.shm] = matlabclient(2);
+			[display.shm_interp.ack, display.shm_interp.start_code, display.shm_interp.data] = get_response(display.shm);
+
+			% request internal mem
+			% matlabclient(1, hex2dec(['12'; '01'; '53'; '66']));
+		end
+		% disp(strjoin({'display took additional ', num2str(toc(display.send_delay))}));
+		% ACTUAL END OF LOOP
+		t = toc(readTime);
+
+		if t > 0.07
+			if t > highToc
+				highToc = t;     %Om det nya v�rdet p� pausen �r h�gre �n den tidigare h�gsta s� sparas det som den h�gsta
+			end
+			if t > 0.1
+				% beep;
+			end
+			break;
+		end
+		pause(0.001);
+	end
+>>>>>>> respond to buttons pressed + indents
 end
- 
+
 %% END OF PROGRAM
 disp(highToc);
 disp(car1);
