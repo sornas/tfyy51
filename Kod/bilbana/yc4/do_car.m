@@ -1,4 +1,4 @@
-function [car, stop] = do_car(car, t)
+function [car, stop, display_data] = do_car(car, t, display_data)
 
 stop = false;
 
@@ -17,7 +17,7 @@ if car.running == true
 		if toc(car.seg_tic) > 9.0
 			set_car_speed(1, 0);
 			set_car_speed(2, 0);
-			disp(strjoin{'Avåkning bil'; num2str(car.num)});
+			%disp(strjoin{'Avåkning bil'; num2str(car.num)});
 			disp('J = Ja, N = Nej')
 			car.response = input('Vill du fortsätta? [N] ', 's');
 			if car.response == 'J'
@@ -30,7 +30,7 @@ if car.running == true
 	end
 	%% CALC POSITION
 	if car.lap > 1
-		car.last_seg_times = car.seg_times(car.lap - 1, 1:9);
+		% car.last_seg_times = car.seg_times(car.lap - 1, 1:9);
 		aprox_v = get_aprox_v(car.segment + detect_missed(car.position, car.segment, car.num), car.lap, car.seg_times, car.num);
 		car.position = get_position(aprox_v, car.position, t);
 		if detect_missed( car.position, car.segment, car.num)
@@ -101,7 +101,7 @@ end
 
 %% CONTROLLER
 if car.running == true && car.automatic == false
-	set_car_speed(car.num, mult * ((max - get_manual_speed(car.num)) / div));
+	% set_car_speed(car.num, mult * ((max - get_manual_speed(car.num)) / div));
 end
 
 %% EXECUTE

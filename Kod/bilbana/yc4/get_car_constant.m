@@ -15,7 +15,7 @@ switch(in_pos)
     case 1
         car_constant = 0.95;
     case 2
-        car_constant = 0.8;
+        car_constant = 1.2;
 end
 end
 

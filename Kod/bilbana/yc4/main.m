@@ -38,6 +38,7 @@ car1.seg_len = [0.0 2.53 3.05 4.73 7.68 8.98 10.93 14.69 17.57];
 car1.map = Bana1;
 car1.approximation = [];
 car1.miss_probability = 0.0;
+car1.num = 1;
 
 
 car2 = struct;
@@ -52,6 +53,7 @@ car2.position = 0;
 car2.seg_len = [0.0 2.53 3.05 4.92 7.60 8.84 10.65 14.68 17.76];
 car2.map = Bana2;
 car2.miss_probability = 0.0;
+car2.num = 2;
 
 
 highToc = 0;
@@ -95,10 +97,10 @@ while 1
     figure(hf)
     drawnow
     
-	[car1, car1.stop] = do_car(car1, t);
-	[car2, car2.stop] = do_car(car2, t);
+	[car1, car1.stop, display_data] = do_car(car1, t, display_data);
+	[car2, car2.stop, display_data] = do_car(car2, t, display_data);
 
-	if car1.stop == truej
+	if car1.stop == true
 		disp('stopped by car 1');
 		break;
 	end
