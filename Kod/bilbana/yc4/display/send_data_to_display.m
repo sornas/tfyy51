@@ -20,6 +20,10 @@ function [] = send_data_to_display()
         %% SEND DATA
         % disp('sending data');
         % disp(display_data)
+		
+		data = [];
+		
+
         matlabclient(1, display_data{1});
         last_send = clock;
         display_data(1) = [];
