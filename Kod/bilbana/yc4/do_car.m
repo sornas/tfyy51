@@ -3,17 +3,18 @@ function [car, stop, display_data] = do_car(car, t, display_data)
 %{
 Input/Output:
 car - En struct med data för en viss bil    
-    car.num - Vilken bil det är
+    car.num - Vilken bil det är (1 eller 2)
     car.running - Om bilen körs eller inte
     car.automatic - Om bilen körs automatiskt eller inte
     car.segment - Bilens nuvarande segment
     car.lap - Bilens nuvarande varv
-    car.lap_times - Bilens sparade varvtider
-    car.seg_times - Bilens sparade segmentstier
+    car.lap_times - Bilens sparade varvtider (1 x n matris)
+    car.seg_times - Bilens sparade segmentstier (n x m matris)
     car.position - Bilens nuvarande placering på banan i meter från
         start/mål
-    car.seg_len - Banans längd från start till givarna
-    car.map - Tabell med hastighetskoefficienter för alla positioner
+    car.seg_len - Banans längd från start till givarna (1 x 9 matris)
+    car.map - Tabell med hastighetskoefficienter för alla positioner (.mat
+    fil)
     car.miss_probability - Sannorlikheten för artificiellt introducerade
         missade givare
 t - Längden (s) på nuvarande programcykel
