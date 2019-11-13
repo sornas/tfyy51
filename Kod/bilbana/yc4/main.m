@@ -51,7 +51,7 @@ car2.seg_times = [];
 car2.position = 0;
 car2.seg_len = [0.0 2.53 3.05 4.92 7.60 8.84 10.65 14.68 17.76];
 car2.map = Bana2;
-car2.miss_probability = 0.0;
+car2.miss_probability = 0.05;
 
 t = 0;
 highToc = 0;
@@ -82,7 +82,7 @@ else
 	car2.running = false;
 end
 
-
+ref_time = 13;
 %% MAIN LOOP
 while 1
     readTime = tic;
@@ -139,10 +139,10 @@ matlabclient(3);
 %% DISPLAY GRAPHS
 
 if car1.running == true
-	graphs(car1.lap_times, 13, car1.seg_times, 1);
+	graphs(car1.lap_times, ref_time, car1.seg_times, 1);
 end
 
 
 if car2.running == true
-	graphs(car2.lap_times, 13, car2.seg_times, 2);
+	graphs(car2.lap_times, ref_time, car2.seg_times, 2);
 end
