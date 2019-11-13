@@ -1,34 +1,51 @@
-function [ack, start_code, data] get_response(display_data)
+function [ack, start_code, responses] = get_response(display_data)
 % GET RESPONSE
 %	In-depth explanation
 %	[flag, display_data] = matlabclient(2)
 
 ack = false;
 start_code = '';
-data = [];
+bcc = display_data(length(display_data));
+responses = [];
 
-len = -1;
+pointer = 1;
 
-if display_data[0] == 6
+if display_data(pointer) == 6
 	ack = true;
 else
 	return
 end
 
-display_data[0] = [];
+if pointer > length(display_data)
+    return 
+end
 
-if display_data[0] == 17
+pointer = pointer + 1;
+if display_data(1) == 17
 	start_code = 'DC1';
-elseif display_data[0] == 18
+elseif display_data(1) == 18
 	start_code = 'DC2';
 end
 
-display_data[0] = [];
+pointer = pointer + 1;
+% total length
 
-len = display_data[0];
-
-while len > 0
-	
-end
-
+data = struct;
+while pointer < length(display_data) - 1  % last value is bcc
+    pointer = pointer + 1;
+    if display_data(pointer) ~= 27
+        % TODO: no ESC?
+    end
+    pointer = pointer + 1;
+    data.id = char(display_data(pointer));
+    
+    pointer = pointer + 1;
+    data.length = display_data(pointer);
+    if data.id == 'A'
+        pointer = pointer + 1;
+        data.data = display_data(pointer);
+    else
+        pointer = pointer + data.length;
+    end
+    responses = [responses, data];
 end
