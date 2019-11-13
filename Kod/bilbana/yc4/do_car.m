@@ -1,5 +1,9 @@
 function [car, stop, display_data] = do_car(car, t, display_data)
 %DO_CAR Ger nya värden till struct car, avgör om koden ska stoppas samt hämtar displaydata.
+%{
+Input:
+    car: En struct med data för en bil
+%}
 stop = false;
 if car.running == true
 	[car.new_lap, car.new_check_point, car.time] = get_car_position(car.num);
@@ -16,7 +20,7 @@ if car.running == true
 		if toc(car.seg_tic) > 9.0
 			set_car_speed(1, 0);
 			set_car_speed(2, 0);
-			%disp(strjoin{'AvÃ¥kning bil'; num2str(car.num)});
+			%disp(strjoin({'AvÃ¥kning bil', num2str(car.num)}));
 			disp('J = Ja, N = Nej')
 			car.response = input('Vill du fortsÃ¤tta? [N] ', 's');
 			if car.response == 'J'
