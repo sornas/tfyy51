@@ -6,7 +6,7 @@ cd display/ClientServerApp/Release
 cd ../../..
 
 display = struct;
-display.data = [clear_display()];
+display.data = [];
 display.out = 0;
 display.shm = 0;
 display.shm_interp = struct;
@@ -14,7 +14,6 @@ display.shm_interp.ack = 0;
 display.shm_interp.start_code = '';
 display.shm_interp.data = [];
 display.last_send = tic;
-display.last_request = tic;
 display.send_interval = 0.5;
 
 disp('Startar bilbanan. Avsluta med q.')
@@ -63,6 +62,43 @@ highToc = 0;
 
 %% ASK ACTIVE CARS
 disp('J = Ja (automatiskt), M = Ja (manuellt), N = Nej');
+
+%% DRAW DISPLAY
+matlabclient(1, get_smallpackage([ ...
+	put_text(160, 30, 'C', 'Choose which car to drive'), ...
+	define_touch_switch(98 , 60 , 130, 90 , 11, 12, 'C', '1'), ...
+	define_touch_switch(102, 98 , 126, 122, 13, 14, 'C', 'M'), ...
+    define_touch_switch(190, 60 , 222, 90 , 21, 22, 'C', '2'), ...
+    define_touch_switch(194, 98 , 218, 122, 23, 61, 'C', 'M'), ...
+    define_touch_key(   272, 192, 304, 224, 31, 32, 'C', 'S') ...
+]));
+
+display.last_check = tic;
+while 1
+	pause(0.1);
+    if toc(display.last_check) > 0.5
+        display.last_check = tic;
+        % read internal mem from last send
+        [display.out, display.shm] = matlabclient(2);
+        [display.shm_interp.ack, display.shm_interp.start_code, display.shm_interp.data] = get_response(display.shm);
+        
+        % request internal mem
+        matlabclient(1, hex2dec(['12'; '01'; '53'; '66']));
+        
+        if isempty(display.shm_interp.data)
+            disp('tomt')
+            continue
+        end
+        for i = 1:length(display.shm_interp.data)
+            disp(num2str(length(display.shm_interp.data)))
+            data = display.shm_interp.data(i);
+            disp(data)
+            if data.data == 31
+                disp('WAHO')
+            end
+        end
+    end
+end
 
 car1.response = input('Vill du köra bil 1? [N] ', 's');
 if car1.response == 'J'
