@@ -1,21 +1,18 @@
-Funktionen ska utifrån köregenskaper för bil, vald referenstid och, om gemensam
-målgång aktiverad, skillnad i bilarnas placering och se till att rätt gaspådrag
+﻿Funktionen ska utifrån köregenskaper för bil och vald referenstid se till att rätt gaspådrag
 skickas till banan. 
 
 Vi utgår ifrån de redan skrivna bankartorna (bana1.mat och bana2.mat) och
-multiplicerar dess spänningsvärde med en car_constant. Programmet kommer sedan
-ihåg hur lång tid varje segment tagit för olika car_constant och gör en modell
+multiplicerar dess spänningsvärde med en seg_constant. Programmet kommer sedan
+ihåg hur lång tid varje segment tagit för olika seg_constant och gör en modell
 över hur hög den bör vara för att nå en viss segmentstid. gov_set väljer sedan
-segmentstider utifrån vald referenstid (och om gemensam målgång aktiverad
-car_diff).
+segmentstider utifrån vald referenstid.
 
-gov_mem Sparar car_constant och tid från varje segment.
+seg_constant_list Sparar seg_constant för varje segment. Följer samma struktur som seg_times.
 
 gov_calc gör en modell över hur lång tid ett segment tar relativt sin
 car_constant. 
 
-gov_set Väljer en tid för varje segment utifrån referenstid, car_diff (om
-gemensam målgång aktiverad)
+gov_set Vid nytt varv; väljer en tid för varje segment utifrån referenstid
 
 Almänna komentarer:
 
@@ -26,3 +23,5 @@ kallibrerigsvarven hanteras? Antagligen behövs specialkod för första varvet s
 att bilen inte behöver köra jättelångsamt hela varvet. Kanse går det att gissa
 på en lite högre car_constant efter bara nåt varv.
 Tänker att övre gräns ej behöver sättas om bankartorna är korrekt gjorda.
+Gemensam målgång hanteras genom att en bil kontrolleras av dessa funktioner
+och den andra får uppgiften att ligga så nära den första bilen som möjligt.
