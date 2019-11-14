@@ -22,6 +22,7 @@ display_data - Buffer med den data som ska skickas till displayen vid nästa
     anrop
 stop - Huruvida koden ska stoppas eller inte
 %}
+
 stop = false;
 if car.running == true
 	[car.new_lap, car.new_check_point, car.time] = get_car_position(car.num);
@@ -32,7 +33,7 @@ if car.running == true
 	end
 end
 
-%% CHECK LAP AND CHECKPOINT
+%% READ INPUT FROM TRACK
 if car.running == true
 	if car.lap ~= 0
 		if toc(car.seg_tic) > 9.0
@@ -49,6 +50,7 @@ if car.running == true
 			end
 		end
 	end
+
 	%% CALC POSITION
 	if car.lap > 1
 		% car.last_seg_times = car.seg_times(car.lap - 1, 1:9);
@@ -63,6 +65,8 @@ if car.running == true
 			%end
 		end
 	end
+
+	%% CHECK POINT
 	if car.new_check_point == true
 		if car.new_lap == false % choose_position krachar vid nytt varv (seg 10)
 			if car.lap ~= 0
@@ -87,6 +91,8 @@ if car.running == true
 			end
 		end
 	end
+
+	%% NEW LAP
 	if car.new_lap == true
 		car.new_lap = false;
 		beep;
