@@ -147,7 +147,10 @@ elseif not(isreal(ref_time))
     ref_time = 13;
 end
 %}
-ref_time = 13;
+
+debug('DISPLAY', ['CAR1.RUNNING=', car1.running, ', CAR1.AUTOMATIC=', car1.automatic])
+debug('DISPLAY', ['CAR2.RUNNING=', car2.running, ', CAR2.AUTOMATIC=', car2.automatic])
+debug('DISPLAY', ['CHOSEN REFERENCE TIME=', ref_time])
 
 matlabclient(1, get_smallpackage([define_bar_graph('O', 2, 266, 30, 290, 210, 0, 64, 1, 1)]));
 
