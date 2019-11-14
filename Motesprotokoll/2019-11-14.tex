@@ -1,0 +1,64 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{geometry}  % gör texten lite bredare eftersom vanlig latex är för smal för a4
+
+% minska storleken på rubriker och underrubriker
+\usepackage{titlesec}
+\titleformat{\section}
+    {\normalfont\Large\bfseries}{\thesection}{1em}{}
+
+\titleformat{\subsection}
+    {\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}[\vspace{-0.4em}]
+\usepackage[]{parskip}
+
+% undvik helst subsubsections
+
+%% FÖRKLARINGAR AV KOMMANDON OCH DYL.
+% \\ skapar en radbrytning
+% \\[1em] skapar en radbrytning med "1em" extra utrymme mellan rader
+%   (1 em är ganska stor)
+% \textbf{Skapar text i fetstil}
+% \begin{itemize} och \end{itemize} skapar en s.k. list-enviornment (list-miljö)
+%   Inuti itemize skriver man \item för att skapa en ny punkt, annars är det bara att skriva
+% \section*{Titel} och \subsection*{Understitel} skapar nya sektioner och undersektioner
+%   Asterisken ser till att det inte dyker upp ett nummer bredvid namnet.
+% I övrigt är det bara att skriva text där man vill ha den
+
+\begin{document}
+\pagenumbering{gobble} % räkna inte (och skriv inte heller ut) sidnumrering
+    \begin{center}
+        \textbf{\Large TFYY51 - Yc4} \\[0.2em]
+        Mötesprotokoll för möte den 14 November i AG352.
+    \end{center}
+    \vspace{1em}
+    \textbf{Närvarande:} Gustav (lokal), David, Alexander, Mattias (ordf), Albin (sek) \\[0.5em]
+    \textbf{Frånvarande:} Ingen \\[0.5em]  % som exempel
+    \textbf{Övriga närvarande:}
+
+    \section*{Föregående protokoll}
+    \begin{itemize}
+        \item Inför BP4b \\
+        Koden krachade vid två bilar och displayen var inte implementerad. Visade sig senare att det var hårdvarufel på banan. BP4b 	        gick med tanke på omstendigheterna bra.
+    \end{itemize}
+
+    \section*{Dagordning}
+    \subsection*{ När ska biblioteksuppgiften in?}
+    Mattias kollar till nästa möte.
+    \subsection*{Issues}
+    Innan mötet 21 öppna issues.
+        \begin{itemize}
+            \item Alla issues gicks igenom, några togs bort och några lades till 
+	 \item Governor (anpassa hastighet utifrån referenstid): Lösning diskuterades, justerades och delades upp i del-issues.
+        \end{itemize}
+
+    \section*{Övrigt}
+    \begin{itemize}
+        \item Borttagning av gamla och oanvända brancher i git
+        \item Diskutera med den andra gruppen hur vi löser lokalbokning
+        \begin{itemize}
+            \item Albin och Gustav går till bilbanerummet och snackar med dem.
+        \end{itemize}
+    \end{itemize}
+
+    \section*{Nästa möte}
+    Nästa mötes hålls tisdag kl 13:15. Lokalbokare kommer då vara  David.  
+\end{document}
