@@ -104,7 +104,7 @@ if car.running == true
 			car.lap_tic = tic;
 			car.position = 0;
 
-			display_data = {display_data, put_text(100, 16 + (16 * car.num), 'L', strjoin({num2str(car.lap), get_time_as_string(round(car.lap_times(car.lap) * 1000))}, ' '))};
+			display_data = [display_data, put_text(100, 16 + (16 * car.num), 'L', strjoin({num2str(car.lap), get_time_as_string(round(car.lap_times(car.lap) * 1000))}, ' '))];
 
 			car.segment = 1;
 			car.lap = car.lap + 1;

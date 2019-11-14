@@ -5,17 +5,23 @@ cd display/ClientServerApp/Release
 !startServer
 cd ../../..
 
-global display_data;
-display_data = {};
-display_data = {display_data clear_display()};
-pause(1);
+display = struct;
+display.data = [clear_display()];
+display.out = 0;
+display.shm = 0;
+display.shm_interp = struct;
+display.shm_interp.ack = 0;
+display.shm_interp.start_code = '';
+display.shm_interp.data = [];
+display.last_send = tic;
+display.last_request = tic;
+display.send_interval = 0.5;
 
 disp('Startar bilbanan. Avsluta med q.')
 hf=figure('position', [0 0 eps eps], 'menubar', 'none');
 
 initialize_counters(1)
 initialize_counters(2)
-
 
 config_IOs
 
@@ -38,7 +44,6 @@ car1.seg_len = [0.0 2.53 3.05 4.73 7.68 8.98 10.93 14.69 17.57];
 car1.map = Bana1;
 car1.approximation = [];
 car1.miss_probability = 0.0;
-
 
 car2 = struct;
 car2.num = 2;
@@ -103,8 +108,8 @@ while 1
     figure(hf)
     drawnow
     
-	[car1, car1.stop, display_data] = do_car(car1, t, display_data);
-	[car2, car2.stop, display_data] = do_car(car2, t, display_data);
+	[car1, car1.stop, display.data] = do_car(car1, t, display.data);
+	[car2, car2.stop, display.data] = do_car(car2, t, display.data);
 
 	if car1.stop == true
 		disp('stopped by car 1');
@@ -114,13 +119,38 @@ while 1
 		disp('stopped by car 2');
 		break;
 	end
-	
-    %% DISPLAY
     
     %% END OF LOOP
     while 1                     %Whileloop med paus som k�rs till pausen �verskridit 0.07 sekunder
-        pause(0.001);
+        % DISPLAY
+        display.send_delay = tic;
+        if toc(display.last_send) > display.send_interval
+            % queue control signal
+            if car1.running && car1.automatic
+                display.data = [display.data, put_text(20, 16 + (16 * 1), 'L', num2str(car1.u))];
+            end
+            if car2.running && car2.automatic
+                display.data = [display.data, put_text(20, 16 + (16 * 2), 'L', num2str(car2.u))];
+            end
+            
+            % send all queued data
+            if ~isempty(display.data)
+                [display.out] = matlabclient(1, get_smallpackage(display.data));
+                display.data = [];
+            end
+            display.last_send = tic;
+            
+            % read internal mem from last send
+            [display.out, display.shm] = matlabclient(2);
+            [display.shm_interp.ack, display.shm_interp.start_code, display.shm_interp.data] = get_response(display.shm);
+            
+            % request internal mem
+            % matlabclient(1, hex2dec(['12'; '01'; '53'; '66']));
+        end
+        % disp(strjoin({'display took additional ', num2str(toc(display.send_delay))}));
+        % ACTUAL END OF LOOP
         t = toc(readTime);
+        
         if t > 0.07
             if t > highToc
                 highToc = t;     %Om det nya v�rdet p� pausen �r h�gre �n den tidigare h�gsta s� sparas det som den h�gsta
@@ -130,8 +160,8 @@ while 1
             end
             break;
         end
+        pause(0.001);
     end
-    send_data_to_display();
 end
  
 %% END OF PROGRAM
