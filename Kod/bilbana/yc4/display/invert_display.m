@@ -1,3 +1,3 @@
 function pkg = invert_display()
-	pkg = get_package('DI', []);
+pkg = get_package('DI', []);
 end
