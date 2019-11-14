@@ -19,21 +19,21 @@ display.send_interval = 0.5;
 disp('Startar bilbanan. Avsluta med q.')
 hf=figure('position', [0 0 eps eps], 'menubar', 'none');
 
-initialize_counters(1)
-initialize_counters(2)
+% initialize_counters(1)
+% initialize_counters(2)
 
-config_IOs
+% config_IOs
 
 load('bilbana\files\Bana1.mat')
 load('bilbana\files\Bana2.mat')
 
-start_race(1)
-start_race(2)
+% start_race(1)
+% start_race(2)
 
 car1 = struct;
 car1.num = 1;
 car1.running = false;
-car1.automatic = true;
+car1.automatic = false;
 car1.segment = 1;
 car1.lap = 0;
 car1.lap_times = [];
@@ -47,7 +47,7 @@ car1.miss_probability = 0.0;
 car2 = struct;
 car2.num = 2;
 car2.running = false;
-car2.automatic = true;
+car2.automatic = false;
 car2.segment = 1;
 car2.lap = 0;
 car2.lap_times = [];
@@ -92,23 +92,23 @@ while 1
 			data = display.shm_interp.data(i);
 			disp(data)
 			if data.data == 32
-				done = true
+				done = true;
 			elseif data.data == 11
-				car1.running = true
+				car1.running = true;
 			elseif data.data == 12
-				car1.running = false
+				car1.running = false;
 			elseif data.data == 13
-				car1.automatic = true
+				car1.automatic = false;
 			elseif data.data == 14
-				car1.automatic = false
+				car1.automatic = true;
 			elseif data.data == 21
-				car2.running = true
+				car2.running = true;
 			elseif data.data == 22
-				car2.running = false
+				car2.running = false;
 			elseif data.data == 23
-				car2.automatic = true
+				car2.automatic = false;
 			elseif data.data == 24
-				car2.automatic = false
+				car2.automatic = true;
 			end
 		end
 		if done == true
