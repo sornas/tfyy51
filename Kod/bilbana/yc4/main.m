@@ -57,6 +57,8 @@ car2.seg_len = [0.0 2.53 3.05 4.92 7.60 8.84 10.65 14.68 17.76];
 car2.map = Bana2;
 car2.miss_probability = 0.05;
 
+ref_time = 13;
+
 t = 0;
 highToc = 0;
 
@@ -116,6 +118,7 @@ while 1
 		end
 	end
 end
+
 %{
 ref_time = input('Vilken referenstid ska användas? [13] ', 's');
 ref_time = str2double(ref_time);
