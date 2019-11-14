@@ -35,6 +35,8 @@ car1 = struct;
 car1.num = 1;
 car1.running = false;
 car1.automatic = true;
+car1.stopping = false;
+car1.stopped = false;
 car1.segment = 1;
 car1.lap = 0;
 car1.lap_times = [];
@@ -49,6 +51,8 @@ car2 = struct;
 car2.num = 2;
 car2.running = false;
 car2.automatic = true;
+car2.stopping = false;
+car2.stopped = false;
 car2.segment = 1;
 car2.lap = 0;
 car2.lap_times = [];
@@ -103,6 +107,9 @@ while 1
     if strcmp(get(hf,'currentcharacter'),'q')
         close(hf)
         break
+	elseif strcmp(get(hf, 'currentcharacter'), 's')
+		car1.stopping = true;
+		car2.stopping = true;
     end
     
     figure(hf)
@@ -120,6 +127,10 @@ while 1
 		break;
 	end
     
+	if car1.stopped == true && car2.stopped == true
+		break;
+	end
+
     %% END OF LOOP
     while 1                     %Whileloop med paus som k�rs till pausen �verskridit 0.07 sekunder
         % DISPLAY

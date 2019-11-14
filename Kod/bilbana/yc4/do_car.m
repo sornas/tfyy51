@@ -33,6 +33,10 @@ if car.running == true
 	end
 end
 
+if car.stopped == true
+	return
+end
+
 %% READ INPUT FROM TRACK
 if car.running == true
 	if car.lap ~= 0
@@ -65,6 +69,16 @@ if car.running == true
 			%end
 		end
 	end
+
+	if car.stopping == true
+		% CHECK IF CAR IS AT THE END OF TRACK
+		if car.position > 19  % TODO idk
+			set_car_speed(car.num, 0);
+			car.stopped = true;
+			return
+		end
+	end
+			
 
 	%% CHECK POINT
 	if car.new_check_point == true
