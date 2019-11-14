@@ -81,7 +81,15 @@ elseif car2.response == 'M'
 else
 	car2.running = false;
 end
-
+%{
+ref_time = input('Vilken referenstid ska användas? [13] ', 's');
+ref_time = str2double(ref_time);
+if isnan(ref_time)
+    ref_time = 13;
+elseif not(isreal(ref_time))
+    ref_time = 13;
+end
+%}
 ref_time = 13;
 %% MAIN LOOP
 while 1
