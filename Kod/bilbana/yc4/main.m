@@ -100,6 +100,7 @@ elseif not(isreal(ref_time))
 end
 %}
 ref_time = 13;
+
 %% MAIN LOOP
 while 1
     readTime = tic;
@@ -138,10 +139,10 @@ while 1
         if toc(display.last_send) > display.send_interval
             % queue control signal
             if car1.running && car1.automatic
-                display.data = [display.data, put_text(20, 16 + (16 * 1), 'L', num2str(car1.u))];
+                % display.data = [display.data, put_text(20, 16 + (16 * 1), 'L', num2str(car1.u))];
             end
             if car2.running && car2.automatic
-                display.data = [display.data, put_text(20, 16 + (16 * 2), 'L', num2str(car2.u))];
+                % display.data = [display.data, put_text(20, 16 + (16 * 2), 'L', num2str(car2.u))];
             end
             
             % send all queued data
