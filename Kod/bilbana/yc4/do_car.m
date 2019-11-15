@@ -91,10 +91,10 @@ if car.running == true
 			car.segment = car.segment + 1;
 			car.seg_tic = tic;
 			if car.lap > 2 % S�kerhetsmarginal (B�r vara 1?)
-				disp(car);
+				disp(car)
 				[new_position, seg_plus] = ...
 						choose_position(car.position, car.segment, car.num);
-				if seg_plus ~= 0 && car.segment == 1
+				if seg_plus ~= 0 && car.segment == 2
 					disp('Hoppar �ver missad givare 1/2');
 				else
 					car.position = new_position;
