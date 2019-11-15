@@ -68,14 +68,17 @@ matlabclient(1, get_smallpackage([ ...
 	define_touch_switch(98 , 60 , 130, 90 , 11, 12, 'C', '1'), ...  % ACTIVATE TRACK 1
 	define_touch_switch(102, 98 , 126, 122, 13, 14, 'C', 'M'), ...  % MANUAL CONTROL TRACK 1
 	define_touch_switch(190, 60 , 222, 90 , 21, 22, 'C', '2'), ...  % ACTIVATE TRACK 2
-	define_touch_switch(194, 98 , 218, 122, 23, 61, 'C', 'M'), ...  % MANUAL CONTROL TRACK 2
-	put_text(160, 120, 'C', '13.0'), ...  % CURRENT REFERENCE TIME
+	define_touch_switch(194, 98 , 218, 122, 23, 61, 'C', 'M') ...  % MANUAL CONTROL TRACK 2
+]));
+pause(0.5);
+matlabclient(1, get_smallpackage([ ...
+    % TODO ?????????????????????????????????????????
+    put_text(160, 120, 'C', '13.0'), ...  % CURRENT REFERENCE TIME
 	define_touch_key(   98 , 110, 130, 140, 41, 42, 'C', '-'), ...  % DECREASE REFERENCE TIME
 	define_touch_key(   190, 110, 220, 140, 43, 44, 'C', '+'), ...  % INCREASE REFERENCE TIME
 	define_touch_key(   272, 192, 304, 224, 31, 32, 'C', 'S') ...  % START BUTTON
 	%TODO CLEAR BUTTON
-	put_text()
-	]));
+]));
 
 %% CHECK DISPLAY BUTTONS
 display.last_check = tic;
@@ -83,6 +86,8 @@ done = false;
 while 1
 	pause(0.1);
 	if toc(display.last_check) > 0.4
+        display.last_check = tic;
+        
 		% read internal mem from last send
 		[display.out, display.shm] = matlabclient(2);
 		[display.shm_interp.ack, display.shm_interp.start_code, display.shm_interp.data] = get_response(display.shm);
@@ -118,12 +123,12 @@ while 1
 			elseif data.data == 41
 				% ignore
 			elseif data.data == 42
-				ref_time = max(ref_time - 0.5, 12.0)
+				ref_time = max(ref_time - 0.5, 12.0);
 				update_ref_time = true;
 			elseif data.data == 43
 				% ignore
 			elseif data.data == 44
-				ref_time = min(ref_time + 0.5, 15.0)
+				ref_time = min(ref_time + 0.5, 15.0);
 				update_ref_time = true;
 			end
 		end
