@@ -96,6 +96,9 @@ elseif not(isreal(ref_time))
 end
 %}
 ref_time = 13;
+
+matlabclient(1, get_smallpackage([define_bar_graph('O', 2, 266, 30, 290, 210, 0, 64, 1, 1)]));
+
 %% MAIN LOOP
 while 1
     readTime = tic;
@@ -127,10 +130,11 @@ while 1
         if toc(display.last_send) > display.send_interval
             % queue control signal
             if car1.running && car1.automatic
-                display.data = [display.data, put_text(20, 16 + (16 * 1), 'L', num2str(car1.u))];
+                % display.data = [display.data, put_text(20, 16 + (16 * 1), 'L', num2str(car1.u))];
             end
             if car2.running && car2.automatic
-                display.data = [display.data, put_text(20, 16 + (16 * 2), 'L', num2str(car2.u))];
+                % display.data = [display.data, put_text(20, 16 + (16 * 2), 'L', num2str(car2.u))];
+                display.data = [display.data, update_bar_graph(2, car2.u)];
             end
             
             % send all queued data
