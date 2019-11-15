@@ -72,7 +72,9 @@ if car.running == true
 
 	if car.stopping == true
 		% CHECK IF CAR IS AT THE END OF TRACK
-		if car.position > 19  % TODO idk
+		if car.position > (car.map(80, 1) / 100) - 0.8  % 80cm
+            disp(car.position)
+            disp((car.map(80, 1) / 100) - 300)
 			set_car_speed(car.num, 0);
 			car.stopped = true;
 			return

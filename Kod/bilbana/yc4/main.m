@@ -121,13 +121,13 @@ while 1
 	if car1.stop == true
 		disp('stopped by car 1');
 		break;
-	end
-	if car2.stop == true
+    end
+    if car2.stop == true
 		disp('stopped by car 2');
 		break;
-	end
+    end
     
-	if car1.stopped == true && car2.stopped == true
+	if (~car2.running && car1.stopped) || (~car1.running && car2.stopped) || (car1.stopped && car2.stopped)
 		break;
 	end
 
