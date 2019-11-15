@@ -81,7 +81,6 @@ if car.running == true
 		end
 	end
 			
-
 	%% CHECK POINT
 	if car.new_check_point == true
 		if car.new_lap == false % choose_position krachar vid nytt varv (seg 10)
@@ -119,7 +118,15 @@ if car.running == true
 			car.seg_tic = tic;
 			car.lap_tic = tic;
 		else
-		% beep;
+			if car.lap == 1
+				% TODO test
+				if size(car.seg_times, 1) < 9
+					disp('FEL: För få segment!!')
+					car.stopped = true
+					other_car.stopped = true
+					return
+				end	
+			end
 			car.seg_times(car.lap, car.segment) = toc(car.seg_tic);
 			car.seg_tic = tic;
 			car.lap_times(car.lap) = toc(car.lap_tic);
