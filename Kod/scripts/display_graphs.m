@@ -3,6 +3,8 @@ cd display/ClientServerApp/Release
 !startServer
 cd ../../..
 
+pause(1);
+
 display = struct;
 display.data = [];
 display.out = 0;
@@ -18,15 +20,15 @@ graphs = struct;
 graphs.car1 = struct;
 graphs.car2 = struct;
 graphs.car1.lap_times = [];  % Nx1
-graphs.car1.lap_deviation = std(graphs.car1.lap_times)
+graphs.car1.lap_deviation = std(graphs.car1.lap_times);
 graphs.car1.seg_times = [];  % 9xM
 graphs.car2.lap_times = [];  % Nx1
-graphs.car2.lap_deviation = std(graphs.car2.lap_times)
+graphs.car2.lap_deviation = std(graphs.car2.lap_times);
 graphs.car2.seg_times = [];  % 9xM
-graphs.laps = max(length(graphs.car1.lap_times), length(graphs.car2.lap_times))
+graphs.laps = max(length(graphs.car1.lap_times), length(graphs.car2.lap_times));
 
 disp('Drawing frame');
-input();
+% input('');
 matlabclient(1, get_smallpackage([ ...
 	draw_single_line(32, 32, 32, 192), ...
 	continue_line(298, 192), ...
@@ -37,25 +39,24 @@ matlabclient(1, get_smallpackage([ ...
 pause(0.2);
 
 disp('Drawing additional frames');
-input();
+% input('');
 matlabclient(1, get_smallpackage([ ...
-	draw_single_line(220, 0, 220, 80), ...
-	continue_line(0, 80), ...
-	draw_single_line(0, 208, 320, 208) ...
+	draw_single_line(190, 0, 190, 70), ...
+	continue_line(320, 70) ...
 ]));
 pause(0.2);
 
 disp('Putting text');
-input();
+% input('');
 matlabclient(1, get_smallpackage([
-	put_text(304, 20, 'R', 'std: 0.15s'), ...
-	put_text(304, 40, 'R', 'mean: 12.4s'), ...
-	put_text(304, 60, 'R', 'target: 12.5s') ...
+	put_text(304, 10, 'R', 'std: 0.15s'), ...
+	put_text(304, 30, 'R', 'mean: 12.4s'), ...
+	put_text(304, 50, 'R', 'target: 12.5s') ...
 ]));
 pause(0.2);
 
 disp('Drawing buttons');
-input();
+% input('');
 matlabclient(1, get_smallpackage([ ...
 	define_touch_key(0  , 208, 107, 240, 51, 61, 'C', 'Knapp 1'), ...
 	define_touch_key(107, 208, 213, 240, 52, 62, 'C', 'Knapp 2'), ...
@@ -64,6 +65,5 @@ matlabclient(1, get_smallpackage([ ...
 pause(0.2);
 
 disp('');
-input();
-matlabclient(1, get_smallpackage([]))
-pause(0.2);
+% input('');
+matlabclient(3);
