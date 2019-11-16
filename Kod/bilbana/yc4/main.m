@@ -119,7 +119,7 @@ while 1
 	[car1, car1.stop, display.data] = do_car(car1, t, display.data);
 	[car2, car2.stop, display.data] = do_car(car2, t, display.data);
 
-    if car1.stop == true
+	if car1.stop == true
 		disp('stopped by car 1');
 		break;
 	end

@@ -3,23 +3,23 @@ function [car, stop, display_data] = do_car(car, t, display_data)
 %{
 Input/Output:
 car - En struct med data för en viss bil    
-    car.num - Vilken bil det är (1 eller 2)
-    car.running - Om bilen körs eller inte
-    car.automatic - Om bilen körs automatiskt eller inte
-    car.segment - Bilens nuvarande segment
-    car.lap - Bilens nuvarande varv
-    car.lap_times - Bilens sparade varvtider (1 x n matris)
-    car.seg_times - Bilens sparade segmentstier (n x m matris)
-    car.position - Bilens nuvarande placering på banan i meter från
-        start/mål
-    car.seg_len - Banans längd från start till givarna (1 x 9 matris)
-    car.map - Tabell med hastighetskoefficienter för alla positioner (.mat
-    fil)
-    car.miss_probability - Sannorlikheten för artificiellt introducerade
-        missade givare
+car.num - Vilken bil det är (1 eller 2)
+car.running - Om bilen körs eller inte
+car.automatic - Om bilen körs automatiskt eller inte
+car.segment - Bilens nuvarande segment
+car.lap - Bilens nuvarande varv
+car.lap_times - Bilens sparade varvtider (1 x n matris)
+car.seg_times - Bilens sparade segmentstier (n x m matris)
+car.position - Bilens nuvarande placering på banan i meter från
+start/mål
+car.seg_len - Banans längd från start till givarna (1 x 9 matris)
+car.map - Tabell med hastighetskoefficienter för alla positioner (.mat
+fil)
+car.miss_probability - Sannorlikheten för artificiellt introducerade
+missade givare
 t - Längden (s) på nuvarande programcykel
 display_data - Buffer med den data som ska skickas till displayen vid nästa
-    anrop
+anrop
 stop - Huruvida koden ska stoppas eller inte
 %}
 
@@ -62,10 +62,10 @@ if car.running == true
 		car.position = get_position(aprox_v, car.position, t);
 		if detect_missed( car.position, car.segment, car.num)
 			disp('Miss?');
-			
+
 			%disp(toc(car.miss_time));
 			%if car.miss_time == 0
-			 %   car.miss_time = tic;
+			%   car.miss_time = tic;
 			%end
 		end
 	end
@@ -73,14 +73,14 @@ if car.running == true
 	if car.stopping == true
 		% CHECK IF CAR IS AT THE END OF TRACK
 		if car.position > (car.map(80, 1) / 100) - 0.8  % 80cm
-            disp(car.position)
-            disp((car.map(80, 1) / 100) - 300)
+			disp(car.position)
+			disp((car.map(80, 1) / 100) - 300)
 			set_car_speed(car.num, 0);
 			car.stopped = true;
 			return
 		end
 	end
-			
+
 	%% CHECK POINT
 	if car.new_check_point == true
 		if car.new_lap == false % choose_position krachar vid nytt varv (seg 10)
@@ -92,7 +92,7 @@ if car.running == true
 			if car.lap > 2 % Sï¿½kerhetsmarginal (Bï¿½r vara 1?)
 				disp(car);
 				[new_position, seg_plus] = ...
-						choose_position(car.position, car.segment, car.num);
+					choose_position(car.position, car.segment, car.num);
 				if seg_plus ~= 0 && car.segment == 1
 					disp('Hoppar ï¿½ver missad givare 1/2');
 				else
@@ -124,13 +124,13 @@ if car.running == true
 			car.lap_tic = tic;
 			car.position = 0;
 
-            if car.lap == 1 && size(car.seg_times, 2) < 9
-                disp('FEL: För få segment!!')
-                car.stopped = true;
-                other_car.stopped = true;
-                return
-            end
-            
+			if car.lap == 1 && size(car.seg_times, 2) < 9
+				disp('FEL: För få segment!!')
+				car.stopped = true;
+				other_car.stopped = true;
+				return
+			end
+
 			display_data = [display_data, put_text(100, 16 + (16 * car.num), 'L', strjoin({num2str(car.lap), get_time_as_string(round(car.lap_times(car.lap) * 1000))}, ' '))];
 
 			car.segment = 1;
