@@ -11,6 +11,11 @@ start_race(1)
 start_race(2)
 
 %% INIT
+global log_debug;
+log_debug = true;
+global log_verbose;
+log_verbose = false;
+
 % INIT DISPLAY
 addpath display/ClientServerApp/Release
 cd display/ClientServerApp/Release
