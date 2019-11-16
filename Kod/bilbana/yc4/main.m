@@ -94,88 +94,88 @@ end
 ref_time = input('Vilken referenstid ska användas? [13] ', 's');
 ref_time = str2double(ref_time);
 if isnan(ref_time)
-    ref_time = 13;
+	ref_time = 13;
 elseif not(isreal(ref_time))
-    ref_time = 13;
+	ref_time = 13;
 end
 %}
 ref_time = 13;
 
 %% MAIN LOOP
 while 1
-    readTime = tic;
-    %% PRE-LOOP
-    if strcmp(get(hf,'currentcharacter'),'q')
-        close(hf)
-        break
+	readTime = tic;
+	%% PRE-LOOP
+	if strcmp(get(hf,'currentcharacter'),'q')
+		close(hf)
+		break
 	elseif strcmp(get(hf, 'currentcharacter'), 's')
 		car1.stopping = true;
 		car2.stopping = true;
-    end
-    
-    figure(hf)
-    drawnow
-    
+	end
+
+	figure(hf)
+	drawnow
+
 	[car1, car1.stop, display.data] = do_car(car1, t, display.data);
 	[car2, car2.stop, display.data] = do_car(car2, t, display.data);
 
 	if car1.stop == true
 		disp('stopped by car 1');
 		break;
-    end
-    if car2.stop == true
+	end
+	if car2.stop == true
 		disp('stopped by car 2');
 		break;
-    end
-    
+	end
+
 	if (~car2.running && car1.stopped) || (~car1.running && car2.stopped) || (car1.stopped && car2.stopped)
 		break;
 	end
 
-    %% END OF LOOP
-    while 1                     %Whileloop med paus som kï¿½rs till pausen ï¿½verskridit 0.07 sekunder
-        % DISPLAY
-        display.send_delay = tic;
-        if toc(display.last_send) > display.send_interval
-            % queue control signal
-            if car1.running && car1.automatic
-                % display.data = [display.data, put_text(20, 16 + (16 * 1), 'L', num2str(car1.u))];
-            end
-            if car2.running && car2.automatic
-                % display.data = [display.data, put_text(20, 16 + (16 * 2), 'L', num2str(car2.u))];
-            end
-            
-            % send all queued data
-            if ~isempty(display.data)
-                [display.out] = matlabclient(1, get_smallpackage(display.data));
-                display.data = [];
-            end
-            display.last_send = tic;
-            
-            % read internal mem from last send
-            [display.out, display.shm] = matlabclient(2);
-            [display.shm_interp.ack, display.shm_interp.start_code, display.shm_interp.data] = get_response(display.shm);
-            
-            % request internal mem
-            % matlabclient(1, hex2dec(['12'; '01'; '53'; '66']));
-        end
-        % disp(strjoin({'display took additional ', num2str(toc(display.send_delay))}));
-        % ACTUAL END OF LOOP
-        t = toc(readTime);
-        
-        if t > 0.07
-            if t > highToc
-                highToc = t;     %Om det nya vï¿½rdet pï¿½ pausen ï¿½r hï¿½gre ï¿½n den tidigare hï¿½gsta sï¿½ sparas det som den hï¿½gsta
-            end
-            if t > 0.1
-                % beep;
-            end
-            break;
-        end
-        pause(0.001);
-    end
+	%% END OF LOOP
+	while 1                     %Whileloop med paus som kï¿½rs till pausen ï¿½verskridit 0.07 sekunder
+		% DISPLAY
+		display.send_delay = tic;
+		if toc(display.last_send) > display.send_interval
+			% queue control signal
+			if car1.running && car1.automatic
+				% display.data = [display.data, put_text(20, 16 + (16 * 1), 'L', num2str(car1.u))];
+			end
+			if car2.running && car2.automatic
+				% display.data = [display.data, put_text(20, 16 + (16 * 2), 'L', num2str(car2.u))];
+			end
+
+			% send all queued data
+			if ~isempty(display.data)
+				[display.out] = matlabclient(1, get_smallpackage(display.data));
+				display.data = [];
+			end
+			display.last_send = tic;
+
+			% read internal mem from last send
+			[display.out, display.shm] = matlabclient(2);
+			[display.shm_interp.ack, display.shm_interp.start_code, display.shm_interp.data] = get_response(display.shm);
+
+			% request internal mem
+			% matlabclient(1, hex2dec(['12'; '01'; '53'; '66']));
+		end
+		% disp(strjoin({'display took additional ', num2str(toc(display.send_delay))}));
+		% ACTUAL END OF LOOP
+		t = toc(readTime);
+
+		if t > 0.07
+			if t > highToc
+				highToc = t;     %Om det nya vï¿½rdet pï¿½ pausen ï¿½r hï¿½gre ï¿½n den tidigare hï¿½gsta sï¿½ sparas det som den hï¿½gsta
+			end
+			if t > 0.1
+				% beep;
+			end
+			break;
+		end
+		pause(0.001);
+	end
 end
- 
+
 %% END OF PROGRAM
 disp(highToc);
 disp(car1);
