@@ -1,3 +1,15 @@
+%% INIT TRACK
+disp('Startar bilbanan. Avsluta med q.')
+hf=figure('position', [0 0 eps eps], 'menubar', 'none');
+
+initialize_counters(1)
+initialize_counters(2)
+
+config_IOs
+
+start_race(1)
+start_race(2)
+
 %% INIT
 % INIT DISPLAY
 addpath display/ClientServerApp/Release
@@ -17,19 +29,8 @@ display.last_send = tic;
 display.last_request = tic;
 display.send_interval = 0.5;
 
-disp('Startar bilbanan. Avsluta med q.')
-hf=figure('position', [0 0 eps eps], 'menubar', 'none');
-
-initialize_counters(1)
-initialize_counters(2)
-
-config_IOs
-
 load('bilbana\files\Bana1.mat')
 load('bilbana\files\Bana2.mat')
-
-start_race(1)
-start_race(2)
 
 car1 = struct;
 car1.num = 1;
