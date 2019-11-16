@@ -110,7 +110,8 @@ if car.running == true
 
 	%% NEW LAP
 	if car.new_lap == true
-		car.new_lap = false;
+        lap_constants = gov_set(get_car_constant(car.num));
+		car.new_lap = false; %TODO remove
 		beep;
 		if car.lap == 0
 			% dont save time for first lap
@@ -136,10 +137,9 @@ end
 
 %% CALCULATE
 if car.running == true && car.automatic == true
-	car.car_constant = get_car_constant(car.num);
 	car.v = get_new_v(car.position, car.map);
-	car.track_u_constant = get_track_u_constant();
-	car.u = get_new_u(car.v, car.car_constant, car.track_u_constant);
+    seg_constant = get_seg_constant(car.position, lap_constants, car.num);
+	car.u = get_new_u(car.v, seg_constant, car.track_u_constant);
 end
 
 %% CONTROLLER
