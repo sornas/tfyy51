@@ -1,4 +1,5 @@
 %% INIT
+clear all;
 % INIT DISPLAY
 addpath display/ClientServerApp/Release
 cd display/ClientServerApp/Release
