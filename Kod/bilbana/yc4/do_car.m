@@ -118,21 +118,19 @@ if car.running == true
 			car.seg_tic = tic;
 			car.lap_tic = tic;
 		else
-			if car.lap == 1
-				% TODO test
-				if size(car.seg_times, 1) < 9
-					disp('FEL: För få segment!!')
-					car.stopped = true
-					other_car.stopped = true
-					return
-				end	
-			end
 			car.seg_times(car.lap, car.segment) = toc(car.seg_tic);
 			car.seg_tic = tic;
 			car.lap_times(car.lap) = toc(car.lap_tic);
 			car.lap_tic = tic;
 			car.position = 0;
 
+            if car.lap == 1 && size(car.seg_times, 2) < 9
+                disp('FEL: För få segment!!')
+                car.stopped = true;
+                other_car.stopped = true;
+                return
+            end
+            
 			display_data = [display_data, put_text(100, 16 + (16 * car.num), 'L', strjoin({num2str(car.lap), get_time_as_string(round(car.lap_times(car.lap) * 1000))}, ' '))];
 
 			car.segment = 1;
