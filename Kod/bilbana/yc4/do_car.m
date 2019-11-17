@@ -8,8 +8,10 @@ car - En struct med data för en viss bil
     car.automatic - Om bilen körs automatiskt eller inte
     car.segment - Bilens nuvarande segment
     car.lap - Bilens nuvarande varv
-    car.lap_times - Bilens sparade varvtider (1 x n matris)
-    car.seg_times - Bilens sparade segmentstier (n x m matris)
+    car.lap_times - Bilens sparade varvtider (1 x v matris)
+    car.seg_times - Bilens sparade segmentstier (v x 9 matris)
+    car.seg_constant_list = []; % TODO Sparar alla seg_constants som
+        använts (v x 9 matris)
     car.position - Bilens nuvarande placering på banan i meter från
         start/mål
     car.seg_len - Banans längd från start till givarna (1 x 9 matris)
@@ -17,6 +19,9 @@ car - En struct med data för en viss bil
     fil)
     car.miss_probability - Sannorlikheten för artificiellt introducerade
         missade givare
+    car.lap_constants = [1,1,1,1,1,1,1,1,1]; % TODO seg_constanst för
+    nuvarande varv. Skapas av gov_set() vid nytt varv
+
 t - Längden (s) på nuvarande programcykel
 display_data - Buffer med den data som ska skickas till displayen vid nästa
     anrop
@@ -110,7 +115,7 @@ if car.running == true
 
 	%% NEW LAP
 	if car.new_lap == true
-        lap_constants = gov_set(get_car_constant(car.num));
+        car.lap_constants = gov_set(get_car_constant(car.num));
 		car.new_lap = false; %TODO remove
 		beep;
 		if car.lap == 0
@@ -138,8 +143,8 @@ end
 %% CALCULATE
 if car.running == true && car.automatic == true
 	car.v = get_new_v(car.position, car.map);
-    seg_constant = get_seg_constant(car.position, lap_constants, car.num);
-	car.u = get_new_u(car.v, seg_constant, car.track_u_constant);
+    seg_constant = get_seg_constant(car.position, car.lap_constants, car.num);
+	car.u = get_new_u(car.v, seg_constant);
 end
 
 %% CONTROLLER
