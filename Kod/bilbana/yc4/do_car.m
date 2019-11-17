@@ -104,7 +104,12 @@ if car.running == true
 				else
 					car.position = new_position;
 					car.segment = car.segment + seg_plus;
-				end
+                end
+                if seg_plus ~= 0
+                    car.seg_times(car.lap, car.segment - seg_plus - 1) = 0;
+                    disp(car.seg_times(car.lap, :))
+                    disp(seg_plus)
+                end
 				%car.miss_time = uint64(0);
 			else
 				car.position = car.seg_len(car.segment);

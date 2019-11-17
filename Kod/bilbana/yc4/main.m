@@ -68,7 +68,7 @@ car2.seg_times = [];
 car2.position = 0;
 car2.seg_len = [0.0 2.53 3.05 4.92 7.60 8.84 10.65 14.68 17.76];
 car2.map = Bana2;
-car2.miss_probability = 0.05;
+car2.miss_probability = 0.1;
 car2.seg_constant_list = []; % TODO
 car2.lap_constants = [1,1,1,1,1,1,1,1,1]; % TODO
 
