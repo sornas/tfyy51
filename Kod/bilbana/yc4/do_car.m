@@ -131,7 +131,10 @@ if car.running == true
 			car.lap_tic = tic;
 		else
 		% beep;
-			car.seg_times(car.lap, car.segment) = toc(car.seg_tic);
+			% Spara inte seg_time om missad givare
+            if car.segment == 9
+                car.seg_times(car.lap, car.segment) = toc(car.seg_tic);
+            end
 			car.seg_tic = tic;
 			car.lap_times(car.lap) = toc(car.lap_tic);
 			car.lap_tic = tic;
