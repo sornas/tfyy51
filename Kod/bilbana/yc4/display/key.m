@@ -1,4 +1,4 @@
-function pkg = define_touch_key(x1, y1, x2, y2, down_code, up_code, just, text)
+function pkg = key(x1, y1, x2, y2, down_code, up_code, just, text)
 arg_location = [get_bytes(x1), get_bytes(y1), get_bytes(x2), get_bytes(y2)];
 arg_text = double(strjoin({just; text}, ''));
 arg_null = 0;
