@@ -75,6 +75,7 @@ car2.map = Bana2;
 car2.miss_probability = 0.1;
 car2.seg_constant_list = []; % TODO
 car2.lap_constants = [1,1,1,1,1,1,1,1,1]; % TODO
+car2.seg_constant = 1;
 
 t = 0;
 highToc = 0;
