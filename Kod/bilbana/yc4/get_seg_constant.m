@@ -6,6 +6,9 @@ position - Position i meter från start
 lap_constants - De seg_constants som ska användas detta varv
 track - den bana/bil som beräkningarna ska göras för
 %}
+
+track_len = track_len(1: length(track_len) - 1);
+
 for i = 1:length(track_len)
     if position >= track_len(i)
         seg_constant_num = i;

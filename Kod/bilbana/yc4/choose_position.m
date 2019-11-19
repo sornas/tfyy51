@@ -5,6 +5,9 @@ function [new_position, seg_plus] = choose_position(position,segment, track, tra
 %   passerades. seg_plus anger om och med hur mycket car.segment bör
 %   justeras för att kompensera efter missad givare.
 pos_c = position;
+
+track_len = track_len(1: length(track_len) - 1);
+
 %% Vilken givare ligger närmast pos_c?
 near = [];
 for i = 1:length(track_len)
