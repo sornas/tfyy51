@@ -21,10 +21,9 @@ car - En struct med data för en viss bil
         missade givare
     car.lap_constants = [1,1,1,1,1,1,1,1,1]; % TODO seg_constanst för
     nuvarande varv. Skapas av gov_set() vid nytt varv
-
 t - Längden (s) på nuvarande programcykel
 display_data - Buffer med den data som ska skickas till displayen vid nästa
-    anrop
+anrop
 stop - Huruvida koden ska stoppas eller inte
 %}
 
@@ -67,10 +66,10 @@ if car.running == true
 		car.position = get_position(aprox_v, car.position, t);
 		if detect_missed( car.position, car.segment, car.num)
 			disp('Miss?');
-			
+
 			%disp(toc(car.miss_time));
 			%if car.miss_time == 0
-			 %   car.miss_time = tic;
+			%   car.miss_time = tic;
 			%end
 		end
 	end
@@ -78,14 +77,13 @@ if car.running == true
 	if car.stopping == true
 		% CHECK IF CAR IS AT THE END OF TRACK
 		if car.position > (car.map(80, 1) / 100) - 0.8  % 80cm
-            disp(car.position)
-            disp((car.map(80, 1) / 100) - 300)
+			disp(car.position)
+			disp((car.map(80, 1) / 100) - 300)
 			set_car_speed(car.num, 0);
 			car.stopped = true;
 			return
 		end
 	end
-			
 
 	%% CHECK POINT
 	if car.new_check_point == true
@@ -130,15 +128,22 @@ if car.running == true
 			car.seg_tic = tic;
 			car.lap_tic = tic;
 		else
-		% beep;
+			% beep;
 			% Spara inte seg_time om missad givare
-            if car.segment == 9
-                car.seg_times(car.lap, car.segment) = toc(car.seg_tic);
-            end
+			if car.segment == 9
+				car.seg_times(car.lap, car.segment) = toc(car.seg_tic);
+			end
 			car.seg_tic = tic;
 			car.lap_times(car.lap) = toc(car.lap_tic);
 			car.lap_tic = tic;
 			car.position = 0;
+
+			if car.lap == 1 && size(car.seg_times, 2) < 9
+				disp('FEL: För få segment!!')
+				car.stopped = true;
+				other_car.stopped = true;
+				return
+			end
 
 			display_data = [display_data, put_text(100, 16 + (16 * car.num), 'L', strjoin({num2str(car.lap), get_time_as_string(round(car.lap_times(car.lap) * 1000))}, ' '))];
 
