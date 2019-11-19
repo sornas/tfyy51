@@ -1,3 +1,5 @@
+clear all;
+
 %% INIT TRACK
 disp('Startar bilbanan. Avsluta med q.')
 hf=figure('position', [0 0 eps eps], 'menubar', 'none');
