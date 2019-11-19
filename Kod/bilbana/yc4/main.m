@@ -208,3 +208,16 @@ end
 if car2.running == true
 	graphs(car2.lap_times, ref_time, car2.seg_times, 2);
 end
+
+%% SAVE VARIABLES FROM CAR STRUCT
+dateStr = datestr(now, 'yyyy-mm-dd');
+timeStr = datestr(now, 'HH.MM');
+
+if car1.lap > 2
+    filenameMat1 = strjoin({'bilbana1_', dateStr, 'T', timeStr, '.mat'}, '');
+    save(filenameMat1, '-struct', 'car1');
+end
+if car2.lap > 2
+    filenameMat2 = strjoin({'bilbana2_', dateStr, 'T', timeStr, '.mat'}, '');
+    save(filenameMat2, '-struct', 'car2');
+end
