@@ -8,8 +8,10 @@ car - En struct med data för en viss bil
     car.automatic - Om bilen körs automatiskt eller inte
     car.segment - Bilens nuvarande segment
     car.lap - Bilens nuvarande varv
-    car.lap_times - Bilens sparade varvtider (1 x n matris)
-    car.seg_times - Bilens sparade segmentstier (n x m matris)
+    car.lap_times - Bilens sparade varvtider (1 x v matris)
+    car.seg_times - Bilens sparade segmentstier (v x 9 matris)
+    car.seg_constant_list = []; % TODO Sparar alla seg_constants som
+        använts (v x 9 matris)
     car.position - Bilens nuvarande placering på banan i meter från
         start/mål
     car.seg_len - Banans längd från start till givarna (1 x 9 matris)
@@ -17,6 +19,9 @@ car - En struct med data för en viss bil
     fil)
     car.miss_probability - Sannorlikheten för artificiellt introducerade
         missade givare
+    car.lap_constants = [1,1,1,1,1,1,1,1,1]; % TODO seg_constanst för
+    nuvarande varv. Skapas av gov_set() vid nytt varv
+
 t - Längden (s) på nuvarande programcykel
 display_data - Buffer med den data som ska skickas till displayen vid nästa
     anrop
@@ -99,7 +104,12 @@ if car.running == true
 				else
 					car.position = new_position;
 					car.segment = car.segment + seg_plus;
-				end
+                end
+                if seg_plus ~= 0
+                    car.seg_times(car.lap, car.segment - seg_plus - 1) = 0;
+                    disp(car.seg_times(car.lap, :))
+                    disp(seg_plus)
+                end
 				%car.miss_time = uint64(0);
 			else
 				car.position = car.seg_len(car.segment);
@@ -110,7 +120,8 @@ if car.running == true
 
 	%% NEW LAP
 	if car.new_lap == true
-		car.new_lap = false;
+        car.lap_constants = gov_set(get_car_constant(car.num));
+		car.new_lap = false; %TODO remove
 		beep;
 		if car.lap == 0
 			% dont save time for first lap
@@ -120,7 +131,10 @@ if car.running == true
 			car.lap_tic = tic;
 		else
 		% beep;
-			car.seg_times(car.lap, car.segment) = toc(car.seg_tic);
+			% Spara inte seg_time om missad givare
+            if car.segment == 9
+                car.seg_times(car.lap, car.segment) = toc(car.seg_tic);
+            end
 			car.seg_tic = tic;
 			car.lap_times(car.lap) = toc(car.lap_tic);
 			car.lap_tic = tic;
@@ -136,10 +150,9 @@ end
 
 %% CALCULATE
 if car.running == true && car.automatic == true
-	car.car_constant = get_car_constant(car.num);
 	car.v = get_new_v(car.position, car.map);
-	car.track_u_constant = get_track_u_constant();
-	car.u = get_new_u(car.v, car.car_constant, car.track_u_constant);
+    seg_constant = get_seg_constant(car.position, car.lap_constants, car.num);
+	car.u = get_new_u(car.v, seg_constant);
 end
 
 %% CONTROLLER
