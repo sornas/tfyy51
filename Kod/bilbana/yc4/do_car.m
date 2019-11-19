@@ -62,9 +62,9 @@ if car.running == true
 	%% CALC POSITION
 	if car.lap > 1
 		% car.last_seg_times = car.seg_times(car.lap - 1, 1:9);
-		aprox_v = get_aprox_v(car.segment + detect_missed(car.position, car.segment, car.num), car.lap, car.seg_times, car.num);
+		aprox_v = get_aprox_v(car.segment + detect_missed(car.position, car.segment, car.num, car.pos_at), car.lap, car.seg_times, car.num, car.seg_len);
 		car.position = get_position(aprox_v, car.position, t);
-		if detect_missed( car.position, car.segment, car.num)
+		if detect_missed( car.position, car.segment, car.num, car.pos_at)
 			disp('Miss?');
 
 			%disp(toc(car.miss_time));
@@ -96,7 +96,7 @@ if car.running == true
 			if car.lap > 2 % S�kerhetsmarginal (B�r vara 1?)
 				disp(car)
 				[new_position, seg_plus] = ...
-						choose_position(car.position, car.segment, car.num);
+						choose_position(car.position, car.segment, car.num, car.pos_at);
 				if seg_plus ~= 0 && car.segment == 2
 					disp('Hoppar �ver missad givare 1/2');
 				else
@@ -110,7 +110,7 @@ if car.running == true
                 end
 				%car.miss_time = uint64(0);
 			else
-				car.position = car.seg_len(car.segment);
+				car.position = car.pos_at(car.segment);
 				%car.miss_time = uint64(0);
 			end
 		end
@@ -156,7 +156,7 @@ end
 %% CALCULATE
 if car.running == true && car.automatic == true
 	car.v = get_new_v(car.position, car.map);
-    seg_constant = get_seg_constant(car.position, car.lap_constants, car.num);
+    seg_constant = get_seg_constant(car.position, car.lap_constants, car.num, car.pos_at);
 	car.u = get_new_u(car.v, seg_constant);
 end
 
