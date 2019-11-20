@@ -72,7 +72,6 @@ matlabclient(1, get_smallpackage([ ...
 ]));
 pause(0.5);
 matlabclient(1, get_smallpackage([ ...
-    % TODO ?????????????????????????????????????????
     put_text(160, 120, 'C', '13.0'), ...  % CURRENT REFERENCE TIME
 	define_touch_key(   98 , 110, 130, 140, 41, 42, 'C', '-'), ...  % DECREASE REFERENCE TIME
 	define_touch_key(   190, 110, 220, 140, 43, 44, 'C', '+'), ...  % INCREASE REFERENCE TIME
