@@ -1,4 +1,4 @@
-function [car, stop, display_data] = do_car(car, t, display_data)
+function [car, stop, display_data] = do_car(car, t, display_data, boot)
 %DO_CAR Ger nya värden till struct car, avgör om koden ska stoppas samt hämtar displaydata.
 %{
 Input/Output:
@@ -44,7 +44,7 @@ end
 %% READ INPUT FROM TRACK
 if car.running == true
 	if car.lap ~= 0
-		if toc(car.seg_tic) > 9.0
+		if toc(car.seg_tic) > 9.0 && not(boot.status)
 			set_car_speed(1, 0);
 			set_car_speed(2, 0);
 			%disp(strjoin({'AvÃ¥kning bil', num2str(car.num)}));

@@ -150,8 +150,8 @@ while 1
 	drawnow
     
     %% CORE OF LOOP
-    [car1, car1.stop, display.data] = do_car(car1, t, display.data);
-    [car2, car2.stop, display.data] = do_car(car2, t, display.data);
+    [car1, car1.stop, display.data] = do_car(car1, t, display.data, boot1);
+    [car2, car2.stop, display.data] = do_car(car2, t, display.data, boot2);
     %% BOOTSTRAP
     if boot1.status
         [car1, boot1] = do_boot(car1, boot1);
