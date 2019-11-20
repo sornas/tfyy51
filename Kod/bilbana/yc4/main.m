@@ -1,4 +1,5 @@
 clear all;
+display_active = false;
 
 %% INIT TRACK
 disp('Startar bilbanan. Avsluta med q.')
@@ -17,12 +18,14 @@ global log_debug;
 log_debug = true;
 global log_verbose;
 log_verbose = false;
-
 % INIT DISPLAY
-addpath display/ClientServerApp/Release
-cd display/ClientServerApp/Release
-!startServer
-cd ../../..
+if display_active
+    
+    addpath display/ClientServerApp/Release
+    cd display/ClientServerApp/Release
+    !startServer
+    cd ../../..
+end
 
 display = struct;
 display.data = [clear_display()];
@@ -57,6 +60,8 @@ car1.map = Bana1;
 car1.approximation = [];
 car1.miss_probability = 0.0;
 car1.lap_constants = [1,1,1,1,1,1,1,1,1]; % TODO
+car1.constant = 0.5;
+car1.boot = false;
 
 car2 = struct;
 car2.num = 2;
@@ -76,6 +81,14 @@ car2.miss_probability = 0.1;
 car2.seg_constant_list = []; % TODO
 car2.lap_constants = [1,1,1,1,1,1,1,1,1]; % TODO
 car2.seg_constant = 1;
+car2.constant = 0.5;
+car2.boot = false;
+
+boot = struct;
+boot.car1 = false;
+boot.car2 = false;
+boot.car1_time = 0;
+boot.car2_time = 0;
 
 t = 0;
 highToc = 0;
@@ -87,6 +100,8 @@ car1.response = input('Vill du köra bil 1? [N] ', 's');
 if car1.response == 'J'
 	car1.running = true;
 	car1.automatic = true;
+    boot.car1 = true;
+    boot.car1_time = tic;
 elseif car1.response == 'M'
 	car1.running = true;
 	car1.automatic = false;
@@ -99,6 +114,8 @@ car2.response = input('Vill du köra bil 2? [N] ', 's');
 if car2.response == 'J'
 	car2.running = true;
 	car2.automatic = true;
+    boot.car2 = true;
+    boot.car2_time = tic;
 elseif car2.response == 'M'
 	car2.running = true;
 	car2.automatic = false;
@@ -114,8 +131,7 @@ elseif not(isreal(ref_time))
 	ref_time = 13;
 end
 %}
-ref_time = 13;
-
+ref_time = 13
 %% MAIN LOOP
 while 1
 	readTime = tic;
@@ -130,9 +146,18 @@ while 1
 
 	figure(hf)
 	drawnow
-
-	[car1, car1.stop, display.data] = do_car(car1, t, display.data);
-	[car2, car2.stop, display.data] = do_car(car2, t, display.data);
+    
+    %% CORE OF LOOP
+    if car1.boot
+        car1 = boot(car1, boot);
+    else
+        [car1, car1.stop, display.data] = do_car(car1, t, display.data);
+    end
+    if car2.boot
+        car2 = boot(car2, boot);
+    else
+        [car2, car2.stop, display.data] = do_car(car2, t, display.data);
+    end
 
 	if car1.stop == true
 		disp('stopped by car 1');
@@ -151,7 +176,7 @@ while 1
 	while 1                     %Whileloop med paus som k�rs till pausen �verskridit 0.07 sekunder
 		% DISPLAY
 		display.send_delay = tic;
-		if toc(display.last_send) > display.send_interval
+		if toc(display.last_send) > display.send_interval && display_active
 			% queue control signal
 			if car1.running && car1.automatic
 				% display.data = [display.data, put_text(20, 16 + (16 * 1), 'L', num2str(car1.u))];

@@ -120,7 +120,7 @@ if car.running == true
 
 	%% NEW LAP
 	if car.new_lap == true
-        car.lap_constants = gov_set(get_car_constant(car.num));
+        car.lap_constants = gov_set(car.constant);
 		car.new_lap = false; %TODO remove
 		beep;
 		if car.lap == 0
