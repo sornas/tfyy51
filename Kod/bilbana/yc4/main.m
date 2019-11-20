@@ -60,8 +60,8 @@ car1.map = Bana1;
 car1.approximation = [];
 car1.miss_probability = 0.0;
 car1.lap_constants = [1,1,1,1,1,1,1,1,1]; % TODO
-car1.constant = 0.5;
-car1.boot = false;
+car1.constant = 0.1;
+car1.stop = false;
 
 car2 = struct;
 car2.num = 2;
@@ -81,14 +81,16 @@ car2.miss_probability = 0.1;
 car2.seg_constant_list = []; % TODO
 car2.lap_constants = [1,1,1,1,1,1,1,1,1]; % TODO
 car2.seg_constant = 1;
-car2.constant = 0.5;
-car2.boot = false;
+car2.constant = 0.1;
+car2.stop = false;
 
-boot = struct;
-boot.car1 = false;
-boot.car2 = false;
-boot.car1_time = 0;
-boot.car2_time = 0;
+boot1 = struct;
+boot1.status = false;
+boot1.time = 0;
+
+boot2 = struct;
+boot2.status = false;
+boot2.time = 0;
 
 t = 0;
 highToc = 0;
@@ -100,8 +102,8 @@ car1.response = input('Vill du köra bil 1? [N] ', 's');
 if car1.response == 'J'
 	car1.running = true;
 	car1.automatic = true;
-    boot.car1 = true;
-    boot.car1_time = tic;
+    boot1.status = true;
+    boot1.time = tic;
 elseif car1.response == 'M'
 	car1.running = true;
 	car1.automatic = false;
@@ -114,8 +116,8 @@ car2.response = input('Vill du köra bil 2? [N] ', 's');
 if car2.response == 'J'
 	car2.running = true;
 	car2.automatic = true;
-    boot.car2 = true;
-    boot.car2_time = tic;
+    boot2.status = true;
+    boot2.time = tic;
 elseif car2.response == 'M'
 	car2.running = true;
 	car2.automatic = false;
@@ -148,15 +150,14 @@ while 1
 	drawnow
     
     %% CORE OF LOOP
-    if car1.boot
-        car1 = boot(car1, boot);
-    else
-        [car1, car1.stop, display.data] = do_car(car1, t, display.data);
+    [car1, car1.stop, display.data] = do_car(car1, t, display.data);
+    [car2, car2.stop, display.data] = do_car(car2, t, display.data);
+    %% BOOTSTRAP
+    if boot1.status
+        [car1, boot1] = do_boot(car1, boot1);
     end
-    if car2.boot
-        car2 = boot(car2, boot);
-    else
-        [car2, car2.stop, display.data] = do_car(car2, t, display.data);
+    if boot2.status
+        [car2, boot2] = do_boot(car2, boot2);
     end
 
 	if car1.stop == true
@@ -222,7 +223,7 @@ disp(car1);
 disp(car2);
 
 terminate(1);
-terminate(2);
+terminate(2)
 
 matlabclient(3);
 
