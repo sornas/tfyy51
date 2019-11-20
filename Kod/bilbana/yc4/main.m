@@ -224,9 +224,9 @@ disp(car2);
 
 terminate(1);
 terminate(2)
-
-matlabclient(3);
-
+if display_active
+    matlabclient(3);
+end
 %% DISPLAY GRAPHS
 
 if car1.running == true

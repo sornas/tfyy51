@@ -90,7 +90,6 @@ if car.running == true
 		if car.new_lap == false % choose_position krachar vid nytt varv (seg 10)
 			if car.lap ~= 0
 				car.seg_times(car.lap, car.segment) = toc(car.seg_tic);
-                car.seg_constant_list(car.lap, car.segment) = car.seg_constant;
 			end
 			car.segment = car.segment + 1;
 			car.seg_tic = tic;
@@ -106,7 +105,6 @@ if car.running == true
                 end
                 if seg_plus ~= 0
                     car.seg_times(car.lap, car.segment - seg_plus - 1) = 0;
-                    car.seg_constant_list(car.lap, car.segment - seg_plus - 1) = 0;
                     disp(car.seg_times(car.lap, :))
                     disp(seg_plus)
                 end
@@ -134,7 +132,6 @@ if car.running == true
 			% Spara inte seg_time om missad givare
 			if car.segment == 9
 				car.seg_times(car.lap, car.segment) = toc(car.seg_tic);
-                car.seg_constant_list(car.lap, car.segment) = car.seg_constant;
 			end
 			car.seg_tic = tic;
 			car.lap_times(car.lap) = toc(car.lap_tic);
@@ -159,8 +156,7 @@ end
 %% CALCULATE
 if car.running == true && car.automatic == true
 	car.v = get_new_v(car.position, car.map);
-    car.seg_constant = get_seg_constant(car.position, car.lap_constants, car.num, car.pos_at);
-	car.u = get_new_u(car.v, car.seg_constant);
+	car.u = get_new_u(car.v, car.constant);
 end
 
 %% CONTROLLER
