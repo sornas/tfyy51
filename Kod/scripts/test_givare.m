@@ -26,10 +26,26 @@ while 1
     [car1.new_lap, car1.new_check_point, car1.time] = get_car_position(1);
     [car2.new_lap, car2.new_check_point, car2.time] = get_car_position(2);
     
-    if car1.new_lap == true || car1.new_check_point == true || car2.new_lap == true || car2.new_check_point == true
-       beep;
+    if car1.new_lap || car1.new_check_point == true || car2.new_lap == true || car2.new_check_point == true
+       disp('###')
     end
     
+    if car1.new_check_point
+        beep;
+        disp('car 1 cp')
+    end
+    if car2.new_check_point
+        beep;
+        disp('car 2 cp')
+    end
+    if car1.new_lap
+        beep;
+        disp('car 1 lap')
+    end
+    if car1.new_lap
+        beep;
+        disp('car 2 lap')
+    end
     pause(0.1)
 end
 
