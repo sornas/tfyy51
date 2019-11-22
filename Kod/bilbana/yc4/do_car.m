@@ -30,6 +30,14 @@ stop - Huruvida koden ska stoppas eller inte
 stop = false;
 if car.running == true
 	[car.new_lap, car.new_check_point, car.time] = get_car_position(car.num);
+    %% KOMPENSERA FÖR TRASIG BANA
+    [car1new_lap, car1new_check_point, ~] = get_car_position(1);
+    if car1new_lap && (car1new_check_point || car1new_check_point)
+        car.new_lap = 0;
+    elseif car1new_lap
+        car.new_lap = 1;
+    end
+    %%
 	if car.new_check_point == true && rand < car.miss_probability && car.lap >= 4
 		disp('Hoppar ï¿½ver givare');
 		car.new_check_point = false;
@@ -118,6 +126,7 @@ if car.running == true
 
 	%% NEW LAP
 	if car.new_lap == true
+        disp('NEW LAP')
         car.lap_constants = gov_set(car.constant);
 		car.new_lap = false; %TODO remove
 		beep;
