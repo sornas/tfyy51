@@ -4,7 +4,7 @@ if isempty(car1_laptimes)
     car2_laptimes = [];
 end
 
-laps = max(length(graphs.car1.lap_times), length(graphs.car2.lap_times));
+% laps = max(length(graphs.car1.lap_times), length(graphs.car2.lap_times));
 
 pause(0.2);
 matlabclient(1, get_smallpackage(clear_display()));
@@ -41,8 +41,7 @@ matlabclient(1, get_smallpackage(save_display_to_clipboard()));
 matlabclient(1, get_smallpackage(draw_line(20, 103, 320, 103)));
 matlabclient(1, get_smallpackage(draw_line(20, 135, 320, 135)));
 matlabclient(1, get_smallpackage(draw_line(20, 167, 320, 167)));
-
-matlabclient(1, )
+pause(0.2);
 
 %%
 matlabclient(1, get_smallpackage([
