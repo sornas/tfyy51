@@ -16,6 +16,7 @@ pause(0.2);
 
 matlabclient(1, get_smallpackage([ ...
 	draw_line(20, 24, 20, 200), ...   % y-axis
+    put_text(9, 25, 'C', 's'), ...  % label y-axis
 	continue_line(304, 200), ... % x-axis
 	draw_line(16, 32, 20, 24), ...    % arrow on y, left part
 	continue_line(24, 32), ...   % arrow on y, right part
@@ -36,11 +37,6 @@ for i = 0:8
     pause(0.2);
 end
 
-matlabclient(1, get_smallpackage(put_text(9, 25, 'C', 's')));
-pause(0.2);
-
-% matlabclient(1, get_smallpackage(set_line_pattern(2)))
-% pause(0.2);
 for i = 1:floor(max_val)
     x = 20;
     y = min_y - round(max_height * (i/max_val));
@@ -48,7 +44,5 @@ for i = 1:floor(max_val)
         put_text(x-6, y-2, 'C', num2str(i))]));
     pause(0.2);
 end
-% matlabclient(1, get_smallpackage(set_line_pattern(1)))
-% pause(0.2);
 end
 
