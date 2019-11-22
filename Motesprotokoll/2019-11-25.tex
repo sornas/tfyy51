@@ -1,0 +1,57 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{geometry}  % gör texten lite bredare eftersom vanlig latex är för smal för a4
+
+% minska storleken på rubriker och underrubriker
+\usepackage{titlesec}
+\titleformat{\section}
+    {\normalfont\Large\bfseries}{\thesection}{1em}{}
+
+\titleformat{\subsection}
+    {\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}[\vspace{-0.4em}]
+\usepackage[]{parskip}
+
+% undvik helst subsubsections
+
+%% FÖRKLARINGAR AV KOMMANDON OCH DYL.
+% \\ skapar en radbrytning
+% \\[1em] skapar en radbrytning med "1em" extra utrymme mellan rader
+%   (1 em är ganska stor)
+% \textbf{Skapar text i fetstil}
+% \begin{itemize} och \end{itemize} skapar en s.k. list-enviornment (list-miljö)
+%   Inuti itemize skriver man \item för att skapa en ny punkt, annars är det bara att skriva
+% \section*{Titel} och \subsection*{Understitel} skapar nya sektioner och undersektioner
+%   Asterisken ser till att det inte dyker upp ett nummer bredvid namnet.
+% I övrigt är det bara att skriva text där man vill ha den
+
+\begin{document}
+\pagenumbering{gobble} % räkna inte (och skriv inte heller ut) sidnumrering
+    \begin{center}
+        \textbf{\Large TFYY51 - Yc4} \\[0.2em]
+        Mötesprotokoll för möte den 25 november i Bilbanerummet.
+    \end{center}
+    \vspace{1em}
+    \textbf{Närvarande:} David (ordf), Alexander (sek), Mattias (lokal) \\[0.5em]
+    \textbf{Frånvarande:}  \\[0.5em]  % som exempel
+    \textbf{Övriga närvarande: }Gustav, Albin
+
+    \section*{Föregående protokoll}
+    \begin{itemize}
+        \item Föregående möte fördelades arbetsuppgifter och diskuterades också vad som skulle göras inför nästa möte.\
+    \end{itemize}
+
+    \section*{Dagordning}
+    \subsection*{Bilbana 2 fungerar inte som den ska}
+	    Vi behöver kontakta Erik eller Victor om detta direkt efter mötet. Detta problem uppstod under gårdagen (21 nov), men fick inte tag i handledarna.
+	    \subsection*{Det här är fixat:}
+	     
+	    \begin{itemize}
+	    	\item Vi har fixat bootstrap
+	    	\item Displayen
+	    	\item Spänningkartan är anpassad till minibussen
+	    \end{itemize}
+    \section*{Övrigt}
+    
+
+    \section*{Nästa möte}
+    Nästa mötes hålls den XXXXX kl. XXXXXX. Lokalbokare kommer då vara Albin. Sekreterare till nästa möte är Mattias och ordförande till mötet är Alexander.  
+\end{document}
