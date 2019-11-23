@@ -1,4 +1,6 @@
 function [] = draw_lap_graph(car1_laptimes, car2_laptimes, ref_time)
+dt = 0.2;  % delay for display
+
 if isempty(car1_laptimes)
 	car1_laptimes = car2_laptimes;
 	car2_laptimes = [];
@@ -6,19 +8,19 @@ end
 
 % laps = max(length(graphs.car1.lap_times), length(graphs.car2.lap_times));
 
-pause(0.2);
+pause(dt);
 matlabclient(1, get_smallpackage(clear_display()));
-pause(0.2);
+pause(dt);
 
 matlabclient(1, get_smallpackage(put_text(160, 8, 'C', 'Varvtider')))
-pause(0.2);
+pause(dt);
 
 matlabclient(1, get_smallpackage([ ...
 		key(0  , 216, 107, 240, 51, 61, 'C', 'Varv'), ...
 		key(107, 216, 213, 240, 52, 62, 'C', 'Segment'), ...
 		key(213, 216, 320, 240, 53, 63, 'C', 'Avsluta') ...
 ]));
-pause(0.2);
+pause(dt);
 
 matlabclient(1, get_smallpackage([ ...
 		draw_line(20, 24, 20, 144), ...   % y-axis
@@ -28,7 +30,7 @@ matlabclient(1, get_smallpackage([ ...
 		continue_line(24, 32), ...   % arrow on y, right part
 		draw_line(304, 140, 304, 148) ... % line on x
 ]));
-pause(0.2);
+pause(dt);
 
 y = 166;
 margin_top = 6;
@@ -38,7 +40,7 @@ matlabclient(1, get_smallpackage([ ...
 		put_text(160, y + margin_top, 'C', 'mean'), ...
 		put_text(266, y + margin_top, 'C', 'std') ...
 ]));
-pause(0.2);
+pause(dt);
 
 line = 12;
 matlabclient(1, get_smallpackage([ ...
@@ -51,7 +53,7 @@ matlabclient(1, get_smallpackage([ ...
 		put_text(266, y + 2 + margin_top + line*1, 'C', 'x.xx'), ...
 		put_text(266, y + 2 + margin_top + line*2, 'C', 'x.xx'), ...
 ]));
-pause(0.2);
+pause(dt);
 
 times = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16];
 for i = 0:(length(times)-1)
