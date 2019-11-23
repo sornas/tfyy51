@@ -69,15 +69,15 @@ matlabclient(1, get_smallpackage([ ...
 	define_touch_switch(102, 98 , 126, 122, 13, 14, 'C', 'M'), ...  % MANUAL CONTROL TRACK 1
 	define_touch_switch(190, 60 , 222, 90 , 21, 22, 'C', '2'), ...  % ACTIVATE TRACK 2
 	define_touch_switch(194, 98 , 218, 122, 23, 61, 'C', 'M') ...  % MANUAL CONTROL TRACK 2
-]));
+	]));
 pause(0.5);
 matlabclient(1, get_smallpackage([ ...
-    put_text(160, 120, 'C', '13.0'), ...  % CURRENT REFERENCE TIME
+	put_text(160, 120, 'C', '13.0'), ...  % CURRENT REFERENCE TIME
 	define_touch_key(   98 , 110, 130, 140, 41, 42, 'C', '-'), ...  % DECREASE REFERENCE TIME
 	define_touch_key(   190, 110, 220, 140, 43, 44, 'C', '+'), ...  % INCREASE REFERENCE TIME
 	define_touch_key(   272, 192, 304, 224, 31, 32, 'C', 'S') ...  % START BUTTON
 	%TODO CLEAR BUTTON
-]));
+	]));
 
 %% CHECK DISPLAY BUTTONS
 display.last_check = tic;
@@ -85,8 +85,8 @@ done = false;
 while 1
 	pause(0.1);
 	if toc(display.last_check) > 0.4
-        display.last_check = tic;
-        
+		display.last_check = tic;
+
 		% read internal mem from last send
 		[display.out, display.shm] = matlabclient(2);
 		[display.shm_interp.ack, display.shm_interp.start_code, display.shm_interp.data] = get_response(display.shm);
@@ -146,9 +146,9 @@ end
 ref_time = input('Vilken referenstid ska användas? [13] ', 's');
 ref_time = str2double(ref_time);
 if isnan(ref_time)
-    ref_time = 13;
-elseif not(isreal(ref_time))
-    ref_time = 13;
+	ref_time = 13;
+	elseif not(isreal(ref_time))
+	ref_time = 13;
 end
 %}
 
@@ -181,52 +181,6 @@ while 1
 		disp('stopped by car 2');
 		break;
 	end
-<<<<<<< HEAD
-    
-    %% END OF LOOP
-    while 1                     %Whileloop med paus som kï¿½rs till pausen ï¿½verskridit 0.07 sekunder
-        % DISPLAY
-        display.send_delay = tic;
-        if toc(display.last_send) > display.send_interval
-            % queue control signal
-            if car1.running && car1.automatic
-                % display.data = [display.data, put_text(20, 16 + (16 * 1), 'L', num2str(car1.u))];
-            end
-            if car2.running && car2.automatic
-                % display.data = [display.data, put_text(20, 16 + (16 * 2), 'L', num2str(car2.u))];
-                display.data = [display.data, update_bar_graph(2, car2.u)];
-            end
-            
-            % send all queued data
-            if ~isempty(display.data)
-                [display.out] = matlabclient(1, get_smallpackage(display.data));
-                display.data = [];
-            end
-            display.last_send = tic;
-            
-            % read internal mem from last send
-            [display.out, display.shm] = matlabclient(2);
-            [display.shm_interp.ack, display.shm_interp.start_code, display.shm_interp.data] = get_response(display.shm);
-            
-            % request internal mem
-            % matlabclient(1, hex2dec(['12'; '01'; '53'; '66']));
-        end
-        % disp(strjoin({'display took additional ', num2str(toc(display.send_delay))}));
-        % ACTUAL END OF LOOP
-        t = toc(readTime);
-        
-        if t > 0.07
-            if t > highToc
-                highToc = t;     %Om det nya vï¿½rdet pï¿½ pausen ï¿½r hï¿½gre ï¿½n den tidigare hï¿½gsta sï¿½ sparas det som den hï¿½gsta
-            end
-            if t > 0.1
-                % beep;
-            end
-            break;
-        end
-        pause(0.001);
-    end
-=======
 
 	%% END OF LOOP
 	while 1                     %Whileloop med paus som kï¿½rs till pausen ï¿½verskridit 0.07 sekunder
@@ -235,10 +189,11 @@ while 1
 		if toc(display.last_send) > display.send_interval
 			% queue control signal
 			if car1.running && car1.automatic
-				display.data = [display.data, put_text(20, 16 + (16 * 1), 'L', num2str(car1.u))];
+				% display.data = [display.data, put_text(20, 16 + (16 * 1), 'L', num2str(car1.u))];
 			end
 			if car2.running && car2.automatic
-				display.data = [display.data, put_text(20, 16 + (16 * 2), 'L', num2str(car2.u))];
+				% display.data = [display.data, put_text(20, 16 + (16 * 2), 'L', num2str(car2.u))];
+				display.data = [display.data, update_bar_graph(2, car2.u)];
 			end
 
 			% send all queued data
@@ -270,7 +225,6 @@ while 1
 		end
 		pause(0.001);
 	end
->>>>>>> respond to buttons pressed + indents
 end
 
 %% END OF PROGRAM
