@@ -1,5 +1,6 @@
 function [] = draw_segment_bars(values1, values2)
-dt = 0.2;
+dt = 0.2;  % delay for display
+queue = [];  % internal queue for packages to send to display
 
 pause(dt);
 matlabclient(1, get_smallpackage(clear_display()));
@@ -35,8 +36,12 @@ end
 
 for i = 0:8
 	x = 16+13 + 10 + 30*i;
-	matlabclient(1, get_smallpackage(put_text(x, 204, 'C', num2str(i + 1))));
-	pause(dt);
+	queue = [queue put_text(x, 204, 'C', num2str(i + 1))]
+	if i == 4 or i == 8
+		matlabclient(1, get_smallpackage(queue));
+		queue = [];
+		pause(dt);
+	end
 end
 
 for i = 1:floor(max_val)
