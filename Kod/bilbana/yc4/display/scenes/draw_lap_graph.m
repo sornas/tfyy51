@@ -6,6 +6,24 @@ if isempty(car1_laptimes)
 	car2_laptimes = [];
 end
 
+
+%% strip empty values
+tmp = [];
+for i = 1:length(car1_laptimes)
+	if car1_laptimes(i) ~= 0
+		tmp = [tmp car1_laptimes(i)];
+	end
+end
+car1_laptimes = tmp;
+
+tmp = [];
+for i = 1:length(car2_laptimes)
+	if car2_laptimes(i) ~= 0
+		tmp = [tmp car2_laptimes(i)];
+	end
+end
+car2_laptimes = tmp;
+
 % laps = max(length(graphs.car1.lap_times), length(graphs.car2.lap_times));
 
 pause(dt);
