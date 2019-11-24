@@ -8,7 +8,7 @@ if is_empty(in_clipboard)
 end
 
 % draw the other car every time the function is called if the change_car flag is set
-% this value is ignored if only one set of lap times are given
+% (this value is ignored if only one set of lap times are given)
 persistent current_car;
 if is_empty(current_car)
 	% first call to function
@@ -45,7 +45,7 @@ pause(dt);
 matlabclient(1, get_smallpackage(clear_display()));
 pause(dt);
 
-% laps = max(length(graphs.car1.lap_times), length(graphs.car2.lap_times));
+%% DRAW STATICS (OR COPY STATICS FROM CLIPBOARD)
 if ~(in_clipboard)
 	matlabclient(1, get_smallpackage([ ...
 			put_text(160, 8, 'C', 'Varvtider'), ...
@@ -111,7 +111,24 @@ else
 	pause(dt);
 end
 
+%% DRAW GRAPH FOR CAR
+
+laps = -1
+% want to keep the same scale in x-axis for both cars so set laps to max of both
+laps = max(length(car1_laptimes), length(car2_laptimes))  % TODO check if max([]) == 0
+x_min = 20;
+dx_max = 260;
+% x[lap] = x_min + (dx_max * (i / laps)))
+
+y_min_val = ref_time - 1.5;  % val for lowest y
+y_max_val = ref_time + 1.5;  % val for highest y
+y_min = 144;
+dy_max = -50;
+y_mid = y_min + (dy_max)
+% y[lap] = clamp(y_min, y_mid + (dy_max * (lap[i] / ref_time)), y_min + 2*dy_max)
+
 times = [];
+% choose which lap-times to graph
 car = 0;
 if current_car == 1 && ~isempty(car1_laptimes)
 	times = car1_laptimes;
@@ -119,6 +136,7 @@ if current_car == 1 && ~isempty(car1_laptimes)
 elseif current_car == 2 && ~isempty(car2_laptimes)
 	times = car2_laptimes;
 	car = 2;
+% ignore current_car and choose the only carn_laptimes that exist
 elseif ~isempty(car1_laptimes)
 	times = car1_laptimes;
 	car = 1;
@@ -129,9 +147,12 @@ else
 	% not supposed to get here
 end
 
-for i = 0:(length(times)-1)
-	x = 28 + i*10;
-	y = 144 - round(100 * (times(i+1) / max(times)));
+for i = 1:(length(times))
+	x = round(x_min + (dx_max * (i/laps)));
+	y = clamp(y_min, ...
+			round(y_mid + (dy_max * (times(i) / ref_time))), ...
+			y_min + 2*dy_max ...
+	);
 	matlabclient(1, get_smallpackage([ ...
 			set_point_size(3, 3), ...
 			point(x, y), ...
@@ -139,5 +160,21 @@ for i = 0:(length(times)-1)
 			draw_line(x, 144-2,  x, 144+2) ...
 	]));
 	pause(dt);
+end
+max_lap_nums = 9;
+d_lap = floor(laps/max_lap_nums) + 1;
+% examples: 
+% laps = 8
+	% d_lap = floor(8/9) + 1 = 0 + 1 = 1
+% laps = 10
+	% d_lap = floor(10/9) + 1 = 1 + 1 = 2
+for i = 1:(length(times))
+	if mod(i, d_lap) == 0
+		x = round(x_min + (dx_max * (i/laps)));
+		y = y_min + 4;
+		matlabclient(1, get_smallpackage([ ...
+				put_text(x, y, 'C', num2str(i)) ...
+		]));
+	end
 end
 end
