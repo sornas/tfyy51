@@ -24,7 +24,7 @@ else
 	end
 end
 
-%% strip empty values
+%% STRIP EMPTY VALUES
 tmp = [];
 for i = 1:length(car1_laptimes)
 	if car1_laptimes(i) ~= 0
@@ -72,7 +72,7 @@ if ~(in_clipboard)
 			draw_line(0, y, 320, y), ...
 			put_text(53 , y + margin_top, 'C', 'target'), ...
 			put_text(160, y + margin_top, 'C', 'mean'), ...
-			put_text(266, y + margin_top, 'C', 'std') ...
+			put_text(266, y + margin_top, 'C', 'stdev') ...
 	]));
 	pause(dt);
 
