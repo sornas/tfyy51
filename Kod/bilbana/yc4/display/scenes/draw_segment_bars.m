@@ -36,8 +36,8 @@ end
 
 for i = 0:8
 	x = 16+13 + 10 + 30*i;
-	queue = [queue put_text(x, 204, 'C', num2str(i + 1))]
-	if i == 4 or i == 8
+	queue = [queue put_text(x, 204, 'C', num2str(i + 1))];
+	if i == 4 || i == 8
 		matlabclient(1, get_smallpackage(queue));
 		queue = [];
 		pause(dt);
