@@ -7,15 +7,26 @@ if car.running == true
         t = toc(boot.time);
         if t > 0.6
             car.constant = car.constant + 0.05;
+            disp('###')
+            disp(car.num)
             disp(car.constant)
             boot.time = tic;
         end
+    end
+    %% WHEN NEW LAP
+    if car.new_lap == 1
+        car.constant = car.constant + 0.3;
+        disp('###')
+        disp(car.num)
+        disp(car.constant)
     end
     %% First segment
     if car.lap == 1 && car.segment == 1
         t = toc(boot.time);
         if t > 3
-            car.constant = car.constant + 0.05;
+            car.constant = car.constant + 0.2;
+            disp('###')
+            disp(car.num)
             disp(car.constant)
             boot.time = tic;
         end
@@ -24,6 +35,8 @@ if car.running == true
     if car.segment > 2
         boot.status = 0;
         disp('END OF BOOTSTRAP')
+        disp(car.num)
+        disp(car.constant)
     end
 end
 end
