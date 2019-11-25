@@ -42,7 +42,7 @@ while 1
         beep;
         disp('car 1 lap')
     end
-    if car1.new_lap
+    if car2.new_lap
         beep;
         disp('car 2 lap')
     end
