@@ -223,7 +223,7 @@ disp(car1);
 disp(car2);
 
 terminate(1);
-terminate(2)
+terminate(2);
 if display_active
     matlabclient(3);
 end
