@@ -20,7 +20,6 @@ global log_verbose;
 log_verbose = false;
 % INIT DISPLAY
 if display_active
-    
     addpath display/ClientServerApp/Release
     cd display/ClientServerApp/Release
     !startServer
@@ -56,6 +55,7 @@ car1.seg_constant_list = []; % TODO
 car1.position = 0;
 car1.pos_at  = [0.0 2.53 3.05 4.73 7.68 8.98 10.93 14.69 17.57 19.60];
 car1.seg_len = [2.53 0.53 1.68 2.92 1.2 2.01 3.83 2.89 1.99];
+car1.percents = [];  % TODO
 car1.map = Bana1;
 car1.approximation = [];
 car1.miss_probability = 0.0;
@@ -76,6 +76,8 @@ car2.seg_times = [];
 car2.position = 0;
 car2.pos_at  = [0.0 2.53 3.05 4.92 7.62 9.02 10.72 14.68 17.76 19.95];
 car2.seg_len = [2.53 0.52 1.87 2.70 1.40 1.70 4.03 3.08 2.19];
+car2.percents = [0.088, 0.022, 0.102, 0.15, 0.058, 0.11, 0.212, 0.146, 0.113];
+
 car2.map = Bana2;
 car2.miss_probability = 0.1;
 car2.seg_constant_list = []; % TODO
@@ -133,7 +135,8 @@ elseif not(isreal(ref_time))
 	ref_time = 13;
 end
 %}
-ref_time = 13
+car1.ref_time = 15;
+car2.ref_time = 15;
 %% MAIN LOOP
 while 1
 	readTime = tic;
@@ -159,7 +162,14 @@ while 1
     if boot2.status
         [car2, boot2] = do_boot(car2, boot2);
     end
-
+    %% GOVERNOR
+    if not(boot1.status) && car1.lap ~= 0
+        car1 = do_gov(car1);
+    end
+    if not(boot2.status) && car2.lap ~= 0
+        car2 = do_gov(car2);
+    end
+    %%
 	if car1.stop == true
 		disp('stopped by car 1');
 		break;
@@ -230,12 +240,12 @@ end
 %% DISPLAY GRAPHS
 
 if car1.running == true
-	graphs(car1.lap_times, ref_time, car1.seg_times, 1);
+	graphs(car1.lap_times, car1.ref_time, car1.seg_times, 1);
 end
 
 
 if car2.running == true
-	graphs(car2.lap_times, ref_time, car2.seg_times, 2);
+	graphs(car2.lap_times, car2.ref_time, car2.seg_times, 2);
 end
 
 %% SAVE VARIABLES FROM CAR STRUCT

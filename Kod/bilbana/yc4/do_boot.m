@@ -45,10 +45,14 @@ if car.running == true
  %%        
  %%    end    
     
-    
-    
     %% END BOOTSTRAP
-    if car.segment > 2
+    if car.segment > 3
+        disp(car.constant);
+        seg_time = car.seg_times(1, 3)
+        laptime_forecast = seg_time / 0.102
+        forecast_ref_diff = laptime_forecast - car.ref_time
+        forecast_ref_diff_rel = forecast_ref_diff / car.ref_time
+        car.constant = car.constant + (forecast_ref_diff_rel * 0.15)
         boot.status = 0;
         disp('END OF BOOTSTRAP')
         disp(car.num)

@@ -30,14 +30,6 @@ stop - Huruvida koden ska stoppas eller inte
 stop = false;
 if car.running == true
 	[car.new_lap, car.new_check_point, car.time] = get_car_position(car.num);
-    %% KOMPENSERA FÖR TRASIG BANA
-    [car1new_lap, car1new_check_point, ~] = get_car_position(1);
-    if car1new_lap && (car1new_check_point || car1new_check_point)
-        car.new_lap = 0;
-    elseif car1new_lap
-        car.new_lap = 1;
-    end
-    %%
 	if car.new_check_point == true && rand < car.miss_probability && car.lap >= 4
 		disp('Hoppar ï¿½ver givare');
 		car.new_check_point = false;
@@ -98,20 +90,24 @@ if car.running == true
 		if car.new_lap == false % choose_position krachar vid nytt varv (seg 10)
 			if car.lap ~= 0
 				car.seg_times(car.lap, car.segment) = toc(car.seg_tic);
-			end
+            end
+            
+            seg_time = car.seg_times(car.lap, car.segment);
+            car.forecasts(car.lap, car.segment) = seg_time / car.percents(car.segment);
+            
 			car.segment = car.segment + 1;
 			car.seg_tic = tic;
 			if car.lap > 2 % Sï¿½kerhetsmarginal (Bï¿½r vara 1?)
 				disp(car)
 				[new_position, seg_plus] = ...
 						choose_position(car.position, car.segment, car.num, car.pos_at);
-				if seg_plus ~= 0 && car.segment == 2
+                if seg_plus ~= 0 && car.segment == 2
 					disp('Hoppar ï¿½ver missad givare 1/2');
 				else
 					car.position = new_position;
 					car.segment = car.segment + seg_plus;
                 end
-                if seg_plus ~= 0
+                if seg_plus ~= 0 && car.segment ~= 2
                     car.seg_times(car.lap, car.segment - seg_plus - 1) = 0;
                     disp(car.seg_times(car.lap, :))
                     disp(seg_plus)
@@ -127,6 +123,7 @@ if car.running == true
 	%% NEW LAP
 	if car.new_lap == true
         disp('NEW LAP')
+        
         car.lap_constants = gov_set(car.constant);
 		car.new_lap = false; %TODO remove
 		beep;
@@ -147,6 +144,9 @@ if car.running == true
 			car.lap_tic = tic;
 			car.position = 0;
 
+            % save segment percentage from last lap
+            car.percents = fit_percents(car.percents, car.lap_times(car.lap), car.seg_times(car.lap,:))
+            
 			if car.lap == 1 && size(car.seg_times, 2) < 9
 				disp('FEL: För få segment!!')
 				car.stopped = true;
