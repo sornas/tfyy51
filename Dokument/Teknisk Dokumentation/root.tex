@@ -81,10 +81,13 @@
   \multicolumn{1}{|c}{\bfseries Granskad}\\
   \hline
   \hline
-  0.1 & 2015-11-01 & Första utkast & Sign1 & Name1   \\
+  0.1 & 2019-11-26 & Förberedande struktur & Albin &   - \\
   \hline
-  0.2 & 2015-11-03 & Första revision & Sign2 & Name2   \\
+  0.2 & 2015-11-03 & Första utkast & Sign2 & Name2   \\
   \hline
+  0.3 & 2015-11-03 & Första revision & Sign2 & Name2   \\
+  \hline
+
 \end{tabular}
 
 \cleardoublepage
@@ -93,8 +96,80 @@
 Massa text som sammanfattar hela skiten.
 \cleardoublepage
 \tableofcontents
+\cleardoublepage
+
+\section{Introduktion}
+Nån text här
+\subsection{Syfte och mål}
+Nån text här
+\subsection{Krav}
+\lipsum[7]
+
+Det finns en miljö (environment) för att skriva krav, hantera
+numrering, och göra det möjligt att referera individuella krav. Det
+skall se bra ut även när tabellen spänner över flera sidor. Se
+källkoden för tabellen med krav nedan.
+
+\begin{requirements}
+  \requirementno\label{req:myreq} & Description & 2\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno\label{req:myreq2} & Description & 2\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+  \requirementno & Description & 1\\
+\end{requirements}
+
+Notera att kraven~\ref{req:myreq} och~\ref{req:myreq2} har prioritet 2.
+
+\clearpage
+\bibliography{references}
 
 \cleardoublepage
+
+\section{Bakgrund}
+Nån text
+
+\section{Metod}
+Nån text
+	\subsection{Övergripande system}
+	\subsection{Delsystem}
+		\subsubsection{Bana}
+		\subsubsection{Display}
+	\subsection{Funktioner och scripts}
+		\subsubsection{main}
+		\subsubsection{get\_ postition}
+		% osv.
+
+\section{Resultat}
+Det gick åt skogen
+
+\section{Diskussion}
+Undrar varför
+
 \section{Första kapitlet}
 Detta är en text. \emph{Detta är kursiv text}. \textbf{Detta är text i
   fetstil}.
