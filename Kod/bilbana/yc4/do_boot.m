@@ -15,7 +15,7 @@ if car.running == true
     end
     %% WHEN NEW LAP
     if car.new_lap == 1
-        car.constant = car.constant + 0.3;
+        car.constant = car.constant + 0.4;
         disp('###')
         disp(car.num)
         disp(car.constant)
@@ -24,13 +24,26 @@ if car.running == true
     if car.lap == 1 && car.segment == 1 || car.lap == 1 && car.segment == 2
         t = toc(boot.time);
         if t > 0.8
-            car.constant = car.constant + 0.05;
+            car.constant = car.constant + 0.06;
             disp('###')
             disp(car.num)
             disp(car.constant)
             boot.time = tic;
         end
+        
     end
+ %% ide höj carconstant så att den blir mer aggresivare ju längre tid som det går t.ex efter 3.5 s   
+ %%    if car.lap == 1 && car.segment == 1 || car.lap == 1 && car.segment == 2
+ %%        t = toc(boot.time);
+ %%        if t > 1.0
+ %%            car.constant = car.constant + 0.5;
+ %%            disp('###')
+ %%            disp(car.num)
+ %%            disp(car.constant)
+ %%            boot.time = tic;
+ %%        end
+ %%        
+ %%    end    
     
     
     
