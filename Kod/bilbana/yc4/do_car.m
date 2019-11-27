@@ -71,7 +71,7 @@ if car.running == true
 	end
 
 	%% CALC POSITION
-	if car.lap > 1
+    if car.automatic && car.lap > 1
 		% car.last_seg_times = car.seg_times(car.lap - 1, 1:9);
 		aprox_v = get_aprox_v(car.segment + detect_missed(car.position, car.segment, car.num, car.pos_at), car.lap, car.seg_times, car.num, car.seg_len);
 		car.position = get_position(aprox_v, car.position, t);
@@ -82,10 +82,10 @@ if car.running == true
 			%if car.miss_time == 0
 			%   car.miss_time = tic;
 			%end
-		end
-	end
+        end
+    end
 
-	if car.stopping == true
+	if car.automatic && car.stopping == true
 		% CHECK IF CAR IS AT THE END OF TRACK
 		if car.position > (car.map(80, 1) / 100) - 0.8  % 80cm
 			disp(car.position)
@@ -99,23 +99,24 @@ if car.running == true
 	%% CHECK POINT
 	if car.new_check_point == true
 		if car.new_lap == false % choose_position krachar vid nytt varv (seg 10)
-			if car.lap ~= 0
+            if car.lap ~= 0
 				car.seg_times(car.lap, car.segment) = toc(car.seg_tic);
             end
             
-            seg_time = car.seg_times(car.lap, car.segment)
-            lap_time_now = toc(car.lap_tic)
+            lap_time_now = toc(car.lap_tic);
             % s = vt
             % v = s/t
             % t = s/v
-            prev_seg_v = car.seg_len(car.segment) / toc(car.seg_tic)
-            track_remaining = car.pos_at(length(car.pos_at)) - car.pos_at(car.segment + 1)
+            prev_seg_v = car.seg_len(car.segment) / toc(car.seg_tic);
+            track_remaining = car.pos_at(length(car.pos_at)) - car.pos_at(car.segment + 1);
+            forecast = lap_time_now + track_remaining/prev_seg_v;
             
-            car.forecasts(car.lap, car.segment) = lap_time_now + track_remaining/prev_seg_v
+            car.forecasts(car.lap, car.segment) = forecast;
             
 			car.segment = car.segment + 1;
 			car.seg_tic = tic;
-			if car.lap > 2 % Sï¿½kerhetsmarginal (Bï¿½r vara 1?)
+            
+            if car.automatic && car.lap > 2 % Sï¿½kerhetsmarginal (Bï¿½r vara 1?)
 				disp(car)
 				[new_position, seg_plus] = ...
 						choose_position(car.position, car.segment, car.num, car.pos_at);
@@ -131,10 +132,10 @@ if car.running == true
                     disp(seg_plus)
                 end
 				%car.miss_time = uint64(0);
-			else
+            else
 				car.position = car.pos_at(car.segment);
 				%car.miss_time = uint64(0);
-			end
+            end
 		end
 	end
 
@@ -143,7 +144,7 @@ if car.running == true
         disp('NEW LAP')
         
         car.lap_constants = gov_set(car.constant);
-		car.new_lap = false; %TODO remove
+		% car.new_lap = false; %TODO remove
 		beep;
 		if car.lap == 0
 			% dont save time for first lap
@@ -163,9 +164,9 @@ if car.running == true
 			car.position = 0;
 
             % save segment percentage from last lap
-            car.percents = fit_percents(car.percents, car.lap_times(car.lap), car.seg_times(car.lap,:))
+            car.percents = fit_percents(car.percents, car.lap_times(car.lap), car.seg_times(car.lap,:));
             
-			if car.lap == 1 && size(car.seg_times, 2) < 9
+			if car.automatic && car.lap == 1 && size(car.seg_times, 2) < 9
 				disp('FEL: För få segment!!')
 				car.stopped = true;
 				other_car.stopped = true;
@@ -188,7 +189,10 @@ end
 
 %% CONTROLLER
 if car.running == true && car.automatic == false
-	% set_car_speed(car.num, mult * ((max - get_manual_speed(car.num)) / div));
+    mult = 100;
+    max = 55;
+    div = 55;
+	set_car_speed(car.num, mult * ((max - get_manual_speed(car.num)) / div));
 end
 
 %% EXECUTE

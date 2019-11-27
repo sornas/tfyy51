@@ -23,7 +23,10 @@ end
 disp(near);
 %% Beräkning av passerad givare
 seg_plus = max(0, near(1) - segment)
-new_position = track_len(segment + seg_plus);
+if segment + seg_plus < 10
+    new_position = track_len(segment + seg_plus);
+else
+    new_position = position;
 end
 
 

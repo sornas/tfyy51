@@ -1,5 +1,9 @@
 function [] = draw_lap_graph(car1_laptimes, car2_laptimes, ref_time, change_car)
 dt = 0.2;  % delay for display
+pause(2*dt);
+
+x_min = 40;
+dx_max = 232;
 
 % don't have to re-draw static elements, just the graphs
 persistent in_clipboard; 
@@ -15,7 +19,6 @@ if isempty(current_car)
 	current_car = 1;
 else
 	% switch current_car
-    disp('switching current car');
 	if change_car
 		if current_car == 1
 			current_car = 2;
@@ -42,14 +45,13 @@ for i = 1:length(car2_laptimes)
 end
 car2_laptimes = tmp;
 
-pause(dt);
 matlabclient(1, get_smallpackage(clear_display()));
 pause(dt);
 
 %% DRAW STATICS (OR COPY STATICS FROM CLIPBOARD)
 if ~(in_clipboard)
 	matlabclient(1, get_smallpackage([ ...
-			put_text(160, 8, 'C', 'Varvtider'), ...
+			% put_text(160, 8, 'C', 'Varvtider'), ...  % moved downwards
 			key(0  , 216, 107, 240, 51, 61, 'C', 'Varv'), ...
 			key(107, 216, 213, 240, 52, 62, 'C', 'Segment'), ...
 			key(213, 216, 320, 240, 53, 63, 'C', 'Avsluta'), ...
@@ -58,11 +60,11 @@ if ~(in_clipboard)
 	pause(dt);
 
 	matlabclient(1, get_smallpackage([ ...
-			draw_line(20, 24, 20, 144), ...   % y-axis
-			put_text(9, 25, 'C', 's'), ...  % label y-axis
+			draw_line(x_min, 24, x_min, 144), ...   % y-axis
+			put_text(x_min-11, 25, 'C', 's'), ...  % label y-axis
 			continue_line(304, 144), ... % x-axis
-			draw_line(16, 32, 20, 24), ...    % arrow on y, left part
-			continue_line(24, 32), ...   % arrow on y, right part
+			draw_line(x_min-4, 32, x_min, 24), ...    % arrow on y, left part
+			continue_line(x_min+4, 32), ...   % arrow on y, right part
 			draw_line(304, 140, 304, 148) ... % line on x
 	]));
 	pause(dt);
@@ -116,16 +118,14 @@ end
 
 laps = -1;
 % want to keep the same scale in x-axis for both cars so set laps to max of both
-laps = max(length(car1_laptimes), length(car2_laptimes));  % TODO check if max([]) == 0
-x_min = 20;
-dx_max = 260;
+laps = max(length(car1_laptimes), length(car2_laptimes));
 % x[lap] = x_min + (dx_max * (i / laps)))
 
 y_min_val = ref_time - 1.5;  % val for lowest y
 y_max_val = ref_time + 1.5;  % val for highest y
 y_min = 144;
 dy_max = -50;
-max_diff_val = 1;
+% max_diff_val = 1;  % unused
 y_mid = y_min + (dy_max);
 % y[lap] = clamp(y_min, y_mid + (dy_max * (lap[i] / ref_time)), y_min + 2*dy_max)
 
@@ -138,7 +138,8 @@ if current_car == 1 && ~isempty(car1_laptimes)
 elseif current_car == 2 && ~isempty(car2_laptimes)
 	times = car2_laptimes;
 	car = 2;
-% ignore current_car and choose the only carn_laptimes that exist
+% current_car doesn't have values ...
+% so ignore current_car and choose the only car_laptimes that exist
 elseif ~isempty(car1_laptimes)
 	times = car1_laptimes;
 	car = 1;
@@ -149,20 +150,36 @@ else
 	% not supposed to get here
 end
 
+matlabclient(1, get_smallpackage(put_text(160, 8, 'C', strjoin({'Varvtider bil', num2str(car)}))));
+pause(dt);
+
 for i = 1:(length(times))
 	x = round(x_min + (dx_max * (i/laps)));
 	y = clamp(round(y_mid + dy_max), ...
-			round(y_mid + (dy_max * ((times(i) - ref_time) / max_diff_val))), ...
+			round(y_mid + (dy_max * (times(i) - ref_time))), ...
 			round(y_mid - dy_max) ...
 	);
 	matlabclient(1, get_smallpackage([ ...
 			set_point_size(3, 3), ...
-			point(x, y), ...
+			point(x, y), ...  % value
 			set_point_size(1, 1), ...
-			draw_line(x, 144-2,  x, 144+2) ...
+			draw_line(x, 144-2,  x, 144+2) ...  % markers on x-axis
 	]));
 	pause(dt);
 end
+
+y_half_up = round(y_mid + (dy_max * 0.5));
+y_half_down = round(y_mid + (dy_max * -0.5));
+matlabclient(1, get_smallpackage([ ...
+    draw_line(x_min, y_mid, 304, y_mid), ...
+    draw_line(x_min, y_half_up, 304, y_half_up), ...
+    draw_line(x_min, y_half_down, 304, y_half_down), ...
+    put_text(x_min-4, y_mid - 4, 'R', num2str(ref_time)), ...
+    put_text(x_min-4, y_half_up - 4, 'R', num2str(ref_time + 0.5)), ...
+    put_text(x_min-4, y_half_down - 4, 'R', num2str(ref_time - 0.5)) ...
+]));
+pause(dt);
+
 max_lap_nums = 9;
 d_lap = floor(laps/max_lap_nums) + 1;
 % examples: 

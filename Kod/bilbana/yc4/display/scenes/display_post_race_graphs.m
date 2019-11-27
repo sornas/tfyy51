@@ -1,10 +1,4 @@
-clear all;
-
-addpath display/ClientServerApp/Release
-cd display/ClientServerApp/Release
-!startServer
-cd ../../..
-
+function [] = display_post_race_graphs(seg_times1, seg_times2, lap_times1, lap_times2, ref_time)
 pause(1);
 
 matlabclient(1, get_smallpackage([ ...
@@ -15,16 +9,13 @@ matlabclient(1, get_smallpackage([ ...
 pause(0.2);
 
 %% CHECK DISPLAY BUTTONS
-display.last_check = tic;
+last_check = tic;
 done = false;
-
-laptime_1 = [12 12.1 12.2 12.3 12.4 12.5 12.6 12.7 12.8 12.9 13];
-laptime_2 = [11 11.2 11.4 11.6 11.8 12 12.5 13 13.5 14 14.2 14.6 14.8 15];
 
 while 1
 	pause(0.1);
-	if toc(display.last_check) > 0.4
-		display.last_check = tic;
+	if toc(last_check) > 0.4
+		last_check = tic;
 
 		% read internal mem from last send
 		[display.out, display.shm] = matlabclient(2);
@@ -37,19 +28,17 @@ while 1
 		end
 		update_ref_time = false;
 		for i = 1:length(display.shm_interp.data)
-			disp(num2str(length(display.shm_interp.data)))
 			data = display.shm_interp.data(i);
 			if data.data == 51
-				draw_lap_graph(laptime_1, laptime_2, 13, false);
+				draw_lap_graph(lap_times1, lap_times2, ref_time, false);
 			elseif data.data == 52
-				draw_segment_bars([1 2 3 4 5 6 7 8 9], [9 8 7 6 5 4 3 2 1]);
+				draw_segment_bars(seg_times1, seg_times2);
 			elseif data.data == 53
 				pause(0.2);
 				matlabclient(1, get_smallpackage(clear_display()));
-				pause(0.2);
 				done = true;
 			elseif data.data == 70
-				draw_lap_graph(laptime_1, laptime_2, 13, true);
+				draw_lap_graph(lap_times1, lap_times2, ref_time, true);
 			end
 		end
 		if done == true
@@ -62,5 +51,4 @@ while 1
 		display.last_check = tic;
 	end
 end
-
-matlabclient(3);
+end

@@ -1,8 +1,8 @@
 function [] = draw_segment_bars(values1, values2)
 dt = 0.2;  % delay for display
+pause(2*dt);
 queue = [];  % internal queue for packages to send to display
 
-pause(dt);
 matlabclient(1, get_smallpackage(clear_display()));
 pause(dt);
 
