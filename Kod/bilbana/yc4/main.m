@@ -20,14 +20,14 @@ global log_verbose;
 log_verbose = false;
 % INIT DISPLAY
 if display_active
-    addpath display/ClientServerApp/Release
-    cd display/ClientServerApp/Release
-    !startServer
-    cd ../../..
+	addpath display/ClientServerApp/Release
+	cd display/ClientServerApp/Release
+	!startServer
+	cd ../../..
 end
 
 display = struct;
-display.data = [clear_display()];
+display.data = [];
 display.out = 0;
 display.shm = 0;
 display.shm_interp = struct;
@@ -35,7 +35,6 @@ display.shm_interp.ack = 0;
 display.shm_interp.start_code = '';
 display.shm_interp.data = [];
 display.last_send = tic;
-display.last_request = tic;
 display.send_interval = 0.5;
 
 load('bilbana\files\Bana1.mat')
@@ -94,49 +93,99 @@ boot2 = struct;
 boot2.status = false;
 boot2.time = 0;
 
+halt = false;
+
+ref_time = 13;
+
 t = 0;
 highToc = 0;
 
-%% ASK ACTIVE CARS
-disp('J = Ja (automatiskt), M = Ja (manuellt), N = Nej');
+%% DRAW DISPLAY
+matlabclient(1, get_smallpackage([ ...
+	put_text(160, 30, 'C', 'Choose which car to drive'), ...
+	define_touch_switch(98 , 60 , 130, 90 , 11, 12, 'C', '1'), ...  % ACTIVATE TRACK 1
+	define_touch_switch(102, 98 , 126, 122, 13, 14, 'C', 'M'), ...  % MANUAL CONTROL TRACK 1
+	define_touch_switch(190, 60 , 222, 90 , 21, 22, 'C', '2'), ...  % ACTIVATE TRACK 2
+	define_touch_switch(194, 98 , 218, 122, 23, 61, 'C', 'M') ...  % MANUAL CONTROL TRACK 2
+	]));
+pause(0.5);
+matlabclient(1, get_smallpackage([ ...
+	put_text(160, 120, 'C', '13.0'), ...  % CURRENT REFERENCE TIME
+	define_touch_key(   98 , 110, 130, 140, 41, 42, 'C', '-'), ...  % DECREASE REFERENCE TIME
+	define_touch_key(   190, 110, 220, 140, 43, 44, 'C', '+'), ...  % INCREASE REFERENCE TIME
+	define_touch_key(   272, 192, 304, 224, 31, 32, 'C', 'S') ...  % START BUTTON
+	%TODO CLEAR BUTTON
+	]));
 
-car1.response = input('Vill du köra bil 1? [N] ', 's');
-if car1.response == 'J'
-	car1.running = true;
-	car1.automatic = true;
-    boot1.status = true;
-    boot1.time = tic;
-elseif car1.response == 'M'
-	car1.running = true;
-	car1.automatic = false;
-else
-	car1.running = false;
+%% CHECK DISPLAY BUTTONS
+display.last_check = tic;
+done = false;
+while 1
+	pause(0.1);
+	if toc(display.last_check) > 0.4
+		display.last_check = tic;
+
+		% read internal mem from last send
+		[display.out, display.shm] = matlabclient(2);
+		[display.shm_interp.ack, display.shm_interp.start_code, display.shm_interp.data] = get_response(display.shm);
+
+		% request internal mem
+		matlabclient(1, hex2dec(['12'; '01'; '53'; '66']));
+		if isempty(display.shm_interp.data)
+			continue
+		end
+		update_ref_time = false;
+		for i = 1:length(display.shm_interp.data)
+			disp(num2str(length(display.shm_interp.data)))
+			data = display.shm_interp.data(i);
+			disp(data)
+			if data.data == 32
+				done = true;
+			elseif data.data == 11
+				car1.running = true;
+			elseif data.data == 12
+				car1.running = false;
+			elseif data.data == 13
+				car1.automatic = false;
+			elseif data.data == 14
+				car1.automatic = true;
+			elseif data.data == 21
+				car2.running = true;
+			elseif data.data == 22
+				car2.running = false;
+			elseif data.data == 23
+				car2.automatic = false;
+			elseif data.data == 24
+				car2.automatic = true;
+			elseif data.data == 41
+				% ignore
+			elseif data.data == 42
+				ref_time = max(ref_time - 0.5, 12.0);
+				update_ref_time = true;
+			elseif data.data == 43
+				% ignore
+			elseif data.data == 44
+				ref_time = min(ref_time + 0.5, 15.0);
+				update_ref_time = true;
+			end
+		end
+		if done == true
+			break
+		end
+		if update_ref_time == true
+			pause(0.4);
+			matlabclient(1, get_smallpackage(put_text(160, 120, 'C', num2str(ref_time, '%.1f'))));
+		end
+		display.last_check = tic;
+	end
 end
 
+debug('DISPLAY', ['CAR1.RUNNING=', car1.running, ', CAR1.AUTOMATIC=', car1.automatic])
+debug('DISPLAY', ['CAR2.RUNNING=', car2.running, ', CAR2.AUTOMATIC=', car2.automatic])
+debug('DISPLAY', ['CHOSEN REFERENCE TIME=', ref_time])
 
-car2.response = input('Vill du köra bil 2? [N] ', 's');
-if car2.response == 'J'
-	car2.running = true;
-	car2.automatic = true;
-    boot2.status = true;
-    boot2.time = tic;
-elseif car2.response == 'M'
-	car2.running = true;
-	car2.automatic = false;
-else
-	car2.running = false;
-end
-%{
-ref_time = input('Vilken referenstid ska anv�ndas? [13] ', 's');
-ref_time = str2double(ref_time);
-if isnan(ref_time)
-	ref_time = 13;
-elseif not(isreal(ref_time))
-	ref_time = 13;
-end
-%}
-car1.ref_time = 15;
-car2.ref_time = 15;
+matlabclient(1, get_smallpackage([define_bar_graph('O', 2, 266, 30, 290, 210, 0, 64, 1, 1)]));
+
 %% MAIN LOOP
 while 1
 	readTime = tic;
@@ -148,52 +197,53 @@ while 1
 		car1.stopping = true;
 		car2.stopping = true;
 	end
+end
 
-	figure(hf)
-	drawnow
-    
-    %% CORE OF LOOP
-    [car1, car1.stop, display.data] = do_car(car1, t, display.data, boot1);
-    [car2, car2.stop, display.data] = do_car(car2, t, display.data, boot2);
-    %% BOOTSTRAP
-    if boot1.status
-        [car1, boot1] = do_boot(car1, boot1);
-    end
-    if boot2.status
-        [car2, boot2] = do_boot(car2, boot2);
-    end
-    %% GOVERNOR
-    if not(boot1.status) && car1.lap ~= 0
-        car1 = do_gov(car1);
-    end
-    if not(boot2.status) && car2.lap ~= 0
-        car2 = do_gov(car2);
-    end
-    %%
-	if car1.stop == true
-		disp('stopped by car 1');
-		break;
-	end
-	if car2.stop == true
-		disp('stopped by car 2');
-		break;
-	end
+figure(hf)
+drawnow
 
-	if (~car2.running && car1.stopped) || (~car1.running && car2.stopped) || (car1.stopped && car2.stopped)
-		break;
-	end
+[car1, halt, display.data] = do_car(car1, t, display.data);
+if halt
+	break
+end
+[car2, halt, display.data] = do_car(car2, t, display.data);
+if halt
+	break
+end
 
-	%% END OF LOOP
-	while 1                     %Whileloop med paus som k�rs till pausen �verskridit 0.07 sekunder
-		% DISPLAY
-		display.send_delay = tic;
-		if toc(display.last_send) > display.send_interval && display_active
+%% BOOTSTRAP
+if boot1.status
+	[car1, boot1] = do_boot(car1, boot1);
+end
+if boot2.status
+	[car2, boot2] = do_boot(car2, boot2);
+end
+%% GOVERNOR
+if not(boot1.status) && car1.lap ~= 0
+	car1 = do_gov(car1);
+end
+if not(boot2.status) && car2.lap ~= 0
+	car2 = do_gov(car2);
+end
+%%
+
+if (~car2.running && car1.stopped) || (~car1.running && car2.stopped) || (car1.stopped && car2.stopped)
+	break;
+end
+
+%% END OF LOOP
+while 1                     %Whileloop med paus som k�rs till pausen �verskridit 0.07 sekunder
+	% DISPLAY
+	display.send_delay = tic;
+	if toc(display.last_send) > display.send_interval && display_active
 			% queue control signal
 			if car1.running && car1.automatic
 				% display.data = [display.data, put_text(20, 16 + (16 * 1), 'L', num2str(car1.u))];
+				display.data = [display.data, update_bar_graph(1, car1.u)];
 			end
 			if car2.running && car2.automatic
 				% display.data = [display.data, put_text(20, 16 + (16 * 2), 'L', num2str(car2.u))];
+				display.data = [display.data, update_bar_graph(2, car2.u)];
 			end
 
 			% send all queued data
@@ -235,7 +285,7 @@ disp(car2);
 terminate(1);
 terminate(2);
 if display_active
-    matlabclient(3);
+	matlabclient(3);
 end
 %% DISPLAY GRAPHS
 
@@ -253,10 +303,10 @@ dateStr = datestr(now, 'yyyy-mm-dd');
 timeStr = datestr(now, 'HH.MM');
 
 if car1.lap > 2
-    filenameMat1 = strjoin({'bilbana1_', dateStr, 'T', timeStr, '.mat'}, '');
-    save(filenameMat1, '-struct', 'car1');
+	filenameMat1 = strjoin({'bilbana1_', dateStr, 'T', timeStr, '.mat'}, '');
+	save(filenameMat1, '-struct', 'car1');
 end
 if car2.lap > 2
-    filenameMat2 = strjoin({'bilbana2_', dateStr, 'T', timeStr, '.mat'}, '');
-    save(filenameMat2, '-struct', 'car2');
+	filenameMat2 = strjoin({'bilbana2_', dateStr, 'T', timeStr, '.mat'}, '');
+	save(filenameMat2, '-struct', 'car2');
 end

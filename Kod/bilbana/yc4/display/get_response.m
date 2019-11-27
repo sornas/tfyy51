@@ -36,7 +36,7 @@ pointer = pointer + 1;
 % total length
 
 data = struct;
-while pointer < length(display_data) - 1  % last value is bcc
+while pointer < length(display_data) - 1  % (last value is bcc)
     pointer = pointer + 1;
     if display_data(pointer) ~= 27
         % TODO: no ESC?

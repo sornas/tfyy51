@@ -1,4 +1,4 @@
-function [car, stop, display_data] = do_car(car, t, display_data, boot)
+function [car, halt, display_data] = do_car(car, t, display_data, boot)
 %DO_CAR Ger nya värden till struct car, avgör om koden ska stoppas samt hämtar displaydata.
 %{
 Input/Output:
@@ -27,7 +27,7 @@ anrop
 stop - Huruvida koden ska stoppas eller inte
 %}
 
-stop = false;
+halt = false;
 if car.running == true
 	[car.new_lap, car.new_check_point, car.time] = get_car_position(car.num);
 	if car.new_check_point == true && rand < car.miss_probability && car.lap >= 4
@@ -53,7 +53,7 @@ if car.running == true
 			if car.response == 'J'
 				car.seg_tic = tic;
 			else
-				stop = true;
+				halt = true;
 				return;
 			end
 		end
