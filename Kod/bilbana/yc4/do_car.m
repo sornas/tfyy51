@@ -5,9 +5,9 @@ Input/Output:
 car - En struct med data för en viss bil    
     car.num - Vilken bil det är (1 eller 2)
     car.running - Om bilen körs eller inte
-    car1.stopping - Logiskt värde som indikerar om bilen snart ska
+    car.stopping - Logiskt värde som indikerar om bilen snart ska
         stannas
-    car1.stopped - Bilen har stannat och ska inte flyttas på
+    car.stopped - Bilen har stannat och ska inte flyttas på
     car.automatic - Om bilen körs automatiskt eller inte
     car.segment - Bilens nuvarande segment
     car.lap - Bilens nuvarande varv
@@ -17,18 +17,22 @@ car - En struct med data för en viss bil
         använts (v x 9 matris)
     car.position - Bilens nuvarande placering på banan i meter från
         start/mål
-    car.pos_at  - Sträckan till målgivaren [m] från varje givare (1 x 10 matris)
+    car.pos_at  - Sträckan till målgivaren [m] från varje givare 
+        (1 x 10 matris)
     car.seg_len = Längden på varje segment [m] (1 x 9 matris)    
-    car1.percents - Upskattad andel av varvtiden som varje segment bör ta
-    (1 x 9 matris)
-    car.map - Tabell med hastighetskoefficienter för alla positioner (.mat
-    fil)
+    car.percents - Upskattad andel av varvtiden som varje segment bör ta
+        (1 x 9 matris)
+    car.map - Tabell med hastighetskoefficienter för alla positioner 
+        (.mat fil)
     car.miss_probability - Sannorlikheten för artificiellt introducerade
         missade givare
-    car1.constant - Parameter som används för att sätta spänningen till banan
+    car.constant - Parameter som används för att sätta spänningen till banan
 t - Längden (s) på nuvarande programcykel
 display_data - Buffer med den data som ska skickas till displayen vid nästa
-anrop
+    anrop
+boot - En struct med info relaterad till bootstrap
+    boot.status - Logiskt värde som indikerar ifall bootstap körs eller ej
+    boot.time - Tiden sedan bootstrap höjde car.constant
 halt - Huruvida koden ska stoppas eller inte
 
 
