@@ -1,4 +1,5 @@
 clear all;
+display_active = false;
 
 %% INIT TRACK
 disp('Startar bilbanan. Avsluta med q.')
@@ -17,12 +18,13 @@ global log_debug;
 log_debug = true;
 global log_verbose;
 log_verbose = false;
-
 % INIT DISPLAY
-addpath display/ClientServerApp/Release
-cd display/ClientServerApp/Release
-!startServer
-cd ../../..
+if display_active
+    addpath display/ClientServerApp/Release
+    cd display/ClientServerApp/Release
+    !startServer
+    cd ../../..
+end
 
 display = struct;
 display.data = [clear_display()];
@@ -53,10 +55,13 @@ car1.seg_constant_list = []; % TODO
 car1.position = 0;
 car1.pos_at  = [0.0 2.53 3.05 4.73 7.68 8.98 10.93 14.69 17.57 19.60];
 car1.seg_len = [2.53 0.53 1.68 2.92 1.2 2.01 3.83 2.89 1.99];
+car1.percents = [];  % TODO
 car1.map = Bana1;
 car1.approximation = [];
 car1.miss_probability = 0.0;
 car1.lap_constants = [1,1,1,1,1,1,1,1,1]; % TODO
+car1.constant = 0.1;
+car1.stop = false;
 
 car2 = struct;
 car2.num = 2;
@@ -71,10 +76,23 @@ car2.seg_times = [];
 car2.position = 0;
 car2.pos_at  = [0.0 2.53 3.05 4.92 7.62 9.02 10.72 14.68 17.76 19.95];
 car2.seg_len = [2.53 0.52 1.87 2.70 1.40 1.70 4.03 3.08 2.19];
+car2.percents = [0.088, 0.022, 0.102, 0.15, 0.058, 0.11, 0.212, 0.146, 0.113];
+
 car2.map = Bana2;
 car2.miss_probability = 0.1;
 car2.seg_constant_list = []; % TODO
 car2.lap_constants = [1,1,1,1,1,1,1,1,1]; % TODO
+car2.seg_constant = 1;
+car2.constant = 0.1;
+car2.stop = false;
+
+boot1 = struct;
+boot1.status = false;
+boot1.time = 0;
+
+boot2 = struct;
+boot2.status = false;
+boot2.time = 0;
 
 t = 0;
 highToc = 0;
@@ -86,6 +104,8 @@ car1.response = input('Vill du köra bil 1? [N] ', 's');
 if car1.response == 'J'
 	car1.running = true;
 	car1.automatic = true;
+    boot1.status = true;
+    boot1.time = tic;
 elseif car1.response == 'M'
 	car1.running = true;
 	car1.automatic = false;
@@ -98,6 +118,8 @@ car2.response = input('Vill du köra bil 2? [N] ', 's');
 if car2.response == 'J'
 	car2.running = true;
 	car2.automatic = true;
+    boot2.status = true;
+    boot2.time = tic;
 elseif car2.response == 'M'
 	car2.running = true;
 	car2.automatic = false;
@@ -113,8 +135,8 @@ elseif not(isreal(ref_time))
 	ref_time = 13;
 end
 %}
-ref_time = 13;
-
+car1.ref_time = 15;
+car2.ref_time = 15;
 %% MAIN LOOP
 while 1
 	readTime = tic;
@@ -129,10 +151,25 @@ while 1
 
 	figure(hf)
 	drawnow
-
-	[car1, car1.stop, display.data] = do_car(car1, t, display.data);
-	[car2, car2.stop, display.data] = do_car(car2, t, display.data);
-
+    
+    %% CORE OF LOOP
+    [car1, car1.stop, display.data] = do_car(car1, t, display.data, boot1);
+    [car2, car2.stop, display.data] = do_car(car2, t, display.data, boot2);
+    %% BOOTSTRAP
+    if boot1.status
+        [car1, boot1] = do_boot(car1, boot1);
+    end
+    if boot2.status
+        [car2, boot2] = do_boot(car2, boot2);
+    end
+    %% GOVERNOR
+    if not(boot1.status) && car1.lap ~= 0
+        car1 = do_gov(car1);
+    end
+    if not(boot2.status) && car2.lap ~= 0
+        car2 = do_gov(car2);
+    end
+    %%
 	if car1.stop == true
 		disp('stopped by car 1');
 		break;
@@ -150,7 +187,7 @@ while 1
 	while 1                     %Whileloop med paus som k�rs till pausen �verskridit 0.07 sekunder
 		% DISPLAY
 		display.send_delay = tic;
-		if toc(display.last_send) > display.send_interval
+		if toc(display.last_send) > display.send_interval && display_active
 			% queue control signal
 			if car1.running && car1.automatic
 				% display.data = [display.data, put_text(20, 16 + (16 * 1), 'L', num2str(car1.u))];
@@ -197,18 +234,18 @@ disp(car2);
 
 terminate(1);
 terminate(2);
-
-matlabclient(3);
-
+if display_active
+    matlabclient(3);
+end
 %% DISPLAY GRAPHS
 
 if car1.running == true
-	graphs(car1.lap_times, ref_time, car1.seg_times, 1);
+	graphs(car1.lap_times, car1.ref_time, car1.seg_times, 1);
 end
 
 
 if car2.running == true
-	graphs(car2.lap_times, ref_time, car2.seg_times, 2);
+	graphs(car2.lap_times, car2.ref_time, car2.seg_times, 2);
 end
 
 %% SAVE VARIABLES FROM CAR STRUCT

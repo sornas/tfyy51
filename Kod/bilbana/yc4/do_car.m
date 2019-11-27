@@ -1,4 +1,4 @@
-function [car, stop, display_data] = do_car(car, t, display_data)
+function [car, stop, display_data] = do_car(car, t, display_data, boot)
 %DO_CAR Ger nya värden till struct car, avgör om koden ska stoppas samt hämtar displaydata.
 %{
 Input/Output:
@@ -44,7 +44,7 @@ end
 %% READ INPUT FROM TRACK
 if car.running == true
 	if car.lap ~= 0
-		if toc(car.seg_tic) > 9.0
+		if toc(car.seg_tic) > 9.0 && not(boot.status)
 			set_car_speed(1, 0);
 			set_car_speed(2, 0);
 			%disp(strjoin({'AvÃ¥kning bil', num2str(car.num)}));
@@ -90,20 +90,31 @@ if car.running == true
 		if car.new_lap == false % choose_position krachar vid nytt varv (seg 10)
 			if car.lap ~= 0
 				car.seg_times(car.lap, car.segment) = toc(car.seg_tic);
-			end
+            end
+            
+            seg_time = car.seg_times(car.lap, car.segment)
+            lap_time_now = toc(car.lap_tic)
+            % s = vt
+            % v = s/t
+            % t = s/v
+            prev_seg_v = car.seg_len(car.segment) / toc(car.seg_tic)
+            track_remaining = car.pos_at(length(car.pos_at)) - car.pos_at(car.segment + 1)
+            
+            car.forecasts(car.lap, car.segment) = lap_time_now + track_remaining/prev_seg_v
+            
 			car.segment = car.segment + 1;
 			car.seg_tic = tic;
 			if car.lap > 2 % Sï¿½kerhetsmarginal (Bï¿½r vara 1?)
 				disp(car)
 				[new_position, seg_plus] = ...
 						choose_position(car.position, car.segment, car.num, car.pos_at);
-				if seg_plus ~= 0 && car.segment == 2
+                if seg_plus ~= 0 && car.segment == 2
 					disp('Hoppar ï¿½ver missad givare 1/2');
 				else
 					car.position = new_position;
 					car.segment = car.segment + seg_plus;
                 end
-                if seg_plus ~= 0
+                if seg_plus ~= 0 && car.segment ~= 2
                     car.seg_times(car.lap, car.segment - seg_plus - 1) = 0;
                     disp(car.seg_times(car.lap, :))
                     disp(seg_plus)
@@ -118,7 +129,9 @@ if car.running == true
 
 	%% NEW LAP
 	if car.new_lap == true
-        car.lap_constants = gov_set(get_car_constant(car.num));
+        disp('NEW LAP')
+        
+        car.lap_constants = gov_set(car.constant);
 		car.new_lap = false; %TODO remove
 		beep;
 		if car.lap == 0
@@ -138,6 +151,9 @@ if car.running == true
 			car.lap_tic = tic;
 			car.position = 0;
 
+            % save segment percentage from last lap
+            car.percents = fit_percents(car.percents, car.lap_times(car.lap), car.seg_times(car.lap,:))
+            
 			if car.lap == 1 && size(car.seg_times, 2) < 9
 				disp('FEL: För få segment!!')
 				car.stopped = true;
@@ -156,8 +172,7 @@ end
 %% CALCULATE
 if car.running == true && car.automatic == true
 	car.v = get_new_v(car.position, car.map);
-    seg_constant = get_seg_constant(car.position, car.lap_constants, car.num, car.pos_at);
-	car.u = get_new_u(car.v, seg_constant);
+	car.u = get_new_u(car.v, car.constant);
 end
 
 %% CONTROLLER
