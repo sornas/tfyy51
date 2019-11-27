@@ -92,8 +92,15 @@ if car.running == true
 				car.seg_times(car.lap, car.segment) = toc(car.seg_tic);
             end
             
-            seg_time = car.seg_times(car.lap, car.segment);
-            car.forecasts(car.lap, car.segment) = seg_time / car.percents(car.segment);
+            seg_time = car.seg_times(car.lap, car.segment)
+            lap_time_now = toc(car.lap_tic)
+            % s = vt
+            % v = s/t
+            % t = s/v
+            prev_seg_v = car.seg_len(car.segment) / toc(car.seg_tic)
+            track_remaining = car.pos_at(length(car.pos_at)) - car.pos_at(car.segment + 1)
+            
+            car.forecasts(car.lap, car.segment) = lap_time_now + track_remaining/prev_seg_v
             
 			car.segment = car.segment + 1;
 			car.seg_tic = tic;
