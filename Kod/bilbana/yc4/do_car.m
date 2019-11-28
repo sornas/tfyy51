@@ -98,45 +98,45 @@ if car.running == true
 
 	%% CHECK POINT
 	if car.new_check_point == true
-        disp(car)
+		disp(car)
 		if car.new_lap == false % choose_position krachar vid nytt varv (seg 10)
-            if car.lap ~= 0
+			if car.lap ~= 0
 				car.seg_times(car.lap, car.segment) = toc(car.seg_tic);
-            end
-            
-            lap_time_now = toc(car.lap_tic);
-            % s = vt
-            % v = s/t
-            % t = s/v
-            prev_seg_v = car.seg_len(car.segment) / toc(car.seg_tic);
-            track_remaining = car.pos_at(length(car.pos_at)) - car.pos_at(car.segment + 1);
-            forecast = lap_time_now + track_remaining/prev_seg_v;
-            
-            car.forecasts(car.lap, car.segment) = forecast;
-            
+			end
+
+			lap_time_now = toc(car.lap_tic);
+			% s = vt
+			% v = s/t
+			% t = s/v
+			prev_seg_v = car.seg_len(car.segment) / toc(car.seg_tic);
+			track_remaining = car.pos_at(length(car.pos_at)) - car.pos_at(car.segment + 1);
+			car.forecasts(car.lap, car.segment) = lap_time_now + track_remaining/prev_seg_v;
+
+			car.forecast_naive(car.lap, car.segment) = toc(car.seg_tic) / car.percents(car.segment)
+
 			car.segment = car.segment + 1;
 			car.seg_tic = tic;
-            
-            if car.automatic && car.lap > 2 % S�kerhetsmarginal (B�r vara 1?)
+
+			if car.automatic && car.lap > 2 % S�kerhetsmarginal (B�r vara 1?)
 				disp(car)
 				[new_position, seg_plus] = ...
-						choose_position(car.position, car.segment, car.num, car.pos_at);
-                if seg_plus ~= 0 && car.segment == 2
+					choose_position(car.position, car.segment, car.num, car.pos_at);
+				if seg_plus ~= 0 && car.segment == 2
 					disp('Hoppar �ver missad givare 1/2');
 				else
 					car.position = new_position;
 					car.segment = car.segment + seg_plus;
-                end
-                if seg_plus ~= 0 && car.segment ~= 2
-                    car.seg_times(car.lap, car.segment - seg_plus - 1) = 0;
-                    disp(car.seg_times(car.lap, :))
-                    disp(seg_plus)
-                end
+				end
+				if seg_plus ~= 0 && car.segment ~= 2
+					car.seg_times(car.lap, car.segment - seg_plus - 1) = 0;
+					disp(car.seg_times(car.lap, :))
+					disp(seg_plus)
+				end
 				%car.miss_time = uint64(0);
-            else
+			else
 				car.position = car.pos_at(car.segment);
 				%car.miss_time = uint64(0);
-            end
+			end
 		end
 	end
 

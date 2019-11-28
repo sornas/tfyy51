@@ -59,6 +59,8 @@ car1.miss_probability = 0.0;
 car1.constant = 0.1;
 car1.stop = false;
 car1.governs = [];
+car1.forecasts = [];
+car1.forecasts_naive = [];
 
 car2 = struct;
 car2.num = 2;
@@ -79,7 +81,8 @@ car2.miss_probability = 0.05;
 car2.constant = 0.1;
 car2.stop = false;
 car2.governs = [];
-
+car2.forecasts = [];
+car2.forecasts_naive = [];
 
 boot1 = struct;
 boot1.status = false;
