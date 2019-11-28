@@ -331,11 +331,13 @@ end
 
 %% DISPLAY POST RACE
 if display_active
-    % format segment times correctly
-    car1.seg_times_format = format_seg_times(car1);
-    car2.seg_times_format = format_seg_times(car2);
-    display_post_race_graphs(car1.seg_times_format, car2.seg_times_format, ...
-            car1.lap_times, car2.lap_times, ref_time);
+	% format segment times correctly
+	car1.seg_times_format = format_seg_times(car1);
+	car2.seg_times_format = format_seg_times(car2);
+	pause(0.2);
+	matlabclient(1, get_smallpackage(clear_display()));
+	display_post_race_graphs(car1.seg_times_format, car2.seg_times_format, ...
+			car1.lap_times, car2.lap_times, ref_time);
 end
 
 %% CLEAN UP
