@@ -82,16 +82,16 @@ if ~(in_clipboard)
 	car1 = struct;
 	car1.avg = '--.-';
 	car1.dev = '-.--';
-	if ~isempty(car1_laptimes)
-		car1.avg = num2str(mean(car1_laptimes), 3);
-		car1.dev = num2str(std(car1_laptimes), 2);
+	if length(car1_laptimes) > 5
+		car1.avg = num2str(mean(car1_laptimes(6, length(car1_laptimes))), 3);
+		car1.dev = num2str(std(car1_laptimes(6, length(car1_laptimes))), 2);
 	end
 	car2 = struct;
 	car2.avg = '--.-';
 	car2.dev = '-.--';
-	if ~isempty(car2_laptimes)
-		car2.avg = num2str(mean(car2_laptimes), 3);
-		car2.dev = num2str(std(car2_laptimes), 2);
+	if length(car2_laptimes) > 5
+		car2.avg = num2str(mean(car2_laptimes(6, length(car2_laptimes))), 3);
+		car2.dev = num2str(std(car2_laptimes(6, length(car2_laptimes))), 2);
 	end
 
 	line = 12;
