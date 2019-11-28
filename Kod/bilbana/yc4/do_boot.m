@@ -53,7 +53,7 @@ if car.running == true
         forecast_ref_diff = laptime_forecast - car.ref_time;
         forecast_ref_diff_rel = forecast_ref_diff / car.ref_time;
         car.constant = car.constant + (forecast_ref_diff_rel * 0.15);
-        % car.constant = car.constant * 1.05;  % kompensation för kall bana
+        car.constant = car.constant * 1.05;  % kompensation för kall bana
         boot.status = 0;
         disp('END OF BOOTSTRAP')
         disp(car.num)

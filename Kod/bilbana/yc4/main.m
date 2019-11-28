@@ -78,7 +78,7 @@ car2.pos_at  = [0.0 2.53 3.05 4.92 7.62 9.02 10.72 14.68 17.76 19.95];
 car2.seg_len = [2.53 0.52 1.87 2.70 1.40 1.70 4.03 3.08 2.19];
 car2.percents = [0.088, 0.022, 0.102, 0.15, 0.058, 0.11, 0.212, 0.146, 0.113];
 car2.map = Bana2;
-car2.miss_probability = 0.1;
+car2.miss_probability = 0.05;
 car2.seg_constant_list = []; % TODO
 car2.lap_constants = [1,1,1,1,1,1,1,1,1]; % TODO
 car2.seg_constant = 1;
@@ -230,11 +230,11 @@ while 1
     figure(hf)
     drawnow
     
-    [car1, halt, display.data] = do_car(car1, t, display.data);
+    [car1, halt, display.data] = do_car(car1, t, display.data, boot1);
     if halt
         break
     end
-    [car2, halt, display.data] = do_car(car2, t, display.data);
+    [car2, halt, display.data] = do_car(car2, t, display.data, boot2);
     if halt
         break
     end

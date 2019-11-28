@@ -41,7 +41,7 @@ halt - Huruvida koden ska stoppas eller inte
 halt = false;
 if car.running == true
 	[car.new_lap, car.new_check_point, car.time] = get_car_position(car.num);
-	if car.new_check_point == true && rand < car.miss_probability && car.lap >= 4
+	if car.new_check_point == true && rand < car.miss_probability && car.lap > 5
 		disp('Hoppar �ver givare');
 		car.new_check_point = false;
 		beep;
@@ -54,20 +54,20 @@ end
 
 %% READ INPUT FROM TRACK
 if car.running == true
-	if car.lap ~= 0
-		if toc(car.seg_tic) > 9.0 && not(boot.status)
+	if car.lap ~= 0 && not(boot.status)
+        if toc(car.seg_tic) > 9.0
 			set_car_speed(1, 0);
 			set_car_speed(2, 0);
 			%disp(strjoin({'Avåkning bil', num2str(car.num)}));
 			disp('J = Ja, N = Nej')
 			car.response = input('Vill du fortsätta? [N] ', 's');
-			if car.response == 'J'
+            if car.response == 'J'
 				car.seg_tic = tic;
 			else
 				halt = true;
 				return;
-			end
-		end
+            end
+        end
 	end
 
 	%% CALC POSITION
@@ -75,7 +75,7 @@ if car.running == true
 		% car.last_seg_times = car.seg_times(car.lap - 1, 1:9);
 		aprox_v = get_aprox_v(car.segment + detect_missed(car.position, car.segment, car.num, car.pos_at), car.lap, car.seg_times, car.num, car.seg_len);
 		car.position = get_position(aprox_v, car.position, t);
-		if detect_missed( car.position, car.segment, car.num, car.pos_at)
+        if detect_missed( car.position, car.segment, car.num, car.pos_at)
 			disp('Miss?');
 
 			%disp(toc(car.miss_time));
