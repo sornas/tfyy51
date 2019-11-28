@@ -308,7 +308,6 @@ end
 disp(highToc);
 disp(car1);
 disp(car2);
-
 terminate(1);
 terminate(2);
 

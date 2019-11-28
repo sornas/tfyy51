@@ -5,8 +5,12 @@ if car.new_lap
     % TODO calculate stuff
 elseif car.new_check_point && (car.segment == 5 || car.segment == 8)
     if true %car.lap == 1
-        status = car.forecasts(car.lap, car.segment-1)/car.ref_time;
-        car.constant = car.constant + (status - 1) * 0.08;
+        if car.lap == 1
+            status = car.forecasts_naive(car.lap, car.segment-1)/car.ref_time;
+        else
+            status = car.forecasts(car.lap, car.segment-1)/car.ref_time;
+        end
+            car.constant = car.constant + (status - 1) * 0.08;
         car.governs(length(car.governs) + 1) = car.constant;
     end
     %{

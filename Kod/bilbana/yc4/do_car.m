@@ -112,7 +112,7 @@ if car.running == true
 			track_remaining = car.pos_at(length(car.pos_at)) - car.pos_at(car.segment + 1);
 			car.forecasts(car.lap, car.segment) = lap_time_now + track_remaining/prev_seg_v;
 
-			car.forecast_naive(car.lap, car.segment) = toc(car.seg_tic) / car.percents(car.segment)
+			car.forecasts_naive(car.lap, car.segment) = toc(car.seg_tic) / car.percents(car.segment)
 
 			car.segment = car.segment + 1;
 			car.seg_tic = tic;
