@@ -142,10 +142,9 @@ if car.running == true
 
 	%% NEW LAP
 	if car.new_lap == true
-        disp('NEW LAP')
-        
-        car.lap_constants = gov_set(car.constant);
-		% car.new_lap = false; %TODO remove
+		disp('NEW LAP')
+
+		car.lap_constants = gov_set(car.constant);
 		beep;
 		if car.lap == 0
 			% dont save time for first lap
