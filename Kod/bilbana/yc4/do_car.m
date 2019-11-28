@@ -73,7 +73,7 @@ if car.running == true
 	%% CALC POSITION
     if car.automatic && car.lap > 1
 		% car.last_seg_times = car.seg_times(car.lap - 1, 1:9);
-		aprox_v = get_aprox_v(car.segment + detect_missed(car.position, car.segment, car.num, car.pos_at), car.lap, car.seg_times, car.num, car.seg_len);
+		aprox_v = get_aprox_v(car.segment + detect_missed(car.position, car.segment, car.num, car.pos_at), car);
 		car.position = get_position(aprox_v, car.position, t);
         if detect_missed( car.position, car.segment, car.num, car.pos_at)
 			disp('Miss?');
