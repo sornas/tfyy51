@@ -98,6 +98,7 @@ if car.running == true
 
 	%% CHECK POINT
 	if car.new_check_point == true
+        disp(car)
 		if car.new_lap == false % choose_position krachar vid nytt varv (seg 10)
             if car.lap ~= 0
 				car.seg_times(car.lap, car.segment) = toc(car.seg_tic);
@@ -192,7 +193,7 @@ if car.running == true && car.automatic == false
     mult = 100;
     max = 55;
     div = 55;
-	set_car_speed(car.num, mult * ((max - get_manual_speed(car.num)) / div));
+	set_car_speed(car.num, mult * ((max - get_manual_speed(car.num)) / div))
 end
 
 %% EXECUTE

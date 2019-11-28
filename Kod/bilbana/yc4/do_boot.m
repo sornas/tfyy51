@@ -5,7 +5,7 @@ if car.running == true
     %% BEFORE FIRST LAP
     if car.lap == 0
         t = toc(boot.time);
-        if t > 0.6
+        if t > 0.7
             car.constant = car.constant + 0.12;
             disp('###')
             disp(car.num)
@@ -15,7 +15,7 @@ if car.running == true
     end
     %% WHEN NEW LAP
     if car.new_lap == 1
-        car.constant = car.constant * 1.2;
+        car.constant = car.constant + 0.2;
         disp('###')
         disp(car.num)
         disp(car.constant)
@@ -23,7 +23,7 @@ if car.running == true
     %% First segment
     if car.lap == 1 && car.segment == 1 || car.lap == 1 && car.segment == 2
         t = toc(boot.time);
-        if t > 0.8
+        if t > 1
             car.constant = car.constant + 0.04;
             disp('###')
             disp(car.num)
@@ -51,9 +51,9 @@ if car.running == true
         seg_time = car.seg_times(1, 3);
         laptime_forecast = seg_time / 0.102;
         forecast_ref_diff = laptime_forecast - car.ref_time;
-        forecast_ref_diff_rel = forecast_ref_diff / car.ref_time;
-        car.constant = car.constant + (forecast_ref_diff_rel * 0.15);
-        car.constant = car.constant * 1.05;  % kompensation för kall bana
+        forecast_ref_diff_rel = forecast_ref_diff / 20;%car.ref_time;
+        car.constant = car.constant + (forecast_ref_diff_rel * 0.5);
+        %car.constant = car.constant * 1.05;  % kompensation för kall bana
         boot.status = 0;
         disp('END OF BOOTSTRAP')
         disp(car.num)

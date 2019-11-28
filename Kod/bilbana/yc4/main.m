@@ -37,8 +37,7 @@ display.shm_interp.data = [];
 display.last_send = tic;
 display.send_interval = 0.5;
 
-load('bilbana\files\Bana1.mat')
-load('bilbana\files\Bana2.mat')
+load('bilbana\files\Bana.mat')
 
 car1 = struct;
 car1.num = 1;
@@ -50,15 +49,13 @@ car1.segment = 1;
 car1.lap = 0;
 car1.lap_times = [];
 car1.seg_times = [];
-car1.seg_constant_list = []; % TODO
 car1.position = 0;
 car1.pos_at  = [0.0 2.53 3.05 4.73 7.68 8.98 10.93 14.69 17.57 19.60];
 car1.seg_len = [2.53 0.53 1.68 2.92 1.2 2.01 3.83 2.89 1.99];
-car1.percents = [];  % TODO
+car1.percents = [0.088, 0.022, 0.102, 0.15, 0.058, 0.11, 0.212, 0.146, 0.113];  % TODO
 car1.map = Bana1;
-car1.approximation = [];
+%car1.approximation = [];
 car1.miss_probability = 0.0;
-car1.lap_constants = [1,1,1,1,1,1,1,1,1]; % TODO
 car1.constant = 0.1;
 car1.stop = false;
 car1.governs = [];
@@ -79,9 +76,6 @@ car2.seg_len = [2.53 0.52 1.87 2.70 1.40 1.70 4.03 3.08 2.19];
 car2.percents = [0.088, 0.022, 0.102, 0.15, 0.058, 0.11, 0.212, 0.146, 0.113];
 car2.map = Bana2;
 car2.miss_probability = 0.05;
-car2.seg_constant_list = []; % TODO
-car2.lap_constants = [1,1,1,1,1,1,1,1,1]; % TODO
-car2.seg_constant = 1;
 car2.constant = 0.1;
 car2.stop = false;
 car2.governs = [];
@@ -306,7 +300,6 @@ while 1
         pause(0.001);
     end
 end
-
 
 %% END OF RACE
 disp(highToc);
