@@ -75,6 +75,10 @@ if car.running == true
 		% car.last_seg_times = car.seg_times(car.lap - 1, 1:9);
 		aprox_v = get_aprox_v(car.segment + detect_missed(car.position, car.segment, car.num, car.pos_at), car);
 		car.position = get_position(aprox_v, car.position, t);
+        if car.lap == 2 && car.segment < 4
+            disp('####')
+            disp(car.position)
+        end
         if detect_missed( car.position, car.segment, car.num, car.pos_at)
 			disp('Miss?');
 
@@ -98,7 +102,6 @@ if car.running == true
 
 	%% CHECK POINT
 	if car.new_check_point == true
-		disp(car)
 		if car.new_lap == false % choose_position krachar vid nytt varv (seg 10)
 			if car.lap ~= 0
 				car.seg_times(car.lap, car.segment) = toc(car.seg_tic);
@@ -118,7 +121,6 @@ if car.running == true
 			car.seg_tic = tic;
 
 			if car.automatic && car.lap > 2 % S�kerhetsmarginal (B�r vara 1?)
-				disp(car)
 				[new_position, seg_plus] = ...
 					choose_position(car.position, car.segment, car.num, car.pos_at);
 				if seg_plus ~= 0 && car.segment == 2
@@ -137,14 +139,13 @@ if car.running == true
 				car.position = car.pos_at(car.segment);
 				%car.miss_time = uint64(0);
 			end
-		end
+        end
+        disp(car)
 	end
 
 	%% NEW LAP
 	if car.new_lap == true
 		disp('NEW LAP')
-
-		car.lap_constants = gov_set(car.constant);
 		beep;
 		if car.lap == 0
 			% dont save time for first lap
@@ -177,7 +178,8 @@ if car.running == true
 
 			car.segment = 1;
 			car.lap = car.lap + 1;
-		end
+        end
+        disp(car)
 	end
 end
 
