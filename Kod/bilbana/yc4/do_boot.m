@@ -47,17 +47,16 @@ if car.running == true
     
     %% END BOOTSTRAP
     if car.segment > 3
+        car.governs(length(car.governs) + 1) = car.constant;
         disp(car.constant);
-        seg_time = car.seg_times(1, 3);
-        laptime_forecast = seg_time / 0.102;
-        forecast_ref_diff = laptime_forecast - car.ref_time;
-        forecast_ref_diff_rel = forecast_ref_diff / 20;%car.ref_time;
-        car.constant = car.constant + (forecast_ref_diff_rel * 0.5);
-        %car.constant = car.constant * 1.05;  % kompensation för kall bana
+        status = car.forecasts_naive(car.lap, car.segment-1)/20;
+        car.constant = car.constant + (status - 1) * 0.08;
+        
         boot.status = 0;
         disp('END OF BOOTSTRAP')
         disp(car.num)
         disp(car.constant)
+        car.governs(length(car.governs) + 1) = car.constant;
     end
 end
 end

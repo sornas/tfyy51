@@ -1,7 +1,7 @@
 function [ car ] = do_gov( car )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
-if car.new_lap
+if car.new_lap && car.lap > 1 % annars höjer den typ alltid första varvet
 	last_lap_time = car.lap_times(car.lap - 1);
 	time_diff = last_lap_time - car.ref_time;  % diff >0 => car is too slow, go faster
 	car.constant = car.constant + (time_diff / car.ref_time) * 0.1;
