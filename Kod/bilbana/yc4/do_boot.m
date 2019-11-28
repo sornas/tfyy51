@@ -20,10 +20,10 @@ if car.running == true
         disp(car.num)
         disp(car.constant)
     end
-    %% First segment
+    %% First segments
     if car.lap == 1 && car.segment == 1 || car.lap == 1 && car.segment == 2
         t = toc(boot.time);
-        if t > 1
+        if t > 1.2
             car.constant = car.constant + 0.04;
             disp('###')
             disp(car.num)
