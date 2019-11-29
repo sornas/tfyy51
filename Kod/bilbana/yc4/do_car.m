@@ -199,7 +199,7 @@ end
 
 %% EXECUTE
 if car.running == true && car.automatic == true
-	disp(strjoin({num2str(car.num), num2str(car.u), num2str(car.position)}))
+	% disp(strjoin({num2str(car.num), num2str(car.u), num2str(car.position)}))
     if not(boot.status)
         set_car_speed(car.num, max(car.u, 16));
     else

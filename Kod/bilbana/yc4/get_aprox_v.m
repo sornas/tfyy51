@@ -12,7 +12,7 @@ if cur_seg > 9
 end
 %% Kompensera för väldigt långsamt segment 1 första varvet
 if cur_seg == 1 && lap == 2
-    v = car.seg_len(1)/(1.5*car.seg_times(1,9));
+    v = car.seg_len(1)/(1.4*car.seg_times(1,9));
     return
 end
 %% Sätt v
