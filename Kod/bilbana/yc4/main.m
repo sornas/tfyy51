@@ -15,7 +15,7 @@ start_race(2)
 
 %% INIT
 global log_debug;
-log_debug = true;
+log_debug = false;
 global log_verbose;
 log_verbose = false;
 % INIT DISPLAY
@@ -55,7 +55,7 @@ car1.seg_len = [2.53 0.53 1.68 2.92 1.2 2.01 3.83 2.89 1.99];
 car1.percents = [0.088, 0.022, 0.102, 0.15, 0.058, 0.11, 0.212, 0.146, 0.113];  % TODO
 car1.map = Bana1;
 %car1.approximation = [];
-car1.miss_probability = 0.0;
+car1.miss_probability = 0.05;
 car1.constant = 0.1;
 car1.stop = false;
 car1.governs = [];
@@ -124,64 +124,48 @@ done = false;
 while 1
 	pause(0.1);
 	if toc(display.last_check) > 0.4
-		verbose('DISPLAY', 'toc > 0.4');
 		display.last_check = tic;
 
 		% read internal mem from last send
 		[display.out, display.shm] = matlabclient(2);
 		[display.shm_interp.ack, display.shm_interp.start_code, display.shm_interp.data] = get_response(display.shm);
 
-		verbose('DISPLAY', 'Requesting internal mem for next cycle...');
 		% request internal mem
 		matlabclient(1, hex2dec(['12'; '01'; '53'; '66']));
 
 		if isempty(display.shm_interp.data)
-			verbose('DISPLAY', 'No response');
 			continue
 		end
-		debug('DISPLAY', ['Reading ', num2str(length(display.shm_interp.data)), ' package(-s)']);
 
 		update_ref_time = false;
 		for i = 1:length(display.shm_interp.data)
 			data = display.shm_interp.data(i);
 			if data.data == 32
-				debug('DISPLAY', ...
-					'Start-button pressed, exiting when no more packages');
 				done = true;
 			elseif data.data == 11
-				debug('DISPLAY', 'Enabling car 1');
 				car1.running = true;
 			elseif data.data == 12
-				debug('DISPLAY', 'Disabling car 1');
 				car1.running = false;
 			elseif data.data == 13
-				debug('DISPLAY', 'Enabling car 1 manual');
 				car1.automatic = false;
 			elseif data.data == 14
-				debug('DISPLAY', 'Disabling car 1');
 				car1.automatic = true;
 			elseif data.data == 21
-				debug('DISPLAY', 'Enabling car 2');
 				car2.running = true;
 			elseif data.data == 22
-				debug('DISPLAY', 'Disabling car 2');
 				car2.running = false;
 			elseif data.data == 23
-				debug('DISPLAY', 'Enabling car 2 manual');
 				car2.automatic = false;
 			elseif data.data == 24
-				debug('DISPLAY', 'Disabling car 2 manual');
 				car2.automatic = true;
 			elseif data.data == 41
 				% ignore
 			elseif data.data == 42
-				debug('DISPLAY', ['Decreasing ref_time to ', num2str(ref_time)]);
 				ref_time = max(ref_time - 0.5, 12.0);
 				update_ref_time = true;
 			elseif data.data == 43
 				% ignore
 			elseif data.data == 44
-				debug('DISPLAY', ['Increasing ref_time to ', num2str(ref_time)]);
 				ref_time = min(ref_time + 0.5, 15.0);
 				update_ref_time = true;
 			end

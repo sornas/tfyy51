@@ -58,9 +58,9 @@ if car.running == true
         if toc(car.seg_tic) > 9.0
 			set_car_speed(1, 0);
 			set_car_speed(2, 0);
-			%disp(strjoin({'AvÃ¥kning bil', num2str(car.num)}));
-			disp('J = Ja, N = Nej')
-			car.response = input('Vill du fortsÃ¤tta? [N] ', 's');
+			disp(strjoin({'Avåkning bil', num2str(car.num)}));
+			disp('(J = Ja, N = Nej)');
+			car.response = input('Vill du fortsätta? [N] ', 's');
             if car.response == 'J'
 				car.seg_tic = tic;
 			else
@@ -76,11 +76,11 @@ if car.running == true
 		aprox_v = get_aprox_v(car.segment + detect_missed(car.position, car.segment, car.num, car.pos_at), car);
 		car.position = get_position(aprox_v, car.position, t);
         if car.lap == 2 && car.segment < 4
-            disp('####')
-            disp(car.position)
+            % disp('####')
+            % disp(car.position)
         end
         if detect_missed( car.position, car.segment, car.num, car.pos_at)
-			disp('Miss?');
+			% disp('Miss?');
 
 			%disp(toc(car.miss_time));
 			%if car.miss_time == 0
@@ -115,9 +115,9 @@ if car.running == true
 			track_remaining = car.pos_at(length(car.pos_at)) - car.pos_at(car.segment + 1);
 			car.forecasts(car.lap, car.segment) = lap_time_now + track_remaining/prev_seg_v;
 
-			car.forecasts_naive(car.lap, car.segment) = toc(car.seg_tic) / car.percents(car.segment)
+			car.forecasts_naive(car.lap, car.segment) = toc(car.seg_tic) / car.percents(car.segment);
 
-			car.segment = car.segment + 1;
+			car.segment = min(9, car.segment + 1);
 			car.seg_tic = tic;
 
 			if car.automatic && car.lap > 2 % Sï¿½kerhetsmarginal (Bï¿½r vara 1?)
@@ -127,7 +127,7 @@ if car.running == true
 					disp('Hoppar ï¿½ver missad givare 1/2');
 				else
 					car.position = new_position;
-					car.segment = car.segment + seg_plus;
+					car.segment = min(9, car.segment + seg_plus);
 				end
 				if seg_plus ~= 0 && car.segment ~= 2
 					car.seg_times(car.lap, car.segment - seg_plus - 1) = 0;
@@ -147,7 +147,7 @@ if car.running == true
 	if car.new_lap == true
 		disp('NEW LAP')
 		beep;
-		if car.lap == 0
+        if car.lap == 0
 			% dont save time for first lap
 			car.segment = 1;
 			car.lap = car.lap + 1;
@@ -191,14 +191,19 @@ end
 
 %% CONTROLLER
 if car.running == true && car.automatic == false
-    mult = 100;
-    max = 55;
-    div = 55;
-	set_car_speed(car.num, mult * ((max - get_manual_speed(car.num)) / div))
+    mult_ = 100;
+    max_ = 55;
+    div_ = 55;
+	set_car_speed(car.num, mult_ * ((max_ - get_manual_speed(car.num)) / div_))
 end
 
 %% EXECUTE
 if car.running == true && car.automatic == true
-	set_car_speed(car.num, car.u);
+	disp(strjoin({num2str(car.num), num2str(car.u), num2str(car.position)}))
+    if not(boot.status)
+        set_car_speed(car.num, max(car.u, 16));
+    else
+        set_car_speed(car.num, car.u);
+    end
 end
 end
