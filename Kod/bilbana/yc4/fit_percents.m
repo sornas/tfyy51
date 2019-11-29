@@ -8,4 +8,4 @@ for i = 1:length(percents)
     new_p = old_p - (old_p + cur_p) / 2;
     new_percents(i) = new_p;
 end
-
+new_percents = new_percents * (1/sum(new_percents))  % normera

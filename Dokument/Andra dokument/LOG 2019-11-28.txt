@@ -1,0 +1,11 @@
+Blå 17 bana 2 fastnar varv 1 seg 4 (om kall bana tror jag)
+Silver 67 kraschar i segment 4. Beror inte på för hög car_constant. Nånting med missad givare 1/2
+	Hypotes: Bilen stannar precis under givaren och ger två utslag
+Silver 67 kraschar ibland i seg 7
+
+1.895/1.232 = 1.54
+1.875/1.2919 = 1.45
+2.0061/1.3020 = 1.54
+2.446/1.2521 = 1.95
+1.2019/1.2126
+1.2159/1.4320

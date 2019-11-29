@@ -5,29 +5,33 @@ if car.running == true
     %% BEFORE FIRST LAP
     if car.lap == 0
         t = toc(boot.time);
-        if t > 0.6
+        if t > 0.7
             car.constant = car.constant + 0.12;
-            disp('###')
-            disp(car.num)
-            disp(car.constant)
+            % disp('###')
+            % disp(car.num)
+            % disp(car.constant)
             boot.time = tic;
         end
     end
     %% WHEN NEW LAP
     if car.new_lap == 1
-        car.constant = car.constant * 1.2;
-        disp('###')
-        disp(car.num)
-        disp(car.constant)
+        car.constant = car.constant + 0.2;
+        % disp('###')
+        % disp(car.num)
+        % disp(car.constant)
     end
-    %% First segment
+    %% First segments
     if car.lap == 1 && car.segment == 1 || car.lap == 1 && car.segment == 2
         t = toc(boot.time);
-        if t > 0.8
-            car.constant = car.constant + 0.04;
-            disp('###')
-            disp(car.num)
-            disp(car.constant)
+        if t > 1.2
+            if car.num == 1
+                car.constant = car.constant + 0.06;
+            else
+                car.constant = car.constant + 0.04;
+            end
+            % disp('###')
+            % disp(car.num)
+            % disp(car.constant)
             boot.time = tic;
         end
         
@@ -42,22 +46,20 @@ if car.running == true
  %            disp(car.constant)
  %            boot.time = tic;
  %        end
- %        
  %    end    
     
     %% END BOOTSTRAP
     if car.segment > 3
-        disp(car.constant);
-        seg_time = car.seg_times(1, 3);
-        laptime_forecast = seg_time / 0.102;
-        forecast_ref_diff = laptime_forecast - car.ref_time;
-        forecast_ref_diff_rel = forecast_ref_diff / car.ref_time;
-        car.constant = car.constant + (forecast_ref_diff_rel * 0.15);
-        car.constant = car.constant * 1.05;  % kompensation för kall bana
+        car.governs(length(car.governs) + 1) = car.constant;
+        % disp(car.constant);
+        status = car.forecasts_naive(car.lap, car.segment-1) / 15;
+        car.constant = car.constant + (status - 1) * 0.08;
+        
         boot.status = 0;
-        disp('END OF BOOTSTRAP')
-        disp(car.num)
-        disp(car.constant)
+        % disp('END OF BOOTSTRAP')
+        % disp(car.num)
+        % disp(car.constant)
+        car.governs(length(car.governs) + 1) = car.constant;
     end
 end
 end
