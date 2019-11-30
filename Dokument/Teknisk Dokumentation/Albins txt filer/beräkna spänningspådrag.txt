@@ -8,7 +8,7 @@ Sedan beräknas det gaspådrag som skall sättas till banan. Detta görs i två
  hastighetsparameter för varje \emph{car.position}, denna retuneras av 
  funktionen och sparas i \emph{car.v}.
  
- I \emph{get_new_u} används denna hastighetsparameter tillsammand med 
+ I \emph{get_new_u} används denna hastighetsparameter tillsammans med 
  \emph{car.constant}. Dessa multipliceras och deras produkt retuneras och sparas
  i \emph{car.u}.
  

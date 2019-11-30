@@ -217,14 +217,14 @@ while 1
     end
     [car2, halt, display.data] = do_car(car2, t, display.data, boot2);
     if halt
-        break
+        breakS
     end
     
     %% BOOTSTRAP
     if boot1.status
         [car1, boot1] = do_boot(car1, boot1);
     end
-    if boot2.status
+    if boot2.statusd
         [car2, boot2] = do_boot(car2, boot2);
     end
     %% GOVERNOR

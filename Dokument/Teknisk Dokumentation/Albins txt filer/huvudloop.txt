@@ -1,0 +1,12 @@
+Huvudloopen körs åtminstonde 10 gånger i sekunden. Den beräknar först var bilen 
+befinner sig, sedan väljer den hur snabbt bilen ska köra och slutligen sätts
+den hastigheten till banan.
+
+Den viktigaste delen av huvudloopen är funktionen \emph{do_car}. Funktionen 
+beräknar de ändrinar som skall göras i matlab-structen \emph{car} och är indelad 
+i många delar.
+
+position.txt
+
+beräkna spänningspådrag.txt
+
