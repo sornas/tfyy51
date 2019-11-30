@@ -87,7 +87,7 @@ Detta projektet har utförts med hjälp av en bilbana samt flera bilar, givare, 
 Syftet med projektet var att konstruera ett system som kör bilar runt en bilbana
 %(Se figur~\ref{fig:track_modell}).
 Med hjälp av informationen som har kunnat läsas av från givarna så skulle det
-skapas ett system som skulle få diverse bilar att köra runt på de 2 olika 
+skapas ett system som skulle få bilar med olika egenskaper att köra runt på de två olika 
 banorna på en vald referenstid. Huvudmålet är indelat i flera olika krav.
 Se avsnitt 3.2 i kravspecifikationen.
 \section{Begrepp och systemöversikt}
@@ -106,7 +106,7 @@ trycktes i och ändrar på variabler enligt de knapptryck som skett.
 
 \subsection{Uppstart} 
 
-Vid automatisk körning körs funktionen "do\_boot" vars syfte är att få fram en
+Vid automatisk körning körs funktionen \emph{do\_boot} vars syfte är att få fram en
 initierande konstant ("car\_constant") för den bil som står på banan. då bilen är
 positionerad framför målbågen höjer funktionen konstanten kontinuerligt i ett
 tidsintervall på 0.7 sekunder. när väl konstanten är tillräckligt stor för att
