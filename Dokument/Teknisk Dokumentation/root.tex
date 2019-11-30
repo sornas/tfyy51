@@ -138,7 +138,7 @@ när en givare inte har passerats. Under första varvet görs endast det första
 från varv 2 och frammåt görs båda paralellt. 
 
 Om en ny givare har passerats, \emph{car.new\_check\_point == true}, ökar
-programmet nuvarande segment (\emph{car.segment}) med 1. emp{car.segment}, som
+programmet nuvarande segment (\emph{car.segment}) med 1. \emph{car.segment}, som
 alltid ligger mellan 1 och 9, används som index för att välja position i en
 lista (\emph{car.pos\_at}). 
 
@@ -153,14 +153,16 @@ hastiget.
 Sedan beräknas den fakiska positionen, i meter från målgivaren, med funktionen
 \emph{get\_position}. Den använder den ungefärliga hastigheten beräknad av
 \emph{aprox\_v} och tiden sedan denna beräkning gjordes senast (en programcykel)
-och beräknar med s = v * t den sträcka som bilen har äkt. Sedan adderas denna
+och beräknar med s = v * t den sträcka som bilen har åkt. Sedan adderas denna
 med förra kända postionen och retuneras i \emph{car.position}. 
+
+\subsection{Gaspådrag}
 
 Sedan beräknas det gaspådrag som skall sättas till banan. Detta görs i två
 funktioner, \emph{get\_new\_v}) och \emph{get\_new\_u}.
  
 I \emph{get\_new\_v} används bilens nuvarande postition (\emph{car.postition})
-och hastihetskartan (\emph{car.map}). I (\emph{car.map}) finns en
+och hastihetskartan (\emph{car.map}). I \emph{car.map} finns en
 hastighetsparameter för varje \emph{car.position}, denna retuneras av funktionen
 och sparas i \emph{car.v}.
  
@@ -173,9 +175,7 @@ i \emph{car.u}.
 Sedan, om bootstrap är avslutad, körs den del av koden vars ända uppgift är att 
 anpassa \emph{car.constant}. 
 
-Detta görs med funktionen \emph{do\_gov}. 
-
-Först görs en uppskattning av varvtiden utifrån hur lång tid varvet har tagit än
+Detta görs med funktionen \emph{do\_gov}.  Först görs en uppskattning av varvtiden utifrån hur lång tid varvet har tagit än
 så länge. Om bilen är inne på sitt första varv görs uppskattningen endast
 utifrån förra segmentet \emph{car.forcasts\_naive} och om första varvet är
 avslutat använder den i stället \emph{car.forcasts} som kollar på hela varvtiden
@@ -183,7 +183,7 @@ fram till och med nu. Detta görs efter segment 4 och 8. Desutom används den
 faktiska varvtiden när bilen passerar mål (från varv 2 och frammåt).
  
 Sedan jämförs den uppskattade varvtiden med referenstiden \emph{car.ref\_time}.
-Om den uppskattade varviden är högre än referenstiden höje \emph{car.constant}
+Om den uppskattade varviden är högre än referenstiden höjs \emph{car.constant}
 och om den är lägre sänks \emph{car.constant}.
 
 \subsubsection{Display}
@@ -215,6 +215,31 @@ Vid programslut visas statistik om varvtid och genomsnittlig segmenttid på
 displayen. Se figurer xx-xx.
 
 \subsection{Missade givare}
+
+Programmet gör redan en uppskattning av bilens position (\emph{get\_position})
+ och justerar denna vid ny givare (lägg till referens här).
+Eftersom \emph{get\_new\_v} utgår ifrån denna uppskattning, kommer ingen
+anpassning behöva göras ifall en givare inte ger utslag. Däremot måste det 
+kompenseras nästa gång en givare detekteras. Detta görs med funktionen 
+\emph{choose\_position}. Den funktionen jämför positionen beräknad av 
+\emph{get\_position} och positionen vald av nuvarande givare. 
+
+Vid varje givare kollar \emph{choose\_position} vilken givare som 
+\emph{get\_position} ligger närmast. Funktionen beräknar skillnaden mellan denna
+och den givare som valdes med givardetektionen. Denna kallas \emph{seg\_plus}.
+I normala fall är \emph{seg\_plus} = 0 (ingen 
+missad givare) eller 1 (en missad givare), men den kan också bli högre. Eftersom
+programmet inte ska behöva hantera för många givarsignaler ska \emph{seg\_plus}
+aldrig kunna bli lägre än 0. Om så ändå är fallet ändras denna till 0. \emph{seg\_plus} 
+retuneras av funktionen och används sedan för att höja \emph{car.segment} så att
+programmet har koll på var bilen är.
+
+Dessutom behöver den insamlade datan justeras när en eller flera givare har 
+missats. Annars kommer \emph{car.seg\_times} spara tiden för flera segment som 
+om det vore ett enda. Lösningen är att skriva över denna tid med 0. Alla 
+funktioner som använder denna data behöver kolla ifall den är noll eller inte, 
+om den är noll används den ifrån varvet innan i stället. Om den också är noll 
+används den från två varv tidigare osv.
 
 \section{Programslut}
 
