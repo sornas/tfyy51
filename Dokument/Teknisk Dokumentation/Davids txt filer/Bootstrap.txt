@@ -1,0 +1,12 @@
+Bootstrap
+Vid automatisk körning körs funktionen "do_boot" vars syfte är att få fram en initierande konstant ("car_constant")
+för den bil som står på banan. Då bilen är positionerad framför målbågen höjer funktionen konstanten kontinuerligt
+i ett tidsintervall på 0.7 sekunder. När väl konstanten är tillräckligt stor för att bilen ska kunna rulla och
+passera målbågen så höjs inte konstanten lika mycket och gör det desto mer sällan. Vid passering av den andra
+givaren så slutar funktionen tillfälligt att förändra konstanten och låter bilen, med den tilldelade konstanten,
+åka igenom segment 3 för att få en uträknad tid. Med tiden det tagit för bilen att ta sig igenom segment 3 räknar
+funktionen ut vilken förväntad varvtid bilen skulle få med just den konstanten den hade i segmentet. 
+(Beskriva forecastsuträkningen?)
+Det sista funktionen gör är att återigen justera konstanten. Om den förväntade varvtiden är större än 15 sekunder,
+som är referensvarvtiden för första varvet, så ökar konstanten och är den förväntade varvtiden mindre än 15
+sekunder så sänks konstanten. 

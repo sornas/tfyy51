@@ -1,0 +1,2 @@
+När körningen avslutas så får banan ingen mer spänning och bilarna stannar. Ifall en bil har kört fler än 2 varv
+så sparas statistik från körningen. 
