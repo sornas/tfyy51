@@ -1,0 +1,7 @@
+Givet material
+
+Projektgruppen har av beställaren tillhandahållits ett lab med följande utrustning:
+- En bilbana utrustad med givare vars funktion är att detektera passerade bilar.
+- Två datorer
+- En display med touchfunktionallitet. 
+- Ett antal bilar 
