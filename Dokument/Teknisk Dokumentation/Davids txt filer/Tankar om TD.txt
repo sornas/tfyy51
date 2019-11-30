@@ -1,0 +1,18 @@
+Något mer än "Teknisk dokumentation" som titel
+
+1.1 
+- "dator inkopplad till givarna på banan" -> "en dator som styrenhet"?  
+
+3.2
+- "autonom" istället för "automatisk"?
+- Kanske göra grafen på den upptrappade konstanthöjning för bootstrapen i latex?
+
+3.3.1 
+- Överflödigt att skriva hur koden ser ut "car.new_check_point ..."
+     
+En tanke är att skippa skriva alla funktioner och variabler helt och hållet när
+vi beskriver vad vår kod gör. Att istället få läsaren att förstå vad som händer
+med bilen på banan och kanske inte så mycket vad som händer med våra konstanter
+och variabler i koden. Det görs väl någon annanstans?
+
+Lite stavfel här och där
