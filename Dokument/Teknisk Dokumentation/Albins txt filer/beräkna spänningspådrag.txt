@@ -1,0 +1,14 @@
+Beräkna gaspådrag
+
+Sedan beräknas det gaspådrag som skall sättas till banan. Detta görs i två
+ funktioner, \emph{get\_new\_v) och \emph{get\_new\_u}.
+ 
+ I \emph{get\_new\_v} används bilens nuvarande postition (\emph{car.postition}) 
+ och hastihetskartan (\emph{car.map}). I (\emph{car.map}) finns en 
+ hastighetsparameter för varje \emph{car.position}, denna retuneras av 
+ funktionen och sparas i \emph{car.v}.
+ 
+ I \emph{get_new_u} används denna hastighetsparameter tillsammand med 
+ \emph{car.constant}. Dessa multipliceras och deras produkt retuneras och sparas
+ i \emph{car.u}.
+ 

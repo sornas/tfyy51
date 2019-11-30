@@ -4,22 +4,22 @@ Det finns två fall när positionen ska beräknas. När en givare har passerats och
 när en givare inte har passerats. Under första varvet görs endast det första
 och från varv 2 och frammåt görs båda paralellt. 
 
-Om en ny givare har passerats, \emph{car.new_check_point == true}, ökar
-programmet nuvarande segment (emph{car.segment}) med 1. emp{car.segment}, som
+Om en ny givare har passerats, \emph{car.new\_check\_point == true}, ökar
+programmet nuvarande segment (\emph{car.segment}) med 1. emp{car.segment}, som
 alltid ligger mellan 1 och 9, används som index för att välja position i en 
-lista (emph{car.pos_at}). 
+lista (\emph{car.pos\_at}). 
 
 Om ingen givare har passerars och bilen har avslutat första varvet, alltså 
 oftast, görs lite mer avancerade beräkningar. För att beräkna positionen 
-använder proggrammet först en funktion \emph{get_aprox_v}. Denna utgår 
+använder proggrammet först en funktion \emph{get\_aprox\_v}. Denna utgår 
 ifrån förra varvets segmentstider 
- (\emph{car.seg_times}) och segmentslängder (\emph{car.seg_len}) och beräknar 
+ (\emph{car.seg\_times}) och segmentslängder (\emph{car.seg\_len}) och beräknar 
  med v = s/t medelhastigheten för nuvarnade segment, men förra varvet. Denna
  antas vara ungefär samma sak som nuvarande hastiget. 
 
 Sedan beräknas den fakiska positionen, i meter från målgivaren, med funktionen
- \emph{get_position}. Den använder den ungefärliga hastigheten beräknad av 
- emph\aprox_v och tiden sedan denna beräkning gjordes senast (en programcykel) 
+ \emph{get\_position}. Den använder den ungefärliga hastigheten beräknad av 
+ emph\aprox\_v och tiden sedan denna beräkning gjordes senast (en programcykel) 
  och beräknar med s = v * t den sträcka som bilen har äkt. Sedan adderas denna 
  med förra kända postionen och retuneras i \emph{car.position}. 
 
