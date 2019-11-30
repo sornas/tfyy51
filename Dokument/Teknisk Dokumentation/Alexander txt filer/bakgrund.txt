@@ -1,0 +1,1 @@
+Detta projektet har utförts med hjälp av en bilbana samt flera bilar, givare, spänningsaggregat och en dator inkopplad till givarna på banan. Via datorn har spänning tillförts till bilbanan. Med hjälp av givarna är det möjligt att veta när en bil har passerat en givare. Programvaran utvecklas i Matlab, vilket ligger till grund för styrning av bilarna. 
