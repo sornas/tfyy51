@@ -1,0 +1,29 @@
+\subsection{Gaspådrag}
+
+Sedan beräknas det gaspådrag som skall sättas till banan. Detta görs i två
+funktioner, \emph{get\_new\_v}) och \emph{get\_new\_u}.
+ 
+I \emph{get\_new\_v} används bilens nuvarande postition (\emph{car.postition})
+och hastihetskartan (\emph{car.map}). I \emph{car.map} finns en
+hastighetsparameter för varje \emph{car.position}, denna retuneras av funktionen
+och sparas i \emph{car.v}.
+ 
+I \emph{get\_new\_u} används denna hastighetsparameter tillsammans med
+\emph{car.constant}. Dessa multipliceras och deras produkt retuneras och sparas
+i \emph{car.u}.
+
+\subsubsection{Governor}
+
+Sedan, om bootstrap är avslutad, körs den del av koden vars ända uppgift är att 
+anpassa \emph{car.constant}. 
+
+Detta görs med funktionen \emph{do\_gov}.  Först görs en uppskattning av varvtiden utifrån hur lång tid varvet har tagit än
+så länge. Om bilen är inne på sitt första varv görs uppskattningen endast
+utifrån förra segmentet \emph{car.forcasts\_naive} och om första varvet är
+avslutat använder den i stället \emph{car.forcasts} som kollar på hela varvtiden
+fram till och med nu. Detta görs efter segment 4 och 8. Desutom används den
+faktiska varvtiden när bilen passerar mål (från varv 2 och frammåt).
+ 
+Sedan jämförs den uppskattade varvtiden med referenstiden \emph{car.ref\_time}.
+Om den uppskattade varviden är högre än referenstiden höjs \emph{car.constant}
+och om den är lägre sänks \emph{car.constant}.

@@ -1,0 +1,17 @@
+\subsection{Uppstart} 
+
+Vid automatisk körning körs funktionen \emph{do\_boot} vars syfte är att få fram
+en initierande konstant (\emph{car\_constant}) och spänningspådrag för den bil
+som står på banan. Då bilen är positionerad framför målbågen höjer funktionen
+konstanten kontinuerligt i ett tidsintervall på 0.7 sekunder. När väl konstanten
+är tillräckligt stor för att bilen ska kunna rulla och passera målbågen så
+dämpas höjningen av konstanten och förändringen sker med en lägre frekvens. Vid
+passering av den andra givaren så slutar funktionen tillfälligt att förändra
+konstanten och låter bilen, med den tilldelade konstanten, åka igenom det tredje
+segmentet för att få en uträknad tid. Med tiden det tagit för bilen att ta sig
+igenom segmentet räknar funktionen ut vilken förväntad varvtid bilen skulle få
+med just den konstanten den hade i segmentet. (beskriva forecastsuträkningen?)
+Det sista funktionen gör är att återigen justera konstanten. Om den förväntade
+varvtiden är större än 15 sekunder, som är referensvarvtiden för första varvet,
+så ökar konstanten och är den förväntade varvtiden mindre än 15 sekunder så
+sänks konstanten. 
