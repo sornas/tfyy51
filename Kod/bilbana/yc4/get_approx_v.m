@@ -1,11 +1,13 @@
-function [v] = get_aprox_v(cur_seg, car)
-%GET_APROX_V Tillfï¿½llig? Behï¿½vs fï¿½r att testa get_position. Ger
-%medelhastigheten fï¿½r nuvarande segment pï¿½ fï¿½rra varvet.
+function [v] = get_approx_v(cur_seg, car)
+%GET_APROX_V Retunerar medelhastiheten för nuvarande segment från tidigare
+%varv
 %{
-cur_seg: Nuvarande segment
-last_seg_times: 1x9 vektor med fï¿½rra varvets segmenttider
+In:
+    cur_seg: Nuvarande segment
+    car: en struct - se do_car.m
+Ut:
+    v: Uppskattning av nuvarande hastiheten [m/s]
 %}
-% seg_len = [];
 lap = car.lap;
 if cur_seg > 9
     cur_seg = cur_seg - 9;

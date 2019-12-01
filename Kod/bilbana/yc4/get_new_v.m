@@ -1,5 +1,5 @@
 function [ new_v ] = get_new_v( position, list)
-%GET_NEW_V Hastigheten som bilen ska få nästa cykel.
+%GET_NEW_V Hastighetsparametern som bilen ska få nästa cykel.
 %{
 Utgår ifrån position och ger motsvarande hårdkodade värde på v för
 nuvarande sub_segment.
