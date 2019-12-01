@@ -1,12 +1,13 @@
 \section{Funktioner och filer}
 
 \subsection{System}
-
+\label{app:funktioner och filer:system}
 choose\_position(position, segment, track, track\_len)
 
 Körs när en givare passerats. Gör en bedömning om en givare (eller flera) har
 missats genom att kontrollera vilken givare som är närmast den nuvarande
-uppskattade position och kompenserar om en givare bedöms ha missats.
+uppskattade position och kompenserar om en givare bedöms ha missats. Se 
+\ref{sec:missade givare}
 
 clamp(n, m, M)
 
@@ -19,13 +20,14 @@ Returnerar true om position ligger utanför det nuvarande segmentet.
 
 do\_boot(car, boot)
 
-Anropas en gång per programcykel i den så kallade boostrap-fasen. Se ANNAN DEL
-AV TEXTEN för information.
+Anropas en gång per programcykel i den så kallade boostrap-fasen. Se 
+\ref{sec:systembeskrivning:uppstart} för information.
 
 do\_car(car, t, displa\_data, boot)
 
-Anropas en gång per programcykel. Se ANNAN DEL AV TEXTEN och EN ANNAN DEL
-AV TEXTEN för information om hur en programcykel ser ut och NÅGOT MER.
+Anropas en gång per programcykel. Se \ref{sec:systembeskrivning:korning} och EN ANNAN DEL
+AV TEXTEN (vadå?) för information om hur en programcykel ser ut och NÅGOT MER
+(vadå?).
 
 do\_gov(car)
 
@@ -33,7 +35,7 @@ Anropas varje gång en givare passerats. Vid målgivaren jämförs referenstiden
 den förra varvtiden och car.constant anpassas efter differensen mellan dem. Om
 differensen är högre ändras car.constant mer, och vice versa om differensen är
 låg. Vid givare 5 och 8 jämförs referenstiden och en uppskattning av hur lång
-tid det nuvarande varvet troligen kommer ta. Se EN ANNAN DEL AV TEXTEN för
+tid det nuvarande varvet troligen kommer ta. Se \ref{sec:systembeskrivning:governor} för
 mer information.
 
 fit\_percents(percents, lap\_time, seg\_times)
@@ -81,7 +83,7 @@ main.m
 Huvudskriptet som startar hela systemet.
 
 \subsection{Display}
-
+\label{app:funktioner och filer:display}
 bar\_graph(direction, no, x1, x2, y1, y2, start\_value, end\_value, type, pattern):
 
 Skapar ett stapeldiagram med ett hörn i (*x1*, *y1*) och ett diagonellt
@@ -252,7 +254,7 @@ blinkande och *n1* = 2 stänger av blinkande.
 
 set\_text\_font(font\_num)
 
-Sätt typsnittet på ny text som skrivs ut. Se *REF* för information om de
+Sätt typsnittet på ny text som skrivs ut. Se *REF*(vadå?) för information om de
 olika typsnitten.
 
 set\_text\_zoom(x\_scale, y\_scale)

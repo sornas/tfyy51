@@ -1,4 +1,5 @@
 \subsection{Körning}
+\label{sec:systembeskrivning:korning}
 
 Huvudloopen körs åtminstonde 10 gånger i sekunden. Den beräknar var bilen
 befinner sig, hur snabbt bilen ska köra, justerar \texttt{car.constant} och sätter det
@@ -36,8 +37,6 @@ med förra kända postionen och retuneras i \texttt{car.position}.
 
 \subsubsection{Gaspådrag}
 
-se sektion \ref{sec:system:korning:position}
-
 Efter positionsberäkningen beräknas det gaspådrag som skall sättas till banan. Detta görs i två
 funktioner, \texttt{get\_new\_v} och \texttt{get\_new\_u}.
  
@@ -51,7 +50,7 @@ I \texttt{get\_new\_u} används denna hastighetsparameter tillsammans med
 i \texttt{car.u}.
 
 \subsubsection{Governor}
-
+\label{sec:systembeskrivning:governor}
 Om bootstrap är avslutad, körs den del av koden vars ända uppgift är att 
 anpassa \texttt{car.constant}. 
 
@@ -75,6 +74,7 @@ höjas eller sänkas proportionellt mot hur långt ifrån \texttt{car.ref\_time}
 av varvtiden ligger. 
 
 \subsubsection{Cykel}
+\label{sec:system:korning:cykel}
 För att verifiera att givarna läses av minst tio gånger i sekunden så körs det
 en funktion i slutet av varje cykel som tillfälligt pausar givarnas avläsning.
 Funktionen gör en paus på 0.001 sekunder och gör det tills funktionen totalt har
