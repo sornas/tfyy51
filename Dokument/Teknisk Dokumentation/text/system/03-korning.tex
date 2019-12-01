@@ -10,7 +10,7 @@ sedan motsvarande hastighetsparameter (\texttt{car.v}) och därefter det gaspåd
 (\texttt{car.u}) som ska sättas till banan.
 
 \subsubsection{Position}
-
+\label{sec:system:korning:position}
 Det finns två fall när positionen ska beräknas. När en givare har passerats och
 när en givare inte har passerats. Under första varvet hanteras endast det första fallet
 och från varv 2 och frammåt görs båda paralellt. 
@@ -35,6 +35,8 @@ och beräknar med $s = v \cdot t$ den sträcka som bilen har åkt. Sedan adderas
 med förra kända postionen och retuneras i \texttt{car.position}. 
 
 \subsubsection{Gaspådrag}
+
+se sektion \ref{sec:system:korning:position}
 
 Efter positionsberäkningen beräknas det gaspådrag som skall sättas till banan. Detta görs i två
 funktioner, \texttt{get\_new\_v} och \texttt{get\_new\_u}.
@@ -71,3 +73,10 @@ D.v.s om de är exakt lika blir \texttt{status~ =~ 1}, om uppskattningen är hö
 den större än 1 och om den är lägre blir den mindre än 1. Således kommer \texttt{car.constant}
 höjas eller sänkas proportionellt mot hur långt ifrån \texttt{car.ref\_time} uppskattningen
 av varvtiden ligger. 
+
+\subsubsection{Cykel}
+För att verifiera att givarna läses av minst tio gånger i sekunden så körs det
+en funktion i slutet av varje cykel som tillfälligt pausar givarnas avläsning.
+Funktionen gör en paus på 0.001 sekunder och gör det tills funktionen totalt har
+pausat i över 0.07 sekunder. Under körningen så sparar funktionen den högst
+uppmätta paustiden.
