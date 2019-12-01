@@ -6,14 +6,14 @@ nya gaspådraget till banan.
 
 Majoriteten av förändringarna i structen \texttt{car} görs i funktionen \texttt{do\_car()}. 
 I \texttt{do\_car()} beräknas  först positionen (\texttt{car.position}), 
-sedan motsvarande hastighetsparameter (\textt{car.v}) och därefter det gaspådrag 
-(\textt{car.u}) som ska sättas till banan.
+sedan motsvarande hastighetsparameter (\texttt{car.v}) och därefter det gaspådrag 
+(\texttt{car.u}) som ska sättas till banan.
 
 \subsubsection{Position}
 
 Det finns två fall när positionen ska beräknas. När en givare har passerats och
-när en givare inte har passerats. Under första varvet görs endast det första och
-från varv 2 och frammåt görs båda paralellt. 
+när en givare inte har passerats. Under första varvet hanteras endast det första fallet
+och från varv 2 och frammåt görs båda paralellt. 
 
 Om en ny givare har passerats, \emph{car.new\_check\_point == true}, ökar
 programmet nuvarande segment (\emph{car.segment}) med 1. \emph{car.segment}, som
@@ -24,20 +24,20 @@ Om ingen givare har passerars och bilen har avslutat första varvet, alltså
 oftast, görs lite mer avancerade beräkningar. För att beräkna positionen
 använder proggrammet först en funktion \emph{get\_aprox\_v}. Denna utgår ifrån
 förra varvets segmentstider (\emph{car.seg\_times}) och segmentslängder
-(\emph{car.seg\_len}) och beräknar med v = s/t medelhastigheten för nuvarnade
+(\emph{car.seg\_len}) och beräknar med $v = \frac{s}{t}$ medelhastigheten för nuvarnade
 segment, men förra varvet. Denna antas vara ungefär samma sak som nuvarande
 hastiget. 
 
 Sedan beräknas den fakiska positionen, i meter från målgivaren, med funktionen
 \emph{get\_position}. Den använder den ungefärliga hastigheten beräknad av
 \emph{aprox\_v} och tiden sedan denna beräkning gjordes senast (en programcykel)
-och beräknar med s = v * t den sträcka som bilen har åkt. Sedan adderas denna
+och beräknar med $s = v \cdot t$ den sträcka som bilen har åkt. Sedan adderas denna
 med förra kända postionen och retuneras i \emph{car.position}. 
 
 \subsubsection{Gaspådrag}
 
-Sedan beräknas det gaspådrag som skall sättas till banan. Detta görs i två
-funktioner, \emph{get\_new\_v}) och \emph{get\_new\_u}.
+Efter positionsberäkningen beräknas det gaspådrag som skall sättas till banan. Detta görs i två
+funktioner, \emph{get\_new\_v} och \emph{get\_new\_u}.
  
 I \emph{get\_new\_v} används bilens nuvarande postition (\emph{car.postition})
 och hastihetskartan (\emph{car.map}). I \emph{car.map} finns en
@@ -50,7 +50,7 @@ i \emph{car.u}.
 
 \subsubsection{Governor}
 
-Sedan, om bootstrap är avslutad, körs den del av koden vars ända uppgift är att 
+Om bootstrap är avslutad, körs den del av koden vars ända uppgift är att 
 anpassa \emph{car.constant}. 
 
 Detta görs med funktionen \emph{do\_gov}.  Först görs en uppskattning av varvtiden utifrån hur lång tid varvet har tagit än
