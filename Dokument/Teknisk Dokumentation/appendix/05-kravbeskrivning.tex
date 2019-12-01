@@ -1,128 +1,140 @@
 \section{Kravbeskrivning}
 
-Krav 1. Systemet är helt skrivet i matlab.
+\begin{requirements}
+	\requirementno & Programmet är skrivet i Matlab. & Ja \\\hline
 
-Krav 2. Systemet kan startas oavsett bil på banan.. 
+	\requirementno & Systemet går att köra autonomt & Ja \\\hline
 
-Krav 3. Systemet klarar av att missa givare. 
+	\requirementno & Systemet hanterar missade givare. Verifieras dels med en inprogrammerad
+	inställbar sannolikhet att en given givare hoppas över, dels av beställaren
+	under BP5. & Ja \\\hline
 
-Krav 4. När ett varv har körts så uppdaterar displayen vilket varv som nyss
-genomfördes samt varvtiden. 
+	\requirementno & När ett varv har körts visar displayen varvnummer och varvtid.
+	& Ja \\\hline
 
-Krav 5. Under programmets gång visas det nuvarande gaspådraget. 
+	\requirementno & Det nuvarande gaspådraget visas kontinuerligt på displayen. &
+	Ja \\\hline
 
-Krav 6. Efter att programmet avslutats visas information på displyen.
+	\requirementno & Statistik om körningen visas vid avslutad körning på displayen.
+	Se REF. & Ja \\\hline
 
-Krav 7. Systemet kan köras oavsett vilken bil som placeras på banan. 
+	\requirementno & Systemet anpassar automatiskt spänningstillförseln beroende på
+	egenskaperna för bilen och banan. & Ja \\\hline
 
-Krav 8. Programmet hanterar driftsfall genom att kompensera en större eller
-mindre styrsignal. 
+	\requirementno & Systemet anpassar automatiskt spänningstillförseln beroende på
+	egenskaperna för bilen och banan. & Ja \\\hline
 
-Krav 9. Om systemet inte får en nt insignal i form av en passerad givare inom
-tio sekunder pausas systemet och användaren får frågan om denne vill fortsätta
-eller avsluta. 
+	\requirementno & Om en givare inte passeras inom nio sekunder pausas systemet och
+	användaren får frågan om programmet ska fortsätta eller avsluta. & Ja \\\hline
 
-Krav 10. Användaren har alternativet att köra en eller båda banorna samt hur
-banorna ska köras, autonomnt eller manuellt. Det manuella alternativet uppfyller
-inte krav 8 på beslut av beställaren. 
+	\requirementno & Vid uppstart väljer användaren vilken av banorna som ska köras eller om
+	båda ska köras samtidigt. & Ja \\\hline
 
-Krav 11. Kravet struket från beslut av beställare. 
+	\requirementno & Struket av beställaren. & N/A \\\hline
 
-Krav 12. Tillsammans med frågan om bana ett eller två ska köras frågar
-programmet systemet om banan ska köras manuellt eller autonomt. 
+	\requirementno & Vid uppstart väljer användaren om en bana ska köras autonomnt eller
+	manuellt. Banorna kan köras i alla kombinationer av autonomt och manuellt styre.
+	& Ja \\\hline
 
-Krav 13. För att starta programmet krävs att man kan öppna matlab och starta
-programmet. Därefter kan användaren starta med hjälp av displayen.  
- 
-Krav 14. När systemet startar frågar programmet användaren vilka banor som skall
-köras samt vilken referenstid de ska ha. 
+	\requirementno & Systemet startas genom att enbart köra filen \texttt{main.m}.
+	Se REF. & Ja \\\hline
 
-Krav 15. Systemet ställer de frågor till användaren via touch displayen.
+	\requirementno & Se krav 10 och 12. Delen om gemensam målgång är struken av
+	beställaren. & Ja \\\hline
 
-Krav 16. Enligt de två givna testerna åkte bilarna inte av banan.
+	\requirementno & All inmatning vid uppstart sker via displayen. & Ja \\\hline
 
-Krav 17. När programmet startas frågar programmet användaren vilken referenstid
-som ska strävas efter, detta görs i ett intervall ]12,15[ med justeringar på 0,5
-sekunder upp eller ner. 
+	\requirementno & På redovisingen åkte bilarna antingen av banan efter ett varv eller
+	inte alls. & Nej \\\hline
 
-Krav 18. Enligt de två visade körningarna stannade inte bilarna under något
-tillfälle. 
+	\requirementno & Referenstiden går att välja på displayen i intervallet 12 till 15
+	sekunder med steg om 0,5 sekunder. & Ja \\\hline
 
-Krav 19. 
+	\requirementno & På redovisningen stannade inte bilarna någon gång. & Ja \\\hline
 
-Krav 20. De två testkörningarna resulterade i en standardavvikelse på 0,22
-respektive 0,24. Kravet är delvis uppnått. 
+	\requirementno && \\\hline
 
-Krav 21. De två testkörningarna resulterade i att bilarna överskred gränsen på
-0.5 ett fåtal gånger, kravet delvsi uppnått. 
+	\requirementno & På redovisnigen slutfördes två körningar om 15 varv varav fem
+	kalibreringsvarv. Standardavvikelsen låg på 0,22 sekunder respektive 0,24
+	sekunder. & Nej \\\hline
 
-Krav 22. Kraven var delvis uppfyllda efter 5 varv. 
+	\requirementno & Under de två testkörningarna överskreds gränsen om $\pm$ 0,5 sekunder
+	ett antal gånger. & Nej \\\hline
 
-Krav 23. Kravet struket av beställaren. 
+	\requirementno & Krav 20 och 21 mäter endast varvtider från varv 6 och framåt. &
+	Ja \\\hline
 
-Krav 24. Resultaten sparades och delades med beställaren via email.  
+	\requirementno & Struket av beställaren. & N/A \\\hline
 
-Krav 25. Efter avslutad körning visas statistik i form av de plottar som önskas
-i kravspecifikationen. 
+	\requirementno & Statistik från körningarna vid redovisingen har delats med beställaren
+	via e-post. & Ja \\\hline
 
-Krav 26. Efter avslutad körning sparas alla data i en fil.  
+	\requirementno & Vid avslutad körning visas grafer över varvtid och genomsnittlig tid
+	per segment. & Delvis \\\hline
 
-Krav 27. Längre upp i dokumentet beskrivs hur tidtagningen gick till och hur den
-validerades.
+	\requirementno & Vid avslutad körning sparas statistik om körningen i en
+	\texttt{.mat}-fil. & Ja \\\hline
 
-Krav 28. 
+	\requirementno & Se REF. & \\\hline
 
-Krav 29. Deltagande i projektet har angett den tid de jobbat efter varje moment. 
+	\requirementno & & \\\hline 
 
-Krav 30. Handledaren har inte bidragit med hjälp i mer än 25h.
+	\requirementno & Gruppmedlemmarna har tidsrapporterat under hela projektet och håller
+	sig på ett ungefär till tidsgränsen. Se externt tidsrapporteringsdokument. & Ja
+	\\\hline
 
-Krav 31. Efter att programmet avslutas visas den cykel som tog längst tid, då
-den inte passerar 0,1 sekunder. 
+	\requirementno & Handledaren har inte bidragit med hjälp i mer än 25h. & Ja \\\hline
 
-Krav 32. Efter två veckor av projektet godkänndes projektplanen. 
+	\requirementno & Vid avslutad körning visas den det längsta mellanrummet mellan två
+	avläsningar av banan. Se REF. & Ja \\\hline
 
-Krav 33. Under projektvecka fyra godkändes designspecifikationen av beställaren. 
+	\requirementno & Krav 32. Projektplanen var godkänd två veckor efter
+	beställarmötet. & Ja \\\hline
 
-Krav 34. Under projektvecka fem redovisade projektgruppen kraven 2, 4, 31 samt 25. 
+	\requirementno & Designspecifikationen godkändes under projektvecka 4. & Ja \\\hline
 
-Krav 35. Under projektvecka sju redovisade projektgruppen kraven 3, 5, 10, 17
-samt 18. Även de krav som uppfylldes under bp.4a visades. 
+	\requirementno & BP4a redovisades under projektvecka 5. & Ja \\\hline
 
-Krav 36. Under projektvecka nio redovisade projektgruppen samtliga Lrav som
-uppfyllts tidigare samt alla krav i avsnitt 3.2.
+	\requirementno & BP4b redovisades under projektvecka 6. & Ja \\\hline
 
-Krav 37. Programvaran levererades under projektvecka 10. 
+	\requirementno & BP5 redovisades under projektvecka 9. & Ja \\\hline
 
-Krav 38. Den tekniska dokumentationen levererades under projektvecka 10. 
+	\requirementno & Programvaran kommer levereras under projektvecka 10. & -- \\\hline
 
-Krav 39. Under projektvecka tio hölls en slutleverans där gruppen visade upp
-samtliga krav och höll en presentation över vad hur arbetet har sett ut. 
+	\requirementno & Den tekniska dokumentationen kommer levereras under
+	projektvecka 10. & -- \\\hline
 
-Krav 40. Inför varje beslutspunkt har önskade dokument varit beställaren
-tillhandahållna innan 09:00 arbetsdagen innan mötet. 
+	\requirementno & En slutleverans kommer hållas under projektvecka 10. Vid slutleveransen
+	kommer projektgruppen gå igenom samtliga krav och i övrigt presentera arbetets
+	gång. & -- \\\hline
 
-Krav 41. Projektledaren har delat tidsrapportering samt eventuella
-mötesprotokoll vid rätt tid de flesta av projektveckorna, kravet är därför
-delvis uppnått.
+	\requirementno & Inför varje beslutspunkt har önskade dokument varit beställaren
+	tillhanda innan 09:00 arbetsdagen innan mötet. & Ja \\\hline
 
-Krav 42. Alla dokument samt all programvara har samlats i gitlab minst en gång i
-veckan sedan projektvecka 2. 
+	\requirementno & Projektledaren har delat tidsrapportering samt eventuella
+	mötesprotokoll vid rätt tid de flesta projektveckor. & Delvis \\\hline
 
-Krav 43. Projektplan, designspecifikation, mötesprotokoll, teknisk
-dokumentation, testprotokoll samt efterstudie har gjorts. 
+	\requirementno & Alla dokument och all programvara har funnits tillgänglig på
+	\url{https://gitlab.liu.se/} sedan projektvecka 2. & Ja \\\hline
 
-Krav 44. Dokument samt programvaran har bearbetats samt lagrats på
-http://gitlab.ida.liu.se/.  
+	\requirementno & Projektplan, designspecifikation, mötesprotokoll, testprotokoll och teknisk
+	dokumentation har framställts. Efterstudie kommer framställas vid ett senare
+	tillfälle. & Ja \\\hline
 
-Krav 45. Alla dokument framtagna av projektgruppen har levererats i pdf-format. 
+	\requirementno & Se krav 42. & Ja \\\hline
 
-Krav 46. Alla dokument skrivna av projektgruppen är är skrivet på formell
-korrekt svenska.
+	\requirementno & Alla dokument framtagna av projektgruppen har levererats som
+	PDF-dokument. & Ja \\\hline
 
-Krav 47. Dokumentationen innehåller, 
+	\requirementno & Alla framtagna dokument är skrivna på formell och korrekt
+	svenska. & Ja \\\hline
 
-Krav 48. Programmet är uppdelat i funktioner. 
+	\requirementno & Dokumentationen innehåller följande figurer: varvtid mot varvnummer och
+	genomsnittlig tid för varje segment. & Delvis \\\hline
 
-Krav 49. Projektgruppen har samtlats på mint ett möte i veckan där alla
-medlemmar har närvarat. Handledaren har inte närvarat vilket resulterar i ett
-delvis uppnått krav. 
+	\requirementno & Programmet är uppdelat i funktioner. & Ja \\\hline
+
+	\requirementno & Projektgruppen har samtlats på minst ett möte i veckan där alla
+	medlemmar har närvarat. Handledaren har inte närvarat. & Delvis \\\hline
+
+\end{requirements}

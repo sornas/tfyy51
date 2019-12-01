@@ -90,7 +90,7 @@ dottedtoc
   \def\name@Email{E-post}
   \def\name@Requirement{Krav}
   \def\name@Description{Beskrivning}
-  \def\name@Priority{Prioritet}
+  \def\name@Priority{Uppfyllt}
   \def\name@contprev{forts. från föregående sida}
   \def\name@contnext{forts. på nästa sida}
   \def\name@Author{Författare}
