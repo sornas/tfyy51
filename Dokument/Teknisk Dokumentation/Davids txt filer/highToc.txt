@@ -1,0 +1,5 @@
+För att verifiera att givarna läses av minst tio gånger i sekunden så körs det
+en funktion i slutet av varje cykel som tillfälligt pausar givarnas avläsning.
+Funktionen gör en paus på 0.001 sekunder och gör det tills funktionen totalt har
+pausat i över 0.07 sekunder. Under körningen så sparar funktionen den högst
+uppmätta paustiden.

@@ -1,0 +1,3 @@
+Inför en delleverans skrevs det upp krav och funktioner som skulle testas.
+I testet kördes de funktioner som skulle uppfylla kraven och utfallet
+av körningarna dokumenterades i ett testprotokoll.
