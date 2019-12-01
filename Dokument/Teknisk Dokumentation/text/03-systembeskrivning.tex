@@ -7,5 +7,19 @@
 
 \subsection{Avslut}
 
-När körningen avslutas så får banan ingen mer spänning och bilarna stannar.
-Ifall en bil har kört fler än 2 varv så sparas statistik från körningen. 
+För att avbryta programmet manuellt kan användaren när som helst trycka på q
+eller s på datorns tangentbord. Trycker användaren på q avslutas programmet
+direkt. Trycker användaren på s stoppas varje bil var för sig när de är 80~cm
+från målgivaren och programmet avslutas när båda bilarna stannat.
+
+Om det har gått mer än nio sekunder sedan en givare passerades pausas programmet
+och användaren informeras på styrdatorn att en bil misstänkts ha fastnat eller
+åkt av banan. 
+
+När körningen avslutas slutar systemet skicka spänning till banan.
+Om en bil kört fler än två varv sparas statistik från körningen i en
+\texttt{.mat}-fil med nuvarande datum och tid som filnamn.
+
+Vid programslut visas statistik om varvtid och genomsnittlig segmenttid på
+displayen. Se figurer xx-xx.
+
