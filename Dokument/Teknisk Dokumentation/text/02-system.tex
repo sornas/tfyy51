@@ -11,7 +11,7 @@ banan behöver olika mycket spänningstillförsel för samma hastighet och dels
 eftersom bilarna vid vissa delar av banan inte kan åka lika snabbt som vid andra
 delar av banan.
 
-Värden som är relevanta för styrningen av vardera bara är i systemet sparad i
+Värden som är relevanta för styrningen av vardera bil är i systemet sparad i
 två så kallade \emph{structs} med samma struktur. Att de båda banorna beskrivs
 av samma typ av objekt gör att funktionerna (som beskrivs nedan) kan utformas
 oberoende av vilken bana det är de hanterar. Dessa variabler hänvisas till som
@@ -46,7 +46,9 @@ Utöver dessa värden sparas ett antal värden för själva systemet.
 \begin{itemize}
 
 	\item \texttt{display.data} - En kö av kommandon som ska skickas till displayen.
-	\item \texttt{bootN.status} - Om den så kallade ''bootstrapen'' (se REF) är aktiv för bana N.
+	\item \texttt{bootN.status} - Om den så kallade ''bootstrapen'' är aktiv för bana N. Se \ref{sec:systembeskrivning:uppstart}
+	\item \texttt{bootN.time} - Den tid som passerat sedan förra gången ''bootstrapen'' höjde \texttt{car.constant} för bana N. Se 
+	\ref{sec:systembeskrivning:uppstart}
 	\item \texttt{halt} - Om någon av bilarna åkt av och användaren valt att avbryta körningen.
 	\item \texttt{t} - Hur lång tid den nuvarande programcykeln tagit.
 	\item \texttt{highToc} - Längden på den längsta programcykeln. Används för att kontrollera krav 31.

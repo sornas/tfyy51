@@ -1,11 +1,7 @@
 Inledning - kolla igenom
-Begrepp och systemöversikt - kolla igenom
-Referenser! - Albin
 Funktioner och filer - format - Gustav
-	main.m - Albin
 Displayfunktioner - rensa - Gustav
 Material - utveckla - Alex
-Lägg in Davis ändringar - Albin
-Kravbesktivning - Läs igenom - Albin
 
-
+gör figurer
+\texttt{} fortsätter efter radbrytning
