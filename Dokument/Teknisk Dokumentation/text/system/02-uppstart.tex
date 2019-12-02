@@ -10,3 +10,39 @@ sista \texttt{car.constant} räknas ut som förväntas ge en varvtid på 15
 sekunder. Om den förväntade varvtiden är längre än 15 sekunder höjs
 \texttt{car.constant} och om den förväntade varvtiden är lägre sänks
 \texttt{car.constant}.
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		\draw 
+			(0,0) -- 
+			(1,0) --
+			(1,1) --
+			(2,1) --
+			(2,2) --
+			(3,2) --
+			(3,3) --
+			(4,3) --
+			(4,5) --
+			(7,5) --
+			(7,5.5) --
+			(10,5.5);
+		\draw [dotted] (10, 5.5) -- (14, 5.5);
+		\draw [->] (0,0) -- (15, 0) node[right]{$t$};
+		\draw [->] (0,0) -- (0, 8) node[above]{Spänning};
+		\draw [dotted] (4, 0) -- (4, 0.5) node[right]{Målgivarutslag} -- (4,3);
+		\draw [dotted] (10,0) -- (10, 3) node[right]{Bootstrap slut} -- (10, 5.5);
+		\draw [decoration={brace, raise=2pt}, decorate] (1,1) -- (2,1);  % dt
+		\node at (1.5, 1.5) {$dt_1$};
+		\draw [decoration={brace, raise=2pt}, decorate] (1,0) -- (1,1);
+		\node at (0.5, 0.5) {$dU_1$};
+		\draw [decoration={brace, raise=2pt}, decorate] (4,3) -- (4,5);
+		\node at (3.5, 4) {$dU_2$};
+		\draw [decoration={brace, raise=2pt}, decorate] (4,5) -- (7,5);
+		\node at (5.5, 5.5) {$dt_2$};
+		\draw [decoration={brace, mirror, raise=2pt}, decorate] (7,5) -- (7,5.5);
+		\node at (7.55,5.25) {$dU_3$};
+	\end{tikzpicture}
+	\caption{Metod för start av bil.}
+	\label{fig:bootstrap}
+\end{figure}

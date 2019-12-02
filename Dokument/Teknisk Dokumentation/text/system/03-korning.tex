@@ -37,6 +37,12 @@ med förra kända positionen och returneras i \texttt{car.position}. Denna
 
 Efter positionsberäkningen beräknas det gaspådrag som skall sättas till banan. Detta görs i två
 funktioner, \texttt{get\_new\_v} och \texttt{get\_new\_u}.
+
+Till systemet har det tagits fram en spänningkarta som är indelat i delsegment.
+Dessa delsegment är helt enkelt varje del av banan som använts för att sätta
+ihop bilbanan. Delarna är uppmätta och placerade i en lista där det sedan 
+gjorts tester där delsegmenten blivit tilldelade en spänning utifrån banans
+och bilarnas egenskaper.
  
 I \texttt{get\_new\_v} används bilens nuvarande postition (\texttt{car.postition})
 och hastighetskartan (\texttt{car.map}). I \texttt{car.map} finns en
@@ -51,6 +57,13 @@ i \texttt{car.u}.
 \label{sec:systembeskrivning:governor}
 Om bootstrap är avslutad, körs den del av koden vars ända uppgift är att 
 anpassa \texttt{car.constant}. 
+
+Forecasts beräknar den approximerade varvtiden utifrån tid fram tills senast
+passerad givare samt hastighet i tidigare segment. Genom att veta en
+genomsnittlig hastighet går det med kvarvarande sträcka att räkna ut en
+ungefärlig kvarvarande tid. Adderas tiden fram tills senaste segment med
+den uträknade approximerade tiden kvar så fås det en uppskattad varvtid som
+används för att avgöra om en bil behöver åka snabbare eller långsammare.
 
 Detta görs med funktionen \texttt{do\_gov}.  Först görs en uppskattning av 
 varvtiden utifrån hur lång tid varvet har tagit än
