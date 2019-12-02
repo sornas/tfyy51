@@ -6,16 +6,14 @@ Programmet gör redan en uppskattning av bilens position (\texttt{get\_position(
 Eftersom \texttt{get\_new\_v()} utgår ifrån denna uppskattning, behövs ingen
 anpassning göras ifall en givare inte ger utslag. Däremot måste det 
 kompenseras nästa gång en givare detekteras. Detta görs med funktionen
-\texttt{choose\_position()}. Den funktionen jämför positionen beräknad av 
-\texttt{get\_position()} och positionen vald av nuvarande givare. 
+\texttt{choose\_position()}.
 
 Vid varje givare kontrollerar \texttt{choose\_position()} vilken givare
-\texttt{car.position} ligger närmast genom att jämföra den nuvarande
-(uppskattade) positionen med de kända positionerna varje givare befinner sig på.
+\texttt{car.position} ligger närmast genom att jämföra den \emph{beräknade} positionen med de kända positionerna varje givare befinner sig på.
 Funktionen beräknar skillnaden i antalet givare mellan denna och den givare som
-valdes med givardetektionen. I normala fall är skillnaden 0 eller 1 (om en
+valdes med givardetektionen. I normala fall är skillnaden 0 (ingen missad givare) eller 1 (om en
 givare missats), men systemet kan hantera att flera givare i rad missas.
-(Systemet kan inte hantera en givare som skickar dubbla signaler.) Om
+(Systemet kan inte hantera en givare som skickar dubbla signaler). Om
 \texttt{choose\_position()} bedömer att en givare missats flyttas
 \texttt{car.segment} till den givare som matchar.
 
