@@ -14,7 +14,7 @@ delar av banan.
 Värden som är relevanta för styrningen av vardera bil är i systemet sparad i
 två så kallade \emph{structs} med samma struktur. Att de båda banorna beskrivs
 av samma typ av objekt gör att funktionerna (som beskrivs nedan) kan utformas
-oberoende av vilken bana det är de hanterar. Dessa variabler hänvisas till som
+oberoende av vilken bana som hanteras. Dessa variabler hänvisas till som
 \texttt{car.value}. Om två bilar körs finns det således två värden sparade för
 varje variabel som är specifierad nedan, en för bana 1 och en för bana 2.
 
@@ -24,7 +24,7 @@ varje variabel som är specifierad nedan, en för bana 1 och en för bana 2.
 \item \texttt{car.running} - Om bilen körs eller inte.
 \item \texttt{car.stopping} - Om bilen för tillfället letar efter ett ställe att stanna på.
 \item \texttt{car.stopped} - Om bilen har hittat ett ställe att stanna på.
-\item \texttt{car.automatic} - Om bilen ska köras autonomnt.
+\item \texttt{car.automatic} - Om bilen ska köras autonomt.
 \item \texttt{car.segment} - Bilens nuvarande segment.
 \item \texttt{car.lap} - Bilens nuvarande varv.
 \item \texttt{car.lap\_times} - En lista över bilens varvtider.

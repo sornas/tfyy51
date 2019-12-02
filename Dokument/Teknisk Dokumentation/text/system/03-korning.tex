@@ -39,7 +39,7 @@ Efter positionsberäkningen beräknas det gaspådrag som skall sättas till bana
 funktioner, \texttt{get\_new\_v} och \texttt{get\_new\_u}.
  
 I \texttt{get\_new\_v} används bilens nuvarande postition (\texttt{car.postition})
-och hastihetskartan (\texttt{car.map}). I \texttt{car.map} finns en
+och hastighetskartan (\texttt{car.map}). I \texttt{car.map} finns en
 hastighetsparameter för varje \texttt{car.position}, denna retuneras av funktionen
 och sparas i \texttt{car.v}.
  
@@ -57,7 +57,7 @@ varvtiden utifrån hur lång tid varvet har tagit än
 så länge, se REFERENS!. Om bilen är inne på sitt första varv görs uppskattningen endast
 utifrån förra segmentet \texttt{car.forcasts\_naive} och om första varvet är
 avslutat använder den i stället \texttt{car.forcasts} som kollar på hela varvtiden
-fram till och med nu. Detta görs efter segment 4 och 8. Desutom används den
+fram till och med nu. Detta görs efter segment 4 och 8. Dessutom används den
 faktiska varvtiden när bilen passerar mål (från varv 2 och frammåt).
  
 Sedan jämförs denna uppskattade varvtid med referenstiden (\texttt{car.ref\_time}) 
