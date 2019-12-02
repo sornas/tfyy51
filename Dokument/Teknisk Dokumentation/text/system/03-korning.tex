@@ -30,7 +30,7 @@ Sedan beräknas positionen, i meter från målgivaren, med funktionen
 \texttt{get\_position()}. Den använder den ungefärliga hastigheten \texttt{v} beräknad av
 \texttt{approx\_v()} och tiden \texttt{t} sedan denna beräkning gjordes senast (en programcykel, se \ref{sec:system:korning:cykel})
 och beräknar med $s = v \cdot t$ den sträcka som bilen har åkt. Sedan adderas denna
-med förra kända postionen och returneras i \texttt{car.position}. Denna 
+med förra kända positionen och returneras i \texttt{car.position}. Denna 
 \emph{beräknade} position tas också fram när en givare har passerats, då skrivs den över med \emph{givarpositionen} men används i stället för att detektera missade givare. Se \ref{sec:missade givare}.
 
 \subsubsection{Gaspådrag}
