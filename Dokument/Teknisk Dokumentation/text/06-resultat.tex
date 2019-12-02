@@ -1,9 +1,34 @@
 \section{Resultat}
 
+Vid redovisningstillfället slutfördes två körningar på 15 varv vardera där de
+fem första var kalibreringsvarv (enligt krav 20 och 22). Vid den första
+körningen var referenstiden inställd på 13 sekunder och vid den andra var
+referenstiden inställd på 14 sekunder. De två körningarna finns uppritade i
+figur~\ref{fig:laptimes-calibration} med kalibreringsvarven och i figur~
+\ref{fig:laptimes-no-calibration} utan kalibreringsvarven med vald referenstid
+och den maximalt tillåtna avvikelsen på 0,5 sekunder (enligt krav 21) inritat.
+Figur~\ref{fig:segtimes} visar den genomsnittliga segmentstiden vid vardera
+körning.
+
+Vid den första körningen höll bilen en genomsnittlig varvtid på 13,22~sekunder
+med en standardavvikelse på 0,24~sekunder. $\pm$0,5~sekunder överträddes vid två
+av varven med varvtider på 13,54 och 13,52~sekunder.
+
+Vid den andra körningen höll bilen en genomsnittlig varvtid på 14,47~sekunder
+med en standardavvikelse på 0,26~sekunder. $\pm$0,5~sekunder överträddes vid
+fyra av varven med en maximal överträdelse på 0,31~sekunder långsammare än
+maximal tillåten varvtid (14,5~sekunder).
+
+Ingen av dessa körningar uppfyllde kraven på prestanda, alltså krav 20, 21 och
+23.
+
+Givarna lästes av mer än 10 gånger per sekund. Se REF för information om hur
+detta mäts.
+
 \begin{figure}
 	\centering
 	\begin{tikzpicture}
-		\begin{axis}[
+		\begin{axis} [
 				ylabel=Tid (s),
 				legend pos = outer north east,
 				ybar interval=0.75
@@ -17,7 +42,7 @@
 		\end{axis}
 	\end{tikzpicture}
 	\caption{Genomsnittlig segmentstid för de två körningarna från redovisningen.}
-	\label{fig:seg_times}
+	\label{fig:segtimes}
 \end{figure}
 
 \begin{figure}
