@@ -12,28 +12,26 @@ sedan motsvarande hastighetsparameter (\texttt{car.v}) och därefter det gaspåd
 
 \subsubsection{Position}
 \label{sec:system:korning:position}
-Det finns två fall när positionen ska beräknas. När en givare har passerats och
-när en givare inte har passerats. Under första varvet hanteras endast det första fallet
-och från varv 2 och frammåt görs båda paralellt. 
+Det finns två fall när positionen ska beräknas. När en givare har passerats sedan förra positionsberäkningen och när ingen givare har passerats. Under första varvet hanteras endast det första fallet
+och från varv 2 och frammåt görs båda parallellt. 
 
 Om en ny givare har passerats, \texttt{car.new\_check\_point == true}, ökar
 programmet nuvarande segment (\texttt{car.segment}) med 1. \texttt{car.segment}, som
 alltid ligger mellan 1 och 9, används som index för att välja position i en
-lista (\texttt{car.pos\_at}). 
+lista (\texttt{car.pos\_at}). Vi kallar den positionen för \emph{givarpositionen}.
 
-Om ingen givare har passerars och bilen har avslutat första varvet, alltså
-oftast, görs lite mer avancerade beräkningar. För att beräkna positionen
-använder proggrammet först en funktion \texttt{get\_aprox\_v}. Denna utgår ifrån
+Om ingen givare har passerars och första varvet är avslutat kallas först på funktionen \texttt{get\_approx\_v()}. Denna utgår ifrån
 förra varvets segmentstider (\texttt{car.seg\_times}) och segmentslängder
-(\texttt{car.seg\_len}) och beräknar med $v = \frac{s}{t}$ medelhastigheten för nuvarnade
-segment, men förra varvet. Denna antas vara ungefär samma sak som nuvarande
-hastiget. 
+(\texttt{car.seg\_len}) och beräknar med $v = \frac{s}{t}$, där \texttt{s} är segmentslängden och \texttt{t} segmentstiden, \texttt{v} som är medelhastigheten för nuvarnade
+segment, men förra varvet. Denna antas vara ungefär samma som nuvarande
+hastiget och kallas \emph{car.v}. 
 
-Sedan beräknas den fakiska positionen, i meter från målgivaren, med funktionen
-\texttt{get\_position}. Den använder den ungefärliga hastigheten beräknad av
-\texttt{aprox\_v} och tiden sedan denna beräkning gjordes senast (en programcykel)
+Sedan beräknas positionen, i meter från målgivaren, med funktionen
+\texttt{get\_position()}. Den använder den ungefärliga hastigheten \texttt{v} beräknad av
+\texttt{approx\_v()} och tiden \texttt{t} sedan denna beräkning gjordes senast (en programcykel, se \ref{sec:system:korning:cykel})
 och beräknar med $s = v \cdot t$ den sträcka som bilen har åkt. Sedan adderas denna
-med förra kända postionen och retuneras i \texttt{car.position}. 
+med förra kända postionen och returneras i \texttt{car.position}. Denna 
+\emph{beräknade} position tas också fram när en givare har passerats, då skrivs den över med \emph{givarpositionen} men används i stället för att detektera missade givare. Se \ref{sec:missade givare}.
 
 \subsubsection{Gaspådrag}
 
