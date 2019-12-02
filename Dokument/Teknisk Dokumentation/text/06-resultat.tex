@@ -2,7 +2,20 @@
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\linewidth]{Figures/segment_times}
+	\begin{tikzpicture}
+		\begin{axis}[
+				ylabel=Tid (s),
+				legend pos = outer north east,
+				ybar interval=0.75
+		]
+			\addplot+ [] coordinates {(1, 1.25) (2, 0.34) (3, 1.33) (4, 2.06) (5, 0.85)
+			(6, 1.74) (7, 2.55) (8, 1.97) (9, 1.28) (10, 1)};
+			\addlegendentry{Körning 1}
+			\addplot+ [] coordinates {(1, 1.27) (2, 0.30) (3, 1.44) (4, 2.14) (5, 1.01)
+			(6, 2.22) (7, 2.83) (8, 2.14) (9, 1.32) (10, 1)};
+			\addlegendentry{Körning 2}
+		\end{axis}
+	\end{tikzpicture}
 	\caption{Genomsnittlig segmentstid för de två körningarna från redovisningen.}
 	\label{fig:seg_times}
 \end{figure}
@@ -20,6 +33,7 @@
 	\end{tikzpicture}
   \caption{Varvtider för de två körningarna från redovisningen, inklusive
 	kalibreringsvarven.}
+	\label{fig:laptimes-calibration}
 
 	\vspace*{\floatsep}% https://tex.stackexchange.com/q/26521/5764
 
@@ -41,4 +55,5 @@
 	\end{tikzpicture}
 	\caption{Varvtider för de två körningarna från redovisningen, exklusive
 	kalibreringsvarven.}
+	\label{fig:laptimes-no-calibration}
 \end{figure}
