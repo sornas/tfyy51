@@ -1,0 +1,64 @@
+Allmänt
+	Ska funktioner skrivas do_car() eller do_car?
+
+Bakgund
+	"Detta projeket"
+	Vad är en givare?
+Begrepp och systemöversikt		
+	Tom
+Systembeskrivning
+	Innan start
+		"displayenm"
+		"0,x" är inte fint
+	Uppstart
+		automatisk eller autonom?
+		Funktioner och variabler inte kursiva
+		Är höjningen värkligen kontinuelig? Mattematiskt nej, språkligt ja
+		Stor bokstav ny mening (rad 4, -2)
+	Körning
+		Position
+			snyggare matte
+		Governor
+			hänvisa till forcasts?
+			Förändringar är större ju mer ifrån tiden är
+	Avslut
+		Hur avslutas programmet?
+Händelser
+Liten beskrivning av vad som medas med händelser?
+	Avslutning av körning
+		"avslutas (först) när båda bilarna står stilla"
+Programslut
+	kursiv stil
+Handhavande
+	bättre beskrivning av sökvägen. 
+	"Dyker upp" lite informellt
+	"När koden körs i Matlab är dags att" Va?
+	Ställ bilarna på banan?
+	"välja antalet banor" Borde bara "välja de banor"
+	inte punkt före "Samt knappen Avsluta." Citattecken runt knappnamn?
+	"varvtid" Ska vara referenstid (car.ref_time)
+	"skriv in" informellt
+Funktioner och filer
+	System
+		Format behöver göras om
+		kursiv stil på funktioner?
+		Mellanslag efter komma?
+		main.m lite mer förklaring
+	Display
+		format för koordinater?
+		Används alla dessa? Typ flashing_area_with_pattern
+Kravbeskrivning
+	Referera till kravspecen
+	Gör om till tabell
+	Referera till var i Tekniska dokumentationen detta beskrivs
+	Ibland stämmer det inte, tex krav 7
+	8 Vad är en styrsignal?
+	9 typo
+	17 är inte intervallet slutet?
+	21 typo
+	36 typo
+	38 inte gjord
+	43 inte gjord
+	44 fel adress, inte ida
+	47 ?
+	

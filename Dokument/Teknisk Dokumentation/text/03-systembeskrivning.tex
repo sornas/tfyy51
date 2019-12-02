@@ -1,0 +1,33 @@
+\section{Systembeskrivning}
+
+\begin{figure}
+	\centering
+	\includegraphics [height=0.8\textheight] {Figures/flow}
+	\caption{Flödesschema över systemet.}
+	\label{fig:flow}
+\end{figure}
+
+\input{text/system/01-innan-start}
+\input{text/system/02-uppstart}
+\input{text/system/03-korning}
+\input{text/system/05-display}
+
+\subsection{Avslut}
+
+För att avbryta programmet manuellt kan användaren när som helst trycka på q
+eller s på datorns tangentbord. Trycker användaren på q avslutas programmet
+direkt. Trycker användaren på s stoppas varje bil var för sig och fordonet
+stoppas när programmet uppskattar att bilen befinner sig 80~cm innan målgivaren.
+Därefter avslutas programmet när båda bilarna stannat.
+
+Om det har gått mer än nio sekunder sedan en givare passerades pausas programmet
+och användaren informeras på styrdatorn att en bil misstänkts ha fastnat eller
+åkt av banan. 
+
+När körningen avslutas slutar systemet skicka spänning till banan.
+Om en bil kört fler än två varv sparas statistik från körningen i en
+\texttt{.mat}-fil med nuvarande datum och tid som filnamn.
+
+Vid programslut visas statistik om varvtid och genomsnittlig segmenttid på
+displayen. Se figurer xx-xx.
+

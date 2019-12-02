@@ -1,0 +1,26 @@
+Missade givare
+
+Programmet gör redan en uppskattning av bilens position (\emph{get\_position})
+ och justerar denna vid ny givare (lägg till referens här).
+Eftersom \emph{get\_new_v} utgår ifrån denna uppskattning, kommer ingen
+anpassning behöva göras ifall en givare inte ger utslag. Däremot måste det 
+kompenseras nästa gång en givare detekteras. Detta görs med funktionen 
+\emph{choose\_position}. Den funktionen jämför positionen beräknad av 
+\emph{get\_position} och positionen vald av nuvarande givare. 
+
+Vid varje givare kollar \emph{choose\_position} vilken givare som 
+\emph{get\_position} ligger närmast. Funktionen beräknar skillnaden mellan denna
+och den givare som valdes med givardetektionen. Denna kallas \emph{seg\_plus}.
+I normala fall är \emph{seg\_plus0} = 0 (ingen 
+missad givare) eller 1 (en missad givare), men den kan också bli högre. Eftersom
+programmet inte ska behöva hantera för många givarsignaler ska \emph{seg\_plus}
+aldrig kunna bli lägre än 0. I så fall ändras denna till 0. \emph{seg\_plus} 
+retuneras av funktionen och används sedan för att höja \emph{car.segment} så att
+programmet har koll på var bilen är.
+
+Dessutom behöver den insamlade datan justeras när en eller flera givare har 
+missats. Annars kommer \emph{car.seg\_times} spara tiden för flera segment som 
+om det vore ett enda. Lösningen är att skriva över denna tid med 0. Alla 
+funktioner som använder denna data behöver kolla ifall den är noll eller inte, 
+om den är noll används den ifrån varvet innan i stället. Om den också är noll 
+används den från två varv tidigare osv.

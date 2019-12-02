@@ -186,7 +186,7 @@ end
 %% CALCULATE
 if car.running == true && car.automatic == true
 	car.v = get_new_v(car.position, car.map);
-	car.u = get_new_u(car.v, car.constant);
+	car.u = car.v * car.constant;
 end
 
 %% CONTROLLER

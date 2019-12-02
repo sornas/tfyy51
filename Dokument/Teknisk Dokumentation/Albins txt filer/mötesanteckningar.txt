@@ -1,0 +1,15 @@
+Alla referenser till kod skall skrvas
+	ex: ...vilket höjer \texttt{car.constant} med...
+
+funktioner ska skrivar med parantes tex \texttt{get\_position()}
+
+variabler i structen skrivs (med texttt och \_) car.seg_times
+
+autonom i ställset för automatisk körning
+
+Behövs en subsection om tidsgrejer. I slutet av system
+
+Snyggare matte och hänvisningar, se gustavs pdf (i mappen "Teknisk
+Dokumentation")
+	
+Flytta 4.1 till 3.5

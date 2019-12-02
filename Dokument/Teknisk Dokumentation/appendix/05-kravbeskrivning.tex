@@ -1,0 +1,141 @@
+\section{Kravbeskrivning}
+\label{app:kravbeskrivning}
+För fullständig beskrivning av kraven, se kravspecifikationen.
+\begin{requirements}
+	\requirementno & Programmet är skrivet i Matlab. & Ja \\\hline
+
+	\requirementno & Systemet går att köra autonomt & Ja \\\hline
+
+	\requirementno & Systemet hanterar missade givare. Verifieras dels med en inprogrammerad
+	inställbar sannolikhet att en given givare hoppas över, dels av beställaren
+	under BP5. & Ja \\\hline
+
+	\requirementno & När ett varv har körts visar displayen varvnummer och varvtid.
+	& Ja \\\hline
+
+	\requirementno & Det nuvarande gaspådraget visas kontinuerligt på displayen. &
+	Ja \\\hline
+
+	\requirementno & Statistik om körningen visas vid avslutad körning på displayen.
+	Se \ref{sec:programslut}. & Ja \\\hline
+
+	\requirementno & Systemet anpassar automatiskt spänningstillförseln beroende på
+	egenskaperna för bilen och banan. & Ja \\\hline
+
+	\requirementno & Systemet anpassar automatiskt spänningstillförseln beroende på
+	egenskaperna för bilen och banan. & Ja \\\hline
+
+	\requirementno & Om en givare inte passeras inom nio sekunder pausas systemet och
+	användaren får frågan om programmet ska fortsätta eller avsluta. & Ja \\\hline
+
+	\requirementno & Vid uppstart väljer användaren vilken av banorna som ska köras eller om
+	båda ska köras samtidigt. & Ja \\\hline
+
+	\requirementno & Struket av beställaren. & N/A \\\hline
+
+	\requirementno & Vid uppstart väljer användaren om en bana ska köras autonomnt eller
+	manuellt. Banorna kan köras i alla kombinationer av autonomt och manuellt styre.
+	& Ja \\\hline
+
+	\requirementno & Systemet startas genom att enbart köra filen \texttt{main.m}.
+	Se \ref{app:handhavande}. & Ja \\\hline
+
+	\requirementno & Se krav 10 och 12. Delen om gemensam målgång är struken av
+	beställaren. & Ja \\\hline
+
+	\requirementno & All inmatning vid uppstart sker via displayen. & Ja \\\hline
+
+	\requirementno & På redovisingen åkte bilarna antingen av banan efter ett varv eller
+	inte alls. & Nej \\\hline
+
+	\requirementno & Referenstiden går att välja på displayen i intervallet 12 till 15
+	sekunder med steg om 0,5 sekunder. & Ja \\\hline
+
+	\requirementno & På redovisningen stannade inte bilarna någon gång. & Ja \\\hline
+
+	\requirementno && \\\hline
+
+	\requirementno & På redovisnigen slutfördes två körningar om 15 varv varav fem
+	kalibreringsvarv. Standardavvikelsen låg på 0,22 sekunder respektive 0,24
+	sekunder. & Nej \\\hline
+
+	\requirementno & Under de två testkörningarna överskreds gränsen om $\pm$ 0,5 sekunder
+	ett antal gånger. & Nej \\\hline
+
+	\requirementno & Krav 20 och 21 mäter endast varvtider från varv 6 och framåt. &
+	Ja \\\hline
+
+	\requirementno & Struket av beställaren. & N/A \\\hline
+
+	\requirementno & Statistik från körningarna vid redovisingen har delats med beställaren
+	via e-post. & Ja \\\hline
+
+	\requirementno & Vid avslutad körning visas grafer över varvtid och genomsnittlig tid
+	per segment. & Delvis \\\hline
+
+	\requirementno & Vid avslutad körning sparas statistik om körningen i en
+	\texttt{.mat}-fil. & Ja \\\hline
+
+	\requirementno & Se \ref{sec:system:korning:cykel}. & \\\hline
+
+	\requirementno & & \\\hline 
+
+	\requirementno & Gruppmedlemmarna har tidsrapporterat under hela projektet och håller
+	sig på ett ungefär till tidsgränsen. Se externt tidsrapporteringsdokument. & Ja
+	\\\hline
+
+	\requirementno & Handledaren har inte bidragit med hjälp i mer än 25h. & Ja \\\hline
+
+	\requirementno & Vid avslutad körning visas den det längsta mellanrummet mellan två
+	avläsningar av banan. Se \ref{sec:system:korning:cykel}. & Ja \\\hline
+
+	\requirementno & Krav 32. Projektplanen var godkänd två veckor efter
+	beställarmötet. & Ja \\\hline
+
+	\requirementno & Designspecifikationen godkändes under projektvecka 4. & Ja \\\hline
+
+	\requirementno & BP4a redovisades under projektvecka 5. & Ja \\\hline
+
+	\requirementno & BP4b redovisades under projektvecka 6. & Ja \\\hline
+
+	\requirementno & BP5 redovisades under projektvecka 9. & Ja \\\hline
+
+	\requirementno & Programvaran kommer levereras under projektvecka 10. & -- \\\hline
+
+	\requirementno & Den tekniska dokumentationen kommer levereras under
+	projektvecka 10. & -- \\\hline
+
+	\requirementno & En slutleverans kommer hållas under projektvecka 10. Vid slutleveransen
+	kommer projektgruppen gå igenom samtliga krav och i övrigt presentera arbetets
+	gång. & -- \\\hline
+
+	\requirementno & Inför varje beslutspunkt har önskade dokument varit beställaren
+	tillhanda innan 09:00 arbetsdagen innan mötet. & Ja \\\hline
+
+	\requirementno & Projektledaren har delat tidsrapportering samt eventuella
+	mötesprotokoll vid rätt tid de flesta projektveckor. & Delvis \\\hline
+
+	\requirementno & Alla dokument och all programvara har funnits tillgänglig på
+	\url{https://gitlab.liu.se/} sedan projektvecka 2. & Ja \\\hline
+
+	\requirementno & Projektplan, designspecifikation, mötesprotokoll, testprotokoll och teknisk
+	dokumentation har framställts. Efterstudie kommer framställas vid ett senare
+	tillfälle. & Ja \\\hline
+
+	\requirementno & Se krav 42. & Ja \\\hline
+
+	\requirementno & Alla dokument framtagna av projektgruppen har levererats som
+	PDF-dokument. & Ja \\\hline
+
+	\requirementno & Alla framtagna dokument är skrivna på formell och korrekt
+	svenska. & Ja \\\hline
+
+	\requirementno & Dokumentationen innehåller följande figurer: varvtid mot varvnummer och
+	genomsnittlig tid för varje segment. & Delvis \\\hline
+
+	\requirementno & Programmet är uppdelat i funktioner. & Ja \\\hline
+
+	\requirementno & Projektgruppen har samtlats på minst ett möte i veckan där alla
+	medlemmar har närvarat. Handledaren har inte närvarat. & Delvis \\\hline
+
+\end{requirements}

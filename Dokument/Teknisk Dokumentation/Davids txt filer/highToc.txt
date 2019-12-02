@@ -1,0 +1,12 @@
+För att garantera att givarna läses av minst tio gånger i sekunden så körs det
+en for-loop i slutet av varje cykel som tillfälligt pausar programmet.
+For-loopen gör en paus på 0.001 sekunder och gör det tills programmet totalt har
+pausat i över 0.07 sekunder. Den totala paustiden mäts och en if-sats sparar den högsta
+uppmätta paustiden i \texttt{highToc}.
+
+I slutet av varje cykel körs det en loop som tillfälligt pausar programmet.
+För att få avläsningen att ske minst en gång var tionde sekund så pausas
+programmet kontinuerligt 0.001 sekunder tills den totala paustiden överskrider 
+0.07 sekunder då nästa cykel börjar. Då pausen på 0.001 sekunder är så pass
+kort och marginalen till kravet är rätt stor så sker avläsningen mellan
+0.07 och 0.1 sekunder.

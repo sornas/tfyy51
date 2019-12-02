@@ -1,0 +1,8 @@
+Inledning - kolla igenom
+Funktioner och filer - format - Gustav
+Displayfunktioner - rensa - Gustav
+Material - utveckla - Alex
+
+gör figurer
+\texttt{} fortsätter efter radbrytning
+forcasts!

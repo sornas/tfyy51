@@ -1,0 +1,6 @@
+Forecasts beräknar den approximerade varvtiden utifrån tid fram tills senast
+passerad givare samt hastighet i tidigare segment. Genom att veta en
+genomsnittlig hasftighet går det med kvarvarande sträcka att räkna ut en
+ungefärlig kvarvarande tid. Adderas tiden fram tills senaste segment med
+den uträknade approximerade tiden kvar så fås det en uppskattad varvtid som
+används för att avgöra om en bil behöver åka snabbare eller långsammare.

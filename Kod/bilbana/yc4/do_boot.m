@@ -1,6 +1,5 @@
 function [car, boot] = do_boot(car, boot)
-%BOOT Summary of this function goes here
-%   Detailed explanation goes here
+%BOOT Höjer car.constant fram till och med segment 3
 if car.running == true
     %% BEFORE FIRST LAP
     if car.lap == 0

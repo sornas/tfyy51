@@ -1,0 +1,5 @@
+Till systemet har det tagits fram en spänningkarta som är indelat i delsegment.
+Dessa delsegment är helt enkelt varje del av banan som använts för att sätta
+ihop bilbanan. Delarna är uppmätta och placerade i en lista där det sedan 
+gjorts tester där delsegmenten blivit tilldelade en spänning utifrån banans
+och bilarnas egenskaper.

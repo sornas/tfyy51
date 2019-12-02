@@ -1,0 +1,86 @@
+\subsection{Körning}
+\label{sec:systembeskrivning:korning}
+
+Huvudloopen körs åtminstonde 10 gånger i sekunden. Den beräknar var bilen
+befinner sig, hur snabbt bilen ska köra, justerar \texttt{car.constant} och sätter det
+nya gaspådraget till banan.
+
+Majoriteten av förändringarna i structen \texttt{car} görs i funktionen \texttt{do\_car()}. 
+I \texttt{do\_car()} beräknas  först positionen (\texttt{car.position}), 
+sedan motsvarande hastighetsparameter (\texttt{car.v}) och därefter det gaspådrag 
+(\texttt{car.u}) som ska sättas till banan.
+
+\subsubsection{Position}
+\label{sec:system:korning:position}
+Det finns två fall när positionen ska beräknas. När en givare har passerats sedan förra positionsberäkningen och när ingen givare har passerats. Under första varvet hanteras endast det första fallet
+och från varv 2 och frammåt görs båda parallellt. 
+
+Om en ny givare har passerats, \texttt{car.new\_check\_point == true}, ökar
+programmet nuvarande segment (\texttt{car.segment}) med 1. \texttt{car.segment}, som
+alltid ligger mellan 1 och 9, används som index för att välja position i en
+lista (\texttt{car.pos\_at}). Vi kallar den positionen för \emph{givarpositionen}.
+
+Om ingen givare har passerars och första varvet är avslutat kallas först på funktionen \texttt{get\_approx\_v()}. Denna utgår ifrån
+förra varvets segmentstider (\texttt{car.seg\_times}) och segmentslängder
+(\texttt{car.seg\_len}) och beräknar med $v = \frac{s}{t}$, där \texttt{s} är segmentslängden och \texttt{t} segmentstiden, \texttt{v} som är medelhastigheten för nuvarnade
+segment, men förra varvet. Denna antas vara ungefär samma som nuvarande
+hastiget och kallas \emph{car.v}. 
+
+Sedan beräknas positionen, i meter från målgivaren, med funktionen
+\texttt{get\_position()}. Den använder den ungefärliga hastigheten \texttt{v} beräknad av
+\texttt{approx\_v()} och tiden \texttt{t} sedan denna beräkning gjordes senast (en programcykel, se \ref{sec:system:korning:cykel})
+och beräknar med $s = v \cdot t$ den sträcka som bilen har åkt. Sedan adderas denna
+med förra kända positionen och returneras i \texttt{car.position}. Denna 
+\emph{beräknade} position tas också fram när en givare har passerats, då skrivs den över med \emph{givarpositionen} men används i stället för att detektera missade givare. Se \ref{sec:missade givare}.
+
+\subsubsection{Gaspådrag}
+
+Efter positionsberäkningen beräknas det gaspådrag som skall sättas till banan. Detta görs i två
+funktioner, \texttt{get\_new\_v} och \texttt{get\_new\_u}.
+ 
+I \texttt{get\_new\_v} används bilens nuvarande postition (\texttt{car.postition})
+och hastighetskartan (\texttt{car.map}). I \texttt{car.map} finns en
+hastighetsparameter för varje \texttt{car.position} (Se \ref{sec:begrepp och systemöversikt}.), denna retuneras av funktionen
+och sparas i \texttt{car.v}.
+ 
+I \texttt{get\_new\_u} används denna hastighetsparameter tillsammans med
+\texttt{car.constant}. Dessa multipliceras och deras produkt retuneras och sparas
+i \texttt{car.u}.
+
+\subsubsection{Governor}
+\label{sec:systembeskrivning:governor}
+Om bootstrap är avslutad, körs den del av koden vars ända uppgift är att 
+anpassa \texttt{car.constant}. 
+
+Detta görs med funktionen \texttt{do\_gov}.  Först görs en uppskattning av 
+varvtiden utifrån hur lång tid varvet har tagit än
+så länge. Detta görs med forecasts som beräknar den approximerade varvtiden utifrån tid fram tills senast
+passerad givare samt hastighet i tidigare segment. Genom att veta en
+genomsnittlig hastighet går det med kvarvarande sträcka att räkna ut en
+ungefärlig kvarvarande tid. När tiden från mål till senaste passerade givare adderas med
+den uträknade approximerade tiden kvar, så erhålls det en uppskattad varvtid som
+används för att avgöra om en bil behöver åka snabbare eller långsammare. Om bilen dock är inne på sitt första varv görs uppskattningen endast
+utifrån förra segmentet \texttt{car.forcasts\_naive} och om första varvet är
+avslutat så används \texttt{car.forcasts} som vanligt. Detta görs efter segment 4 och 8. Dessutom används den
+faktiska varvtiden när bilen passerar mål (från varv 2 och frammåt).
+ 
+Sedan jämförs denna uppskattade varvtid med referenstiden (\texttt{car.ref\_time}) 
+och \texttt{car.constant} justeras.
+\begin{verbatim}
+car.constant = car.constant + (status - 1) * 0.08;
+\end{verbatim}
+Där \texttt{status} är den uppskattade varvtidens förhållande till \texttt{car.ref\_time}.
+D.v.s om de är exakt lika blir \texttt{status~ =~ 1}, om uppskattningen är högre blir
+den större än 1 och om den är lägre blir den mindre än 1. Således kommer \texttt{car.constant}
+höjas eller sänkas proportionellt mot hur långt ifrån \texttt{car.ref\_time} uppskattningen
+av varvtiden ligger. 
+
+\subsubsection{Hantering av cykellängd}
+\label{sec:system:korning:cykel}
+I slutet av varje cykel körs det en loop som tillfälligt pausar programmet.
+För att få avläsningen att ske minst en gång var tionde sekund så pausas
+programmet kontinuerligt 0.001 sekunder tills den totala paustiden överskrider 
+0.07 sekunder då nästa cykel börjar. Då pausen på 0.001 sekunder är så pass
+kort och marginalen till kravet är rätt stor så sker avläsningen mellan
+0.07 och 0.1 sekunder. I en if-sats sparas den högst
+uppmätta tiden i \texttt{highToc}.

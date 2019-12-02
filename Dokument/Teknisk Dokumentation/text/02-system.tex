@@ -1,0 +1,54 @@
+\section{Begrepp och systemöversikt}
+\label{sec:begrepp och systemöversikt}
+
+Runt om bilbanan finns 9 givare som skickar en signal när
+en bil passerar under dem. En av givarna är målgivaren som går att skilja från de andra givarna då den ger ut en annan signal som defineras som nytt varv. Givarna delar in banan i nio delar, kallade segment. Dessa segment har i sin tur delats in i delsegment. Banan består av totalt 80 delsegment. Delsegementen har indelats utifrån längden på ban-bitarna från banan.
+För vardera bana och delsegment har ett värde på önskad spänningstillförsel till
+banan tagits fram. Detta värde varierar dels eftersom bilarna vid olika delar av
+banan behöver olika mycket spänningstillförsel för samma hastighet och dels
+eftersom bilarna vid vissa delar av banan inte kan åka lika snabbt som vid andra
+delar av banan.
+
+Värden som är relevanta för styrningen av vardera bil är i systemet sparad i
+två så kallade \emph{structs} med samma struktur. Att de båda banorna beskrivs
+av samma typ av objekt gör att funktionerna (som beskrivs nedan) kan utformas
+oberoende av vilken bana som hanteras. Dessa variabler hänvisas till som
+\texttt{car.value}. Om två bilar körs finns det således två värden sparade för
+varje variabel som är specifierad nedan, en för bana 1 och en för bana 2.
+
+\begin{itemize}
+
+\item \texttt{car.num} - Om bilen är på bana ett eller två.
+\item \texttt{car.running} - Om bilen körs eller inte.
+\item \texttt{car.stopping} - Om bilen för tillfället letar efter ett ställe att stanna på.
+\item \texttt{car.stopped} - Om bilen har hittat ett ställe att stanna på.
+\item \texttt{car.automatic} - Om bilen ska köras autonomt.
+\item \texttt{car.segment} - Bilens nuvarande segment.
+\item \texttt{car.lap} - Bilens nuvarande varv.
+\item \texttt{car.lap\_times} - En lista över bilens varvtider.
+\item \texttt{car.seg\_times} - En matris över bilens segmentstider per varv.
+\item \texttt{car.position} - Bilens position i meter efter målgivaren.
+\item \texttt{car.pos\_at} - En lista över hur långt det är kvar till målgivaren från de olika segmenten.
+\item \texttt{car.seg\_len} - En lista över längden för varje segment.
+\item \texttt{car.percents} - En lista över hur stor andel av varvtiden varje segment förväntas ta.
+\item \texttt{car.map} - Kartan över alla subsegment och önskad spänningstillförsel.
+\item \texttt{car.miss\_probability} - Sannolikheten att bilen vid en given givare inte får en signal. Används för att testa krav 3.
+\item \texttt{car.constant} - Multipliceras med den önskade spänningstillförseln för att
+	kompensera för olika bilars olika påverkan av samma spänningstillförsel.
+
+\end{itemize}
+
+
+Utöver dessa värden sparas ett antal värden för själva systemet.
+
+\begin{itemize}
+
+	\item \texttt{display.data} - En kö av kommandon som ska skickas till displayen.
+	\item \texttt{bootN.status} - Om den så kallade ''bootstrapen'' är aktiv för bana N. Se \ref{sec:systembeskrivning:uppstart}
+	\item \texttt{bootN.time} - Den tid som passerat sedan förra gången ''bootstrapen'' höjde \texttt{car.constant} för bana N. Se 
+	\ref{sec:systembeskrivning:uppstart}
+	\item \texttt{halt} - Om någon av bilarna åkt av och användaren valt att avbryta körningen.
+	\item \texttt{t} - Hur lång tid den nuvarande programcykeln tagit.
+	\item \texttt{highToc} - Längden på den längsta programcykeln. Används för att kontrollera krav 31.
+
+\end{itemize}
