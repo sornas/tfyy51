@@ -8,7 +8,7 @@ figur~\ref{fig:laptimes-calibration} med kalibreringsvarven och i figur~
 \ref{fig:laptimes-no-calibration} utan kalibreringsvarven med vald referenstid
 och den maximalt tillåtna avvikelsen på 0,5 sekunder (enligt krav 21) inritat.
 Figur~\ref{fig:segtimes} visar den genomsnittliga segmentstiden vid vardera
-körning.
+körning och tabell~\ref{table:resultat} visar resultaten beskrivna nedan.
 
 Vid den första körningen höll bilen en genomsnittlig varvtid på 13,22~sekunder
 med en standardavvikelse på 0,24~sekunder. $\pm$0,5~sekunder överträddes vid två
@@ -45,8 +45,21 @@ Givarna lästes av mer än 10 gånger per sekund under båda körningarna. Se
 	\label{fig:segtimes}
 \end{figure}
 
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		Körning & Referenstid & Snitt & Standardavvikelse \\\hline
+		1 & 13 & 13,22 & 0,24 \\\hline
+		2 & 14 & 14,47 & 0,26 \\\hline
+	\end{tabular}
+	\caption{Resultaten från de två körningarna.}
+	\label{table:resultat}
+\end{table}
+
 \begin{figure}
 	\centering
+
 	\begin{tikzpicture}
 		\begin{axis} [xmin=0, xmax=15.5,ymin=10,ymax=20, xlabel=Varv, ylabel={Tid (s)}, 
 						legend pos=outer north east]
