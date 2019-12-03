@@ -29,12 +29,12 @@ en uppskattning av hur lång tid det nuvarande varvet troligen kommer ta. Se
 \texttt{fit\_percents(percents, lap\_time, seg\_times)} - Anropas vid varje nytt
 varv. Räknar ut den procentuella tiden varje segment tog det förra varvet och
 sparar medelvärdet mellan den förra procentsatsen och den nya, uträknade
-procentsatsen. Procentsatsen normeras sedan så summan är 1 (100%).
+procentsatsen. Procentsatsen normeras sedan så summan är 1 (100 procent).
 
 \texttt{format\_seg\_times(car)} - Anropas när körningen avslutas. Returnerar
 den genomsnittliga tiden för varje segment.
 
-\texttt{get\_aprox\_v(cur\_seg, car)} - Anropas varje programcykel. Uppskattar
+\texttt{get\_approx\_v(cur\_seg, car)} - Anropas varje programcykel. Uppskattar
 bilens nuvarande hastighet genom att dividera den senast uppmätta segmentstiden
 med segmentets längd.
 
@@ -44,14 +44,14 @@ med segmentets längd.
 \texttt{get\_new\_v(position, list)} - Anropas varje programcykel. Söker igenom
 bankartan och returnerar värdet v som matchar position.
 
-\texttt{get\_position(aprox\_v, prev\_p, delta\_t)} - Anropas varje
+\texttt{get\_position(approx\_v, prev\_p, delta\_t)} - Anropas varje
 programcykel. Räknar ut hur långt bilen rört sig sedan senaste programcykeln.
 
 % \texttt{get\_seg\_constant(position, lap\_constants, track, track\_len)} - TA
 % BORT
 
 \texttt{get\_time\_as\_string(millis)} - Omvandlar en mängd millisekunder till
-formatet "mm:ss.s". Till exempel omvandlas 1250 ms till "00:01.3" och 11240 till
+formatet ''mm:ss.s''. Till exempel omvandlas 1250 ms till "00:01.'' och 11240 till
 "00:11.2".
 
 \texttt{main.m} - Huvudskriptet som startar hela systemet. Det script som
