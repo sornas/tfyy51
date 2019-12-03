@@ -1,15 +1,28 @@
 \subsection{Uppstart} 
 \label{sec:systembeskrivning:uppstart}
-Vid autonom körning utgår systemet ifrån en bootstrap som är systemet för uppstarten av bilarna. Då körs funktionen \texttt{do\_boot()} som arbetar fram en
-initial \texttt{car.constant}. Detta sker i tre steg. Innan bilen börjar rulla
-höjs \texttt{car.constant} varje 0,7 sekunder. När bilen börjar rulla och åker
-under målgivaren höjs \texttt{car.constant} långsammare tills bilen åkt under
-den första givaren varpå \texttt{car.constant} inte längre ändras. Vid den
-tredje givaren jämförs hur lång tid det senaste segmentet tog att köra och en
-sista \texttt{car.constant} räknas ut som förväntas ge en varvtid på 15
-sekunder. Om den förväntade varvtiden är längre än 15 sekunder höjs
-\texttt{car.constant} och om den förväntade varvtiden är lägre sänks
-\texttt{car.constant}.
+
+% Vid autonom körning utgår systemet ifrån en bootstrap som är systemet för
+% uppstarten av bilarna. Då körs funktionen \texttt{do\_boot()} som arbetar fram
+% en initial \texttt{car.constant}. Detta sker i tre steg. Innan bilen börjar
+% rulla höjs \texttt{car.constant} varje 0,7 sekunder. När bilen börjar rulla och
+% åker under målgivaren höjs \texttt{car.constant} långsammare tills bilen åkt
+% under den första givaren varpå \texttt{car.constant} inte längre ändras. Vid den
+% tredje givaren jämförs hur lång tid det senaste segmentet tog att köra och en
+% sista \texttt{car.constant} räknas ut som förväntas ge en varvtid på 15
+% sekunder. Om den förväntade varvtiden är längre än 15 sekunder höjs
+% \texttt{car.constant} och om den förväntade varvtiden är lägre sänks
+% \texttt{car.constant}.
+
+Vid autonom körning börjar systemet med en så kallad ''bootstrap'' vars funktion
+är att arbeta fram en initial konstant för den aktiva bilen. Detta sker i tre
+steg enligt figur~\ref{fig:bootstrap}. I det första steget står bilen stilla
+framför målgivaren och konstanten höjs ofta (varje 0,7 sekunder, $dt_1$ i
+figuren) med ett mellanstort värde ($dU_1$ i figuren). När bilen börjar rulla
+och passerar målgivaren (\emph{målgivarutslag}) höjs konstanten markant ($dU_2$)
+så bilen ska klara den första sträckan av banan. Konstanten höjs sedan med ett
+mindre värde ($dU_3$) efter ett längre intervall ($dt_2$) tills bilen passerar
+den tredje givaren (\emph{bootstrap slut}). Vid den tredje givaren tar det
+ordinarie systemet vid.
 
 \begin{figure}
 	\centering
