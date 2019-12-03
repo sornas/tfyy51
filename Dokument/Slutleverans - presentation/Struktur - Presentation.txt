@@ -1,0 +1,16 @@
+Inledning (M.U)
+- Introduktion/Bakgrund
+- Syfte och mål
+
+Huvuddel
+- Metod
+	- Lips (Hur vi arbetat efter lips-modellen) (A.T)
+	- Gitlab (G.S)
+- System
+	- Display (G.S)
+	- Bilbana (A.W)
+- Resultat (D.T)
+- Reflektion till resultat (A.T)
+	- Vad vi kunnat göra annorlunda
+
+Avslutning (M.U)
