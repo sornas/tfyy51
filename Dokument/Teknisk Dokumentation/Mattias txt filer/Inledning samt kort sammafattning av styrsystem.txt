@@ -12,7 +12,7 @@ under bilarna som håller dem någorlunda fast på banan. Hela systemet ska styr
 utifrån en touch display som är enkel att förstå för gemene man och efter 
 avslutad körning ska den även visa statistik om hur körningen gick. 
 
------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 Kort sammanfattning systembeskrivning 
 
