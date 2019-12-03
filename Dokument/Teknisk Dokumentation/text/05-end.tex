@@ -1,31 +1,37 @@
 \section{Programslut}
 \label{sec:programslut}
-display\_post\_race\_graphs(seg\_times1, seg\_times2, lap\_times1, lap\_times2,
-ref\_time) hanterar knapptryck för att byta mellan de två vyerna. Varje 0,4
-sekunder skickas ett kommando till displayen som kopierar det interna minnet
-till minnet som delas med styrdatorn. Minnet som delas med styrdatorn läses av
-och eventuella knapptryck hanteras genom anrop till antingen
-draw\_lap\_graph(...) eller draw\_segment\_graph(...).
 
-draw\_lap\_graph(lap\_times1, lap\_times2, ref\_time) ritar varvtider för
-ena bilen i taget och skriver ut medelvärde och standardavvikelse, se figur \ref{fig:display_end}.
+När körningen avslutas visas statistik från körningen på den inkopplade
+touchdisplayen. Användaren kan välja om hen vill se den genomsnittliga varvtiden
+för vardera bil eller den genomsnittliga varvtiden för båda bilarna samtidigt.
 
-Hur mycket ska jag skriva om implementationen här?
+\subsection{Varvtider}
 
-draw\_segment\_graph(seg\_times1, seg\_times2)
+Användaren kan välja att se varvtider från körningen som avslutades. Displayen
+visar dels en tabell med referenstid, genomsnittlig varvtid och
+standardavvikelse och dels en graf över alla varvtider för den ena av bilarna.
+Grafen är en vanlig ''scatter plot'' med linjer mellan punkterna. Utritat finns
+också den valda referenstiden och två linjer vid referenstiden + 0,5~sekunder
+respektive referenstiden - 0,5~sekunder, den maximalt tillåtna avvikelsen från
+referenstiden. Om två bilar körts kan användaren byta bil genom att trycka på en
+knapp på displayen.
 
-Samma fråga här som raden ovanför.
+\subsection{Segmentstider}
+
+Användaren kan också välja att se genomsnittliga segmentstider från körningen.
+Segmentstiderna ritas upp som stapeldiagram med en stapel per bil och segment.
+Om två bilar körts visas två staplar per segment.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.75\linewidth] {Figures/genomsnitt_segment}
 	\caption{Genomsnittliga segmentstider}
-	%\label{fig:choose2}
+	\label{fig:display-seg}
 	
 	\vspace*{2\floatsep}% https://tex.stackexchange.com/q/26521/5764
 	
 	\centering
 	\includegraphics [width=0.75\linewidth] {Figures/varvtider}
 	\caption{Varvtider}
-	\label{fig:display_end}
+	\label{fig:display-lap}
 \end{figure}

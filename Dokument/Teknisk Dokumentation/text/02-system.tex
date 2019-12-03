@@ -21,6 +21,22 @@ beroende på hur mycket spänning en viss bil behöver för att nå en viss
 hastighet. Konstanten anpassas under körningens gång ytterligare beroende på
 bilens varvtid jämfört med referenstiden.
 
+\subsection{Display}
+
+% TODO introducera displayen
+
+\subsection{Kommunikation}
+
+För att rita object på displayen finns hjälpfunktioner liknande ett API som
+tagits fram utifrån displayens tekniska specifikation, se bilaga.
+Hjälpfunktionerna implementerades i Matlab och beskrivs i sin helhet i appendix
+del~\ref{app:funktioner och filer:display}.
+
+För att reagera på knapptryck på displayen kan displayen instrueras att flytta
+hela sitt interna minne (där information om bland annat knapptryck finns) till
+ett minne som delas med styrdatorn. Detta minne kan sedan läsas av och systemet
+kan agera utifrån händelserna som skett.
+
 % \begin{itemize}
 % 
 % 	\item \texttt{car.num} - Om bilen är på bana ett eller två.

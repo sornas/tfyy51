@@ -1,11 +1,14 @@
 \subsection{Körning}
 \label{sec:systembeskrivning:korning}
 
-Huvudloopen körs åtminstonde 10 gånger i sekunden. Den beräknar var bilen
-befinner sig, hur snabbt bilen ska köra och skickar det nya gaspådraget till
-banan. När en givare passeras justeras också bilens konstant efter nuvarande
-varv- och referenstid. Nedan beskrivs vad systemet gör under en komplett
-programcykel.
+Körningen är uppdelad i olika faser. Dessa presenteras nedan. En
+\emph{programcykel} är när dessa faser körs igenom en gång. Samlingsnamnet för
+faserna är \emph{huvudloopen}. Systemet behöver köra programcykler med som högst
+0,1~sekunders intervall (enligt krav 31). I en programcykel beräknar systemet
+var bilen befinner sig, hur snabbt bilen ska köra och skickar det nya
+gaspådraget till banan. När en givare passeras justeras också bilens konstant
+efter nuvarande varv- och referenstid.  Nedan beskrivs vad systemet gör under en
+komplett programcykel.
 
 \subsubsection{Position}
 \label{sec:system:korning:position}
@@ -23,20 +26,22 @@ position. Detta görs genom att räkna ut en approximativ hastighet $v =
 \frac{s}{t}$ där $v$ är hastigheten, $s$ är längden på det nuvarande segmentet
 och $t$ är hur lång tid det nuvarande segmentet tog förra varvet.
 
-% Om ingen givare har passerars och första varvet är avslutat kallas först på funktionen \texttt{get\_approx\_v()}. Denna utgår ifrån
-% förra varvets segmentstider (\texttt{car.seg\_times}) och segmentslängder
-% (\texttt{car.seg\_len}) och beräknar med $v = \frac{s}{t}$, där \texttt{s} är segmentslängden och \texttt{t} segmentstiden, \texttt{v} som är medelhastigheten för nuvarnade
-% segment, men förra varvet. Denna antas vara ungefär samma som nuvarande
-% hastiget och kallas \emph{car.v}. 
+% Om ingen givare har passerars och första varvet är avslutat kallas först på
+% funktionen \texttt{get\_approx\_v()}. Denna utgår ifrån förra varvets
+% segmentstider (\texttt{car.seg\_times}) och segmentslängder
+% (\texttt{car.seg\_len}) och beräknar med $v = \frac{s}{t}$, där \texttt{s} är
+% segmentslängden och \texttt{t} segmentstiden, \texttt{v} som är
+% medelhastigheten för nuvarnade segment, men förra varvet. Denna antas vara
+% ungefär samma som nuvarande hastiget och kallas \emph{car.v}. 
 
-Med den approximativa hastigheten räknas sedan en beräknad längd bilen rört sig
-sedan senaste programcykeln ut med $\mathrm{d}s = v \cdot \mathrm{d}t$ där
-$\mathrm{d}s$ är den beräknade sträckan bilen rört sig, $v$ är hastigheten som
-precis räknades ut och $\mathrm{d}t$ är tiden sedan den förra programcykeln.
-Denna förflyttning adderas med positionen från förra programcykeln och kallas
-den \emph{beräknade positionen}.
+Med den approximativa hastigheten räknar sedan systemet ut hur långt bilen rört
+sig sen den senaste programcykeln. Denna förflyttning räknas ut med $\mathrm{d}s
+= v \cdot \mathrm{d}t$ där $\mathrm{d}s$ är den beräknade förflyttningen, $v$
+hastigheten som precis räknades ut och $\mathrm{d}t$ tiden sedan den förra
+programcykeln. Denna förflyttning läggs till positionen från förra programcykeln
+och kallas den \emph{beräknade} positionen.
 
-Om en givare passerats räknar systemet här ut om en givare vid ett tidigare
+Om en givare passerats upskattar systemet sedan om en givare vid ett tidigare
 tillfälle passerats (genom att jämföra givarpositionen och den beräknade
 positionen). Information om denna procedur finns i del~\ref{sec:missade givare}.
 
