@@ -1,18 +1,31 @@
 Inledning
 
-Projektet ska utveckla ett system vilket styr bilar runt en bilbana efter en given referenstid. Till förfogande finns, en bilbana, ett antal bilar, en display samt en dator.
-Målet med detta projekt är att bilarna skas köras runt banan inom 0,5 sekunder av den referenstid som användaren har angett. Efter en avslutad
-körning på x varv ska standardaviklesen på varvtiderna inte överskrida 0,2 sekunder. Systemet skrivs i MatLab och har som huvudsyfte att reglera den spänning som bilbanan skickar
-till bilarna. Olika bilar beter sig olika utifrån vissa skillnader bland bilarna, till exempel vikt, motorn i dem samt den magnet under bilarna som håller dem någorlunda fast på banan. 
-Hela systemet ska styras utifrån en touch display som är enkel att förstå för gemene man och efter avslutad körning ska den även visa statistik om hur körningen gick. 
+Projektet ska utveckla ett system vilket styr bilar runt en bilbana efter en 
+given referenstid. Till förfogande finns, en bilbana, ett antal bilar, en 
+display samt en dator. Målet med detta projekt är att bilarna skas köras runt 
+banan inom 0,5 sekunder av den referenstid som användaren har angett. Efter en 
+avslutad körning på x varv ska standardaviklesen på varvtiderna inte överskrida 
+0,2 sekunder. Systemet skrivs i MatLab och har som huvudsyfte att reglera den 
+spänning som bilbanan skickar till bilarna. Olika bilar beter sig olika utifrån 
+vissa skillnader bland bilarna, till exempel vikt, motorn i dem samt den magnet 
+under bilarna som håller dem någorlunda fast på banan. Hela systemet ska styras 
+utifrån en touch display som är enkel att förstå för gemene man och efter 
+avslutad körning ska den även visa statistik om hur körningen gick. 
 
 -----------------------------------------------------------------------
 
 Kort sammanfattning systembeskrivning 
 
-Vid systemets start möts användaren av startsidan på displayen (se bild x) där olika alternativ ges angående hur körningen ska gå till. Vilken eller vilka av bilarna som ska köras och 
-om detta ska ske autonomt eller manuellt. Användaren anger även en referenstid som bilen ska försöka hålla runt banan. I fallet att användaren väljer autonom körning körs först en bootstrap vars jobb är att ge ett startvärde till huvudloopen. 
-Systemet ökar stegvis värdet fram till tredje segmentet där värdet sedan anpassas för att försöka få ett första varv på 15 sekunder. När bilen genomfört det första varvet gör programmet 
-beräkningar på vart bilen befinner sig, hur snabbt den åker samt hur utsignalen bör ändras för att bättre få en varvtid som matchar referenstiden. När körningen avslutas visas relevant 
-statistik på displayen och datan sparas i en .mat fil om bilen kört mer än två varv. 
+Vid systemets start möts användaren av startsidan på displayen (se bild x) där 
+olika alternativ ges angående hur körningen ska gå till. Vilken eller vilka av 
+bilarna som ska köras och om detta ska ske autonomt eller manuellt. Användaren 
+anger även en referenstid som bilen ska försöka hålla runt banan. I fallet att 
+användaren väljer autonom körning körs först en bootstrap vars jobb är att ge 
+ett startvärde till huvudloopen. Systemet ökar stegvis värdet fram till tredje 
+segmentet där värdet sedan anpassas för att försöka få ett första varv på 15 
+sekunder. När bilen genomfört det första varvet gör programmet beräkningar på 
+vart bilen befinner sig, hur snabbt den åker samt hur utsignalen bör ändras för 
+att bättre få en varvtid som matchar referenstiden. När körningen avslutas 
+visas relevant statistik på displayen och datan sparas i en .mat fil om bilen 
+kört mer än två varv. 
 	s
