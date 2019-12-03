@@ -1,24 +1,85 @@
 \section{Handhavande}
 \label{app:handhavande}
-Starta Matlab 2015b. Observera att användaren måste använda datorn som finns
-inne i bilbanerummet och som är inkopplade till bilbanan. Inne i Matlab ska användaren navigera sig till ''Kod'' mappen (som finns tillgängliga för alla i projektet). Börja med att högerklicka på mappen ''Kod'' och välj alternativet ''Add To Path''. Klicka på ''Select Folders And Subfolders'' som dyker upp när musen pekar på ''Add To Path''. Därefter expandera bilbana mappen följt av yc4 mappen. Öppna sedan main.m och starta systemet genom att klicka på Run i Editorn i Matlab.
 
-Därefter välj vilka banor som ska köras via den externa touch displayen. Justera också referenstiden genom att klicka på plusstecknet eller minustecknet (notera att referenstiden ändras med 0.5 s intervall). Kryssa även i om någon av banorna ska köras manuellt. Starta genom att trycka på knappen nere i det högra hörnet på displayen. Observera att bilarna måste placeras några decimeter innan målgivaren före start.
+Ladda ner och packa upp projektets kod till en mapp på datorn som är inkopplad i
+bilbanan. Starta Matlab (2015b), navigera till mappen och öppna den.
+Navigera till mappen \texttt{Kod} och lägg till alla dess undermappar till Matlabs
+sökväg genom att högerklicka på dem och välja ''Add To Path'' \textrightarrow
+''Select Folders and Subfolders''. Öppna filen \texttt{main.m} men se till att
+Matlabs utforskare i vänstermenyn står kvar i mappen \texttt{Kod}. Klicka på
+den gröna play-knappen \texttt{Run}.
 
-När programmet ska avslutas klickar användaren i kommentar fönstret i Matlab och
-klickar på q om bilen ska stanna direkt. Om användaren istället vill att
-bilen/bilarna ska stanna precis innan målgivaren klickar användaren på s
-(observera att detta fungerar endast efter varv ett).
+% Starta Matlab 2015b. Observera att användaren måste använda datorn som finns
+% inne i bilbanerummet och som är inkopplade till bilbanan. Inne i Matlab ska
+% användaren navigera sig till ''Kod'' mappen (som finns tillgängliga för alla i
+% projektet). Börja med att högerklicka på mappen ''Kod'' och välj alternativet
+% ''Add To Path''. Klicka på ''Select Folders And Subfolders'' som dyker upp när
+% musen pekar på ''Add To Path''. Därefter expandera bilbana mappen följt av yc4
+% mappen. Öppna sedan main.m och starta systemet genom att klicka på Run i
+% Editorn i Matlab.
 
-När programmet avslutas finns möjligheterna att se varvtiden/varvtiderna,
-segmentstiden/segmentstiderna samt att avsluta. Detta väljs utifrån de tre
-knapparna längst ner på displayen. Dessa knappar är Varv för att se varvtid,
-Segment för att se segmentstider. Samt knappen Avsluta.
+Ställ en eller två bilar på valfri bana mellan 10 och 20 centimeter framför
+målgivaren. Den exakta positionen är inte så noga, se bara till att bilen inte
+fastnar mellan två bandelar eller står precis under själva givaren.
 
-Om knappen Varv väljs kommer information såsom ''target'' vilket är vald varvtid.
-“mean” som är genomsnittlig varvtid och “stdev” är standardavvikelsen. För att
-se varvtiden för den andra banan klicka på knappen uppe i högra hörnet.
+Välj sedan via den externa touchdisplayen vilka banor som ska vara aktiva, om de
+ska köras i manuellt eller autonomnt läge och vilken referenstid som önskas.
+Att välja banor sker genom att aktivera eller avaktivera de olika knapparna och
+referenstiden ändras med steg om 0,5 sekunder med knapparna märkta \texttt{+}
+och \texttt{-}. Starta sedan banan genom att trycka på \texttt{S}.
 
-Om programmet kraschar öppna main.m. Därefter skriv in
-ctrl och enter i avgränsningen som heter ''\%\% END OF RACE'' som finns i slutet av
-koden main.m.
+% Därefter välj vilka banor som ska köras via den externa touch displayen.
+% Justera också referenstiden genom att klicka på plusstecknet eller
+% minustecknet (notera att referenstiden ändras med 0.5 s intervall). Kryssa
+% även i om någon av banorna ska köras manuellt. Starta genom att trycka på
+% knappen nere i det högra hörnet på displayen. Observera att bilarna måste
+% placeras några decimeter innan målgivaren före start.
+
+För att avsluta, tryck antingen på \texttt{q} eller \texttt{s} på datorns
+tangentbord. Om \texttt{q} trycks ner stannar programmet direkt och om
+\texttt{s} trycks ner stannar systemet de aktiva bilarna var för sig när de
+befinner sig strax innan målgivaren. Observera att att stoppa systemet med
+\texttt{s} inte rekommenderas om minst en bil körs manuellt.
+
+% När programmet ska avslutas klickar användaren i kommentar fönstret i Matlab
+% och klickar på q om bilen ska stanna direkt. Om användaren istället vill att
+% bilen/bilarna ska stanna precis innan målgivaren klickar användaren på s
+% (observera att detta fungerar endast efter varv ett).
+
+När körningen avslutats går det att se varvtider och genomsnittliga
+segmentstider på touchdisplayen. Tryck på \texttt{Varv} för att se varvtider för
+en av bilarna. Om två bilar kördes går den andra bilens varvtid att se genom att
+trycka på \texttt{Byt bil}. Oavsett vilken bil som visas syns vald referenstid,
+genomsnittlig varvtid och standardavvikelse för båda bilarna under grafen. För
+att se genomsnittliga segmentstider, tryck på \texttt{Segment}. Om båda bilarna
+var aktiva visas de två bilarnas värden sida vid sida per segment där bana 1 är
+till vänster och bana 2 är till höger. Om någon av bilarna kördes manuellt
+kommer statistik visas för den bilen också.
+
+% När programmet avslutas finns möjligheterna att se varvtiden/varvtiderna,
+% segmentstiden/segmentstiderna samt att avsluta. Detta väljs utifrån de tre
+% knapparna längst ner på displayen. Dessa knappar är Varv för att se varvtid,
+% Segment för att se segmentstider. Samt knappen Avsluta.
+% 
+% Om knappen Varv väljs kommer information såsom ''target'' vilket är vald varvtid.
+% “mean” som är genomsnittlig varvtid och “stdev” är standardavvikelsen. För att
+% se varvtiden för den andra banan klicka på knappen uppe i högra hörnet.
+
+Om olyckan är framme kan programmet krascha. Vanligtvis räcker det med att
+tvinga körningen av programmet att stanna och att återställa koden som styr
+bilbanan. Detta görs genom att först trycka \texttt{CTRL+C} i Matlab och sedan
+skriva följande rader i Matlabs kommandorad.
+
+\begin{verbatim}
+terminate(1);
+terminate(2);
+matlabclient(3);
+\end{verbatim}
+
+Om systemet fortfarande inte fungerar som det ska kan det hjälpa att starta båda
+banorna i manuellt läge och köra något varv på vardera bana för att
+''nollställa'' givarna och systemet. Om systemet fortfarande inte fungerar
+rekommenderas användaren starta om datorn.
+
+% Om programmet kraschar öppna main.m. Därefter skriv in ctrl och enter i
+% avgränsningen som heter ''\%\% END OF RACE'' som finns i slutet av koden main.m.

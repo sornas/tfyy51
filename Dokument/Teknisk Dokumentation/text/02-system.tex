@@ -6,11 +6,13 @@ dem. En av givarna kallas målgivaren vars signal går att skilja från övriga
 givare och således passar som en markör när ett nytt varv inleds. Givarna
 delar in banan i nio delar, kallade segment. Dessa segment har i sin tur delats
 in i totalt 80 delsegment där ett delsegment motsvarar en fysisk bit av banan.
-För vardera bana och delsegment har ett värde på önskad spänningstillförsel till
-banan tagits fram. Detta värde varierar dels eftersom bilarna vid olika delar
-av banan behöver olika mycket spänningstillförsel för samma hastighet och dels
-eftersom bilarna vid vissa delar av banan inte kan åka lika snabbt som vid andra
-delar av banan för att inte riskera att åka av.
+För vardera bana och delsegment har ett värde på en \emph{spänningsparameter}
+tagits fram. Detta värde varierar dels eftersom bilarna vid olika delar av banan
+behöver olika mycket spänningstillförsel för samma hastighet och dels eftersom
+bilarna vid vissa delar av banan inte kan åka lika snabbt som vid andra delar av
+banan för att inte riskera att åka av. En spänningsparameter är i det här fallet
+ett värde som i slutändan kommer multipliceras med en parameter för bilen för
+att ge en slutlig signal att skicka till banan.
 
 Centralt för systemet är den karta som beskrivs ovan samt en
 modifierare som beror på köregenskaperna för den nuvarande bilen. Det

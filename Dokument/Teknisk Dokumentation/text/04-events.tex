@@ -1,24 +1,17 @@
 \subsection{Missade givare}
 \label{sec:missade givare}
 
-Programmet gör redan en uppskattning av bilens position (\texttt{get\_position()})
- och justerar denna vid ny givare, se \ref{sec:system:korning:position}.
-Eftersom \texttt{get\_new\_v()} utgår ifrån denna uppskattning, behövs ingen
-anpassning göras ifall en givare inte ger utslag. Däremot måste det 
-kompenseras nästa gång en givare detekteras. Detta görs med funktionen
-\texttt{choose\_position()}.
+En givare kan ibland inte skicka en signal när en bil åker under den. Vid varje
+givarsignal jämför därför systemet bilens uppskatta position och positionen den
+''borde'' vara vid om givarna skickar korrekta signaler. Konkret kontrolleras om
+givaren som är närmast bilens position på banan är samma som systemet tror bilen
+nyss åkte genom. Om så inte är fallet antas en (eller flera) givare ha missats
+och bilens position anpassas.
 
-Vid varje givare kontrollerar \texttt{choose\_position()} vilken givare
-\texttt{car.position} ligger närmast genom att jämföra den \emph{beräknade} positionen med de kända positionerna varje givare befinner sig på.
-Funktionen beräknar skillnaden i antalet givare mellan denna och den givare som
-valdes med givardetektionen. I normala fall är skillnaden 0 (ingen missad givare) eller 1 (om en
-givare missats), men systemet kan hantera att flera givare i rad missas.
-(Systemet kan inte hantera en givare som skickar dubbla signaler). Om
-\texttt{choose\_position()} bedömer att en givare missats flyttas
-\texttt{car.segment} till den givare som matchar.
+Om en givare missats saknas information om hur lång tid de överhoppade segmenten
+tog. Systemet kan inte göra en bedömning om bilens hastighet mellan två givare
+utan vetskap om hur lång tid det tog att åka mellan dem så sparandet av tid
+hoppas helt enkelt över. För de delar av systemet som räknar på förra varvets
+segmentstid används då segmentstiden från varvet innan (eller varvet innan om
+den också missades och så vidare).
 
-Den insamlade datan behöver justeras när en eller flera givare har missats. Om
-datan inte justeras kommer \texttt{car.seg\_times} spara tiden för flera segment
-som om det vore ett enda. För att undvika detta sätts både den nuvarande och den
-förra segmentstiden till 0. Om en annan del av systemet vill räkna på
-segmentstiderna ansvarar den själv för att hoppa över segmentstider som är noll.
