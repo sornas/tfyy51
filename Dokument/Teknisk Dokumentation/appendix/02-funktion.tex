@@ -17,9 +17,7 @@ om position ligger utanför det nuvarande segmentet.
 \texttt{do\_boot(car, boot)} - Anropas en gång per programcykel i den så kallade
 boostrap-fasen. Se \ref{sec:systembeskrivning:uppstart} för information.
 
-\texttt{do\_car(car, t, displa\_data, boot)} - Anropas en gång per programcykel.
-Se \ref{sec:systembeskrivning:korning} och EN ANNAN DEL AV TEXTEN (vadå?) för
-information om hur en programcykel ser ut och NÅGOT MER (vadå?).
+\texttt{do\_car(car, t, displa\_data, boot)} - Anropas en gång per programcykel och innehåller ''Inhämtning av data'' och ''Behandling och sparande av data'' i figur \ref{fig:flow}.
 
 \texttt{do\_gov(car)} - Anropas varje gång en givare passerats. Vid målgivaren
 jämförs referenstiden och den förra varvtiden och car.constant anpassas efter
