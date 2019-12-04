@@ -15,3 +15,18 @@ gruppmedlemmar ska delta i presentationen och presentera någon del i projektet.
 Presentationsmaterialet från slutleveransen kan alltså användas som bas men presentationen
 ska vara något kortare och vända sig främst till Y1-teknologerna istället för en kund.
 Konferensen leds och org
+
+
+6.6. Efterstudien, v) och gruppvis projektutvärdering
+LIPS-mall: efterstudie (Word-dokument)
+Efterstudien görs gruppvis enligt LIPS-mallen och skickas via e-post till kursansvarig senast
+en vecka efter slutleveransen. Kursansvarig förmedlar efterstudien till berörda lärare. Kapitel
+9 i Ref. [3] kan vara ett stöd vid skrivandet av detta dokument. Studenterna uppmanas att
+förbereda sig på arbetet med efterstudien redan tidigt under projektets gång eftersom det
+kräver viss dokumentation av egna tankar och intryck. Rubrikerna i mallen ska användas. I 
+LiTH
+Kursdirektiv, TFYY51
+Ingenjörsprojekt www.ifm.liu.se/courses/tfyy51 LIPs
+Urban Forsberg Urban.Forsberg@liu.se Sida 14
+samband med att efterstudien skickas in lämnar också varje grupp ett betyg och utlåtande om
+projektet (Avsnitt 5.5). 
