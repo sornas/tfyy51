@@ -3,9 +3,6 @@ Inledning (M.U)
 - Syfte och mål
 
 Huvuddel
-- Metod
-	- Lips (Hur vi arbetat efter lips-modellen) (A.T)
-	- Gitlab (G.S)
 - System
 	- Display (G.S)
 	- Bilbana (A.W)
