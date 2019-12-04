@@ -1,0 +1,17 @@
+5.5. Efterstudien, projektbetyget och projektkonferensen
+I efterarbetsfasen ingår att göra eventuella kompletteringar av projektdokumenten. Dessa
+lämnas till beställaren enligt tidpunkt i undervisningsplanen. I efterarbetet ska även en
+efterstudie göras (se avsnitt 6.6). Detta görs efter den formella slutleveransen och ska via epost skickas in till kursansvarig senast en vecka efter den formella slutleveransen.
+Samtidigt ska dessutom gruppens sätta betyg på projektets innehåll och lärarpersonal.
+Betygen tas fram genom att varje projektmedlem individuellt sätter betyget 1-5 (där 5 är bästa
+omdömet). Projektledaren tar sedan fram ett medelvärde för innehållet och ett medelvärde för
+lärarpersonalen och skickar dessa två värden via e-post till kursansvarig. Ett utlåtande om
+projektet bör också bifogas.
+Vid projektkonferensen presenterar alla projektgrupper sina arbeten för samtliga teknologer i
+Y1. Vid denna presentation är det tillåtet att vara friare och även diskutera problem och
+erfarenheter från själva projektarbetet. Varje projektgrupp får ca 15 minuter för
+presentationen. Efter presentationen lämnas 5 minuter för frågor och diskussion. Samtliga
+gruppmedlemmar ska delta i presentationen och presentera någon del i projektet.
+Presentationsmaterialet från slutleveransen kan alltså användas som bas men presentationen
+ska vara något kortare och vända sig främst till Y1-teknologerna istället för en kund.
+Konferensen leds och org
