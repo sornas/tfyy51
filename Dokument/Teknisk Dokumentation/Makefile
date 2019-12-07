@@ -7,6 +7,8 @@
 # should always be the "all" rule, so that "make" and "make all" are identical.
 all: root.pdf
 
+figures: figures.pdf
+
 # CUSTOM BUILD RULES
 
 # In case you didn't know, '$@' is a variable holding the name of the target,
@@ -31,6 +33,9 @@ all: root.pdf
 
 root.pdf: root.tex
 	latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-make root.tex
+
+figures.pdf: figures.tex
+	latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-make figures.tex
 
 clean:
 	latexmk -CA
