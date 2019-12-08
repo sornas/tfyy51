@@ -69,3 +69,72 @@ Endast det Britta inte påpekade.
 - Tabelltext ovanför tabell
 - Stort f figur
 - "Tänk igenom styckeindelning" i slutet
+
+# Gustav
+
+Endast det varken Britta och Erik kommenterade (så väldigt små saker)
+
+## Försätt
+
+- Granskad/Godkänd på framsidan
+- Räkna inte sidor vid innehållsförteckningen
+- Figurlista
+
+## S2
+
+- "Spänning har tillförts" matcha tempus "mha givarna är"
+- "Målet ... var" matcha tempus "ett system som kan ..."
+- "Krav som skulle klaras av" stilnivå (även "finns")
+- Appendix D stort A
+- "klarade" stilnivå
+- "Runt om bilbanan" stilnivå
+- "En av givarna kallas" av vem?
+- Passar således
+- "kallade segment" av vem?
+- Sista meningen lång
+
+## S3
+
+- "i slutändan" av vad?
+- "object"
+- Vad är ett API?
+- Appendix del B2
+- ".. mer detalj" än vad?
+- stryk "i figuren"
+- "tills"
+- Vid den tredje givaren \textrightarrow \ Efter ..
+- Hur många faser?
+- Onödigt hackigt i 3.3
+- Uppräkning, "beräknar a, b och gör c"
+- "Nedan beskrivs vad systemet gör under en hel programcykel" upprepande från
+	tidigare
+
+## S6
+
+- Varför beräknas position oavsett? Introducera stycket
+- "Detta görs" stilnivå
+- Räknar ut \textrightarrow \ Beräknar
+- Läggs \textrightarrow \ adderas
+- Beräknad position introduceras kursivt för sent
+- "Uppskattar" stavfel
+- Tempus (??? inte helt säker) "behöver ... beräkna ... hur lång tid ... kommer
+	ta"
+- Stryk sedan "denna jämförs sedan"
+- "För att få avläsningen att ske" aktiv/passiv
+- Kontinuerligt i
+
+## S7
+
+- "Rätt stor" stilnivå (+ stryk "så")
+- Specifiera längd på tid vid "längden på den största .."?
+- Hoppa bättre till 3.4 från 3.3
+- "Varje bil var för sig .. när den"
+- Blandat aktiv/passiv 3.5
+- Specifiera varför start 3.6
+- aktiv/passiv 3.6
+- stryk "helt enkelt"
+- "räknar på"
+- "genomsnittlig varvtid för båda bilarna" segmentstid
+- Linjer finns inte mellan punkterna
+- Specifiera vilken knapp för att byta mellan varvtiderna
+
