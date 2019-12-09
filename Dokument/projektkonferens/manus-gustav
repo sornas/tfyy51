@@ -1,0 +1,30 @@
+Metodik
+
+Hur har vi då arbetat med det här projektet? Vi har uppenbarligen följt
+LIPS-modellen med beslutspunkter som vi fick av vår beställare. Men LIPS säger
+inte så mycket om hur själva projektet ska arbetas med, troligtvis eftersom det
+kan variera beroende på vilken typ av projekt det handlar om. Vårt projekt var i
+huvudsak ett programmeringsprojekt så vi delade in beslutspunkterna i konkreta
+mål med mellan en och två veckors mellanrum. Mellan målen hade vi vad vi kallade
+"arbetsmöten". Under dessa möten samlades vi och gick igenom vad var och en hade
+gjort sedan förra arbetsmötet.
+
+Efter alumniföreläsningen från Softube visade det ju sig att vi jobbade agilt.
+Våra mål motsvarar "sprintar" och våra möten motsvarar "stand-ups".
+
+Att programmera i grupp var en utmaning i sig. I början satt vi fem personer
+runt en dator med en ensam person tappert vid tangentbordet. Det här fungerade i
+ungefär en vecka innan vi bestämde oss för att dela upp arbetet. För att kunna
+ha gemensam kod och arbeta flera personer samtidigt använde vi oss av git. Git
+är ett så kallat versionshanteringssystem. Med hjälp av git kunde vi arbeta
+flera personer på varsin dator och se till att våra ändringar inte krockade med
+varandra. Vi använde oss av git både för vår programmering och för alla dokument vi
+framställde.
+
+För att samarbeta via git behövs en server. Som tur är har universitetet en
+sådan via ett tjänst som heter Gitlab.
+
+KVAR: 
+
+- Gitlab issues
+- Lärdomar
