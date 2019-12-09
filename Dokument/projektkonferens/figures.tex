@@ -1,0 +1,29 @@
+\documentclass{standalone}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{pgfplots, pgfplotstable}
+\pgfplotsset{scaled y ticks=false}
+
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[cm]{sfmath}
+
+\begin{document}
+
+\begin{figure}
+	\begin{tikzpicture}
+		\begin{axis} [width=32em, height=24em, ymin=1, ymax=10800, xmin=0, xmax=12.2,
+			xtick={1,2,...,12}, xticklabels={38,39,...,49}, every axis plot/.append
+			style={thick}, ytick={0,1200,...,9600}, yticklabels={,,}, axis y line*=right]
+			% yticklabels={,20,40...,160}
+			\addplot+ [mark=none] table [col sep=comma, x index=0, y index = 1] {time.csv};
+			\addplot+ [mark=none] table [col sep=comma, x index=0, y index = 2] {time.csv};
+			\addplot+ [mark=none] table [col sep=comma, x index=0, y index = 3] {time.csv};
+			\addplot+ [mark=none] table [col sep=comma, x index=0, y index = 4] {time.csv};
+			\addplot+ [mark=none] table [col sep=comma, x index=0, y index = 5] {time.csv};
+			% \addplot+ [red, domain=0:16, mark=none] {7200};
+		\end{axis}
+	\end{tikzpicture}
+\end{figure}
+
+\end{document}
