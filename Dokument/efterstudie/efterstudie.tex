@@ -2,6 +2,7 @@
 
 %\usepackage[square]{natbib}\bibliographystyle{plainnat}\setcitestyle{numbers}
 \usepackage[round]{natbib}\bibliographystyle{plainnat}
+\usepackage{parskip}
 
 \RequirePackage[yyyymmdd]{datetime}
 \renewcommand{\dateseparator}{-}
@@ -95,13 +96,19 @@
 \pagenumbering{arabic}\cfoot{\thepage}
 
 \section{Tidsåtgång}
+
+Nedan redovisas hur gruppens tidsfördelning under projektet sett ut.
+
 \subsection{Arbetsfördelning}
 
 Gruppen anser att arbetsfördelningen i stort har fungerat bra, men de flesta
 gruppmedlemmar lade ner mer tid än planerat (som mest upp emot 50 timmar mer än
-de 120 inplanerade). Gruppen fokuserade på fel saker och upptäckte det för sent i
-arbetets gång, vilket gjorde att orimligt mycket tid behövde läggas på att få en
-färdig slutprodukt i slutet av arbetet. 
+de 120 inplanerade).
+
+Gruppmedlemmarna upplever i efterhand att de spenderade för mycket tid på en
+lösning som i slutändan inte visade sig vara tillräcklig för att lösa problemet.
+Detta upptäckes för sent i arbetets gång vilket gjorde att orimligt mycket tid
+behövde läggas på att få en färdig slutprodukt i slutet av arbetet. 
 
 \subsection{Jämförelse med planerad tid}
 
@@ -118,20 +125,22 @@ utvecklingen.
 
 Gruppen anser att den använda andelen tid per fas ser bra ut. För att få summan
 till 600 timmar istället för nuvarande 740 hade gruppen önskat att efter-fasen
-hade kortats ner till 120 timmar. Samt att under-fasen hade kortats ner till 360
-timmar, för att få en 20/60/20-fördelning mellan de olika faserna.
+hade kortats ner till 120 timmar, samt att under-fasen hade kortats ner till 360
+timmar för att få en 20/60/20-fördelning mellan de olika faserna.
 
 \section{Analys av arbete och problem}
 
-TEXT HÄR
+I den här delen presenteras hur gruppen arbetat med projektet och hur
+medlemmarna upplevt arbetsprocessen.
 
-\subsection{Faserna}
+\subsection{Faserna} \label{sec:faser}
 
-TEXT HÄR
+Arbetet var indelat i tre faser enligt LIPS-modellen. Dessa redovisas och
+analyseras nedan.
 
 \subsubsection{Före-fasen}
 
-Under före-fasen planeras projektet och hur systemet skulle se ut. Före-fasen
+Under före-fasen planerades projektet och hur systemet skulle se ut. Före-fasen
 gjorde att gruppen kände att de hade något att utgå ifrån när utvecklingen väl
 började. Tyvärr kände gruppmedlemmarna under själva utförandet av före-fasen att
 det var svårt att motivera framställningen av dokument som upplevdes som
@@ -160,16 +169,17 @@ egna implementationer av problemen och tillsammans går igenom dem.
 \subsubsection{Efter-fasen}
 
 Arbetet under efter-fasen präglades av effektivitet. Gruppen hade missförstått
-deadline för teknisk dokumentation och behövde göra mer arbete än planerat under
-kort tid. För att motverka denna missuppfattning borde gruppen under
-före-fasen sammanställt samtliga deadlines och andra viktiga datum samt internt
-bestämt egna deadlines i god tid innan respektive leverans och dokumentinlämning.
-Detta hade möjliggjort att information som var svårtolkad eller rentav inte
-hittades hade kunnat dubbelkollas.
+deadline för teknisk dokumentation och behövde därför göra mer arbete än
+planerat under kort tid. För att motverka denna missuppfattning borde gruppen
+under före-fasen sammanställt samtliga deadlines och andra viktiga datum samt
+internt bestämt egna deadlines i god tid innan respektive leverans och
+dokumentinlämning.
 
 \subsection{Samarbete}
 
-Hur har gruppen arbetat tillsammans?
+Ett av huvudsyftena med kursen var att ``aktivt medverka i en fungerade
+projektgrupp''. \footnote{\url{https://liu.se/studieinfo/kurs/tfyy51/ht-2018#}}
+Nedan reflekterar gruppen hur samarbetet fungerat.
 
 \subsubsection{Ansvarsområden}
 
@@ -215,23 +225,29 @@ Handledaren har kommit med hård, relevant och rättvis kritik mot inlämnade
 dokument och hjälpt gruppen nå resultat de inte själva trodde de kunde nå.
 
 \subsection{Tekniska framgångar och problem}
- TEXT HÄR
+
+Vissa delar av systemet fungerande över förväntan medan andra inte nådde upp
+till kraven som ställdes. Anledningen till detta diskuteras ovan
+(\ref{sec:faser}). Runt projektvecka 8 havererade själva bilbanan vilket gjorde
+att utvecklingen temporärt stannade upp. På grund av de tekniska problemen gick
+beställaren med på att omförhandla några av kraven.
+
 \section{Måluppfyllelse}
 
-TEXT HÄR
+För hela projektet fanns dels mål med kursen och dels mål med själva projektet.
 
-\subsection{Uppnådda mål}
+\subsection{Mål med kursen}
 
 Gruppmedlemmarna har fått erfarenhet inom grupparbete helt olikt grupparbeten de
 var vana vid från gymnasiestudier. De har också förstått det viktiga i att dela
 upp problem mellan personer och hur man i praktiken bygger ett system
 tillsammans.
 
-\subsection{Leveransen}
+\subsection{Mål med projektet}
 
 Själva presentationen gick bra och stämningen var god. De tekniska resultaten
 var å andra sidan under förväntan, även efter kraven hade sänkts vid två
-tillfällen.
+tillfällen. Dessa redovisas i fullo i den tekniska dokumentationen.
 
 \subsection{Studiesituationen}
 
@@ -241,7 +257,9 @@ ut över studiesituationen i övrigt.
 
 \section{Sammanfattning}
 
-Gruppen har haft kul blablabla
+Gruppen anser att kursen har varit mycket givande. Tyvärr nådde själva systemet
+inte upp till de krav som ställdes, vilket gruppen självklart upplevde som
+tråkigt.
 
 \subsection{De tre viktigaste erfarenheterna}
 
@@ -259,10 +277,40 @@ Gruppen har haft kul blablabla
 	\item Utnyttja varandras tidigare erfarenheter.
 	\item Använd git (ordentligt).
 	\item Utnyttja handledaren.
-	\item Kolla upp teorin bakom reglering.
+	\item Kolla upp teorin bakom reglering tidigt.
 \end{itemize}
 \appendix
 \section{Tidsåtgång per aktivitet}
+
+\begin{tabular}{|l|l|l|} \hline
+	\textbf{Moment}                      & \textbf{Planerat}    & \textbf{Faktiskt}    \\\hline
+Display                     &          60 &          20 \\\hline
+\emph{Körning}                    &         224 &         253 \\\hline
+  \ \emph{Variabel hastighet}        &         150 &           -- \\\hline
+    \ \ Utifrån del av banan    &          60 &           -- \\\hline
+    \ \ Utifrån körningsegenskap&          60 &         -- \\\hline
+    \ \ Utifrån varvtid         &          30 &           -- \\\hline
+  \ Gemensam målgång          &          24 &           -- \\\hline
+  \ Missade givare            &          10 &          19 \\\hline
+  \ Avåkning                  &          10 &           -- \\\hline
+  \ Testning/felsökning       &          30 &          22 \\\hline
+\emph{Dokument}                    &         114 &           119 \\\hline
+  \ Projektplan och tidsplan  &           8 &          15 \\\hline
+  \ Mötesprotokoll            &           8 &           1 \\\hline
+  \ Beställarkontakt          &           8 &           5 \\\hline
+  \ Teknisk dokumentation     &          80 &          88 \\\hline
+  \ Dokumentansvarigsarbete   &          10 &          10 \\\hline
+Övriga dokument             &           -- &          76 \\\hline
+\emph{Övrigt}                      &         132 &           220 \\\hline
+  \ Presentation              &          20 &          83 \\\hline
+  \ Bibiloteksuppgift         &          40 &           9 \\\hline
+  \ Möten                     &          58 &         103 \\\hline
+  \ Utbildning                &          14 &          25 \\\hline
+Övriga aktiviteter          &           -- &           8 \\\hline
+\textbf{SUMMA}                       &         530 &         737 \\\hline
+	
+	
+\end{tabular}
 
 \end{document}
 
