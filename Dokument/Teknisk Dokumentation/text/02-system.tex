@@ -14,16 +14,24 @@ banan för att inte riskera att åka av. En spänningsparameter är i det här f
 ett värde som i slutändan kommer multipliceras med en parameter för bilen för
 att ge en slutlig signal att skicka till banan.
 
-Centralt för systemet är den karta som beskrivs ovan samt en
-modifierare som beror på köregenskaperna för den nuvarande bilen. Det
-modifierande värdet kallas bilens \emph{konstant}. Denna konstant varierar
-beroende på hur mycket spänning en viss bil behöver för att nå en viss
-hastighet. Konstanten anpassas under körningens gång ytterligare beroende på
-bilens varvtid jämfört med referenstiden.
+För att anpassa efter olika bilars köregenskaper (vikt, motor, magnetstyrka och
+så vidare) används en variabel kallad bilens \emph{konstant}. Konstanten tas
+fram av systemet vid uppstart och är helt oberoende från tidigare körningar.
+
+% Centralt för systemet är den karta som beskrivs ovan samt en
+% modifierare som beror på köregenskaperna för den nuvarande bilen. Det
+% modifierande värdet kallas bilens \emph{konstant}. Denna konstant varierar
+% beroende på hur mycket spänning en viss bil behöver för att nå en viss
+% hastighet. Konstanten anpassas under körningens gång ytterligare beroende på
+% bilens varvtid jämfört med referenstiden.
 
 \subsection{Display}
 
-Förutom bilbanan finns även en \emph{display}. Denna används innan körningen för att välja vilka banor som ska köras, om de ska köras manuellt eller autonomt och vilken referenstid som ska köras mot. Under körningen visas i realtid det gaspådrag som skickas till banan. Efter körningen visas statistik i form av varvtider och den genomsnittliga tiden per segment.
+Förutom bilbanan finns även en display. Denna används innan körningen för att
+välja vilka banor som ska köras, om de ska köras manuellt eller autonomt och
+vilken referenstid som ska köras mot. Under körningen visas i realtid det
+gaspådrag som skickas till banan. Efter körningen visas statistik i form av
+varvtider och den genomsnittliga tiden per segment.
 
 \subsection{Kommunikation}
 
