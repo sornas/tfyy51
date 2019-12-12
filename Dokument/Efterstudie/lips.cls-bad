@@ -1,6 +1,6 @@
 %% This simple template was written by Erik Frisk <erik.frisk@liu.se>
 %% for use with the CDIO/LIPS courses at Linköping University.
-%% 
+%%
 %% If you find them usefeul, great! If you have constructive suggestions or
 %% comments, send me an email and I will consider your comments.
 
@@ -29,7 +29,7 @@
 
 % Load packages
 \RequirePackage[
-nochapters, % Turn off chapters since this is an article        
+nochapters, % Turn off chapters since this is an article
 %beramono, % Use the Bera Mono font for monospaced text (\texttt)
 %eulermath,% Use the Euler font for mathematics
 pdfspacing, % Makes use of pdftex’ letter spacing capabilities via the microtype package
@@ -53,7 +53,6 @@ dottedtoc
 \RequirePackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
 \RequirePackage{amsmath,amssymb,amsthm} % For including math equations, theorems, symbols, etc
 \RequirePackage{varioref} % More descriptive referencing
-
 
 \def\name@groupemail{Group E-mail}
 \def\name@Homepage{Homepage}
@@ -107,11 +106,11 @@ dottedtoc
 
 \def\courseresponsible#1{\gdef\@courseresponsible{#1}}
 \def\courseresponsiblephone#1{\gdef\@courseresponsiblephone{#1}}
-\def\courseresponsibleemail#1{\gdef\@courseresponsibleemail{#1}}
+\def\courseresponsibleemail#1{\gdef\@courseresponsibleemail{\url{#1}}}
 
 \def\supervisor#1{\gdef\@supervisor{#1}}
 \def\supervisorphone#1{\gdef\@supervisorphone{#1}}
-\def\supervisoremail#1{\gdef\@supervisoremail{#1}}
+\def\supervisoremail#1{\gdef\@supervisoremail{\url{#1}}}
 
 \def\groupname#1{\gdef\@groupname{#1}}
 \def\groupemail#1{\gdef\@groupemail{\url{#1}}}
@@ -130,7 +129,7 @@ dottedtoc
 
 \renewcommand{\maketitle}{%
   \pagestyle{scrheadings}
-  
+
   \clearscrheadfoot
   \@ifundefined{@smalllogo}{\ihead{}}{\ihead{\includegraphics[width=.2\textwidth]{\@smalllogo}}}
   \chead{\@projecttitle}
@@ -177,16 +176,23 @@ dottedtoc
 
   \begin{tabular}{ll}
     \name@groupemail: & \@groupemail\\[5mm]
-    \name@Homepage:     & \@groupwww\\[5mm]
-    \name@Orderer:      & \@orderer\\
-                  & \name@Phone: \@ordererphone\\
-                  & \name@Email: \@ordereremail\\[5mm]
-    \name@Supervisor:   & \@supervisor\\
-                  & \name@Phone: \@supervisorphone\\
-                  & \name@Email: \@supervisoremail\\[5mm]
-    \name@Responsible: & \@courseresponsible\\
-                  & \name@Phone: \@courseresponsiblephone\\
-                  & \name@Email: \@courseresponsibleemail
+    \name@Homepage:   & \@groupwww\\[5mm]
+    \ifthenelse{\equal{\@orderer}{}}{\\[-4.5mm]}{%
+      \name@Orderer: & \@orderer\\
+                     & \name@Phone: \@ordererphone\\
+                     & \name@Email: \@ordereremail\\[5mm]}
+    \ifthenelse{\equal{\@customer}{}}{\\[-4.5mm]}{%
+      \name@Customer: & \@customer\\
+                      & \name@Phone: \@customerphone\\
+                      & \name@Email: \@customeremail\\[5mm]}
+    \ifthenelse{\equal{\@supervisor}{}}{\\[-4.5mm]}{%
+      \name@Supervisor: & \@supervisor\\
+                        & \name@Phone: \@supervisorphone\\
+                        & \name@Email: \@supervisoremail\\[5mm]}
+    \ifthenelse{\equal{\@courseresponsible}{}}{\\[-4.5mm]}{%
+      \name@Responsible: & \@courseresponsible\\
+                         & \name@Phone: \@courseresponsiblephone\\
+                         & \name@Email: \@courseresponsibleemail}
   \end{tabular}
 }
 
@@ -201,7 +207,7 @@ dottedtoc
 %     \tablehead{\hline \multicolumn{3}{|l|}{\footnotesize\textsl{\name@contprev}}\\\hline \name@Requirement & \name@Description & \name@Priority\\\hline \hline}%
 %     \tabletail{\hline \multicolumn{3}{|r|}{\footnotesize\textsl{\name@contnext}}\\\hline}%
 %     \tablelasttail{\hline}%
-    
+
 %     \begin{supertabular*}{\textwidth}{@{\extracolsep{\fill}}|c|p{100mm}|c|}}{%
 %     \end{supertabular*}
 %   \end{center}
