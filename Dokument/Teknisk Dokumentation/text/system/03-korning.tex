@@ -17,9 +17,10 @@ Om en givare passerats vet systemet exakt var bilen befinner sig. Om så är
 fallet sparas den nuvarande exakta position och kallas \emph{givarpositionen}.
 
 % Om en ny givare har passerats, \texttt{car.new\_check\_point == true}, ökar
-% programmet nuvarande segment (\texttt{car.segment}) med 1. \texttt{car.segment}, som
-% alltid ligger mellan 1 och 9, används som index för att välja position i en
-% lista (\texttt{car.pos\_at}). Vi kallar den positionen för \emph{givarpositionen}.
+% programmet nuvarande segment (\texttt{car.segment}) med 1.
+% \texttt{car.segment}, som alltid ligger mellan 1 och 9, används som index för
+% att välja position i en lista (\texttt{car.pos\_at}). Vi kallar den positionen
+% för \emph{givarpositionen}.
 
 Oavsett om en givare passerats eller inte räknar systemet ut en beräknad
 position. Detta görs genom att räkna ut en approximativ hastighet $v =
@@ -46,11 +47,14 @@ tillfälle missats (genom att jämföra givarpositionen och den beräknade
 positionen). Information om denna procedur finns i del~\ref{sec:missade givare}.
 
 % Sedan beräknas positionen, i meter från målgivaren, med funktionen
-% \texttt{get\_position()}. Den använder den ungefärliga hastigheten \texttt{v} beräknad av
-% \texttt{approx\_v()} och tiden \texttt{t} sedan denna beräkning gjordes senast (en programcykel, se \ref{sec:system:korning:cykel})
-% och beräknar med $s = v \cdot t$ den sträcka som bilen har åkt. Sedan adderas denna
-% med förra kända positionen och returneras i \texttt{car.position}. Denna 
-% \emph{beräknade} position tas också fram när en givare har passerats, då skrivs den över med \emph{givarpositionen} men används i stället för att detektera missade givare. Se \ref{sec:missade givare}.
+% \texttt{get\_position()}. Den använder den ungefärliga hastigheten \texttt{v}
+% beräknad av \texttt{approx\_v()} och tiden \texttt{t} sedan denna beräkning
+% gjordes senast (en programcykel, se \ref{sec:system:korning:cykel}) och
+% beräknar med $s = v \cdot t$ den sträcka som bilen har åkt. Sedan adderas
+% denna med förra kända positionen och returneras i \texttt{car.position}. Denna
+% \emph{beräknade} position tas också fram när en givare har passerats, då
+% skrivs den över med \emph{givarpositionen} men används i stället för att
+% detektera missade givare. Se \ref{sec:missade givare}.
 
 \subsubsection{Gaspådrag}
 
@@ -58,64 +62,70 @@ Efter positionsberäkningen beräknas spänningen som ska skickas till banan. De
 fås genom att multiplicera en hastighetsparameter ($v$, som beror på bilens
 position) med bilens konstant ($k$) enligt $u = kv$.
 
-% Efter positionsberäkningen beräknas spänningen som ska skickas till banan. Först
-% används positionen för att välja en spänningsparameter. Denna finns i kartan som
-% är indexerad efter position. Gaspådraget ($u$) fås sedan genom att multiplicera
-% denna hastighetsparameter ($v$) med bilens konstant ($k$): $u = v \cdot k$.
+% Efter positionsberäkningen beräknas spänningen som ska skickas till banan.
+% Först används positionen för att välja en spänningsparameter. Denna finns i
+% kartan som är indexerad efter position. Gaspådraget ($u$) fås sedan genom att
+% multiplicera denna hastighetsparameter ($v$) med bilens konstant ($k$): $u = v
+% \cdot k$.
 
-% Efter positionsberäkningen beräknas det gaspådrag som skall sättas till banan. Detta görs i två
-% funktioner, \texttt{get\_new\_v} och \texttt{get\_new\_u}.
+% Efter positionsberäkningen beräknas det gaspådrag som skall sättas till banan.
+% Detta görs i två funktioner, \texttt{get\_new\_v} och \texttt{get\_new\_u}.
 % 
-% I \texttt{get\_new\_v} används bilens nuvarande postition (\texttt{car.postition})
-% och hastighetskartan (\texttt{car.map}). I \texttt{car.map} finns en
-% hastighetsparameter för varje \texttt{car.position} (Se \ref{sec:begrepp och systemöversikt}.), denna retuneras av funktionen
-% och sparas i \texttt{car.v}.
+% I \texttt{get\_new\_v} används bilens nuvarande postition
+% (\texttt{car.postition}) och hastighetskartan (\texttt{car.map}). I
+% \texttt{car.map} finns en hastighetsparameter för varje \texttt{car.position}
+% (Se \ref{sec:begrepp och systemöversikt}.), denna retuneras av funktionen och
+% sparas i \texttt{car.v}.
 %  
 % I \texttt{get\_new\_u} används denna hastighetsparameter tillsammans med
-% \texttt{car.constant}. Dessa multipliceras och deras produkt retuneras och sparas
-% i \texttt{car.u}.
+% \texttt{car.constant}. Dessa multipliceras och deras produkt retuneras och
+% sparas i \texttt{car.u}.
 
 \subsubsection{Governor}
 \label{sec:systembeskrivning:governor}
 
 Om bootstrap är avslutad och en givare passerats behöver bilens konstant
-eventuellt justeras. För att justera bilens konstant behöver systemet först beräkna hur lång tid det
-nuvarande varvet kommer ta. Vid varje givare beräknas därför den genomsnittliga
-hastigheten genom det förra segmentet och multipliceras med den kvarvarande
-sträckan på varvet för att få den uppskattade tiden den resterande delen av
-varvet kommer ta. Denna tid läggs ihop med varvtiden hittills och ger då en
-uppskattad varvtid för det nuvarande varvet. Denna varvtid jämförs sedan med den
-valda referenstiden och bilens konstant anpassas vid behov.
+eventuellt justeras. För att justera bilens konstant behöver systemet först
+beräkna hur lång tid det nuvarande varvet kommer ta. Vid varje givare beräknas
+därför den genomsnittliga hastigheten genom det förra segmentet och
+multipliceras med den kvarvarande sträckan på varvet för att få den uppskattade
+tiden den resterande delen av varvet kommer ta. Denna tid läggs ihop med
+varvtiden hittills och ger då en uppskattad varvtid för det nuvarande varvet.
+Denna varvtid jämförs sedan med den valda referenstiden och bilens konstant
+anpassas vid behov.
 
-% Detta görs med funktionen \texttt{do\_gov}.  Först görs en uppskattning av 
-% varvtiden utifrån hur lång tid varvet har tagit än
-% så länge. Detta görs med forecasts som beräknar den approximerade varvtiden utifrån tid fram tills senast
-% passerad givare samt hastighet i tidigare segment. Genom att veta en
+% Detta görs med funktionen \texttt{do\_gov}.  Först görs en uppskattning av
+% varvtiden utifrån hur lång tid varvet har tagit än så länge. Detta görs med
+% forecasts som beräknar den approximerade varvtiden utifrån tid fram tills
+% senast passerad givare samt hastighet i tidigare segment. Genom att veta en
 % genomsnittlig hastighet går det med kvarvarande sträcka att räkna ut en
-% ungefärlig kvarvarande tid. När tiden från mål till senaste passerade givare adderas med
-% den uträknade approximerade tiden kvar, så erhålls det en uppskattad varvtid som
-% används för att avgöra om en bil behöver åka snabbare eller långsammare. Om bilen dock är inne på sitt första varv görs uppskattningen endast
-% utifrån förra segmentet \texttt{car.forcasts\_naive} och om första varvet är
-% avslutat så används \texttt{car.forcasts} som vanligt. Detta görs efter segment 4 och 8. Dessutom används den
-% faktiska varvtiden när bilen passerar mål (från varv 2 och frammåt).
+% ungefärlig kvarvarande tid. När tiden från mål till senaste passerade givare
+% adderas med den uträknade approximerade tiden kvar, så erhålls det en
+% uppskattad varvtid som används för att avgöra om en bil behöver åka snabbare
+% eller långsammare. Om bilen dock är inne på sitt första varv görs
+% uppskattningen endast utifrån förra segmentet \texttt{car.forcasts\_naive} och
+% om första varvet är avslutat så används \texttt{car.forcasts} som vanligt.
+% Detta görs efter segment 4 och 8. Dessutom används den faktiska varvtiden när
+% bilen passerar mål (från varv 2 och frammåt).
 %  
-% Sedan jämförs denna uppskattade varvtid med referenstiden (\texttt{car.ref\_time}) 
-% och \texttt{car.constant} justeras.
+% Sedan jämförs denna uppskattade varvtid med referenstiden
+% (\texttt{car.ref\_time}) och \texttt{car.constant} justeras.
 
 % \begin{verbatim}
 % car.constant = car.constant + (status - 1) * 0.08;
 % \end{verbatim}
 
-% Där \texttt{status} är den uppskattade varvtidens förhållande till \texttt{car.ref\_time}.
-% D.v.s om de är exakt lika blir \texttt{status~ =~ 1}, om uppskattningen är högre blir
-% den större än 1 och om den är lägre blir den mindre än 1. Således kommer \texttt{car.constant}
-% höjas eller sänkas proportionellt mot hur långt ifrån \texttt{car.ref\_time} uppskattningen
-% av varvtiden ligger. 
+% Där \texttt{status} är den uppskattade varvtidens förhållande till
+% \texttt{car.ref\_time}.  D.v.s om de är exakt lika blir \texttt{status~ =~ 1},
+% om uppskattningen är högre blir den större än 1 och om den är lägre blir den
+% mindre än 1. Således kommer \texttt{car.constant} höjas eller sänkas
+% proportionellt mot hur långt ifrån \texttt{car.ref\_time} uppskattningen av
+% varvtiden ligger. 
 
 \subsubsection{Hantering av längden av en programcykel}
 \label{sec:system:korning:cykel}
 
-I slutet av varje cykel körs en loop som tillfälligt pausar programmet.  För att
+I slutet av varje cykel körs en loop som tillfälligt pausar programmet. För att
 få avläsningen att ske minst en gång var tionde sekund pausas programmet
 kontinuerligt i 0,001 sekunder tills den totala paustiden överskrider 0,07
 sekunder och nästa cykel börjar. Eftersom pausen på 0,001 sekunder är så pass

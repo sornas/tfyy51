@@ -1,21 +1,30 @@
 \section{Begrepp och systemöversikt}
 \label{sec:begrepp och systemöversikt}
 
-Runt om bilbanan finns nio givare som skickar en signal när en bil passerar
-under dem. En av givarna kallas målgivaren vars signal går att skilja från
-övriga givare och således passar som en markör för när ett nytt varv inleds.
-Givarna delar in banan i nio delar, kallade segment. Dessa segment har i sin tur
-delats in i mindre delsegment. För vardera bana och delsegment har ett värde på
-en \emph{spänningsparameter} tagits fram. Detta värde varierar dels eftersom
-bilarna vid olika delar av banan behöver olika mycket spänningstillförsel för
-samma hastighet och dels eftersom bilarna vid vissa delar av banan inte kan åka
-lika snabbt som vid andra delar av banan för att inte riskera att åka av.
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth] {Figures/BanaModell}
+	\caption{En modell av bilbanan.}
+	\label{fig:bilbanan}
+\end{figure} 
+
+Runt om bilbanan finns nio givare (se Figur~\ref{fig:bilbanan}) som skickar en
+signal när en bil passerar under dem. En av givarna kallas målgivaren vars
+signal går att skilja från övriga givare och således passar som en markör för
+när ett nytt varv inleds.  Givarna delar in banan i nio delar, kallade segment.
+Dessa segment har i sin tur delats in i mindre delsegment. För vardera bana och
+delsegment har ett värde på en \emph{spänningsparameter} tagits fram. Detta
+värde varierar dels eftersom bilarna vid olika delar av banan behöver olika
+mycket spänningstillförsel för samma hastighet och dels eftersom bilarna vid
+vissa delar av banan inte kan åka lika snabbt som vid andra delar av banan för
+att inte riskera att åka av.
 
 För att anpassa efter olika bilars köregenskaper (vikt, motor, magnetstyrka och
 så vidare) används en variabel kallad bilens \emph{konstant}. Konstanten tas
-fram av systemet vid uppstart och är helt oberoende från tidigare körningar.
-Spänningen som skickas till banan fås genom att multiplicera tidigare nämnda
-spänningsparameter med bilens konstant.
+fram av systemet vid uppstart, justeras kontinuerligt under hela körningen och
+är oberoende från tidigare körningar. Spänningen som skickas till banan
+fås genom att multiplicera tidigare nämnda spänningsparameter med bilens
+konstant.
 
 % Centralt för systemet är den karta som beskrivs ovan samt en
 % modifierare som beror på köregenskaperna för den nuvarande bilen. Det
