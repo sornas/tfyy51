@@ -34,12 +34,12 @@ och $t$ är hur lång tid det nuvarande segmentet tog förra varvet.
 % medelhastigheten för nuvarnade segment, men förra varvet. Denna antas vara
 % ungefär samma som nuvarande hastiget och kallas \emph{car.v}. 
 
-Med den approximativa hastigheten räknar sedan systemet ut hur långt bilen rört
-sig sedan den senaste programcykeln. Denna förflyttning räknas ut med $\mathrm{d}s
-= v \cdot \mathrm{d}t$ där $\mathrm{d}s$ är den beräknade förflyttningen, $v$
-hastigheten som precis räknades ut och $\mathrm{d}t$ tiden sedan den förra
-programcykeln. Denna förflyttning läggs till positionen från förra programcykeln
-och kallas den \emph{beräknade} positionen.
+Med den approximativa hastigheten beräknar sedan systemet hur långt bilen rört
+sig sedan den senaste programcykeln enligt $\mathrm{d}s = v \cdot \mathrm{d}t$
+där $\mathrm{d}s$ är den beräknade förflyttningen, $v$ hastigheten som precis
+räknades ut och $\mathrm{d}t$ tiden sedan den förra programcykeln. Denna
+förflyttning läggs till positionen från förra programcykeln och kallas den
+\emph{beräknade} positionen.
 
 Om en givare passerats uppskattar systemet sedan om en givare vid ett tidigare
 tillfälle missats (genom att jämföra givarpositionen och den beräknade
@@ -115,11 +115,11 @@ valda referenstiden och bilens konstant anpassas vid behov.
 \subsubsection{Hantering av längden av en programcykel}
 \label{sec:system:korning:cykel}
 
-I slutet av varje cykel körs en loop som tillfälligt pausar programmet.
-För att få avläsningen att ske minst en gång var tionde sekund pausas
-programmet kontinuerligt 0,001 sekunder tills den totala paustiden överskrider 
-0,07 sekunder då nästa cykel börjar. Då pausen på 0,001 sekunder är så pass
-kort och marginalen till kravet är rätt stor så sker avläsningen mellan
-0,07 och 0,1 sekunder. Längden på den största skillnaden mellan två avläsningar
-sparas och visas vid programmets slut.
+I slutet av varje cykel körs en loop som tillfälligt pausar programmet.  För att
+få avläsningen att ske minst en gång var tionde sekund pausas programmet
+kontinuerligt i 0,001 sekunder tills den totala paustiden överskrider 0,07
+sekunder och nästa cykel börjar. Eftersom pausen på 0,001 sekunder är så pass
+kort och marginalen till kravet är stor garanteras att sker med ett intervall på
+mellan 0,07 och 0,1 sekunder. Längden på den största skillnaden mellan två
+avläsningar sparas och visas vid programmets slut på styrdatorn.
 

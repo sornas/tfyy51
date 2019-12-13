@@ -1,22 +1,21 @@
 \section{Begrepp och systemöversikt}
 \label{sec:begrepp och systemöversikt}
 
-Runt om bilbanan finns nio givare som skickar en signal när en bil passerar under
-dem. En av givarna kallas målgivaren vars signal går att skilja från övriga
-givare och således passar som en markör när ett nytt varv inleds. Givarna
-delar in banan i nio delar, kallade segment. Dessa segment har i sin tur delats
-in i totalt 80 delsegment där ett delsegment motsvarar en fysisk bit av banan.
-För vardera bana och delsegment har ett värde på en \emph{spänningsparameter}
-tagits fram. Detta värde varierar dels eftersom bilarna vid olika delar av banan
-behöver olika mycket spänningstillförsel för samma hastighet och dels eftersom
-bilarna vid vissa delar av banan inte kan åka lika snabbt som vid andra delar av
-banan för att inte riskera att åka av. En spänningsparameter är i det här fallet
-ett värde som i slutändan kommer multipliceras med en parameter för bilen för
-att ge en slutlig signal att skicka till banan.
+Runt om bilbanan finns nio givare som skickar en signal när en bil passerar
+under dem. En av givarna kallas målgivaren vars signal går att skilja från
+övriga givare och således passar som en markör för när ett nytt varv inleds.
+Givarna delar in banan i nio delar, kallade segment. Dessa segment har i sin tur
+delats in i mindre delsegment. För vardera bana och delsegment har ett värde på
+en \emph{spänningsparameter} tagits fram. Detta värde varierar dels eftersom
+bilarna vid olika delar av banan behöver olika mycket spänningstillförsel för
+samma hastighet och dels eftersom bilarna vid vissa delar av banan inte kan åka
+lika snabbt som vid andra delar av banan för att inte riskera att åka av.
 
 För att anpassa efter olika bilars köregenskaper (vikt, motor, magnetstyrka och
 så vidare) används en variabel kallad bilens \emph{konstant}. Konstanten tas
 fram av systemet vid uppstart och är helt oberoende från tidigare körningar.
+Spänningen som skickas till banan fås genom att multiplicera tidigare nämnda
+spänningsparameter med bilens konstant.
 
 % Centralt för systemet är den karta som beskrivs ovan samt en
 % modifierare som beror på köregenskaperna för den nuvarande bilen. Det
@@ -27,18 +26,17 @@ fram av systemet vid uppstart och är helt oberoende från tidigare körningar.
 
 \subsection{Display}
 
-Förutom bilbanan finns även en display. Denna används innan körningen för att
+Förutom bilbanan finns även en display. Innan körningen används den för att
 välja vilka banor som ska köras, om de ska köras manuellt eller autonomt och
 vilken referenstid som ska köras mot. Under körningen visas i realtid det
-gaspådrag som skickas till banan. Efter körningen visas statistik i form av
-varvtider och den genomsnittliga tiden per segment.
+gaspådrag som skickas till banan och efter körningen visas varvtiderna och den
+genomsnittliga tiden per segment, båda för vardera bil.
 
 \subsection{Kommunikation}
 
-För att rita object på displayen finns hjälpfunktioner liknande ett API som
-tagits fram utifrån displayens tekniska specifikation, se bilaga displayspecifikation.
-Hjälpfunktionerna implementerades i Matlab och beskrivs i sin helhet i Appendix
-del~\ref{app:funktioner och filer:display}.
+För att rita objekt på displayen finns hjälpfunktioner liknande ett API som
+matchar displayens tekniska specifikation, se bilaga. Hjälpfunktionerna beskrivs
+i sin helhet i Appendix~\ref{app:funktioner och filer:display}.
 
 För att reagera på knapptryck på displayen kan displayen instrueras att flytta
 hela sitt interna minne (där information om bland annat knapptryck finns) till
